@@ -6,6 +6,7 @@
     "Password": "Mot de Passe",
     "Remember me":"Se Souvenir de Moi",
     "Log in":"Se Connecter",
+    "Log Out":"Se déconnecter",
     "Forgot your password?":"Mot de Passe Oublié ?",
     "Your account is disable, Please contact administrator.": "votre compte est desactivé,svp contactez l'administrateur de la plateforme",
     "These credentials do not match our records.": "Ces informations d'identification ne correspondent pas.",
