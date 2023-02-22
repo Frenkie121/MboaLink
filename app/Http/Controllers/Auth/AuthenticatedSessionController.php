@@ -9,6 +9,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -31,7 +32,9 @@ class AuthenticatedSessionController extends Controller
         if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
             $user = User::where('email', $request->email)->first();
             if ($user) {
-                $message = 'auth.disabled';
+                if (Hash::check($request->password, $user->password)) {
+                    $message = 'auth.disabled';
+                }
             } else {
                 $message = 'auth.failed';
             }
