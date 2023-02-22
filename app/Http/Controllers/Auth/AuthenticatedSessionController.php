@@ -29,21 +29,20 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $remember = (bool) $request->remember;
-
-        if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], $remember)) {
-            $user = User::where('email', $request->email)->first();
-            if (Hash::check($request->password, $user->password)) {
-                $message = 'auth.status';
-            } else {
-                $message = 'auth.failed';
+        $message = 'auth.disabled';
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
+            if ($user = User::where('email', $request->email)->first()) {
+                if (Hash::check($request->password, $user->password)) {
+                    $message = 'auth.disabled';
+                } else {
+                    $message = 'auth.failed';
+                }
             }
-
             throw ValidationException::withMessages([
                 'email' => trans($message),
             ]);
         }
         $request->session()->regenerate();
-
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
