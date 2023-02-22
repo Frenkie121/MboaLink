@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
     {
         $remember = (bool) $request->remember;
         $message = 'auth.disabled';
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
+        if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
             if ($user = User::where('email', $request->email)->first()) {
                 if (Hash::check($request->password, $user->password)) {
                     $message = 'auth.disabled';
@@ -43,6 +43,7 @@ class AuthenticatedSessionController extends Controller
             ]);
         }
         $request->session()->regenerate();
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
