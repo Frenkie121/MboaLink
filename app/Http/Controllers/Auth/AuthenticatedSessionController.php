@@ -9,7 +9,6 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -29,19 +28,18 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $remember = (bool) $request->remember;
-        $message = 'auth.disabled';
         if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
-            if ($user = User::where('email', $request->email)->first()) {
-                if (Hash::check($request->password, $user->password)) {
-                    $message = 'auth.disabled';
-                } else {
-                    $message = 'auth.failed';
-                }
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                $message = 'auth.disabled';
+            } else {
+                $message = 'auth.failed';
             }
             throw ValidationException::withMessages([
                 'email' => trans($message),
             ]);
         }
+        $request->authenticate();
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
