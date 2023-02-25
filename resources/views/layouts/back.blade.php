@@ -22,10 +22,13 @@
     <link rel="stylesheet" href="{{ asset('assets/back/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/css/components.css') }}">
 
+    @notifyCss
+
     @stack('css')
 </head>
 
 <body>
+  @include('notify::components.notify')
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
@@ -63,6 +66,8 @@
   <!-- Template JS File -->
   <script src="{{ asset('assets/back/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/back/js/custom.js') }}"></script>
+
+  @notifyJs
 
   @stack('js')
 

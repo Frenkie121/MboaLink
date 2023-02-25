@@ -34,7 +34,10 @@ class UsersController extends Controller
             $user->is_active = true;
             $content = trans('enabled');
         }
+
         $message = trans('Account has been successfully ') . $content;
+        notify()->success($message);
+
         $user->save();
 
         return back();
