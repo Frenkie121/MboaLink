@@ -23,7 +23,7 @@
                                         <th class="text-center">#</th>
                                         <th>@lang('Name')</th>
                                         <th>Email</th>
-                                        <th>Role</th>
+                                        <th>@lang('Role')</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

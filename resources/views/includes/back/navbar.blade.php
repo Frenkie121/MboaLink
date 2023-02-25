@@ -5,41 +5,19 @@
       </ul>
     </form>
     <ul class="navbar-nav navbar-right">
-        {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                <div class="dropdown-header">Notifications
-                    <div class="float-right">
-                    <a href="#">Mark All As Read</a>
-                    </div>
-                </div>
-                <div class="dropdown-list-content dropdown-list-icons">
-                    <a href="#" class="dropdown-item dropdown-item-unread">
-                    <div class="dropdown-item-icon bg-primary text-white">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="dropdown-item-desc">
-                        Template update is available now!
-                        <div class="time text-primary">2 Min Ago</div>
-                    </div>
-                    </a>
-                    <a href="#" class="dropdown-item">
-                        <div class="dropdown-item-icon bg-info text-white">
-                        <i class="fas fa-bell"></i>
-                        </div>
-                        <div class="dropdown-item-desc">
-                        Welcome to Stisla template!
-                        <div class="time">Yesterday</div>
-                        </div>
-                    </a>
-                </div>
-                <div class="dropdown-footer text-center">
-                    <a href="#">View All <i class="fas fa-chevron-right"></i></a>
-                </div>
+        <div class="dropdown d-inline">
+            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-globe"></i>
+                @if (app()->getLocale() === 'fr') Fr @else En @endif
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item has-icon" href="{{ route('lang', 'fr') }}"> Fr</a>
+              <a class="dropdown-item has-icon" href="{{ route('lang', 'en') }}"> En</a>
             </div>
-        </li> --}}
+          </div>
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{{ asset('assets/back/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                {{-- <img alt="image" src="{{ asset('assets/back/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1"> --}}
                 <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

@@ -29,16 +29,14 @@ class UsersController extends Controller
     {
         if ($user->is_active) {
             $user->is_active = false;
-            $content = trans('disabled');
+            $message = trans('Account has been successfully unblocked.');
         } else {
             $user->is_active = true;
-            $content = trans('enabled');
+            $message = trans('Account has been successfully blocked.');
         }
-
-        $message = trans('Account has been successfully ') . $content;
-        notify()->success($message);
-
         $user->save();
+
+        notify()->success($message);
 
         return back();
     }
