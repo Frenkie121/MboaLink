@@ -28,12 +28,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $message = '';
         $remember = (bool) $request->remember;
         if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
             $user = User::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
                     $message = 'auth.disabled';
+                } else {
+                    $message = 'auth.failed';
                 }
             } else {
                 $message = 'auth.failed';
