@@ -25,7 +25,7 @@ Route::view('/', 'welcome');
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
 // ADMIN
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     // USERS
     Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {
