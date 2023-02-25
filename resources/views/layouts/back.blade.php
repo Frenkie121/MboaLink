@@ -36,26 +36,26 @@
 
         <!-- Main Content -->
         <div class="main-content">
-        <section class="section">
+          <section class="section">
             @yield('content')
-        </section>
-        </div>
-        <footer class="main-footer">
-            <div class="container">
-              <div class="footer-left">2023</div>
-              <div class="footer-right">
-                <div class="bullet"></div> @lang('Made By') <a href="https://bvision-lte.com" target="_blank">Better Vision</a>
+          </section>
+          </div>
+          <footer class="main-footer">
+              <div class="container">
+                <div class="footer-left">2023</div>
+                <div class="footer-right">
+                  <div class="bullet"></div> @lang('Made By') <a href="https://bvision-lte.com" target="_blank">Better Vision</a>
+                </div>
               </div>
-            </div>
-        </footer>
-    </div>
+          </footer>
+      </div>
   </div>
 
   <!-- General JS Scripts -->
-  <script src="{{ asset('assets/back/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('assets/back/modules/bootstrap/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('assets/back/modules/popper.js') }}"></script>
   <script src="{{ asset('assets/back/modules/tooltip.js') }}"></script>
+  <script src="{{ asset('assets/back/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets/back/modules/bootstrap/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('assets/back/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
   <script src="{{ asset('assets/back/modules/moment.min.js') }}"></script>
   <script src="{{ asset('assets/back/js/stisla.js') }}"></script>

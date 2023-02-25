@@ -1,6 +1,6 @@
 @extends('layouts.back')
 
-@section('subtitle', trans('Dashboard') )
+@section('subtitle', __('Dashboard'))
 
 @section('content')
     
@@ -70,8 +70,9 @@
     </div>                  
   </div>
 
-  @push('js')
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/back/js/page/index-0.js') }}"></script>
-  @endpush
 @endsection
+
+@push('js')
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('assets/back/js/page/index-0.js') }}"></script>
+@endpush

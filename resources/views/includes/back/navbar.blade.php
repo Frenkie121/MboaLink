@@ -43,23 +43,23 @@
                 <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-            {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
-            <a href="/" class="dropdown-item has-icon">
-                <i class="fas fa-home"></i> @lang('Back to home')
-            </a>
-            <a href="{{ route('profile.edit') }}" class="dropdown-item has-icon">
-                <i class="far fa-user"></i> @lang('Profile')
-            </a>
-            <div class="dropdown-divider"></div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    this.closest('form').submit();"
-                    class="dropdown-item has-icon text-danger">
-                    <i class="fas fa-sign-out-alt"></i> @lang('Log Out')
+                {{-- <div class="dropdown-title">Logged in 5 min ago</div> --}}
+                <a href="/" class="dropdown-item has-icon">
+                    <i class="fas fa-home"></i> @lang('Back to home')
                 </a>
-            </form>
+                <a href="{{ route('profile.edit') }}" class="dropdown-item has-icon">
+                    <i class="far fa-user"></i> @lang('Profile')
+                </a>
+                <div class="dropdown-divider"></div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        this.closest('form').submit();"
+                        class="dropdown-item has-icon text-danger">
+                        <i class="fas fa-sign-out-alt"></i> @lang('Log Out')
+                    </a>
+                </form>
             </div>
         </li>
     </ul>

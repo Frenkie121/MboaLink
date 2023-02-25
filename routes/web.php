@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,11 @@ Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('
 // ADMIN
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    // USERS
+    Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::patch('status/{user}', 'updateStatus')->name('status');
+    });
 });
 
 require __DIR__.'/auth.php';
