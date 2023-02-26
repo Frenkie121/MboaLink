@@ -41,5 +41,15 @@
     "Forgot Password": "Mot de passe oublié",
     "Your password has been successfully reset. You can login with your new password.": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe.",
     "Back to login": "Retourner à la connexion",
-    "Send the link": "Envoyer le lien"
+    "Send the link": "Envoyer le lien",
+    "Hi": "Salut",
+    "Change information about yourself on this page.": "Changez les informations vous concernant à partir de cette page.",
+    "Profile Information": "Informations du profil",
+    "Update Password": "Changer le mot de passe",
+    "Current password": "Mot de passe actuel",
+    "New password": "Nouveau mot de passe",
+    "Confirm password": "Confirmer le mot de passe",
+    "Save": "Enregistrer",
+    "Password has been successfully updated.": "Le mot de passe a été changé avec succès.",
+    "Information have been successfully updated.": "Les informations de profil on été mises à jour avec succès"
 }
