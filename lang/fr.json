@@ -4,7 +4,7 @@
     "A new verification link has been sent to the email address you provided during registration.": "Un nouveau lien de vérification a été envoyé à l'adresse email que vous avez indiquée lors de votre inscription.",
     "Email Password Reset Link": "Lien de réinitialisation du mot de passe par e-mail",
     "Password": "Mot de passe",
-    "Remember me": "Se souvenir de moi",
+    "Remember Me": "Se souvenir de moi",
     "Log in": "Se connecter",
     "Log Out": "Se déconnecter",
     "Hello!":"Bonjour!",
@@ -37,7 +37,9 @@
     "Block": "Bloquer",
     "Unblock": "Débloquer",
     "Made By": "Fait par",
-    "Fill your email address in this form and we will send you a link to reset your password": "Remplissez votre adresse mail dans ce formulaire et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "Fill your email address in this form and we will send you a link to reset your password.": "Remplissez votre adresse mail dans ce formulaire et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
     "Forgot Password": "Mot de passe oublié",
-    "Your password has been successfully reset. You can login with your new password.": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe."
+    "Your password has been successfully reset. You can login with your new password.": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe.",
+    "Back to login": "Retourner à la connexion",
+    "Send the link": "Envoyer le lien"
 }

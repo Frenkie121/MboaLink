@@ -41,7 +41,7 @@
         
         <div class="float-right">
             @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-small">@lang('Forgot your Password?')</a>
+                <a href="{{ route('password.request') }}" class="text-small">@lang('Forgot your password?')</a>
             @endif
         </div>
     </div>

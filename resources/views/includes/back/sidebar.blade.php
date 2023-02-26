@@ -5,7 +5,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('admin.dashboard') }}">{{ config('app.name', 'MboaLink') }}</a>
+            <a href="{{ route('admin.dashboard') }}">
+                <img alt="image" src="{{ asset('assets/logo.jpg') }}" class="rounded-circle mr-1" width="60">
+                {{ config('app.name', 'MboaLink') }}
+            </a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="{{ route('admin.dashboard') }}">Mb</a>
