@@ -35,8 +35,8 @@ class UsersController extends Controller
             $message = trans('Account has been successfully blocked.');
         }
         $user->save();
-
-        notify()->success($message);
+        
+        toast($message, 'success');
 
         return back();
     }
