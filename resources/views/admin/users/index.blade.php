@@ -44,8 +44,12 @@
                                                         <a href="{{ route('admin.users.status', $user->id) }}"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();"
-                                                            class="btn btn-{{ $user->is_active ? 'primary' : 'danger' }}">
-                                                            @if ($user->is_active) @lang('Unblock') @else @lang('Block') @endif
+                                                            class="btn btn-{{ $user->is_active ? 'danger' : 'primary' }}">
+                                                            @if ($user->is_active) 
+                                                                @lang('Block')
+                                                            @else
+                                                                @lang('Unblock')
+                                                            @endif
                                                         </a>
                                                     </form>
                                                 @endif
