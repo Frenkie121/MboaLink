@@ -36,5 +36,8 @@
     "Role": "Rôle",
     "Block": "Bloquer",
     "Unblock": "Débloquer",
-    "Made By": "Fait par"
+    "Made By": "Fait par",
+    "Fill your email address in this form and we will send you a link to reset your password": "Remplissez votre adresse mail dans ce formulaire et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "Forgot Password": "Mot de passe oublié",
+    "Your password has been successfully reset. You can login with your new password.": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez vous connecter avec votre nouveau mot de passe."
 }
