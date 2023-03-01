@@ -51,5 +51,15 @@
     "Confirm password": "Confirmer le mot de passe",
     "Save": "Enregistrer",
     "Password has been successfully updated.": "Le mot de passe a été changé avec succès.",
-    "Information have been successfully updated.": "Les informations de profil on été mises à jour avec succès"
+    "Information have been successfully updated.": "Les informations de profil on été mises à jour avec succès",
+    "Sub-categories list": "Liste des sous-catégories",
+    "Add new sub-category": "Ajouter une sous-catégorie",
+    "Category": "Catégorie",
+    "Sub-categories": "Sous-catégories",
+    "The sub-category has been created": "La sous-catégorie a été ajoutée",
+    "The sub-category has been updated": "La sous-catégorie a été mise à jour",
+    "Select a category": "Sélectionner une sous-catégorie",
+    "Edit sub-category": "Modifier la sous-catégorie",
+    "Cancel": "Annuler",
+    "": ""
 }

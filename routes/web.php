@@ -35,6 +35,9 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
         Route::get('', 'index')->name('index');
         Route::patch('status/{user}', 'updateStatus')->name('status');
     });
+
+    // SUBCATEGORIES
+    Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
 });
 
 require __DIR__.'/auth.php';
