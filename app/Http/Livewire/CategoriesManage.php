@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\WithPagination;
 
 class CategoriesManage extends Component
 {
     use WithPagination;
+
+    use LivewireAlert;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -38,13 +41,14 @@ class CategoriesManage extends Component
     public function updateCategory()
     {
         $newData = $this->validate([
-            'nameEdit' => ['string', 'unique:categories,name', 'required', 'min:3'],
+            'nameEdit' => ['string', 'unique:categories,name,' . $this->editCategory->id . '', 'required', 'min:3'],
         ]);
         Category::where('id', $this->editCategory->id)
             ->update([
                 'name' => $newData['nameEdit'],
             ]);
-        toast(' Category has been successfully updated.', 'success');
+        $this->alert('success', trans('The category has been updated'));
+        // toast(' Category has been successfully updated.', 'success');
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -56,7 +60,8 @@ class CategoriesManage extends Component
         // dd("passer");
         Category::create($newData);
         $this->resetInput();
-        toast('New Category has been successfully created.', 'success');
+        $this->alert('success', trans('The category has been created'));
+        // toast('New Category has been successfully created.', 'success');
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -72,7 +77,8 @@ class CategoriesManage extends Component
     {
         $this->deleteCategory = Category::find($this->deleteId);
         $this->deleteCategory->delete();
-        toast(' Category has been successfully deleted.', 'success');
+        $this->alert('success', trans('The category has been deleted'));
+        // toast(' Category has been successfully deleted.', 'success');
         $this->dispatchBrowserEvent('close-modal');
     }
 

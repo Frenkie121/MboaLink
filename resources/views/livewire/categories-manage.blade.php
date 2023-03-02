@@ -70,7 +70,7 @@
                         {{-- <p>This login form is taken from elements with <code>#modal-login-part</code> id.</p> --}}
                         <div class="form-group">
                             <label class="control-label"> @lang('Category name') </label>
-                            <input type="text" wire:model="name" class="form-control"
+                            <input type="text" wire:model.defer="name" class="form-control"
                                 placeholder="{{ __('Category Name here') }}" />
                             @error('name')
                                 <span class="text-danger ">{{ $message }} </span>
@@ -102,7 +102,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">@lang('Name')</label>
-                            <input type="text" wire:model="nameEdit" class="form-control"
+                            <input type="text" wire:model.defer="nameEdit" class="form-control"
                                 placeholder="Category Name here" />
                             @error('name')
                                 <span class="text-danger ">{{ $message }} </span>

@@ -4,11 +4,13 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/back/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
 @endpush
 
 @section('content')
-    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
     <x-admin.section-header :title="__('Users list')" :previousTitle="__('Dashboard')" :previousRouteName="route('admin.dashboard')" />
 
     <div class="section-body">
@@ -18,7 +20,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-1">
-                                <thead>                                 
+                                <thead>
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Name')</th>
@@ -27,7 +29,7 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>                                 
+                                <tbody>
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
@@ -38,14 +40,15 @@
                                             </td>
                                             <td>
                                                 @if ($user->role_id !== 1)
-                                                    <form method="POST" action="{{ route('admin.users.status', $user->id) }}">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.users.status', $user->id) }}">
                                                         @csrf
                                                         @method('PATCH')
                                                         <a href="{{ route('admin.users.status', $user->id) }}"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();"
                                                             class="btn btn-{{ $user->is_active ? 'danger' : 'primary' }}">
-                                                            @if ($user->is_active) 
+                                                            @if ($user->is_active)
                                                                 @lang('Block')
                                                             @else
                                                                 @lang('Unblock')
@@ -66,10 +69,11 @@
     </div>
 
 @endsection
-    
+
 @push('js')
     <script src="{{ asset('assets/back/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
+    </script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/back/js/page/modules-datatables.js') }}"></script>
 @endpush
