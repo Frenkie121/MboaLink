@@ -1,13 +1,8 @@
 <div class="col-12">
     <div class="card">
-        <div class="card-header">
-            <h4></h4>
-            <div class="card-header-form">
-                <button type="button" wire:click="showCreateForm()" class="btn btn-primary">@lang('Add new sub-category')</button>
-            </div>
-        </div>
-        <div class="card-body p-0">
+        <div class="card-body">
             <div class="table-responsive">
+                <button type="button" wire:click="showCreateForm()" class="btn btn-primary float-right">@lang('Add new sub-category')</button>
                 <table class="table table-striped">
                     <tr>
                         <th>#</th>
