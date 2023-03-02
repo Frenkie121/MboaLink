@@ -9,4 +9,3 @@
         <div class="breadcrumb-item">{{ $title }}</div>
     </div>
 </div>
-{{-- <i class="fa-duotone fa-tags"></i> --}}

@@ -8,8 +8,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" type="button" class="btn btn-md btn btn-primary" data-toggle="modal"
-                                data-target="#AddCategory">
+                            <button style="float: right;" type="button" class="btn btn-md btn btn-primary"
+                                data-toggle="modal" data-target="#AddCategory">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add category') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
@@ -130,7 +130,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete this Category data ?')
+                    @lang('Are you Sure? You want to delete  ?'.$nameDelete)
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>

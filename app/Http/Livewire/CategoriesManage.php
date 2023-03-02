@@ -30,6 +30,9 @@ class CategoriesManage extends Component
     public function resetInput()
     {
         $this->name = '';
+        $this->nameDelete = '';
+        $this->nameEdit = '';
+        $this->reset();
     }
 
     public function editCategory($id)
@@ -47,8 +50,7 @@ class CategoriesManage extends Component
             ->update([
                 'name' => $newData['nameEdit'],
             ]);
-        $this->alert('success', trans('The category has been updated'));
-        // toast(' Category has been successfully updated.', 'success');
+        $this->alert('success', trans($newData['nameEdit'].' category has been updated'));
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -60,8 +62,7 @@ class CategoriesManage extends Component
         // dd("passer");
         Category::create($newData);
         $this->resetInput();
-        $this->alert('success', trans('The category has been created'));
-        // toast('New Category has been successfully created.', 'success');
+        $this->alert('success', trans($newData['name'] . 'category has been created'));
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -76,14 +77,15 @@ class CategoriesManage extends Component
     public function destroyCategory()
     {
         $this->deleteCategory = Category::find($this->deleteId);
+        $this->nameDelete=$this->deleteCategory->name;
+        dd($this->nameDelete);
         $this->deleteCategory->delete();
         $this->alert('success', trans('The category has been deleted'));
-        // toast(' Category has been successfully deleted.', 'success');
         $this->dispatchBrowserEvent('close-modal');
     }
 
     public function render()
     {
-        return view('livewire.categories-manage', ['categories' => Category::query()->paginate(6)]);
+        return view('livewire.categories-manage', ['categories' => Category::query()->OrderBy('id', 'desc')->paginate(5)]);
     }
 }
