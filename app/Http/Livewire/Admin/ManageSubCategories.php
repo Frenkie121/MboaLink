@@ -45,7 +45,9 @@ class ManageSubCategories extends Component
 
         $this->closeModal();
 
-        $this->alert('success', trans('The sub-category has been created'));
+        $this->alert('success', trans('The sub-category has been created'), [
+            'showCloseButton' => true
+        ]);
     }
 
     public function showEditForm(SubCategory $subCategory)
@@ -72,7 +74,27 @@ class ManageSubCategories extends Component
 
         $this->closeModal();
 
-        $this->alert('success', trans('The sub-category has been updated'));
+        $this->alert('success', trans('The sub-category has been updated'), [
+            'showCloseButton' => true
+        ]);
+    }
+
+    public function showDeleteModal(SubCategory $subCategory)
+    {
+        $this->selectedSubCategory = $subCategory;
+
+        $this->emit('openDeleteModal');
+    }
+
+    public function confirmDelete()
+    {
+        $this->selectedSubCategory->delete();
+
+        $this->closeModal();
+
+        $this->alert('success', trans('The sub-category has been deleted'), [
+            'showCloseButton' => true
+        ]);
     }
 
     public function render()
