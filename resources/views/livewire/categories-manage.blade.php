@@ -131,6 +131,8 @@
                 </div>
                 <div class="modal-body">
                     @lang('Are you Sure? You want to delete  ?'.$nameDelete)
+                    <br>
+                  <span class="text-warning">NB:</span>  <span class="text-warning" style="font-size: 15px;">@lang('If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>

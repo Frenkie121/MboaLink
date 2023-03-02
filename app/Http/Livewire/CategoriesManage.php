@@ -72,13 +72,13 @@ class CategoriesManage extends Component
     public function deleteCategory($id)
     {
         $this->deleteId = $id;
+        $this->nameDelete=(Category::find($this->deleteId))->name;
     }
 
     public function destroyCategory()
     {
         $this->deleteCategory = Category::find($this->deleteId);
         $this->nameDelete=$this->deleteCategory->name;
-        dd($this->nameDelete);
         $this->deleteCategory->delete();
         $this->alert('success', trans('The category has been deleted'));
         $this->dispatchBrowserEvent('close-modal');
