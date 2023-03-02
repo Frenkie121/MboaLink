@@ -19,13 +19,8 @@ class UsersController extends Controller
 
     /**
      * Enable or disable user account
-     *
-     * @param User $user
-     * 
-     * @return \Illuminate\Http\RedirectResponse
-     * 
      */
-    public function updateStatus(User $user) : RedirectResponse
+    public function updateStatus(User $user): RedirectResponse
     {
         if ($user->is_active) {
             $user->is_active = false;
@@ -35,7 +30,7 @@ class UsersController extends Controller
             $message = trans('Account has been successfully blocked.');
         }
         $user->save();
-        
+
         toast($message, 'success');
 
         return back();

@@ -17,7 +17,7 @@ class SubCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->unique()->jobTitle()
+            'name' => fake()->unique()->jobTitle(),
         ];
     }
 }

@@ -13,7 +13,7 @@ class LangController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(string $locale) : RedirectResponse
+    public function __invoke(string $locale): RedirectResponse
     {
         app()->setlocale($locale);
         session()->put('locale', $locale);

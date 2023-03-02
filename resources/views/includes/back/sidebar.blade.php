@@ -20,6 +20,9 @@
             <li class="@if(Str::contains($currentUri, 'users')) active @endif">
                 <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i> <span>@lang('Users')</span></a>
             </li>
+            <li class="@if(Str::contains($currentUri, 'categories')) active @endif">
+                <a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="fas fa-users"></i> <span>@lang('Categories')</span></a>
+            </li>
         </ul>
     </aside>
 </div>
