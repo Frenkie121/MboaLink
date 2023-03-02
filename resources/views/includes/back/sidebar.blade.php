@@ -1,5 +1,5 @@
 @php
-  $currentUri = Route::current()->uri;
+    $currentUri = Route::current()->uri;
 @endphp
 
 <div class="main-sidebar sidebar-style-2">
@@ -14,14 +14,17 @@
             <a href="{{ route('admin.dashboard') }}">Mb</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="@if(Str::contains($currentUri, 'dashboard')) active @endif">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fas fa-home"></i> <span>@lang('Dashboard')</span></a>
+            <li class="@if (Str::contains($currentUri, 'dashboard')) active @endif">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fas fa-home"></i>
+                    <span>@lang('Dashboard')</span></a>
             </li>
-            <li class="@if(Str::contains($currentUri, 'users')) active @endif">
-                <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i> <span>@lang('Users')</span></a>
+            <li class="@if (Str::contains($currentUri, 'users')) active @endif">
+                <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i>
+                    <span>@lang('Users')</span></a>
             </li>
-            <li class="@if(Str::contains($currentUri, 'categories')) active @endif">
-                <a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="fas fa-users"></i> <span>@lang('Categories')</span></a>
+            <li class="@if (Str::contains($currentUri, 'categories')) active @endif">
+                <a class="nav-link" href="{{ route('admin.categories.index') }}"><i class="fa-solid fa-layer-group"></i>
+                    <span>@lang('Categories')</span></a>
             </li>
         </ul>
     </aside>
