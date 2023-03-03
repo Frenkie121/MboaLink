@@ -9,7 +9,7 @@
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
                             <button style="float: right;" type="button" class="btn btn-md btn btn-primary"
-                                data-toggle="modal" data-target="#AddCategory">
+                                data-toggle="modal" data-target="#AddTag">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add Tag') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
@@ -26,15 +26,15 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#deleteCategory"
-                                                    wire:click="deleteCategory({{ $tag->id }})"> <i
-                                                        class="fa fa-trash"></i>
-                                                </a>
-                                                <a href="#" wire:click="editCategory({{ $tag->id }})"
-                                                    data-toggle="modal" data-target="#EditCategory"
+                                                <a href="#" wire:click="editTag({{ $tag->id }})"
+                                                    data-toggle="modal" data-target="#AddTag"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="far fa-edit"></i> </a>
+                                                <a href="#" class="btn btn-danger" data-toggle="modal"
+                                                    data-target="#deleteTag"
+                                                    wire:click="deleteTag({{ $tag->id }})"> <i
+                                                        class="fa fa-trash"></i>
+                                                </a>
                                             </td>
                                     </tr>
                                     @endforeach
@@ -53,31 +53,39 @@
         </div>
     </div>
 
-    <!-- Modal addTag -->
-    <div wire:ignore.self class="modal fade" id="AddCategory" tabindex="-1" role="dialog"
-        aria-labelledby="AddCategoryLabel" aria-hidden="true">
+    <!-- Modal addTag + EditTag-->
+    <div wire:ignore.self class="modal fade" id="AddTag" tabindex="-1" role="dialog"
+        aria-labelledby="AddTagLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel"> @lang('Add Tag') </h5>
+                    <h5 class="modal-title" id="AddTagLabel">
+                        @if ($selectedTag)
+                            @lang('Edit Tag')
+                        @else
+                            @lang('Add Tag')
+                        @endif
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="addTag">
+                <form wire:submit.prevent={{ $selectedTag ? 'updateTag' : 'addTag' }}>
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label"> @lang('Tag name') </label>
                             <input type="text" wire:model.defer="name" class="form-control"
-                                placeholder="{{ __('Tag Name here') }}" />
+                                placeholder=" {{ __('Tag Name here') }}" />
                             @error('name')
                                 <span class="text-danger ">{{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="submit" class="btn btn-primary"> @lang('Save') </button>
+                        <button type="reset" wire:click="closeModal()" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="submit" class="btn btn-primary">
+                            @if ($selectedTag) @lang('Edit') @else @lang('Save')  @endif
+                        </button>
                     </div>
                 </form>
 
@@ -85,61 +93,28 @@
         </div>
     </div>
 
-    <!-- Modal EditCategory -->
-    <div wire:ignore.self class="modal fade" id="EditCategory" tabindex="-1" role="dialog"
-        aria-labelledby="EditCategoryLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel">@lang('Edit Category')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form wire:submit.prevent="updateCategory">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label class="control-label">@lang('Name')</label>
-                            <input type="text" wire:model.defer="nameEdit" class="form-control"
-                                placeholder="Category Name here" />
-                            @error('name')
-                                <span class="text-danger ">{{ $message }} </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="submit" class="btn btn-primary">@lang('Edit') </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Delete Category -->
-    {{-- <div wire:ignore.self class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Modal Delete Tag -->
+    <div wire:ignore.self class="modal fade" id="deleteTag" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCategory">@lang('Delete Category')</h5>
+                    <h5 class="modal-title" id="deleteTag">@lang('Delete Tag')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete  ?' . $nameDelete)
+                    @lang('Are you Sure? You want to delete') <span style="font-weight: bold">{{ $name }} </span> ?
                     <br>
-                    <span class="text-warning">NB:</span> <span class="text-warning"
-                        style="font-size: 15px;">@lang('If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
-                    <button type="button" wire:click="destroyCategory()" class="btn btn-danger">
+                    <button type="button" wire:click="destroyTag()" class="btn btn-danger">
                         @lang('Yes! delete')</button>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- end modal confirmation delete User --}}
 
 </div>

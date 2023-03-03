@@ -26,15 +26,15 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>
+                                                <a href="#" wire:click="editCategory({{ $category->id }})"
+                                                    data-toggle="modal" data-target="#EditCategory"
+                                                    class="btn btn-icon icon-left btn-primary"><i
+                                                        class="far fa-edit"></i> </a>
                                                 <a href="#" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#deleteCategory"
                                                     wire:click="deleteCategory({{ $category->id }})"> <i
                                                         class="fa fa-trash"></i>
                                                 </a>
-                                                <a href="#" wire:click="editCategory({{ $category->id }})"
-                                                    data-toggle="modal" data-target="#EditCategory"
-                                                    class="btn btn-icon icon-left btn-primary"><i
-                                                        class="far fa-edit"></i> </a>
                                             </td>
                                     </tr>
                                     @endforeach
@@ -77,11 +77,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="reset" class="btn btn-secondary" wire:click="closeModal()"
+                            data-dismiss="modal">@lang('Cancel')</button>
                         <button type="submit" class="btn btn-primary"> @lang('Save') </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -103,13 +103,14 @@
                             <label class="control-label">@lang('Name')</label>
                             <input type="text" wire:model.defer="nameEdit" class="form-control"
                                 placeholder="Category Name here" />
-                            @error('name')
+                            @error('nameEdit')
                                 <span class="text-danger ">{{ $message }} </span>
                             @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="reset" class="btn btn-secondary" wire:click="closeModal()"
+                            data-dismiss="modal">@lang('Cancel')</button>
                         <button type="submit" class="btn btn-primary">@lang('Edit') </button>
                     </div>
                 </form>
@@ -129,12 +130,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete') <span class="text-lg" style="color: black;font-weight:bold;"> {{ $nameDelete }}</span>?
+                    @lang('Are you Sure? You want to delete') <span class="text-lg" style="color: black;font-weight:bold;">
+                        {{ $nameDelete }}</span>?
                     <br>
-                 <span class="text-warning" style="font-size: 15px;">@lang('NB: If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
+                    <span class="text-warning" style="font-size: 15px;">@lang('NB: If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
+                    <button type="reset" class="btn btn-success" wire:click="closeModal()"
+                        data-dismiss="modal">@lang('Cancel')</button>
                     <button type="button" wire:click="destroyCategory()" class="btn btn-danger">
                         @lang('Yes! delete')</button>
                 </div>

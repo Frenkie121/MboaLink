@@ -31,7 +31,11 @@ class CategoriesManage extends Component
         $this->name = '';
         $this->nameDelete = '';
         $this->nameEdit = '';
+    }
+    public function closeModal()
+    {
         $this->reset();
+        $this->dispatchBrowserEvent('close-modal');
     }
 
     public function editCategory($id)
@@ -50,7 +54,8 @@ class CategoriesManage extends Component
                 'name' => $newData['nameEdit'],
             ]);
         $this->alert('success', $newData['nameEdit'].' category has been updated');
-        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInput();
+        $this->closeModal();
     }
 
     public function addCategory()
@@ -61,7 +66,7 @@ class CategoriesManage extends Component
         Category::create($newData);
         $this->resetInput();
         $this->alert('success', trans($newData['name'].'category has been created'));
-        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
     }
 
     /**
@@ -76,10 +81,10 @@ class CategoriesManage extends Component
     public function destroyCategory()
     {
         $this->deleteCategory = Category::find($this->deleteId);
-        $this->nameDelete = $this->deleteCategory->name;
         $this->deleteCategory->delete();
         $this->alert('success', trans('The category has been deleted'));
-        $this->dispatchBrowserEvent('close-modal');
+        $this->resetInput();
+        $this->closeModal();
     }
 
     public function render()
