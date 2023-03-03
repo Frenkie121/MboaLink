@@ -22,15 +22,12 @@ class TagsManage extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public function resetInput()
-    {
-        $this->name = '';
-        $this->reset();
-    }
-
     public function closeModal()
     {
         $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
+
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -49,9 +46,8 @@ class TagsManage extends Component
             ->update([
                 'name' => $newData['name'],
             ]);
-        $this->alert('success', $newData['name'].' Tag has been updated');
-        $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal');
+        $this->alert('success', trans('The tag has been updated'));
+        $this->closeModal();
     }
 
     public function addTag()
@@ -60,9 +56,8 @@ class TagsManage extends Component
             'name' => ['string', 'unique:tags,name', 'required', 'min:2'],
         ]);
         Tag::create($newData);
-        $this->alert('success', trans($newData['name'].'Tag has been created'));
-        $this->resetInput();
-        $this->dispatchBrowserEvent('close-modal');
+        $this->alert('success', trans('The new Tag has been created'));
+        $this->closeModal();
     }
 
     public function deleteTag($id)
@@ -76,7 +71,7 @@ class TagsManage extends Component
         $this->deleteTag = Tag::find($this->deleteId);
         $this->deleteTag->delete();
         $this->alert('success', trans('The Tag has been deleted'));
-        $this->dispatchBrowserEvent('close-modal');
+        $this->closeModal();
     }
 
     public function render()
