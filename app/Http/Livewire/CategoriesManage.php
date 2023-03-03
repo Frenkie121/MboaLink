@@ -32,6 +32,7 @@ class CategoriesManage extends Component
         $this->nameDelete = '';
         $this->nameEdit = '';
     }
+
     public function closeModal()
     {
         $this->reset();
