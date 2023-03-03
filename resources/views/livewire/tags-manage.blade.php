@@ -1,5 +1,5 @@
 <div>
-    <x-admin.section-header :title="__('Categories list')" :previousTitle="__('Dashboard')" :previousRouteName="route('admin.dashboard')" />
+    <x-admin.section-header :title="__('Tags list')" :previousTitle="__('Dashboard')" :previousRouteName="route('admin.dashboard')" />
 
     <div class="section-body">
         <div class="row">
@@ -10,7 +10,7 @@
                             <!-- Button trigger modal -->
                             <button style="float: right;" type="button" class="btn btn-md btn btn-primary"
                                 data-toggle="modal" data-target="#AddCategory">
-                                <i class="fa fa-plus btn-md"></i> @lang('Add category') </button>
+                                <i class="fa fa-plus btn-md"></i> @lang('Add Tag') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
                                 <thead>
@@ -22,16 +22,16 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        @foreach ($categories as $category)
+                                        @foreach ($tags as $tag)
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $tag->name }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#deleteCategory"
-                                                    wire:click="deleteCategory({{ $category->id }})"> <i
+                                                    wire:click="deleteCategory({{ $tag->id }})"> <i
                                                         class="fa fa-trash"></i>
                                                 </a>
-                                                <a href="#" wire:click="editCategory({{ $category->id }})"
+                                                <a href="#" wire:click="editCategory({{ $tag->id }})"
                                                     data-toggle="modal" data-target="#EditCategory"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="far fa-edit"></i> </a>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="card-footer text-right">
                         <nav class="d-inline-block">
-                            {{ $categories->links() }}
+                            {{ $tags->links() }}
                         </nav>
                     </div>
                 </div>
@@ -53,24 +53,23 @@
         </div>
     </div>
 
-
-    <!-- Modal addCategory -->
+    <!-- Modal addTag -->
     <div wire:ignore.self class="modal fade" id="AddCategory" tabindex="-1" role="dialog"
         aria-labelledby="AddCategoryLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel"> @lang('Add category') </h5>
+                    <h5 class="modal-title" id="AddCategoryLabel"> @lang('Add Tag') </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form wire:submit.prevent="addCategory">
+                <form wire:submit.prevent="addTag">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="control-label"> @lang('Category name') </label>
+                            <label class="control-label"> @lang('Tag name') </label>
                             <input type="text" wire:model.defer="name" class="form-control"
-                                placeholder="{{ __('Category Name here') }}" />
+                                placeholder="{{ __('Tag Name here') }}" />
                             @error('name')
                                 <span class="text-danger ">{{ $message }} </span>
                             @enderror
@@ -113,13 +112,12 @@
                         <button type="submit" class="btn btn-primary">@lang('Edit') </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 
     <!-- Modal Delete Category -->
-    <div wire:ignore.self class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-hidden="true">
+    {{-- <div wire:ignore.self class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -129,9 +127,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete') <span class="text-lg" style="color: black;font-weight:bold;"> {{ $nameDelete }}</span>?
+                    @lang('Are you Sure? You want to delete  ?' . $nameDelete)
                     <br>
-                 <span class="text-warning" style="font-size: 15px;">@lang('NB: If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
+                    <span class="text-warning">NB:</span> <span class="text-warning"
+                        style="font-size: 15px;">@lang('If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
@@ -140,7 +139,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- end modal confirmation delete User --}}
 
 </div>

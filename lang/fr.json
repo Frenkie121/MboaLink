@@ -60,8 +60,13 @@
     "Yes! delete": "Oui! supprimer",
     "Delete": "Supprimer",
     "Delete Category": "Supprimer la catégorie",
+    "NB: If you delete this category, the related subcategory and jobs or posts will also be affected.":"NB: Si vous supprimez cette categorie,celà va entrainer celle des sous-categories et jobs y afférants  ",
     "Edit Category": "Modifier la catégorie",
     "Category name": "Nom de la catégorie",
-    "Are you Sure? You want to delete this Category data ?": "Etes-vous sûr? Souhaitez-vous supprimer cette catégorie ?",
+    "Tags list":"Liste des Tags",
+    " category has been updated":"categorie a été mis a jour",
+    "category has been created":"categorie a été creé",
+    "The category has been deleted":"La categorie a été supprimée",
+    "Are you Sure? You want to delete": "Etes-vous sûr? Souhaitez-vous supprimer",
     "Add category": "Ajouter une catégorie"
 }
