@@ -27,12 +27,14 @@ class TagsManage extends Component
         $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
-
         $this->dispatchBrowserEvent('close-modal');
     }
 
     public function editTag($id)
     {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->selectedTag = Tag::find($id);
         $this->name = $this->selectedTag->name;
     }
@@ -52,6 +54,8 @@ class TagsManage extends Component
 
     public function addTag()
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
         $newData = $this->validate([
             'name' => ['string', 'unique:tags,name', 'required', 'min:2'],
         ]);

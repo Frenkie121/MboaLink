@@ -36,6 +36,9 @@ class CategoriesManage extends Component
 
     public function editCategory($id)
     {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->editCategory = Category::find($id);
         $this->nameEdit = $this->editCategory->name;
     }
@@ -55,6 +58,8 @@ class CategoriesManage extends Component
 
     public function addCategory()
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
         $newData = $this->validate([
             'name' => ['string', 'unique:categories,name', 'required', 'min:3'],
         ]);

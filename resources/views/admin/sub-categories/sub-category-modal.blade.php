@@ -19,12 +19,12 @@
                         <label for="category" class="col-sm-3 col-form-label">@lang('Category')</label>
                         <div class="col-sm-9">
                             <select class="custom-select" wire:model.defer="category">
-                                <option 
+                                <option
                                     @disabled($selectedSubCategory)
                                     @selected(!$selectedSubCategory)
                                 >@lang('Select a category')</option>
                                 @foreach ($categories as $category)
-                                    <option 
+                                    <option
                                         value="{{ $category->id }}"
                                         @selected($selectedSubCategory && $category->id === $selectedSubCategory->category->id)
                                         >
@@ -41,7 +41,7 @@
                         <label for="name" class="col-sm-3 col-form-label">@lang('Name')</label>
                         <div class="col-sm-9">
                             <input type="text" wire:model.defer="name" class="form-control" id="name" placeholder="@lang('Name')">
-                            @error('name') 
+                            @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>

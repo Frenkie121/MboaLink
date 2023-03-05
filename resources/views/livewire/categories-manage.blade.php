@@ -124,16 +124,16 @@
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteCategory">@lang('Delete Category')</h5>
+                    <h5 class="modal-title" id="deleteCategory">@lang('Delete category') <strong>
+                            {{ $nameDelete }}</strong></h5>
                     <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete') <span class="text-lg" style="color: black;font-weight:bold;">
-                        {{ $nameDelete }}</span>?
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category? This will also delete all jobs related to this category.')</p>
+                    </span>
                     <br>
-                    <span class="text-warning" style="font-size: 15px;">@lang('NB: If you delete this category, the related subcategory and jobs or posts will also be affected.')</span>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-success" wire:click="closeModal()"

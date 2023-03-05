@@ -31,6 +31,8 @@ class ManageSubCategories extends Component
     public function closeModal()
     {
         $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->emit('closeModal');
     }
 
@@ -52,6 +54,9 @@ class ManageSubCategories extends Component
 
     public function showEditForm(SubCategory $subCategory)
     {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->selectedSubCategory = $subCategory;
 
         $this->name = $subCategory->name;

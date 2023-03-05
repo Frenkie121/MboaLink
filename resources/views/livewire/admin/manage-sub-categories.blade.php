@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <button type="button" wire:click="showCreateForm()" class="btn btn-primary float-right">@lang('Add new sub-category')</button>
+                <button type="button" wire:click="showCreateForm()" class="btn btn-primary float-right"><i
+                        class="fa fa-plus btn-md"></i> @lang('Add new sub-category')</button>
                 <table class="table table-striped">
                     <tr>
                         <th>#</th>
@@ -16,8 +17,10 @@
                             <td>{{ $subCategory->name }}</td>
                             <td>{{ $subCategory->category->name }}</td>
                             <td>
-                                <button wire:click="showEditForm({{ $subCategory->id }})" class="btn btn-primary"><i class="fas fa-pen"></i></button>
-                                <button wire:click="showDeleteModal({{ $subCategory->id }})" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                <button wire:click="showEditForm({{ $subCategory->id }})" class="btn btn-primary"><i
+                                        class="fas fa-pen"></i></button>
+                                <button wire:click="showDeleteModal({{ $subCategory->id }})" class="btn btn-danger"><i
+                                        class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -33,7 +36,7 @@
 
     <!-- Modal -->
     @include('admin.sub-categories.sub-category-modal')
-    
+
     @if ($selectedSubCategory)
         @include('admin.sub-categories.delete-modal')
     @endif

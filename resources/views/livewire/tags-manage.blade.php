@@ -98,13 +98,14 @@
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteTag">@lang('Delete Tag')</h5>
+                    <h5 class="modal-title" id="deleteTag">@lang('Delete tag') <strong>{{ $name }}</strong></h5>
                     <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @lang('Are you Sure? You want to delete') <span style="font-weight: bold">{{ $name }} </span> ?
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this tag?')</p>
+                <div class="modal-footer">
                     <br>
                 </div>
                 <div class="modal-footer">
