@@ -44,6 +44,9 @@
                 <a href="{{ route('password.request') }}" class="text-small">@lang('Forgot your password?')</a>
             @endif
         </div>
+        <div class="float-left">
+            <a href="{{ route('front.home') }}" class="text-small">@lang('Back to home')</a>
+        </div>
     </div>
 
 @endsection
