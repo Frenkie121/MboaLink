@@ -12,23 +12,23 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::contains($currentUri, '/')) active @endif">@lang('Home')</a>
-            <a href="about.html" class="nav-item nav-link">About</a>
+            <a href="#" class="nav-item nav-link">About</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="job-list.html" class="dropdown-item">Job List</a>
-                    <a href="job-detail.html" class="dropdown-item">Job Detail</a>
+                    <a href="{{ route('front.categories') }}" class="dropdown-item">@lang('Categories')</a>
+                    <a href="#" class="dropdown-item">@lang('Job List')</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="category.html" class="dropdown-item">Job Category</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404</a>
+                    <a href="#" class="dropdown-item">Job Category</a>
+                    <a href="#" class="dropdown-item">Testimonial</a>
+                    <a href="#" class="dropdown-item">404</a>
                 </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
+            <a href="#" class="nav-item nav-link">Contact</a>
         </div>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -39,6 +39,6 @@
                 <a href="{{ route('lang', 'en') }}" class="dropdown-item">En</a>
             </div>
         </div>
-        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-3 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
+        <a href="#" class="btn btn-primary rounded-0 py-4 px-lg-3 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
     </div>
 </nav>

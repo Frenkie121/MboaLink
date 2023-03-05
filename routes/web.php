@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
+use App\Http\Controllers\Front\PagesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 
 // FRONT
 Route::name('front.')->group(function () {
-    Route::view('/', 'front.home')->name('home');
+    Route::controller(PagesController::class)->group(function () {
+        Route::get('/', 'home')->name('home');
+        Route::get('categories', 'categories')->name('categories');
+    });
 });
 
 
