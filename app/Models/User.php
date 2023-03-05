@@ -47,7 +47,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
     ];
 
     /**
@@ -64,11 +64,10 @@ class User extends Authenticatable
             $this->notify(new ResetPasswordFrNotification($token));
         }
     }
-    
+
     // RELATIONSHIPS
-    public function role() : BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
-    
 }
