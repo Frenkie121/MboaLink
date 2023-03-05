@@ -18,7 +18,8 @@ class PagesController extends Controller
         return view('front.categories', [
             'categories' => Category::query()
                                     // ->with('')
-                                    ->get(['name'])
+                                    ->paginate(8, ['slug', 'name'])
+                                    
         ]);
     }
 }

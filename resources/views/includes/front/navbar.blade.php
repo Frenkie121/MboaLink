@@ -14,7 +14,12 @@
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::contains($currentUri, '/')) active @endif">@lang('Home')</a>
             <a href="#" class="nav-item nav-link">About</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Jobs</a>
+                <a href="#" 
+                    class="nav-link dropdown-toggle 
+                    @if (Str::contains($currentUri, 'categories') 
+                    || (Str::contains($currentUri, 'jobs'))) active 
+                    @endif" 
+                    data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
                     <a href="{{ route('front.categories') }}" class="dropdown-item">@lang('Categories')</a>
                     <a href="#" class="dropdown-item">@lang('Job List')</a>
