@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
-use Livewire\Component;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Livewire\WithPagination;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class ManageSubCategories extends Component
 {
@@ -15,11 +15,12 @@ class ManageSubCategories extends Component
     public $selectedSubCategory;
 
     public $name;
+
     public $category;
 
     protected $rules = [
         'name' => 'required|unique:sub_categories,name',
-        'category' => 'required|exists:categories,id'
+        'category' => 'required|exists:categories,id',
     ];
 
     public function showCreateForm()
@@ -42,13 +43,13 @@ class ManageSubCategories extends Component
         SubCategory::query()
                     ->create([
                         'name' => $this->name,
-                        'category_id' => $this->category
+                        'category_id' => $this->category,
                     ]);
 
         $this->closeModal();
 
         $this->alert('success', trans('The sub-category has been created'), [
-            'showCloseButton' => true
+            'showCloseButton' => true,
         ]);
     }
 
@@ -68,19 +69,19 @@ class ManageSubCategories extends Component
     public function update()
     {
         $this->validate([
-            'name' => 'required|unique:sub_categories,name,' . $this->selectedSubCategory->id,
-            'category' => 'required|exists:categories,id'
+            'name' => 'required|unique:sub_categories,name,'.$this->selectedSubCategory->id,
+            'category' => 'required|exists:categories,id',
         ]);
 
         $this->selectedSubCategory->update([
             'name' => $this->name,
-            'category_id' => $this->category
+            'category_id' => $this->category,
         ]);
 
         $this->closeModal();
 
         $this->alert('success', trans('The sub-category has been updated'), [
-            'showCloseButton' => true
+            'showCloseButton' => true,
         ]);
     }
 
@@ -98,7 +99,7 @@ class ManageSubCategories extends Component
         $this->closeModal();
 
         $this->alert('success', trans('The sub-category has been deleted'), [
-            'showCloseButton' => true
+            'showCloseButton' => true,
         ]);
     }
 
@@ -110,7 +111,7 @@ class ManageSubCategories extends Component
                                             ->latest()
                                             ->paginate(5),
             'categories' => Category::query()
-                                    ->get(['id', 'name'])
+                                    ->get(['id', 'name']),
         ]);
     }
 }

@@ -29,7 +29,7 @@
                                                 <a href="#" wire:click="editTag({{ $tag->id }})"
                                                     data-toggle="modal" data-target="#AddTag"
                                                     class="btn btn-icon icon-left btn-primary"><i
-                                                        class="far fa-edit"></i> </a>
+                                                        class="fas fa-pen"></i> </a>
                                                 <a href="#" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#deleteTag"
                                                     wire:click="deleteTag({{ $tag->id }})"> <i

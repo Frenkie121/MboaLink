@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Category extends Model
 {
@@ -12,7 +14,32 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function subCategories()
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    // MUTATORS
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    // ACCESSORS
+
+    public function getShortNameAttribute(): string
+    {
+        $name = $this->attributes['name'];
+        if (str_word_count($name) > 2 && strlen($name) > 25) {
+            return substr($name, 0, 20).'...';
+        }
+
+        return $name;
+    }
+
+    // RELATIONSHIPS
+    public function subCategories(): HasMany
     {
         return $this->hasMany(SubCategory::class);
     }

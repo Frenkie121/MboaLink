@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class SubCategory extends Model
 {
@@ -12,7 +14,19 @@ class SubCategory extends Model
 
     protected $fillable = ['name', 'category_id'];
 
-    public function category()
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    // MUTATORS
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }

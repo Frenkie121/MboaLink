@@ -29,7 +29,7 @@
                                                 <a href="#" wire:click="editCategory({{ $category->id }})"
                                                     data-toggle="modal" data-target="#EditCategory"
                                                     class="btn btn-icon icon-left btn-primary"><i
-                                                        class="far fa-edit"></i> </a>
+                                                        class="fas fa-pen"></i> </a>
                                                 <a href="#" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#deleteCategory"
                                                     wire:click="deleteCategory({{ $category->id }})"> <i
