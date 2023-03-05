@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('assets/back/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/back/css/components.css') }}">
 
+    @livewireStyles
+
     @stack('css')
 </head>
 
@@ -65,6 +67,8 @@
   <!-- Template JS File -->
   <script src="{{ asset('assets/back/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/back/js/custom.js') }}"></script>
+
+  @livewireScripts
 
   @stack('js')
 

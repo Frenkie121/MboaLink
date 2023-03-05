@@ -78,5 +78,15 @@
     "The Tag has been deleted":"Le tag a été supprimé",
     "Are you Sure? You want to delete": "Etes-vous sûr? Souhaitez-vous supprimer",
     "Add Tag": "Ajouter un tag",
-    "Add category": "Ajouter une catégorie"
+    "Add category": "Ajouter une catégorie",
+    "Sub-categories list": "Liste des sous-catégories",
+    "Add new sub-category": "Ajouter une sous-catégorie",
+    "Category": "Catégorie",
+    "Sub-categories": "Sous-catégories",
+    "The sub-category has been created": "La sous-catégorie a été ajoutée",
+    "The sub-category has been updated": "La sous-catégorie a été mise à jour",
+    "Select a category": "Sélectionner une sous-catégorie",
+    "Edit sub-category": "Modifier la sous-catégorie",
+    "Confirm": "Confirmer",
+    "": ""
 }
