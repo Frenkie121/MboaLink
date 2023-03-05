@@ -57,14 +57,6 @@
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Company</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Quick Links</h5>
                         <a class="btn btn-link text-white-50" href="">About Us</a>
                         <a class="btn btn-link text-white-50" href="">Contact Us</a>
@@ -91,9 +83,33 @@
                             <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
                             <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
                         </div>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <a href="{{ route('login') }}" type="button" class="btn btn-primary py-2 position-absolute top-0 mt-2 me-2">@lang('Log in')</a>
-                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">@lang('Sign In')</h5>
+                        @auth
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    @if (auth()->user()->role_id === 1)
+                                        <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">@lang('Go to dashboard')</a></li>
+                                    @endif
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <li>
+                                            <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                            this.closest('form').submit();"
+                                            class="dropdown-item"> @lang('Log Out')
+                                            </a>
+                                        </li>
+                                    </form>
+                                </ul>
+                            </div>
+                        @else
+                            <div class="position-relative mx-auto" style="max-width: 400px;">
+                                <a href="{{ route('login') }}" type="button" class="btn btn-primary py-2 position-absolute top-0 mt-2 me-2">@lang('Log in')</a>
+                            </div>
+                        @endauth
                     </div>
                 </div>
             </div>
