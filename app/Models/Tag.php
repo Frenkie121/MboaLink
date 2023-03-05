@@ -13,11 +13,6 @@ class Tag extends Model
 
     protected $fillable = ['name'];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     // MUTATORS
     public function setNameAttribute($value): void
     {

@@ -14,11 +14,6 @@ class SubCategory extends Model
 
     protected $fillable = ['name', 'category_id'];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     // MUTATORS
     public function setNameAttribute($value): void
     {

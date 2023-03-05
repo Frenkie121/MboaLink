@@ -14,11 +14,6 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     // MUTATORS
     public function setNameAttribute($value): void
     {
