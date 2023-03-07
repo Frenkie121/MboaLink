@@ -5,7 +5,7 @@
 @section('content')
 
     <!-- Header End -->
-    <x-front.header :title="__('Categories')" : />
+    <x-front.header :title="__('Categories')" />
     <!-- Header End -->
 
     <!-- Category Start -->

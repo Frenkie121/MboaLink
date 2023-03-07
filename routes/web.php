@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\Front\{JobController, PagesController};
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +29,12 @@ Route::name('front.')->group(function () {
     Route::controller(PagesController::class)->group(function () {
         Route::get('/', 'home')->name('home');
         Route::get('categories', 'categories')->name('categories');
+    });
+
+    Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/post', 'create')->name('create');
+        Route::get('/{job}', 'show')->name('show');
     });
 });
 

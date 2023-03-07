@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,14 @@ class JobFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'sub_category_id' => SubCategory::factory(),
+            'company_id' => Company::factory(),
+            'title' => fake()->jobTitle(),
+            'location' => fake('it_IT')->city(),
+            'description' => fake()->paragraph(5),
+            'salary' => fake()->numberBetween(100000, 200000) . '-' . fake()->numberBetween(250000, 500000),
+            'type' => fake()->numberBetween(1, 5),
+            'dateline' => now()->addDays(fake()->numberBetween(4, 30))
         ];
     }
 }
