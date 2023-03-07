@@ -21,7 +21,7 @@
                     @endif" 
                     data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="{{ route('front.categories') }}" class="dropdown-item 
+                    <a href="{{ route('front.jobs.categories') }}" class="dropdown-item 
                         @if (Str::endsWith($currentRouteName, 'categories')) active @endif"
                     >@lang('Categories')</a>
                     <a href="{{ route('front.jobs.index') }}" class="dropdown-item

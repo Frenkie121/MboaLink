@@ -28,10 +28,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 Route::name('front.')->group(function () {
     Route::controller(PagesController::class)->group(function () {
         Route::get('/', 'home')->name('home');
-        Route::get('categories', 'categories')->name('categories');
     });
-
+    
     Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
+        Route::get('categories', 'categories')->name('categories');
         Route::get('/', 'index')->name('index');
         Route::get('/post', 'create')->name('create');
         Route::get('/{job}', 'show')->name('show');

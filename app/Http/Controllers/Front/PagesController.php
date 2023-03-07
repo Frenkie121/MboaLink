@@ -11,14 +11,4 @@ class PagesController extends Controller
     {
         return view('front.home');
     }
-
-    public function categories()
-    {
-        return view('front.categories', [
-            'categories' => Category::query()
-                                    // ->with('')
-                                    ->paginate(8, ['slug', 'name']),
-
-        ]);
-    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,11 +21,11 @@ class Job extends Model
     ];
 
     const TYPES = [
-        1 => 'FULL-TIME',
-        2 => 'PART-TIME',
-        3 => 'INTERNSHIP',
-        4 => 'FREELANCE',
-        5 => 'REMOTE'
+        1 => 'Full Time',
+        2 => 'Part Time',
+        3 => 'Internship',
+        4 => 'Freelance',
+        5 => 'Remote'
     ];
 
     public function getRouteKeyName(): string
@@ -33,6 +34,15 @@ class Job extends Model
     }
 
     // ACCESSORS
+    public function getDatelineAttribute($dateline)
+    {
+        return date_format(Carbon::make($dateline), 'F d, Y');
+    }
+    
+    public function getTypeAttribute($type)
+    {
+        return self::TYPES[$type];
+    }
 
     // MUTATORS
     public function setTitleAttribute($value): void
