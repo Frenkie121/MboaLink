@@ -29,11 +29,6 @@ class Job extends Model
         5 => 'Remote',
     ];
 
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
-
     // ACCESSORS
     public function getDatelineAttribute($dateline)
     {

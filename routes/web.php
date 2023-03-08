@@ -35,7 +35,7 @@ Route::name('front.')->group(function () {
         Route::get('categories', 'categories')->name('categories');
         Route::get('/', 'index')->name('index');
         Route::get('/post', 'create')->name('create');
-        Route::get('/{job}', 'show')->name('show');
+        Route::get('/{job:slug}', 'show')->name('show');
     });
 });
 

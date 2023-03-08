@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('type');
             $table->date('dateline');
             $table->string('file')->nullable();
+            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }
