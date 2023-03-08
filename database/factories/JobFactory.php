@@ -27,6 +27,7 @@ class JobFactory extends Factory
             'salary' => fake()->numberBetween(10000, 20000).' - '.fake()->numberBetween(25000, 50000),
             'type' => fake()->numberBetween(1, 5),
             'dateline' => now()->addDays(fake()->numberBetween(4, 30)),
+            'is_published' => fake()->boolean(),
         ];
     }
 }

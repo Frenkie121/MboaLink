@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Job;
+use App\Models\Category;
 use App\Models\SubCategory;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class JobController extends Controller
 {
@@ -23,7 +24,12 @@ class JobController extends Controller
     {
         return view('front.jobs.categories', [
             'categories' => Category::query()
-                                    ->paginate(8, ['slug', 'name']),
+                                    ->whereHas('jobs', function (Builder $query) {
+                                        $query->where('is_published', true);
+                                    })
+                                    ->withCount('jobs')
+                                    ->latest()
+                                    ->paginate(8),
 
         ]);
     }

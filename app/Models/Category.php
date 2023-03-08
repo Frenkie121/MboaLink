@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\Relations\{HasMany, HasManyThrough};
 use Illuminate\Support\Str;
 
 class Category extends Model
@@ -37,5 +36,10 @@ class Category extends Model
     public function subCategories(): HasMany
     {
         return $this->hasMany(SubCategory::class);
+    }
+
+    public function jobs(): HasManyThrough
+    {
+        return $this->hasManyThrough(Job::class, SubCategory::class);
     }
 }
