@@ -81,40 +81,65 @@
 
 
 
-        <div wire:ignore.self class="modal fade" id="showJobModal" tabindex="-1" role="dialog"
-            aria-labelledby="showJobModalLabel" aria-hidden="true">
+        {{-- Start show modal --}}
+        <div wire:ignore.self class="modal fade" id="ShowJobModalLabel" tabindex="-1" role="dialog"
+            aria-labelledby="ShowJobModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="AddCategoryLabel">@lang('Edit Category')</h5>
+                        <h5 class="modal-title" id="ShowJobModalLabel">
+                            @lang('Show job') {{ $title }}
+                        </h5>
                         <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form wire:submit.prevent="updateCategory">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="control-label">@lang('Name')</label>
-                                <input type="text" wire:model.defer="title" class="form-control"
-                                    placeholder="Category Name here" />
-                                @error('nameEdit')
-                                    <span class="text-danger ">{{ $message }} </span>
-                                @enderror
+                    <div class="modal-body">
+                        <form>
+                            {{-- <div class="form-group row">
+                                <label for="category" class="col-sm-3 col-form-label">@lang('Category')</label>
+                                <div class="col-sm-9">
+                                    <select class="custom-select" wire:model.defer="location">
+                                        <option @disabled($selectedSubCategory) @selected(!$selectedSubCategory)>
+                                            @lang('Select a category')</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" @selected($selectedSubCategory && $category->id === $selectedSubCategory->category->id)>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div> --}}
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">@lang('Title')</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly wire:model.defer="title" class="form-control"
+                                        id="name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-secondary" wire:click="closeModal()"
-                                data-dismiss="modal">@lang('Cancel')</button>
-                            <button type="submit" class="btn btn-primary">@lang('Edit') </button>
-                        </div>
-                    </form>
-
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">@lang('Location')</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly wire:model.defer="location" class="form-control"
+                                        id="name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 col-form-label">@lang('Description')</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly wire:model.defer="description" class="form-control"
+                                        id="name">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="reset" wire:click="closeModal()" class="btn btn-secondary"
+                                    data-dismiss="modal">@lang('Cancel')</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-
 
 
 
