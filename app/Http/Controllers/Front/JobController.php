@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Job;
-use App\Models\Category;
-use App\Models\SubCategory;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Job;
+use App\Models\SubCategory;
 
 class JobController extends Controller
 {
@@ -34,7 +33,7 @@ class JobController extends Controller
         return view('front.jobs.create', [
             'types' => Job::TYPES,
             'subCategories' => SubCategory::query()
-                                            ->get()
+                                            ->get(),
         ]);
     }
 
@@ -42,7 +41,7 @@ class JobController extends Controller
     {
         return view('front.jobs.show', [
             'types' => Job::TYPES,
-            'job' => $job->load('subCategory', 'company', 'tags')
+            'job' => $job->load('subCategory', 'company', 'tags'),
         ]);
     }
 }

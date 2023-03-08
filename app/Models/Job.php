@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Job extends Model
 {
@@ -17,7 +18,7 @@ class Job extends Model
     ];
 
     protected $casts = [
-        'dateline' => 'date:d-m,Y'
+        'dateline' => 'date:d-m,Y',
     ];
 
     const TYPES = [
@@ -25,7 +26,7 @@ class Job extends Model
         2 => 'Part Time',
         3 => 'Internship',
         4 => 'Freelance',
-        5 => 'Remote'
+        5 => 'Remote',
     ];
 
     public function getRouteKeyName(): string
@@ -38,7 +39,7 @@ class Job extends Model
     {
         return date_format(Carbon::make($dateline), 'F d, Y');
     }
-    
+
     public function getTypeAttribute($type)
     {
         return self::TYPES[$type];

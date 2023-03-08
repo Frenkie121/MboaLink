@@ -29,6 +29,10 @@
             <li class="@if (Str::contains($currentUri, 'tags')) active @endif">
                 <a class="nav-link" href="{{ route('admin.tags.index') }}"><i class="fas fa-tags"></i> <span>@lang('Tags')</span></a>
             </li>
+            <li class="@if (Str::contains($currentUri, 'jobs')) active @endif">
+                <a class="nav-link" href="{{ route('admin.jobs.index') }}"><i class="fa fa-briefcase"></i>
+                    <span>@lang('Jobs')</span></a>
+            </li>
         </ul>
     </aside>
 </div>
