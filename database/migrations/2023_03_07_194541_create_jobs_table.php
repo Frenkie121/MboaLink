@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->boolean('is_published')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

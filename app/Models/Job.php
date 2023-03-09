@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
 use Illuminate\Support\Str;
 
 class Job extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title', 'location', 'description', 'salary', 'type', 'dateline',
@@ -61,5 +60,19 @@ class Job extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    // SCOPES
+    /**
+     * Scope the query to only include pusblished jobs
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     * 
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_published', true);
     }
 }

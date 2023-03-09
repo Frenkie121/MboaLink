@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\Job;
-use App\Models\Category;
 use App\Models\SubCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Builder;
 
 class JobController extends Controller
 {
@@ -16,21 +14,8 @@ class JobController extends Controller
             'types' => Job::TYPES,
             'jobs' => Job::query()
                         ->with('company:id,logo')
+                        ->orderByDesc('created_at')
                         ->paginate(10),
-        ]);
-    }
-
-    public function categories()
-    {
-        return view('front.jobs.categories', [
-            'categories' => Category::query()
-                                    ->whereHas('jobs', function (Builder $query) {
-                                        $query->where('is_published', true);
-                                    })
-                                    ->withCount('jobs')
-                                    ->latest()
-                                    ->paginate(8),
-
         ]);
     }
 
