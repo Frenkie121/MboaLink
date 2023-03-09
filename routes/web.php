@@ -1,13 +1,12 @@
 <?php
 
-use App\Models\Job;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Front\JobController;
-use App\Http\Controllers\SingleJobController;
-use App\Http\Controllers\Extra\LangController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Extra\LangController;
+use App\Http\Controllers\Front\JobController;
 use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SingleJobController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
