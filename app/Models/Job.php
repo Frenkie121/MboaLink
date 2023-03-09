@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 use Illuminate\Support\Str;
 
 class Job extends Model
@@ -34,6 +34,11 @@ class Job extends Model
         return date_format(Carbon::make($dateline), 'F d, Y');
     }
 
+    public function getCreatedAtAttribute($created_at)
+    {
+        return date_format(Carbon::make($created_at), 'F d, Y');
+    }
+
     public function getTypeAttribute($type)
     {
         return self::TYPES[$type];
@@ -60,6 +65,16 @@ class Job extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function requirements(): HasMany
+    {
+        return $this->hasMany(Requirement::class);
+    }
+
+    public function qualifications(): HasMany
+    {
+        return $this->hasMany(Qualification::class);
     }
 
     // SCOPES

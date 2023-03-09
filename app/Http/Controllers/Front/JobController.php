@@ -32,7 +32,13 @@ class JobController extends Controller
     {
         return view('front.jobs.show', [
             'types' => Job::TYPES,
-            'job' => $job->load('subCategory', 'company', 'tags'),
+            'job' => $job->load([
+                'subCategory',
+                'company',
+                'tags',
+                'requirements:id,content,job_id',
+                'qualifications:id,content,job_id',
+            ]),
         ]);
     }
 }

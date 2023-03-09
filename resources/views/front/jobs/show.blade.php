@@ -32,22 +32,18 @@
                         <h4 class="mb-3">@lang('Job description')</h4>
                         <p>{{ $job->description }}</p>
                         <h4 class="mb-3">@lang('Responsabilities')</h4>
-                        <p>Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor</p>
+                        <p>@lang('Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor')</p>
                         <ul class="list-unstyled">
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
+                            @foreach ($job->requirements as $requirement)
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $requirement->content }}</li>
+                            @endforeach
                         </ul>
-                        <h4 class="mb-3">Qualifications</h4>
-                        <p>Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor</p>
+                        <h4 class="mb-3">@lang('Qualifications')</h4>
+                        <p>@lang('Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor')</p>
                         <ul class="list-unstyled">
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Dolor justo tempor duo ipsum accusam</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Elitr stet dolor vero clita labore gubergren</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Rebum vero dolores dolores elitr</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Est voluptua et sanctus at sanctus erat</li>
-                            <li><i class="fa fa-angle-right text-primary me-2"></i>Diam diam stet erat no est est</li>
+                            @foreach ($job->qualifications as $qualification)
+                                <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $qualification->content }}</li>
+                            @endforeach
                         </ul>
                     </div>
     
@@ -82,7 +78,7 @@
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                         <h4 class="mb-4">@lang('Job Summary')</h4>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Published On'): {{ $job->created_at }}</p>
-                        <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Job Type:') {{ $job->type }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Job Type'): {{ $job->type }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Salary'): {{ $job->salary }} XAF</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Location'): {{ $job->location }}</p>
                         <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>@lang('Date Line'): {{ $job->dateline }}</p>
