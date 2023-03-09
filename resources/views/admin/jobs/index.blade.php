@@ -17,9 +17,7 @@
 @push('js')
     <script>
         window.addEventListener('close-modal', event => {
-            $('#AddCategory').modal('hide');
-            $('#deleteCategory').modal('hide');
-            $('#EditCategory').modal('hide');
+            $('#deleteJob').modal('hide');
         });
     </script>
     @livewireScripts()

@@ -21,8 +21,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach ($categories as $category)
+                                    @foreach ($categories as $category)
+                                        <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>
@@ -36,7 +36,7 @@
                                                         class="fa fa-trash"></i>
                                                 </a>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Job;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -16,7 +17,7 @@ class JobsManage extends Component
 
     public $title;
 
-    public $deleteJob;
+    // public $deleteJob;
 
     public $location;
 
@@ -44,21 +45,20 @@ class JobsManage extends Component
 
     public function deleteJob($id)
     {
-        dd($id);
         $this->deleteId = $id;
         $this->title = (Job::find($this->deleteId))->title;
     }
 
     public function destroyJob()
     {
+        DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
         (Job::find($this->deleteId))->delete();
-        $this->alert('success', trans('The category has been deleted'));
+        $this->alert('success', trans('The job has been deleted'));
         $this->closeModal();
     }
 
     public function showJob($id)
     {
-        dd($id);
         $this->title = (Job::find($id))->title;
         $this->location = (Job::find($id))->location;
         $this->salary = (Job::find($id))->salary;
@@ -71,8 +71,6 @@ class JobsManage extends Component
 
     public function render()
     {
-        return view('livewire.jobs-manage', ['jobs' => Job::select('title', 'location', 'salary')
-            ->latest()
-            ->paginate(5)]);
+        return view('livewire.jobs-manage', ['jobs' => Job::query()->with('company')->latest()->paginate(5)]);
     }
 }

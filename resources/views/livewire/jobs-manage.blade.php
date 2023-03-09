@@ -13,21 +13,23 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Title')</th>
-                                        <th>@lang('Location')</th>
+                                        <th>@lang('Company')</th>
                                         <th>@lang('Salary')</th>
+                                        <th>@lang('Published')</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach ($jobs as $job)
+                                    @foreach ($jobs as $job)
+                                        <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $job->title }}</td>
-                                            <td>{{ $job->location }}</td>
+                                            <td>{{ $job->company->location }}</td>
                                             <td>{{ $job->salary }}</td>
+                                            <td>@if ($job->is_published) Yes  @else No  @endif
+                                        </td>
                                             <td>
-                                                <a href="#" wire:click="showJob({{ $job->id }})"
-                                                    data-toggle="modal" data-target="#showJobModal"
+                                                <a href="{{ route('admin.job.show',$job) }}"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-eye"></i> </a>
                                                 <a href="#" wire:click="deleteJob({{ $job->id }})"
@@ -35,7 +37,7 @@
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>
@@ -75,11 +77,6 @@
             </div>
         </div>
         {{-- end modal confirmation delete User --}}
-
-
-
-
-
 
         {{-- Start show modal --}}
         <div wire:ignore.self class="modal fade" id="ShowJobModalLabel" tabindex="-1" role="dialog"
