@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\{Category, Job, Qualification, Requirement, Tag};
+use App\Models\{Category, Company, Job, Qualification, Requirement, Tag, User};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -40,6 +40,9 @@ class DatabaseSeeder extends Seeder
             ->has(Tag::factory(rand(1, 3)))
             ->has(Requirement::factory(rand(3, 5)))
             ->has(Qualification::factory(rand(3, 5)))
+            ->for(Company::factory()
+                        ->has(User::factory())
+            )
             ->create();
     }
 }

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\Job;
-use App\Models\SubCategory;
+use App\Models\{Job, SubCategory};
 use App\Http\Controllers\Controller;
 
 class JobController extends Controller
@@ -33,8 +32,8 @@ class JobController extends Controller
         return view('front.jobs.show', [
             'types' => Job::TYPES,
             'job' => $job->load([
-                'subCategory',
-                'company',
+                'subCategory.category',
+                'company.user:id,name,email,userable_id',
                 'tags',
                 'requirements:id,content,job_id',
                 'qualifications:id,content,job_id',

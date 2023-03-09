@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
         return [
             'location' => fake('it_IT')->city(),
             'description' => fake()->paragraphs(2, true),
-            'url' => fake()->url(),
+            'url' => 'www.' . fake()->domainName(),
             'logo' => fake()->imageUrl(),
         ];
     }

@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('subtitle', __('Jobs') | $job->title)
+@section('subtitle', __('Jobs') . ' | ' . $job->title)
 
 @section('content')
 
@@ -22,7 +22,7 @@
                         <img class="flex-shrink-0 img-fluid border rounded" src="{{ $job->company->logo }}" alt="" style="width: 80px; height: 80px;">
                         <div class="text-start ps-4">
                             <h3 class="mb-3">{{ $job->title }}</h3>
-                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>N{{ $job->location }}</span>
+                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}</span>
                             <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ $job->type }}</span>
                             <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ $job->salary }} XAF</span>
                         </div>
@@ -47,7 +47,7 @@
                         </ul>
                     </div>
     
-                    <div class="">
+                    <div class="" id="apply">
                         <h4 class="mb-4">@lang('Apply For The Job')</h4>
                         <form>
                             <div class="row g-3">
@@ -67,7 +67,7 @@
                                     <textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                    <button class="btn btn-primary w-100" type="submit">@lang('Apply Now')</button>
                                 </div>
                             </div>
                         </form>
@@ -75,18 +75,27 @@
                 </div>
     
                 <div class="col-lg-4">
+                    <a href="#apply" class="btn btn-primary w-100 mb-2" type="submit">@lang('Apply Now')</a href="#apply">
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
-                        <h4 class="mb-4">@lang('Job Summary')</h4>
+                        <h4 class="mb-4">@lang('Other informations')</h4>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Published On'): {{ $job->created_at }}</p>
+                        <p class=""><i class="fa fa-angle-right text-primary me-2"></i>@lang('Date Line'): {{ $job->dateline }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Job Type'): {{ $job->type }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Salary'): {{ $job->salary }} XAF</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Location'): {{ $job->location }}</p>
-                        <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>@lang('Date Line'): {{ $job->dateline }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Category'): {{ $job->subCategory->name }} (<a href="{{ route('front.category.jobs', $job->subCategory->category->slug) }}">{{ $job->subCategory->category->name}}</a>)</p>
+                        <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Tags:
+                            {{ implode(', ', $job->tags()->pluck('name')->toArray()) }}
+                        </p>
                     </div>
-                    {{-- <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
-                        <h4 class="mb-4">Company Detail</h4>
-                        <p class="m-0">Ipsum dolor ipsum accusam stet et et diam dolores, sed rebum sadipscing elitr vero dolores. Lorem dolore elitr justo et no gubergren sadipscing, ipsum et takimata aliquyam et rebum est ipsum lorem diam. Et lorem magna eirmod est et et sanctus et, kasd clita labore.</p>
-                    </div> --}}
+                    <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                        <h4 class="mb-4">@lang('Company Details')</h4>
+                        <p><i class="fa fa-user text-primary me-2"></i> {{ $job->company->user->name }}</p>
+                        <p><i class="fa fa-envelope text-primary me-2"></i> {{ $job->company->user->email }}</p>
+                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i> {{ $job->company->location }}</p>
+                        <p><i class="fa fa-at text-primary me-2"></i> {{ $job->company->url }}</p>
+                        <p class="m-0">{{ $job->company->description }}</p>
+                    </div>
                 </div>
             </div>
         </div>
