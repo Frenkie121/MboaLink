@@ -38,6 +38,16 @@
                             <h6 class="mt-n1 mb-0">@lang('Qualifications')</h6>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-4">
+                            <h6 class="mt-n1 mb-0">@lang('Company Details')</h6>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-5">
+                            <h6 class="mt-n1 mb-0">@lang('Confirmation')</h6>
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
@@ -91,15 +101,15 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="@lang('Leave a message here')" id="message" style="height: 150px"></textarea>
-                                        <label for="message">@lang('Short Description') <b class="text-danger">*</b></label>
+                                        <textarea class="form-control" placeholder="@lang('Add a description')" id="description" style="height: 150px"></textarea>
+                                        <label for="description">@lang('Short Description') <b class="text-danger">*</b></label>
                                     </div>
                                     {{-- <small><b class="text-danger">*</b> @lang('General introduction to the job')</small> --}}
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="file" class="form-control" id="dateline" placeholder="@lang('Add job specifications file')">
-                                        <label for="dateline">@lang('Add job specifications file')</label>
+                                        <input type="file" class="form-control" id="file" placeholder="@lang('Add job specifications file')">
+                                        <label for="file">@lang('Add job specifications file')</label>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -116,37 +126,84 @@
                     <div id="tab-2" class="tab-pane fade show p-0">
                         <form>
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
+                                        <input type="text" class="form-control" id="content" placeholder="@lang('Requirement') 1" required>
+                                        <label for="content">@lang('Requirement') 1 <b class="text-danger">*</b></label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-2 d-flex justify-content-between">
+                                    <button class="btn btn-secondary w-50 py-3 mr-1">+</button>
+                                    {{-- <button class="btn btn-danger w-50 py-3 ml-1">-</button> --}}
+                                </div>
+                                <div class="col-md-10">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="text" class="form-control" id="content" placeholder="@lang('Requirement') 2">
+                                        <label for="content">@lang('Requirement') 2 <b class="text-danger">*</b></label>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                <div class="col-md-2 d-flex justify-content-between">
+                                    <button class="btn btn-secondary w-50 py-3 mr-1">+</button>
+                                    <button class="btn btn-danger w-50 py-3 ml-1">-</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div id="tab-3" class="tab-pane fade show p-0">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="content" placeholder="@lang('Content') 1" required>
+                                        <label for="content">@lang('Content') 1 <b class="text-danger">*</b></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tab-4" class="tab-pane fade show p-0">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="@lang('Name')" required>
+                                        <label for="name">@lang('Name') <b class="text-danger">*</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="@lang('Email')" required>
+                                        <label for="email">@lang('Email') <b class="text-danger">*</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="location" placeholder="@lang('Location')" required>
+                                        <label for="location">@lang('Location') <b class="text-danger">*</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="url" class="form-control" id="url" placeholder="@lang('Website')">
+                                        <label for="url">@lang('Website')</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="@lang('Add a description')" id="description" style="height: 150px"></textarea>
+                                        <label for="description">@lang('Description') <b class="text-danger">*</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="file" class="form-control" id="logo" placeholder="@lang('Add a logo')">
+                                        <label for="logo">@lang('Add a logo')</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tab-5" class="tab-pane fade show p-0">
                         
                     </div>
                 </div>
