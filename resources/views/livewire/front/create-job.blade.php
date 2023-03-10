@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select @error('category') is-invalid @enderror" wire:model.defer="category" id="category">
+                        <select class="form-select @error('category') is-invalid @enderror" wire:model.lazy="category" id="category">
                             <option>@lang('Select a category')<b class="text-danger">*</b></option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -265,14 +265,14 @@
     </div>
     
     <div class="col-12 d-flex justify-content-between mt-2">
-        <button class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
+        <button wire:target="confirm()" wire:loading.attr="disabled" class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
 
         <div class="d-flex justify-content-end">
             @if ($currentStep === 5)
-                <button class="btn btn-danger w-40 py-3"><i class="fa fa-trash"></i>  @lang('Cancel')</button>
+                <button wire:target="confirm()" wire:loading.attr="disabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash"></i>  @lang('Cancel')</button>
             @endif
 
-            <button 
+            <button wire:target="confirm()" wire:loading.attr="disabled"
                 class="btn btn-{{ $currentStep === 5 ? 'secondary' : 'primary' }} w-40 py-3"
                 wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif"
             >@if ($currentStep === 5)

@@ -9,6 +9,9 @@
 
 @section('content')
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
+
     <!-- Header End -->
     <x-front.header
         :title="__('Post A Job')"

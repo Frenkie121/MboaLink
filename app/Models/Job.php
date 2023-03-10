@@ -3,17 +3,17 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
-use Illuminate\Support\Str;
 
 class Job extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'location', 'description', 'salary', 'type', 'dateline',
+        'title', 'sub_category_id', 'location', 'description', 'salary', 'type', 'dateline',
     ];
 
     protected $casts = [
