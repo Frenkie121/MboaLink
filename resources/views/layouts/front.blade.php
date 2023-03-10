@@ -152,6 +152,9 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/front/js/main.js') }}"></script>
+    
+    <!-- Specific Page Ssripts -->
+    @stack('js')
 </body>
 
 </html>
