@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="email" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="@lang('Location')" wire:model.defer="location">
+                            <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="@lang('Location')" wire:model.defer="location">
                             <label for="location">@lang('Location')<b class="text-danger">*</b></label>
                             @error('location')
                                 <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <select class="form-select @error('category') is-invalid @enderror" wire:model.lazy="category" id="category">
+                        <select class="form-select @error('category') is-invalid @enderror" wire:model.defer="category" id="category">
                             <option>@lang('Select a category')<b class="text-danger">*</b></option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -204,55 +204,55 @@
                 <div class="row g-3">
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control @error('') is-invalid @enderror" id="name" placeholder="@lang('Name')" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
                             <label for="name">@lang('Name')<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            @error('name')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="email" class="form-control @error('') is-invalid @enderror" id="email" placeholder="@lang('Email')" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="@lang('Email')" wire:model.defer="email">
                             <label for="email">@lang('Email')<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            @error('email')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control @error('') is-invalid @enderror" id="location" placeholder="@lang('Location')" required>
-                            <label for="location">@lang('Location')<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            <input type="text" class="form-control @error('company_location') is-invalid @enderror" id="location" placeholder="@lang('Location')" wire:model.defer="company_location">
+                            <label for="location">@lang('Location')</label>
+                            @error('company_location')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-floating">
-                            <input type="url" class="form-control @error('') is-invalid @enderror" id="url" placeholder="@lang('Website')">
-                            <label for="url">@lang('Website')</label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            <input type="url" class="form-control @error('website') is-invalid @enderror" id="website" placeholder="@lang('Website')" wire:model.defer="website">
+                            <label for="website">@lang('Website')</label>
+                            @error('website')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <textarea class="form-control @error('') is-invalid @enderror" placeholder="@lang('Add a description')" id="description" style="height: 150px"></textarea>
+                            <textarea class="form-control @error('company_description') is-invalid @enderror" placeholder="@lang('Add a description')" id="description" style="height: 150px" wire:model.defer="company_description"></textarea>
                             <label for="description">@lang('Description')<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            @error('company_description')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="file" class="form-control @error('') is-invalid @enderror" id="logo" placeholder="@lang('Add a logo')">
+                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" placeholder="@lang('Add a logo')" wire:model.defer="logo">
                             <label for="logo">@lang('Add a logo')</label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            @error('logo')
+                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -266,9 +266,22 @@
     
     <div class="col-12 d-flex justify-content-between mt-2">
         <button class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
-        <button 
-            class="btn btn-primary w-40 py-3"
-            wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif"
-        >@lang('Next')  <i class="fa fa-caret-right"></i></button>
+
+        <div class="d-flex justify-content-end">
+            @if ($currentStep === 5)
+                <button class="btn btn-danger w-40 py-3"><i class="fa fa-trash"></i>  @lang('Cancel')</button>
+            @endif
+
+            <button 
+                class="btn btn-{{ $currentStep === 5 ? 'secondary' : 'primary' }} w-40 py-3"
+                wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif"
+            >@if ($currentStep === 5)
+                @lang('Confirm')
+            @else
+                @lang('Next')
+            @endif
+            <i class="fa fa-caret-right"></i>
+            </button>
+        </div>
     </div>
 </div>

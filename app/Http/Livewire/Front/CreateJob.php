@@ -29,6 +29,9 @@ class CreateJob extends Component
     public $qualifications;
     public array $qualificationsInputs = [''];
 
+    // Company Details
+    public $name, $email, $website, $company_location, $company_description, $logo;
+
     public function mount()
     {
         $this->categories = Category::query()->with('subCategories:id,name,category_id')->get(['id', 'name']);
@@ -62,7 +65,7 @@ class CreateJob extends Component
      */
     public function updatedCategory($category): void
     {
-        if (! is_null($category)) {
+        if (! is_null($category) && is_integer(intval($category))) {
             $this->sub_categories = Category::query()->findOrFail($category)->subCategories;
         }
     }
@@ -77,7 +80,7 @@ class CreateJob extends Component
     {
         $this->validate([
             'title' => 'required|string|max:100',
-            'location' => 'required|string',
+            'location' => 'required|string|max:50',
             'min_salary' => 'required|numeric',
             'max_salary' => 'nullable|numeric|gt:min_salary',
             'category' => 'required|exists:categories,id',
@@ -149,25 +152,48 @@ class CreateJob extends Component
 
     // STEP III
 
-    public function addQualification()
-    {
-        $this->qualificationsInputs[] = '';
-    }
-
-    public function removeQualification($index)
+    public function removeQualification($index): void
     {
         unset($this->qualificationsInputs[$index]);
         $this->qualificationsInputs = array_values($this->qualificationsInputs);
     }
 
-    public function validateQualifications()
+    /**
+     * Validate qualifications fields
+     *
+     * @return void
+     * 
+     */
+    public function validateQualifications(): void
     {
         $this->validate([
-            // 'qualifications.0' => 'required|string|max:200',
+            'qualifications.0' => 'required|string|max:200',
             'qualifications.*' => 'nullable|string|distinct|max:200',
         ]);
 
         $this->currentStep = 4;
+    }
+
+    // STEP IV
+
+    /**
+     * Validate company details fields
+     *
+     * @return void
+     * 
+     */
+    public function validateCompanyDetails(): void
+    {
+        $this->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'website' => 'nullable|url',
+            'company_location' => 'nullable|string|max:50',
+            'company_description' => 'nullable|string|max:500',
+            'logo' => 'nullable|image',
+        ]);
+
+        $this->currentStep = 5;
     }
 
     public function render()
