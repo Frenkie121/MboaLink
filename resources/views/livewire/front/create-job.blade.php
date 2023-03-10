@@ -146,43 +146,56 @@
                 <div class="row g-3">
                     <div class="col-md-10">
                         <div class="form-floating">
-                            <input type="text" class="form-control @error('') is-invalid @enderror" id="content" placeholder="@lang('Requirement') 1" required>
+                            <input type="text" class="form-control @error('requirement.0') is-invalid @enderror" id="content" placeholder="@lang('Requirement') 1" wire:model.defer="requirements.0">
                             <label for="content">@lang('Requirement') 1<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
+                            @error('requirements.0')
+                                <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-secondary w-50 py-3 mr-1">+</button>
+                        <button class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</button>
                     </div>
-                    <div class="col-md-10">
-                        <div class="form-floating">
-                            <input type="text" class="form-control @error('') is-invalid @enderror" id="content" placeholder="@lang('Requirement') 2">
-                            <label for="content">@lang('Requirement') 2<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
-                            @enderror
+                    @foreach ($requirementsInputs as $key => $input)
+                        <div class="col-md-10" wire:key="{{ $input }}">
+                            <div class="form-floating">
+                                <input type="text" class="form-control @error('requirements.' . $input) is-invalid @enderror" id="content" placeholder="@lang('Requirement') {{ $loop->iteration + 1 }}" wire:model.defer="requirements.{{ $input }}">
+                                <label for="content">@lang('Requirement') {{ $loop->iteration + 1 }}<b class="text-danger">*</b></label>
+                                @error('requirements.' . $input)
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-danger w-50 py-3 mr-1">-</button>
-                    </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</button>
+                        </div>
+                    @endforeach
                 </div>
             </form>
         </div>
         <div class="tab-pane fade show p-0 @if ($currentStep === 3) active @endif">
             <form>
                 <div class="row g-3">
-                    <div class="col-md-12">
-                        <div class="form-floating">
-                            <input type="text" class="form-control @error('') is-invalid @enderror" id="content" placeholder="@lang('Content') 1" required>
-                            <label for="content">@lang('Content') 1<b class="text-danger">*</b></label>
-                            @error('')
-                                <span class="text-danger"></span>
-                            @enderror
+                    @foreach ($qualificationsInputs as $index => $input)
+                        <div class="col-md-10">
+                            <div class="form-floating">
+                                <input type="text" class="form-control @error('qualifications.' . $index) is-invalid @enderror" id="content" placeholder="@lang('Qualification') {{ $loop->iteration }}" wire:model.defer="qualifications.{{ $index }}">
+                                <label for="content">@lang('Qualification') {{ $loop->iteration }}<b class="text-danger">*</b></label>
+                                @error('qualifications.' . $index)
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                        @if ($loop->first)
+                            <div class="col-md-2">
+                                <button class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</button>
+                            </div>
+                        @else
+                            <div class="col-md-2">
+                                <button class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $index }})">-</button>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </form>
         </div>
@@ -252,7 +265,7 @@
     </div>
     
     <div class="col-12 d-flex justify-content-between mt-2">
-        <button class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="back(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
+        <button class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
         <button 
             class="btn btn-primary w-40 py-3"
             wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif"
