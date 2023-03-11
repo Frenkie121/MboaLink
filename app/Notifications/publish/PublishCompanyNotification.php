@@ -2,14 +2,16 @@
 
 namespace App\Notifications\publish;
 
+
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Lang;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
+
 
 class PublishCompanyNotification extends Notification
 {
-    use Queueable;
+    use Queueable,ShouldQueue;
 
     /**
      * Create a new notification instance.
@@ -17,6 +19,7 @@ class PublishCompanyNotification extends Notification
      * @return void
      */
     public function __construct(public $job, public $data)
+
     {
     }
 
@@ -40,13 +43,12 @@ class PublishCompanyNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->greeting(Lang::get('Hello ').$this->job->company->user->name)
-            ->subject(Lang::get('Job publication '))
-            ->line($this->data)
-            ->line(Lang::get('You receive this e-mail about the publication of your job, the title of which is:'.$this->job->title))
-            ->action(Lang::get('Consult the list of other available jobs'), url('/'))
-            ->line(Lang::get('Thank you for using our application!'))
-            // ->from('Mboalink', 'Administrator')
+            ->greeting('Hello  ' . $this->job->company->name)
+            ->subject('Confirmation  de publication du job')
+            ->line('Vous recevez cet e-mail pour vous confirmer effectivement la publication de votre job dont le titre est : ' . $this->job->title)
+            ->action('Consulter la liste des autres jobs disponibles', url('/'))
+            ->line('Thank you for using our application!')
+            ->from('Mboalink', 'Administrator')
             ->line('...');
     }
 
