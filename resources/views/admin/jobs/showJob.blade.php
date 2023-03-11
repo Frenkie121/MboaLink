@@ -18,10 +18,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                             <!-- Button trigger modal -->
-                             <button style="float: right;" type="button" class="btn btn-lg btn btn-success">
-                             <i class="fa fa-check btn-sm"></i> @lang('Published') </button>
-                         <br><br><br>
+                            <!-- Button trigger published -->
+
+                            @if (!$job->is_published)
+                                <a href="{{ route('admin.job.publish', $job) }}" style="float: right;" type="button"
+                                    class="btn btn-lg btn btn-success">
+                                    <i class="fa fa-upload btn-sm"></i> @lang('Published') </a>
+                            @else
+                                <a style="float: right;" href="{{ route('admin.job.publish', $job) }}" type="button"
+                                    class="btn btn-lg btn btn-danger">
+                                    <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
+                            @endif
+                            <br><br><br>
                             <div class="table-responsive  table-bordered">
 
                                 <table class="table table-striped" id="table-1">
