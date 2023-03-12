@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-6">
                         <select class="form-select @error('category') is-invalid @enderror" wire:model.lazy="category" id="category">
-                            <option>@lang('Select a category')<b class="text-danger">*</b></option>
+                            <option hidden>@lang('Select a category')<b class="text-danger">*</b></option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                         <select class="form-select @error('sub_category') is-invalid @enderror" wire:model.defer="sub_category" id="sub-category">
-                            <option>@lang('Select a sub-category')<b class="text-danger">*</b></option>
+                            <option hidden>@lang('Select a sub-category')<b class="text-danger">*</b></option>
                             @if (! is_null($category))
                                 @foreach ($sub_categories as $sub_category)
                                     <option value="{{ $sub_category->id }}">{{ $sub_category->name }}</option>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-md-12">
                         <select class="form-select @error('type') is-invalid @enderror" wire:model.defer="type" id="type">
-                            <option>@lang('Select the job type')<b class="text-danger">*</b></option>
+                            <option hidden>@lang('Select the job type')<b class="text-danger">*</b></option>
                             @foreach ($types as $key => $type)
                                 <option value="{{ $key }}">{{ $type }}</option>
                             @endforeach
@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" wire:model.defer="file" placeholder="@lang('Add job specifications file')">
+                            <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" wire:model.defer="file" placeholder="@lang('Add job specifications file')" accept=".pdf,.doc,.docx,.ppt,.xlsx">
                             <label for="file">@lang('Add job specifications file')</label>
                             @error('file')
                                 <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -154,20 +154,20 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</button>
+                        <a class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</a>
                     </div>
                     @foreach ($requirementsInputs as $key => $input)
                         <div class="col-md-10" wire:key="{{ $input }}">
                             <div class="form-floating">
                                 <input type="text" class="form-control @error('requirements.' . $input) is-invalid @enderror" id="content" placeholder="@lang('Requirement') {{ $loop->iteration + 1 }}" wire:model.defer="requirements.{{ $input }}">
-                                <label for="content">@lang('Requirement') {{ $loop->iteration + 1 }}<b class="text-danger">*</b></label>
+                                <label for="content">@lang('Requirement') {{ $loop->iteration + 1 }}</label>
                                 @error('requirements.' . $input)
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</button>
+                            <a class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</a>
                         </div>
                     @endforeach
                 </div>
@@ -176,25 +176,31 @@
         <div class="tab-pane fade show p-0 @if ($currentStep === 3) active @endif">
             <form>
                 <div class="row g-3">
-                    @foreach ($qualificationsInputs as $index => $input)
-                        <div class="col-md-10">
+                    <div class="col-md-10" wire:key="{{ uniqid() }}">
+                        <div class="form-floating">
+                            <input type="text" class="form-control @error('qualifications.0') is-invalid @enderror" id="content" placeholder="@lang('Qualification') 1" wire:model.defer="qualifications.0">
+                            <label for="content">@lang('Qualification') 1<b class="text-danger">*</b></label>
+                            @error('qualifications.0')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</a>
+                    </div>
+                    @foreach ($qualificationsInputs as $key => $input)
+                        <div class="col-md-10" wire:key="{{ uniqid() }}">
                             <div class="form-floating">
-                                <input type="text" class="form-control @error('qualifications.' . $index) is-invalid @enderror" id="content" placeholder="@lang('Qualification') {{ $loop->iteration }}" wire:model.defer="qualifications.{{ $index }}">
-                                <label for="content">@lang('Qualification') {{ $loop->iteration }}<b class="text-danger">*</b></label>
-                                @error('qualifications.' . $index)
+                                <input type="text" class="form-control @error('qualifications.' . $input) is-invalid @enderror" id="content" placeholder="@lang('Qualification') {{ $loop->iteration + 1 }}" wire:model.defer="qualifications.{{ $input }}">
+                                <label for="content">@lang('Qualification') {{ $loop->iteration + 1 }}</label>
+                                @error('qualifications.' . $input)
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
-                        @if ($loop->first)
-                            <div class="col-md-2">
-                                <button class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</button>
-                            </div>
-                        @else
-                            <div class="col-md-2">
-                                <button class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $index }})">-</button>
-                            </div>
-                        @endif
+                        <div class="col-md-2">
+                            <a class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</a>
+                        </div>
                     @endforeach
                 </div>
             </form>
@@ -223,7 +229,7 @@
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('company_location') is-invalid @enderror" id="location" placeholder="@lang('Location')" wire:model.defer="company_location">
-                            <label for="location">@lang('Location')</label>
+                            <label for="location">@lang('Location')<b class="text-danger">*</b></label>
                             @error('company_location')
                                 <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                             @enderror
@@ -249,7 +255,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" placeholder="@lang('Add a logo')" wire:model.defer="logo">
+                            <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" placeholder="@lang('Add a logo')" wire:model.defer="logo" accept=".png,.jpeg,.jpg">
                             <label for="logo">@lang('Add a logo')</label>
                             @error('logo')
                                 <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -265,23 +271,25 @@
     </div>
     
     <div class="col-12 d-flex justify-content-between mt-2">
-        <button wire:target="confirm()" wire:loading.attr="disabled" class="btn btn-dark w-40 py-3" @disabled($currentStep === 1) wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</button>
+        <a href="#tabs" wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-dark w-40 py-3 {{ $currentStep === 1 ? 'isDisabled' : '' }}" wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</a>
 
         <div class="d-flex justify-content-end">
             @if ($currentStep === 5)
-                <button wire:target="confirm()" wire:loading.attr="disabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash"></i>  @lang('Cancel')</button>
+                <a wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash"></i>  @lang('Cancel')</a>
             @endif
 
-            <button wire:target="confirm()" wire:loading.attr="disabled"
-                class="btn btn-{{ $currentStep === 5 ? 'secondary' : 'primary' }} w-40 py-3"
-                wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif"
-            >@if ($currentStep === 5)
-                @lang('Confirm')
-            @else
-                @lang('Next')
-            @endif
-            <i class="fa fa-caret-right"></i>
-            </button>
+            <div class="mx-1">
+                <a href="#tabs" wire:loading.class="isDisabled"
+                    class="btn btn-{{ $currentStep === 5 ? 'secondary' : 'primary' }} w-40 py-3"
+                    wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif">
+                    @if ($currentStep === 5)
+                        @lang('Confirm')
+                    @else
+                        @lang('Next')
+                    @endif
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>

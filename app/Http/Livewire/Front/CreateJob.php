@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Livewire\{Component, WithFileUploads};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\{Category, Company, Job, Tag, User};
+use App\Models\{Category, Company, Job, Tag};
 
 class CreateJob extends Component
 {
@@ -33,6 +33,9 @@ class CreateJob extends Component
 
     // Company Details
     public $name, $email, $website, $company_location, $company_description, $logo;
+
+    // Other
+    // public bool $disabled = false;
 
     protected $listeners = [
         'confirmCancel'
@@ -94,7 +97,7 @@ class CreateJob extends Component
             'type' => 'required|' . Rule::in(array_keys($this->types)),
             'dateline' => 'required|date|after:' . now()->addWeek(),
             'description' => 'required|string|max:1000',
-            'file' => 'nullable|file|mimes:doc,docx,pdf,ppt|max:512',
+            'file' => 'nullable|file|mimes:doc,docx,pdf,ppt,.xlsx|max:512',
             'tags' => 'nullable|array',
             'tags.*' =>'nullable|exists:tags,id',
         ]);
@@ -149,20 +152,14 @@ class CreateJob extends Component
     public function validateRequirements(): void
     {
         $this->validate([
-            'requirements.0' => 'required|string|max:200',
-            'requirements.*' => 'required|string|distinct|max:200',
+            'requirements.0' => 'required|string|max:255',
+            'requirements.*' => 'required|string|distinct:ignore_case|max:255',
         ]);
-
+        
         $this->currentStep = 3;
     }
 
     // STEP III
-
-    public function removeQualification($index): void
-    {
-        unset($this->qualificationsInputs[$index]);
-        $this->qualificationsInputs = array_values($this->qualificationsInputs);
-    }
 
     /**
      * Validate qualifications fields
@@ -173,8 +170,8 @@ class CreateJob extends Component
     public function validateQualifications(): void
     {
         $this->validate([
-            'qualifications.0' => 'required|string|max:200',
-            'qualifications.*' => 'nullable|string|distinct|max:200',
+            'qualifications.0' => 'required|string|max:255',
+            'qualifications.*' => 'nullable|string|distinct:ignore_case|max:255',
         ]);
 
         $this->currentStep = 4;
@@ -194,9 +191,9 @@ class CreateJob extends Component
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'website' => 'nullable|url',
-            'company_location' => 'nullable|string|max:50',
-            'company_description' => 'nullable|string|max:500',
-            'logo' => 'nullable|image|max:512',
+            'company_location' => 'required|string|max:50',
+            'company_description' => 'required|string|max:500',
+            'logo' => 'nullable|image|mimes:png,jpeg,jpg|max:512',
         ]);
 
         $this->currentStep = 5;
@@ -211,15 +208,25 @@ class CreateJob extends Component
      * 
      */
     public function confirm(): void
-    {       
+    {
+        // $this->disabled = true;
         // I. SAVES
+
+        // For later: check if email exists before beginning saves
 
         // 1. Company
         $company = Company::query()->create([
-            'location' => $this->company_location,
+            'location' => $this->company_location ,
             'description' => $this->company_description,
             'url' => $this->website ?? '',
         ]);
+        
+        if ($this->logo) {
+            $name = uniqid('company-') . '.' . $this->logo->extension();
+            $this->logo->storeAs('public/companies/', $name);
+            $company->logo = $name;
+            $company->save();
+        }
 
         // 2. User
         $company->user()->create([
@@ -269,10 +276,11 @@ class CreateJob extends Component
 
         // 2. To User - Company
 
+        sleep(15);
         // 
-        alert('', trans('Your job has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible. An email related to this action has been sent to you, please check your mailbox.'), 'success')->autoclose(10000);
+        alert('', trans('Your job has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible. An email related to this action has been sent to you, please check your mailbox.'), 'success')->autoclose(20000);
 
-        $this->redirectRoute('front.jobs.create');
+        $this->redirectRoute('front.jobs.index');
     }
 
     /**
@@ -284,13 +292,16 @@ class CreateJob extends Component
     public function cancel(): void
     {
         $this->alert('question', trans('Are you sure you want to cancel?'), [
+            'position' => 'center',
+            'timer' => null,
+            'toast' => true,
             'showConfirmButton' => true,
             'confirmButtonText' => trans('Yes'),
             'onConfirmed' => 'confirmCancel',
+            'confirmButtonColor' => '#f9460c',
             'showCancelButton' => true,
             'cancelButtonText' => trans('No'),
-            'confirmButtonColor' => '#f9460c',
-            'timer' => null,
+            'width' => 400,
         ]);
     }
 
@@ -302,8 +313,8 @@ class CreateJob extends Component
      */
     public function confirmCancel(): void
     {
-        $this->reset();
-        $this->flash('success', trans('Job creation has been cancelled'), ['timer' => 5000], 'jobs/create');
+        alert('', trans('Job creation has been cancelled'), 'info')->autoclose(7000);
+        $this->redirectRoute('front.jobs.create');
     }
 
     public function render()

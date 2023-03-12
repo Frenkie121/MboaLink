@@ -21,12 +21,7 @@ class Company extends Model
     public function logo(): Attribute
     {
         return Attribute::make(
-            get: fn($logo) => asset("storage/services/{$logo}"),
-            set: function($logo){
-                $name = uniqid('company') . '.' . $logo->extension();
-                $logo->storeAs('public/companies/', $name);
-                return $this->attributes['logo'] = $name;
-            }
+            get: fn($logo) => asset("storage/companies/{$logo}")
         );
     }
 
