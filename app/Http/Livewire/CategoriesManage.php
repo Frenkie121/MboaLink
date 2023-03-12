@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\Job;
+use App\Models\SubCategory;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -79,6 +81,18 @@ class CategoriesManage extends Component
 
     public function destroyCategory()
     {
+        // select sub-category
+        $subcategories = SubCategory::where('category_id', $this->deleteId)->get();
+        foreach ($subcategories as $item) {
+            $jobs = Job::where('sub_category_id', $item->id)->get();
+            foreach ($jobs as $job) {
+                $job->delete();
+            }
+        }
+        // delete sub-category
+        foreach ($subcategories as $subcategory) {
+            $subcategory->delete();
+        }
         $this->deleteCategory = Category::find($this->deleteId);
         $this->deleteCategory->delete();
         $this->alert('success', trans('The category has been deleted'));

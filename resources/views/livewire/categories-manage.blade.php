@@ -131,7 +131,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category? This will also delete all jobs related to this category.')</p>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category ?')
+                        <br>
+                        @lang('This will also remove all subcategories and jobs linked to that category.')</p>
                     </span>
                     <br>
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
+use App\Models\Job;
 use App\Models\SubCategory;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -94,6 +95,8 @@ class ManageSubCategories extends Component
 
     public function confirmDelete()
     {
+        //delete jobs before
+        Job::where('sub_category_id', $this->selectedSubCategory->id)->delete();
         $this->selectedSubCategory->delete();
 
         $this->closeModal();

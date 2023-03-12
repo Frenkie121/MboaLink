@@ -26,10 +26,15 @@
                                             <td>{{ $job->title }}</td>
                                             <td>{{ $job->company->location }}</td>
                                             <td>{{ $job->salary }}</td>
-                                            <td>@if ($job->is_published) Yes  @else No  @endif
-                                        </td>
                                             <td>
-                                                <a href="{{ route('admin.job.show',$job) }}"
+                                                @if ($job->is_published)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('admin.job.show', $job) }}"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-eye"></i> </a>
                                                 <a href="#" wire:click="deleteJob({{ $job->id }})"
@@ -64,7 +69,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this job?')</p>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this job ?')</p>
                     <div class="modal-footer">
                         <br>
                     </div>
@@ -77,70 +82,4 @@
             </div>
         </div>
         {{-- end modal confirmation delete User --}}
-
-        {{-- Start show modal --}}
-        <div wire:ignore.self class="modal fade" id="ShowJobModalLabel" tabindex="-1" role="dialog"
-            aria-labelledby="ShowJobModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ShowJobModalLabel">
-                            @lang('Show job') {{ $title }}
-                        </h5>
-                        <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            {{-- <div class="form-group row">
-                                <label for="category" class="col-sm-3 col-form-label">@lang('Category')</label>
-                                <div class="col-sm-9">
-                                    <select class="custom-select" wire:model.defer="location">
-                                        <option @disabled($selectedSubCategory) @selected(!$selectedSubCategory)>
-                                            @lang('Select a category')</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" @selected($selectedSubCategory && $category->id === $selectedSubCategory->category->id)>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
-                            <div class="form-group row">
-                                <label for="name" class="col-sm-3 col-form-label">@lang('Title')</label>
-                                <div class="col-sm-9">
-                                    <input type="text" readonly wire:model.defer="title" class="form-control"
-                                        id="name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="name" class="col-sm-3 col-form-label">@lang('Location')</label>
-                                <div class="col-sm-9">
-                                    <input type="text" readonly wire:model.defer="location" class="form-control"
-                                        id="name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="name" class="col-sm-3 col-form-label">@lang('Description')</label>
-                                <div class="col-sm-9">
-                                    <input type="text" readonly wire:model.defer="description" class="form-control"
-                                        id="name">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="reset" wire:click="closeModal()" class="btn btn-secondary"
-                                    data-dismiss="modal">@lang('Cancel')</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
     </div>

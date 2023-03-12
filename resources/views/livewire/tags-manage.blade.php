@@ -109,7 +109,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this tag?')</p>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this tag ?')</p>
                     <div class="modal-footer">
                         <br>
                     </div>

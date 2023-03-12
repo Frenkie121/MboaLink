@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Job;
+use App\Notifications\publish\PublishCompanyFrNotification;
+use App\Notifications\publish\PublishCompanyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\publish\PublishCompanyNotification;
-use App\Notifications\publish\PublishCompanyFrNotification;
 
 class publishController extends Controller
 {
@@ -35,6 +35,7 @@ class publishController extends Controller
             Notification::send($job->company->user, new PublishCompanyFrNotification($job, $data));
         }
         toast($message, 'success');
+
         return redirect()->back();
     }
 }

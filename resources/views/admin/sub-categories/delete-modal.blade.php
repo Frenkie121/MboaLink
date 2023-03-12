@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this subcategory? This will also delete all jobs related to this subcategory.')</p>
+                <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this subcategory ?') <br> @lang("This will also delete all jobs related to this subcategory.")</p>
                 <div class="modal-footer">
                     <button type="button" wire:click="closeModal()" class="btn btn-success"
                         data-dismiss="modal">@lang('Cancel')</button>
