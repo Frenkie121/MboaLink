@@ -55,4 +55,9 @@ class PagesController extends Controller
             'jobs' => $jobs,
         ]);
     }
+
+    public function about()
+    {
+        return view('front.about');
+    }
 }
