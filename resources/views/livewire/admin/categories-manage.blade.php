@@ -21,8 +21,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach ($categories as $category)
+                                    @foreach ($categories as $category)
+                                        <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>
@@ -36,7 +36,7 @@
                                                         class="fa fa-trash"></i>
                                                 </a>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>
@@ -131,7 +131,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category? This will also delete all jobs related to this category.')</p>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category?')
+                        <br>
+                        @lang('This will also remove all subcategories and jobs linked to that category.')</p>
                     </span>
                     <br>
                 </div>

@@ -10,16 +10,14 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <x-livewire-alert::scripts />
-    @livewire('jobs-manage')
+    @livewire('admin.jobs-manage')
 @endsection
 
 
 @push('js')
     <script>
         window.addEventListener('close-modal', event => {
-            $('#AddCategory').modal('hide');
-            $('#deleteCategory').modal('hide');
-            $('#EditCategory').modal('hide');
+            $('#deleteJob').modal('hide');
         });
     </script>
     @livewireScripts()

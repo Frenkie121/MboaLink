@@ -1,4 +1,5 @@
-<div wire:ignore.self class="modal fade" id="subCategoryModal" tabindex="-1" role="dialog" aria-labelledby="subCategoryModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="subCategoryModal" tabindex="-1" role="dialog"
+    aria-labelledby="subCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,15 +20,10 @@
                         <label for="category" class="col-sm-3 col-form-label">@lang('Category')</label>
                         <div class="col-sm-9">
                             <select class="custom-select" wire:model.defer="category">
-                                <option
-                                    @disabled($selectedSubCategory)
-                                    @selected(!$selectedSubCategory)
-                                >@lang('Select a category')</option>
+                                <option @disabled($selectedSubCategory) @selected(!$selectedSubCategory)>@lang('Select a category')
+                                </option>
                                 @foreach ($categories as $category)
-                                    <option
-                                        value="{{ $category->id }}"
-                                        @selected($selectedSubCategory && $category->id === $selectedSubCategory->category->id)
-                                        >
+                                    <option value="{{ $category->id }}" @selected($selectedSubCategory && $category->id === $selectedSubCategory->category->id)>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
@@ -40,14 +36,16 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 col-form-label">@lang('Name')</label>
                         <div class="col-sm-9">
-                            <input type="text" wire:model.defer="name" class="form-control" id="name" placeholder="@lang('Name')">
+                            <input type="text" wire:model.defer="name" class="form-control" id="name"
+                                placeholder="@lang('Name')">
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" wire:click="closeModal()" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="reset" wire:click="closeModal()" class="btn btn-secondary"
+                            data-dismiss="modal">@lang('Cancel')</button>
                         <button type="submit" class="btn btn-primary">@lang('Save')</button>
                     </div>
                 </form>

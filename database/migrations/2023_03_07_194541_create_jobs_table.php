@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sub_category_id')->constrained();
+            $table->foreignId('sub_category_id')->constrained()->cas;
             $table->foreignId('company_id')->constrained();
             $table->string('title');
             $table->string('slug');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('dateline');
             $table->string('file')->nullable();
             $table->boolean('is_published')->default(false);
+            $table->date('published_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

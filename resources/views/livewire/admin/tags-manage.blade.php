@@ -21,8 +21,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach ($tags as $tag)
+                                    @foreach ($tags as $tag)
+                                        <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>
@@ -36,7 +36,7 @@
                                                         class="fa fa-trash"></i>
                                                 </a>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     @endforeach
 
                                 </tbody>
@@ -54,8 +54,8 @@
     </div>
 
     <!-- Modal addTag + EditTag-->
-    <div wire:ignore.self class="modal fade" id="AddTag" tabindex="-1" role="dialog"
-        aria-labelledby="AddTagLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="AddTag" tabindex="-1" role="dialog" aria-labelledby="AddTagLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,9 +82,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="reset" wire:click="closeModal()" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="reset" wire:click="closeModal()" class="btn btn-secondary"
+                            data-dismiss="modal">@lang('Cancel')</button>
                         <button type="submit" class="btn btn-primary">
-                            @if ($selectedTag) @lang('Edit') @else @lang('Save')  @endif
+                            @if ($selectedTag)
+                                @lang('Edit')
+                            @else
+                                @lang('Save')
+                            @endif
                         </button>
                     </div>
                 </form>
@@ -105,17 +110,17 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this tag?')</p>
-                <div class="modal-footer">
-                    <br>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
-                    <button type="button" wire:click="destroyTag()" class="btn btn-danger">
-                        @lang('Yes! delete')</button>
+                    <div class="modal-footer">
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="button" wire:click="destroyTag()" class="btn btn-danger">
+                            @lang('Yes! delete')</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- end modal confirmation delete User --}}
+        {{-- end modal confirmation delete User --}}
 
-</div>
+    </div>
