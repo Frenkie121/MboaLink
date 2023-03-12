@@ -40,8 +40,8 @@ class PublishCompanyNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->greeting(trans("Hello ").$this->job->company->name)
-            ->subject(trans("Confirmation de publication du job"))
+            ->greeting(trans('Hello ').$this->job->company->name)
+            ->subject(trans('Confirmation de publication du job'))
             ->line($this->data)
             ->line(trans('You receive this e-mail to confirm the publication of your job, the title of which is: ').$this->job->title)
             ->action(trans('Consult the list of other available jobs'), url('/'))

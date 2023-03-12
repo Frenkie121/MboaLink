@@ -1,6 +1,6 @@
 @extends('layouts.back')
 
-@section('subtitle', __('Jobs list'))
+@section('subtitle', __('Show Job'))
 
 @push('css')
     @livewireStyles()
@@ -19,17 +19,21 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Button trigger published -->
-
                             @if (!$job->is_published)
-                                <a href="{{ route('admin.job.publish', $job) }}" style="float: right;" type="button"
-                                    class="btn btn-lg btn btn-success">
-                                    <i class="fa fa-upload btn-sm"></i> @lang('Published') </a>
+                                <form method="POST" action="{{ route('admin.job.publish', $job->id) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" style="float: right;" type="button"
+                                        class="btn btn-lg btn btn-success">
+                                        <i class="fa fa-upload btn-sm"></i> @lang('Published') </button>
+                                </form>
                             @else
-                                <a style="float: right;" href="{{ route('admin.job.publish', $job) }}" type="button"
-                                    class="btn btn-lg btn btn-danger">
+                                <a style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
+                                    class="btn btn-lg btn btn-danger" data-toggle="modal" data-target="#deleteJob">
                                     <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
                             @endif
                             <br><br><br>
+                            @livewire('admin.delete-modal-publish')
                             <div class="table-responsive  table-bordered">
 
                                 <table class="table table-striped" id="table-1">
@@ -107,5 +111,12 @@
             </div>
         </div>
 
-
     @endsection
+    @push('js')
+        <script>
+            window.addEventListener('close-modal', event => {
+                $('#deleteCategory').modal('hide');
+            });
+        </script>
+        @livewireScripts()
+    @endpush

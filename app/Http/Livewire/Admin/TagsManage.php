@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Admin;
 
 use App\Models\Tag;
+use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -72,6 +73,7 @@ class TagsManage extends Component
 
     public function destroyTag()
     {
+        DB::table('job_tag')->where('tag_id', $this->deleteId)->delete();
         $this->deleteTag = Tag::find($this->deleteId);
         $this->deleteTag->delete();
         $this->alert('success', trans('The Tag has been deleted'));
@@ -80,6 +82,6 @@ class TagsManage extends Component
 
     public function render()
     {
-        return view('livewire.tags-manage', ['tags' => Tag::query()->OrderBy('id', 'desc')->paginate(5)]);
+        return view('livewire.admin.tags-manage', ['tags' => Tag::query()->OrderBy('id', 'desc')->paginate(5)]);
     }
 }

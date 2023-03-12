@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
 use App\Models\Job;
@@ -101,6 +101,6 @@ class CategoriesManage extends Component
 
     public function render()
     {
-        return view('livewire.categories-manage', ['categories' => Category::query()->OrderBy('id', 'desc')->paginate(5)]);
+        return view('livewire.admin.categories-manage', ['categories' => Category::query()->OrderBy('id', 'desc')->paginate(5)]);
     }
 }

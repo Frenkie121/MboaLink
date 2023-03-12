@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +71,6 @@ class JobsManage extends Component
 
     public function render()
     {
-        return view('livewire.jobs-manage', ['jobs' => Job::query()->with('company')->latest()->paginate(5)]);
+        return view('livewire.admin.jobs-manage', ['jobs' => Job::query()->with('company')->latest()->paginate(5)]);
     }
 }
