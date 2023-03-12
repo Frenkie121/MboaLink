@@ -53,7 +53,7 @@ class PostJobNotification extends Notification
                     )
                     ->when($notifiable->role_id === 1, 
                         fn($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
-                        fn($mail) => $mail->action(trans('Go to website'), url('/front/jobs')),
+                        fn($mail) => $mail->action(trans('Go to website'), url('/jobs')),
                     );
     }
 }
