@@ -49,7 +49,7 @@ class PostJobNotification extends Notification
                     )
                     ->lineIf(
                         $notifiable->role_id === 2,
-                        trans('Your job ') . $this->job->title . (' has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible.')
+                        trans('Your job ') . $this->job->title . trans(' has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible.')
                     )
                     ->when($notifiable->role_id === 1, 
                         fn($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
