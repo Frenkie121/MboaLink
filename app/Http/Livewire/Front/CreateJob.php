@@ -6,7 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Livewire\{Component, WithFileUploads};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\{Category, Company, Job, Tag};
+use App\Models\{Category, Company, Job, Tag, User};
+use App\Notifications\Front\Jobs\PostJobNotification;
 
 class CreateJob extends Component
 {
@@ -229,7 +230,7 @@ class CreateJob extends Component
         }
 
         // 2. User
-        $company->user()->create([
+        $user = $company->user()->create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Str::random(),
@@ -273,10 +274,13 @@ class CreateJob extends Component
         // II. MAILS
 
         // 1. To Admin
-
+        User::query()
+            ->firstWhere('role_id', 1)
+            ->notify(new PostJobNotification($job));
+            
         // 2. To User - Company
-
-        sleep(15);
+        $user->notify(new PostJobNotification($job));
+        // sleep(15);
         // 
         alert('', trans('Your job has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible. An email related to this action has been sent to you, please check your mailbox.'), 'success')->autoclose(20000);
 
