@@ -69,14 +69,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this job ?')</p>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this job?')</p>
                     <div class="modal-footer">
                         <br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
                         <button type="button" wire:click="destroyJob()" class="btn btn-danger">
-                            @lang('Yes! delete')</button>
+                            @lang('Delete')</button>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Button trigger published -->
-                            @if (!$job->is_published)
+                            {{-- @if (!$job->is_published)
                                 <form method="POST" action="{{ route('admin.job.publish', $job->id) }}">
                                     @csrf
                                     @method('PATCH')
@@ -31,7 +31,7 @@
                                 <a style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
                                     class="btn btn-lg btn btn-danger" data-toggle="modal" data-target="#deleteJob">
                                     <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
-                            @endif
+                            @endif --}}
                             <br><br><br>
                             @livewire('admin.delete-modal-publish')
                             <div class="table-responsive  table-bordered">
