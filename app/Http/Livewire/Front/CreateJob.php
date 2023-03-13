@@ -30,7 +30,7 @@ class CreateJob extends Component
 
     // Qualifications
     public $qualifications;
-    public array $qualificationsInputs = [''];
+    public array $qualificationsInputs = [];
 
     // Company Details
     public $name, $email, $website, $company_location, $company_description, $logo;

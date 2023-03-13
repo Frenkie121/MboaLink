@@ -143,31 +143,31 @@
         </div>
         <div class="tab-pane fade show p-0 @if ($currentStep === 2) active @endif">
             <form>
-                <div class="row g-3">
-                    <div class="col-md-10">
+                <div class="row gy-2 gx-0 gx-sm-0">
+                    <div class="col-md-10 col-sm-9 col-8">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('requirement.0') is-invalid @enderror" id="content" placeholder="@lang('Requirement') 1" wire:model.defer="requirements.0">
                             <label for="content">@lang('Requirement') 1<b class="text-danger">*</b></label>
                             @error('requirements.0')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</a>
+                    <div class="col-md-2 col-sm-3 col-4">
+                        <a class="btn btn-secondary w-50 py-3" wire:click.prevent="add({{ $i }})">+</a>
                     </div>
                     @foreach ($requirementsInputs as $key => $input)
-                        <div class="col-md-10" wire:key="{{ $input }}">
+                        <div class="col-md-10 col-sm-9 col-8" wire:key="{{ $input }}">
                             <div class="form-floating">
                                 <input type="text" class="form-control @error('requirements.' . $input) is-invalid @enderror" id="content" placeholder="@lang('Requirement') {{ $loop->iteration + 1 }}" wire:model.defer="requirements.{{ $input }}">
                                 <label for="content">@lang('Requirement') {{ $loop->iteration + 1 }}</label>
                                 @error('requirements.' . $input)
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger"><small>{{ $message }}</small></span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</a>
+                        <div class="col-md-2 col-sm-3 col-4">
+                            <a class="btn btn-danger w-50 py-3" wire:click.prevent="remove({{ $key }})">-</a>
                         </div>
                     @endforeach
                 </div>
@@ -175,31 +175,31 @@
         </div>
         <div class="tab-pane fade show p-0 @if ($currentStep === 3) active @endif">
             <form>
-                <div class="row g-3">
-                    <div class="col-md-10" wire:key="{{ uniqid() }}">
+                <div class="row g-3 gx-sm-0">
+                    <div class="col-md-10 col-sm-9 col-8" wire:key="{{ uniqid() }}">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('qualifications.0') is-invalid @enderror" id="content" placeholder="@lang('Qualification') 1" wire:model.defer="qualifications.0">
                             <label for="content">@lang('Qualification') 1<b class="text-danger">*</b></label>
                             @error('qualifications.0')
-                                <span class="text-danger">{{ $message }}</span>
+                                <span class="text-danger"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a class="btn btn-secondary w-50 py-3 mr-1" wire:click.prevent="add({{ $i }})">+</a>
+                    <div class="col-md-2 col-sm-3 col-4">
+                        <a class="btn btn-secondary w-50 py-3" wire:click.prevent="add({{ $i }})">+</a>
                     </div>
                     @foreach ($qualificationsInputs as $key => $input)
-                        <div class="col-md-10" wire:key="{{ uniqid() }}">
+                        <div class="col-md-10 col-sm-9 col-8" wire:key="{{ uniqid() }}">
                             <div class="form-floating">
                                 <input type="text" class="form-control @error('qualifications.' . $input) is-invalid @enderror" id="content" placeholder="@lang('Qualification') {{ $loop->iteration + 1 }}" wire:model.defer="qualifications.{{ $input }}">
                                 <label for="content">@lang('Qualification') {{ $loop->iteration + 1 }}</label>
                                 @error('qualifications.' . $input)
-                                    <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger"><small>{{ $message }}</small></span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-danger w-50 py-3 mr-1" wire:click.prevent="remove({{ $key }})">-</a>
+                        <div class="col-md-2 col-sm-3 col-4">
+                            <a class="btn btn-danger w-50 py-3" wire:click.prevent="remove({{ $key }})">-</a>
                         </div>
                     @endforeach
                 </div>
@@ -270,23 +270,25 @@
         </div>
     </div>
     
-    <div class="col-12 d-flex justify-content-between mt-2">
-        <a href="#tabs" wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-dark w-40 py-3 {{ $currentStep === 1 ? 'isDisabled' : '' }}" wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  @lang('Previous')</a>
+    <div class="col-{{ $currentStep === 2 || $currentStep === 3 ? '11' : '12' }} d-flex justify-content-between mt-2">
+        <a href="#tabs" wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-dark w-40 py-3 {{ $currentStep === 1 ? 'isDisabled' : '' }}" wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @elseif($currentStep === 5)4 @endif)"><i class="fa fa-caret-left"></i>  <span class="d-none d-md-inline d-sm-inline">@lang('Previous')</span></a>
 
         <div class="d-flex justify-content-end">
             @if ($currentStep === 5)
-                <a wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash"></i>  @lang('Cancel')</a>
+                <a wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash-alt"></i>  <span class="d-none d-md-inline d-sm-inline">@lang('Cancel')</span></a>
             @endif
 
             <div class="mx-1">
                 <a href="#tabs" wire:loading.class="isDisabled"
                     class="btn btn-{{ $currentStep === 5 ? 'secondary' : 'primary' }} w-40 py-3"
                     wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@elseif($currentStep === 4)validateCompanyDetails()@else confirm()@endif">
-                    @if ($currentStep === 5)
-                        @lang('Confirm')
-                    @else
-                        @lang('Next')
-                    @endif
+                    <span class="d-none d-md-inline d-sm-inline">
+                        @if ($currentStep === 5)
+                            @lang('Confirm')
+                        @else
+                            @lang('Next')
+                        @endif
+                    </span>
                     <i class="fa fa-caret-right"></i>
                 </a>
             </div>
