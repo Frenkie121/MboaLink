@@ -29,7 +29,6 @@ class DeleteModalPublish extends Component
 
     public function deleteJob($id)
     {
-    
         $this->deleteId = $id;
         $this->title = (Job::find($this->deleteId))->title;
     }
@@ -37,7 +36,7 @@ class DeleteModalPublish extends Component
     public function notPublish()
     {
         $job = Job::find($this->deleteId);
-        dd($this->deleteId,$job);
+        dd($this->deleteId, $job);
         $job->is_published = false;
         $message = trans("Job hasn't been successfully published.");
         $data = trans('Sorry, your job has not been approved and therefore not published.');
@@ -63,7 +62,6 @@ class DeleteModalPublish extends Component
 
     public function render()
     {
-
         return view('livewire.admin.delete-modal-publish');
     }
 }
