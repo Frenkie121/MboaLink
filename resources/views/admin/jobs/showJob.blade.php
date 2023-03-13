@@ -12,15 +12,13 @@
     <x-livewire-alert::scripts />
     <div>
         <x-admin.section-header :title="__('Job show')" :previousTitle="__('Jobs list')" :previousRouteName="route('admin.jobs.index')" />
-
-        {{-- @livewire('admin.delete-modal-publish',['job'=>$job]) --}}
-        @livewire('admin.delete-modal-publish',['job'=>$job])
-        {{-- <div class="section-body">
+        <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
 
+                            @livewire('admin.delete-modal-publish', ['job' => $job])
                             <br><br><br>
                             <div class="table-responsive  table-bordered">
 
@@ -97,7 +95,7 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
     @endsection
     @push('js')

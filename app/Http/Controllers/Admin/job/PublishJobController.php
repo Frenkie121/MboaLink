@@ -17,9 +17,11 @@ class PublishJobController extends Controller
      */
     public function __invoke(Request $request, Job $job)
     {
-        $job->where('id', $job->id)->update([
-            'is_published' => true,
-        ]);
+        $job->where('id', $job->id)
+            ->update([
+                'is_published' => true,
+                'published_at' => now(),
+            ]);
         $message = trans('Job has been successfully published.');
         $data = trans('Congratulations, your job has been approved and published.');
         $job->save();
