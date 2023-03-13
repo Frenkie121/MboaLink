@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use App\Notifications\publish\PublishCompanyNotification;
+use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Notifications\Admin\publish\PublishCompanyNotification;
 
 class DeleteModalPublish extends Component
 {
