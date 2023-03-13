@@ -32,7 +32,7 @@
                     >@lang('Post A Job')</a>
                 </div>
             </div>
-            <a href="#" class="nav-item nav-link">Contact</a>
+            <a href="{{ route('front.contact') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'contact')) active @endif">Contact</a>
         </div>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

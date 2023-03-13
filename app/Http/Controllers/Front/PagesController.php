@@ -10,7 +10,7 @@ class PagesController extends Controller
 {
     public function home()
     {
-        return view('front.home', [
+        return view('front.pages.home', [
             'jobs' => Job::query()
                         ->with('company:id,logo')
                         ->published()
@@ -54,10 +54,5 @@ class PagesController extends Controller
         return view('front.jobs.index', [
             'jobs' => $jobs,
         ]);
-    }
-
-    public function about()
-    {
-        return view('front.about');
     }
 }

@@ -45,7 +45,7 @@
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item bg-light rounded p-4">
                     <h3 class="text-primary mb-3"> @lang('Companies')</h3>
-                    <p>@lang('You are a company looking for interns or qualified personnel, subscribe with the company status and publish your recruitment ads while benefiting from our tools and formulas in order to reach more quickly your objectives and improve your MboaLink experience.')</p>
+                    <p style="text-align: justify;">@lang('You are a company looking for interns or qualified personnel, subscribe with the company status and publish your recruitment ads while benefiting from our tools and formulas in order to reach more quickly your objectives and improve your MboaLink experience.')</p>
                     <div class="d-flex align-items-center">
                         {{-- <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
                         <div class="ps-3">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <h3 class="text-primary mb-3"> @lang('Unemployed')</h3>
-                    <p>@lang('You are a Cameroonian graduate, without a permanent job and maybe even with exceptional aptitude in one or more professional fields and wish to register in a career project, subscribe with the status without permanent job and apply for the position that corresponds to your abilities while benefiting from our tools and formulas to reach your goals faster and your objectives and enhance your MboaLink experience.')</p>
+                    <p style="text-align: justify;">@lang('You are a Cameroonian graduate, without a permanent job and maybe even with exceptional aptitude in one or more professional fields and wish to register in a career project, subscribe with the status without permanent job and apply for the position that corresponds to your abilities while benefiting from our tools and formulas to reach your goals faster and your objectives and enhance your MboaLink experience.')</p>
                     <div class="d-flex align-items-center">
                         {{-- <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
                         <div class="ps-3">
@@ -67,7 +67,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <h3 class="text-primary mb-3"> @lang('Students')</h3>
-                    <p>@lang('You are a Cameroonian student, at the beginning, middle or end of your studies, and you wish to put into practice your knowledge, discover the world of work and acquire a professional experience; subscribe with the STUDENT status and benefit from our tools and formulas in order to reach your objectives and enhance your MboaLink experience.')</p>
+                    <p style="text-align: justify;">@lang('You are a Cameroonian student, at the beginning, middle or end of your studies, and you wish to put into practice your knowledge, discover the world of work and acquire a professional experience; subscribe with the STUDENT status and benefit from our tools and formulas in order to reach your objectives and enhance your MboaLink experience.')</p>
                     <div class="d-flex align-items-center">
                         {{-- <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
                         <div class="ps-3">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
                     <h3 class="text-primary mb-3"> @lang('Pupils')</h3>
-                    <p>@lang('You are a Cameroonian student, eager to acquire professional skills in order to develop your abilities faster and arrive with a head start on the job market, subscribe with the student status and benefit from our tools and formulas in order to reach your objectives and enhance your MboaLink experience.')</p>
+                    <p style="text-align: justify;">@lang('You are a Cameroonian pupil, eager to acquire professional skills in order to develop your abilities faster and arrive with a head start on the job market, subscribe with the pupil status and benefit from our tools and formulas in order to reach your objectives and enhance your MboaLink experience.')</p>
                     <div class="d-flex align-items-center">
                         {{-- <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
                         <div class="ps-3">
