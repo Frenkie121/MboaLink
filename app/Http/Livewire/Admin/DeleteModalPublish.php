@@ -29,6 +29,7 @@ class DeleteModalPublish extends Component
 
     public function deleteJob($id)
     {
+    
         $this->deleteId = $id;
         $this->title = (Job::find($this->deleteId))->title;
     }
@@ -62,6 +63,7 @@ class DeleteModalPublish extends Component
 
     public function render()
     {
+
         return view('livewire.admin.delete-modal-publish');
     }
 }
