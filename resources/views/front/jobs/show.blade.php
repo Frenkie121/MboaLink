@@ -78,7 +78,7 @@
                     <a href="#apply" class="btn btn-primary w-100 mb-2" type="submit">@lang('Apply Now')</a href="#apply">
                     <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                         <h4 class="mb-4">@lang('Other informations')</h4>
-                        <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Published On'): {{ $job->created_at }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Published On'): {{ $job->published_at }}</p>
                         <p class=""><i class="fa fa-angle-right text-primary me-2"></i>@lang('Date Line'): {{ $job->dateline }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Job Type'): {{ $job->type }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>@lang('Salary'): {{ $job->salary }} XAF</p>

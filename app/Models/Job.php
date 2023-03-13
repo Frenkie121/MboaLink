@@ -31,12 +31,17 @@ class Job extends Model
     // ACCESSORS
     public function getDatelineAttribute($dateline)
     {
-        return date_format(Carbon::make($dateline), 'F d, Y');
+        return formatedLocaleDate($dateline);
     }
 
     public function getCreatedAtAttribute($created_at)
     {
-        return date_format(Carbon::make($created_at), 'F d, Y');
+        return formatedLocaleDate($created_at);
+    }
+
+    public function getPublishedAtAttribute($published_at)
+    {
+        return formatedLocaleDate($published_at);
     }
 
     public function getTypeAttribute($type)
@@ -88,6 +93,20 @@ class Job extends Model
      */
     public function scopePublished(Builder $query): Builder
     {
-        return $query->where('is_published', true);
+        return $query->where('is_published', true)
+                    ->whereNotNull('published_at');
+    }
+
+    /**
+     * Scope thee query to only include jobs for which the dateline has not yet passed
+     *
+     * @param Illuminate\Database\Eloquent\Builder $query
+     * 
+     * @return Illuminate\Database\Eloquent\Builder
+     * 
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->whereDate('dateline', '>', today());
     }
 }

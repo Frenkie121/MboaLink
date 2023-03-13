@@ -12,6 +12,8 @@ class JobController extends Controller
         return view('front.jobs.index', [
             'types' => Job::TYPES,
             'jobs' => Job::query()
+                        ->published()
+                        ->active()
                         ->with('company:id,logo')
                         ->orderByDesc('created_at')
                         ->paginate(10),

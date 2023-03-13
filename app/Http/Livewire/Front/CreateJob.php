@@ -96,7 +96,7 @@ class CreateJob extends Component
             'category' => 'required|exists:categories,id',
             'sub_category' => 'required|exists:sub_categories,id',
             'type' => 'required|' . Rule::in(array_keys($this->types)),
-            'dateline' => 'required|date|after:' . now()->addWeek(),
+            'dateline' => 'required|date|after:' . now()->addWeek()->format('d-m-Y'),
             'description' => 'required|string|max:1000',
             'file' => 'nullable|file|mimes:doc,docx,pdf,ppt,.xlsx|max:512',
             'tags' => 'nullable|array',
@@ -238,7 +238,7 @@ class CreateJob extends Component
         ]);
 
         // 3. Job
-        $salary = $this->min_salary . $this->max_salary ? '  - ' . $this->min_salary : ''; 
+        $salary =$this->max_salary ? $this->min_salary . ' - ' . $this->max_salary : $this->min_salary; 
         $job = $company->jobs()->create([
             'sub_category_id' => $this->sub_category,
             'title' => $this->title,
