@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Notifications\Admin\publish\PublishCompanyNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Notifications\Admin\publish\PublishCompanyNotification;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class DeleteModalPublish extends Component
 {
@@ -52,6 +52,7 @@ class DeleteModalPublish extends Component
 
     public function destroyJob()
     {
+        DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
         DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
         $message = trans("Job hasn't been successfully published.");
         $data = trans('Sorry, your job has not been approved and therefore not published.');

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\job;
 
-use App\Models\Job;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Notification;
+use App\Models\Job;
 use App\Notifications\Admin\publish\PublishCompanyNotification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class PublishJobController extends Controller
 {
@@ -24,8 +24,9 @@ class PublishJobController extends Controller
             ]);
         $message = trans('Job has been successfully published.');
         $data = trans('Congratulations, your job has been approved and published.');
+        
         $job->save();
-        dd($job->company->user,$job, $data);
+        // dd($job->company->user, $job, $data);
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
         toast($message, 'success');
 
