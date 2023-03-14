@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use App\Notifications\publish\PublishCompanyNotification;
+use App\Notifications\admin\job\PublishCompanyNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -16,6 +16,8 @@ class DeleteModalPublish extends Component
     use LivewireAlert;
 
     public $deleteId;
+
+    public $job;
 
     public $title;
 
@@ -35,27 +37,35 @@ class DeleteModalPublish extends Component
 
     public function notPublish()
     {
-        $job = Job::find($this->deleteId);
-        dd($this->deleteId,$job);
-        $job->is_published = false;
+        $jobData = Job::find($this->deleteId);
+        $jobData->is_published = false;
+        $jobData->published_at = null;
+        $jobData->save();
         $message = trans("Job hasn't been successfully published.");
         $data = trans('Sorry, your job has not been approved and therefore not published.');
-        Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
-        $this->alert('success', trans($message));
+        Notification::send($jobData->company->user, new PublishCompanyNotification($jobData, $data));
+
         $this->closeModal();
+
+        $this->alert('success', $message);
+
+        return redirect()->route('admin.jobs.index');
     }
 
     public function destroyJob()
     {
         DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
+        DB::table('qualifications')->where('job_id', $this->deleteId)->delete();
+        DB::table('requirements')->where('job_id', $this->deleteId)->delete();
         $message = trans("Job hasn't been successfully published.");
         $data = trans('Sorry, your job has not been approved and therefore not published.');
         $job = Job::find($this->deleteId);
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
-        dd('passer');
         $job->delete();
-        $this->alert('success', trans('The job has been deleted'));
+
         $this->closeModal();
+
+        $this->alert('success', $message);
 
         return redirect()->route('admin.jobs.index');
     }

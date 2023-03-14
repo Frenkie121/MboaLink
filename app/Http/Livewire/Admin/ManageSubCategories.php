@@ -27,6 +27,7 @@ class ManageSubCategories extends Component
     public function showCreateForm()
     {
         $this->reset();
+        $this->resetErrorBag();
         $this->emit('openModal');
     }
 
@@ -34,7 +35,6 @@ class ManageSubCategories extends Component
     {
         $this->reset();
         $this->resetErrorBag();
-        $this->resetValidation();
         $this->emit('closeModal');
     }
 
@@ -58,7 +58,6 @@ class ManageSubCategories extends Component
     {
         $this->reset();
         $this->resetErrorBag();
-        $this->resetValidation();
         $this->selectedSubCategory = $subCategory;
 
         $this->name = $subCategory->name;

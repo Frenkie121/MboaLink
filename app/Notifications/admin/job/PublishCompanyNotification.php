@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Notifications\publish;
+namespace App\Notifications\admin\job;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PublishCompanyNotification extends Notification implements ShouldQueue
+class PublishCompanyNotification extends Notification
 {
     use Queueable;
 
@@ -39,15 +38,19 @@ class PublishCompanyNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $hour = date('H');
+        $greeting = ($hour > 17) ? trans('Evening ') : (($hour > 12 && $hour <= 18) ? trans('Afternoon ') : trans('Morning '));
+
         return (new MailMessage)
-            ->greeting(trans('Hello ').$this->job->company->name)
-            ->subject(trans('Confirmation de publication du job'))
-            ->line($this->data)
+            ->greeting(trans('Good ').$greeting.$notifiable->name)
+            ->subject(trans('Publication Job Notification'))
             ->line(trans('You receive this e-mail to confirm the publication of your job, the title of which is: ').$this->job->title)
-            ->action(trans('Consult the list of other available jobs'), url('/'))
-            ->line(trans('Thank you for using our application!'))
-            ->from('admin@Mboalink.com', trans('Administrator'))
-            ->line('...');
+            ->line($this->data)
+            ->when(
+                $notifiable->role_id === 1,
+                fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
+                fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
+            );
     }
 
     /**

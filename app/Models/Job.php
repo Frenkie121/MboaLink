@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Job extends Model
 {
@@ -86,10 +89,8 @@ class Job extends Model
     /**
      * Scope the query to only include pusblished jobs
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * 
+     * @param  Illuminate\Database\Eloquent\Builder  $query
      * @return Illuminate\Database\Eloquent\Builder
-     * 
      */
     public function scopePublished(Builder $query): Builder
     {
@@ -100,10 +101,8 @@ class Job extends Model
     /**
      * Scope thee query to only include jobs for which the dateline has not yet passed
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * 
+     * @param  Illuminate\Database\Eloquent\Builder  $query
      * @return Illuminate\Database\Eloquent\Builder
-     * 
      */
     public function scopeActive(Builder $query): Builder
     {

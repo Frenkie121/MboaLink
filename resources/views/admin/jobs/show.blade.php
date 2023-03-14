@@ -12,28 +12,14 @@
     <x-livewire-alert::scripts />
     <div>
         <x-admin.section-header :title="__('Job show')" :previousTitle="__('Jobs list')" :previousRouteName="route('admin.jobs.index')" />
-
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <!-- Button trigger published -->
-                            {{-- @if (!$job->is_published)
-                                <form method="POST" action="{{ route('admin.job.publish', $job->id) }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" style="float: right;" type="button"
-                                        class="btn btn-lg btn btn-success">
-                                        <i class="fa fa-upload btn-sm"></i> @lang('Published') </button>
-                                </form>
-                            @else
-                                <a style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
-                                    class="btn btn-lg btn btn-danger" data-toggle="modal" data-target="#deleteJob">
-                                    <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
-                            @endif --}}
+
+                            @livewire('admin.delete-modal-publish', ['job' => $job])
                             <br><br><br>
-                            @livewire('admin.delete-modal-publish')
                             <div class="table-responsive  table-bordered">
 
                                 <table class="table table-striped" id="table-1">
@@ -100,6 +86,10 @@
                                     <tr>
                                         <td style="font-weight:bold;">@lang('Updated at')</td>
                                         <td>{{ $job->updated_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">@lang('Published at')</td>
+                                        <td>{{ $job->published_at }}</td>
                                     </tr>
 
                                 </table>

@@ -169,6 +169,6 @@ return [
         'requirements.*' => 'exigence',
         'qualifications.0' => 'qualification',
         'qualifications.*' => 'qualification',
-        'website' => 'site web'
+        'website' => 'site web',
     ],
 ];

@@ -4,11 +4,12 @@ namespace App\Http\Livewire\Front;
 
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Livewire\{Component, WithFileUploads};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\{Category, Company, Job, Tag, User};
 use App\Notifications\Front\Jobs\PostJobNotification;
 use Illuminate\Support\Facades\Notification;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateJob extends Component
 {
@@ -17,30 +18,66 @@ class CreateJob extends Component
     public $currentStep = 1;
 
     public $categories;
+
     public $sub_categories;
+
     public $all_tags;
+
     public $types;
 
     // General job informations properties
-    public $title, $location, $min_salary, $max_salary, $category, $sub_category, $type, $dateline, $description, $file, $tags;
+    public $title;
+
+    public $location;
+
+    public $min_salary;
+
+    public $max_salary;
+
+    public $category;
+
+    public $sub_category;
+
+    public $type;
+
+    public $dateline;
+
+    public $description;
+
+    public $file;
+
+    public $tags;
 
     // Requirements
     public $requirements;
+
     public array $requirementsInputs = [];
+
     public int $i = 1;
 
     // Qualifications
     public $qualifications;
+
     public array $qualificationsInputs = [];
 
     // Company Details
-    public $name, $email, $website, $company_location, $company_description, $logo;
+    public $name;
+
+    public $email;
+
+    public $website;
+
+    public $company_location;
+
+    public $company_description;
+
+    public $logo;
 
     // Other
     // public bool $disabled = false;
 
     protected $listeners = [
-        'confirmCancel'
+        'confirmCancel',
     ];
 
     public function mount()
@@ -53,11 +90,6 @@ class CreateJob extends Component
 
     /**
      * Navigate in form wizard from one step to another
-     *
-     * @param int $step
-     * 
-     * @return void
-     * 
      */
     public function previous(int $step): void
     {
@@ -69,23 +101,17 @@ class CreateJob extends Component
     /**
      * Lifecyle hook to update category property and get related subCategories on every change
      *
-     * @param string $category
-     * 
-     * @return void
-     * 
+     * @param  string  $category
      */
     public function updatedCategory($category): void
     {
-        if (! is_null($category) && is_integer(intval($category))) {
+        if (! is_null($category) && is_int(intval($category))) {
             $this->sub_categories = Category::query()->findOrFail($category)->subCategories;
         }
     }
 
     /**
      * Validate first step form containing job general infromations
-     *
-     * @return void
-     * 
      */
     public function validateGeneralInformations(): void
     {
@@ -96,12 +122,12 @@ class CreateJob extends Component
             'max_salary' => 'nullable|numeric|gt:min_salary',
             'category' => 'required|exists:categories,id',
             'sub_category' => 'required|exists:sub_categories,id',
-            'type' => 'required|' . Rule::in(array_keys($this->types)),
-            'dateline' => 'required|date|after:' . now()->addWeek()->format('d-m-Y'),
+            'type' => 'required|'.Rule::in(array_keys($this->types)),
+            'dateline' => 'required|date|after:'.now()->addWeek()->format('d-m-Y'),
             'description' => 'required|string|max:1000',
             'file' => 'nullable|file|mimes:doc,docx,pdf,ppt,.xlsx|max:512',
             'tags' => 'nullable|array',
-            'tags.*' =>'nullable|exists:tags,id',
+            'tags.*' => 'nullable|exists:tags,id',
         ]);
 
         $this->currentStep = 2;
@@ -111,11 +137,6 @@ class CreateJob extends Component
 
     /**
      * Add new element to inputs array to increase requirements inputs
-     *
-     * @param int $i
-     * 
-     * @return void
-     * 
      */
     public function add(int $i): void
     {
@@ -130,11 +151,6 @@ class CreateJob extends Component
 
     /**
      * Remove element from in array which will delete a requirement input
-     *
-     * @param int $i
-     * 
-     * @return void
-     * 
      */
     public function remove(int $i): void
     {
@@ -147,9 +163,6 @@ class CreateJob extends Component
 
     /**
      * Validate requirements fields and go to the next step
-     *
-     * @return void
-     * 
      */
     public function validateRequirements(): void
     {
@@ -157,7 +170,7 @@ class CreateJob extends Component
             'requirements.0' => 'required|string|max:255',
             'requirements.*' => 'required|string|distinct:ignore_case|max:255',
         ]);
-        
+
         $this->currentStep = 3;
     }
 
@@ -165,9 +178,6 @@ class CreateJob extends Component
 
     /**
      * Validate qualifications fields
-     *
-     * @return void
-     * 
      */
     public function validateQualifications(): void
     {
@@ -183,9 +193,6 @@ class CreateJob extends Component
 
     /**
      * Validate company details fields
-     *
-     * @return void
-     * 
      */
     public function validateCompanyDetails(): void
     {
@@ -205,9 +212,6 @@ class CreateJob extends Component
 
     /**
      * Save fields to database
-     *
-     * @return void
-     * 
      */
     public function confirm(): void
     {
@@ -218,13 +222,13 @@ class CreateJob extends Component
 
         // 1. Company
         $company = Company::query()->create([
-            'location' => $this->company_location ,
+            'location' => $this->company_location,
             'description' => $this->company_description,
             'url' => $this->website ?? '',
         ]);
-        
+
         if ($this->logo) {
-            $name = uniqid('company-') . '.' . $this->logo->extension();
+            $name = uniqid('company-').'.'.$this->logo->extension();
             $this->logo->storeAs('public/companies/', $name);
             $company->logo = $name;
             $company->save();
@@ -239,7 +243,7 @@ class CreateJob extends Component
         ]);
 
         // 3. Job
-        $salary =$this->max_salary ? $this->min_salary . ' - ' . $this->max_salary : $this->min_salary; 
+        $salary = $this->max_salary ? $this->min_salary.' - '.$this->max_salary : $this->min_salary;
         $job = $company->jobs()->create([
             'sub_category_id' => $this->sub_category,
             'title' => $this->title,
@@ -251,7 +255,7 @@ class CreateJob extends Component
         ]);
 
         if ($this->file) {
-            $filename = $job->slug . '_' . uniqid() . $this->file->extension();
+            $filename = $job->slug.'_'.uniqid().$this->file->extension();
             $this->file->storeAs('public/jobs', $filename);
         }
 
@@ -282,9 +286,6 @@ class CreateJob extends Component
 
     /**
      * Show alert for job cancellation
-     *
-     * @return void
-     * 
      */
     public function cancel(): void
     {
@@ -304,9 +305,6 @@ class CreateJob extends Component
 
     /**
      * Confirm job cancellation
-     *
-     * @return void
-     * 
      */
     public function confirmCancel(): void
     {

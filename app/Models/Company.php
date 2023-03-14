@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model
 {
@@ -16,11 +16,11 @@ class Company extends Model
         'location', 'description', 'url', 'logo',
     ];
 
-    // MUTATORS
+    // ACCESSORS
     public function logo(): Attribute
     {
         return Attribute::make(
-            get: fn($logo) => $logo ? asset("storage/companies/{$logo}") : 'https://via.placeholder.com/640x480.png/f9460C?text=' . $this->load('user')->user->name
+            get: fn ($logo) => $logo ? asset("storage/companies/{$logo}") : 'https://via.placeholder.com/640x480.png/f9460C?text='.$this->load('user')->user->name
         );
     }
 
