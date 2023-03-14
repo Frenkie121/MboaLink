@@ -16,8 +16,6 @@
 
     </div>
 
-
-
     <!-- Modal Delete Tag -->
     <div wire:ignore.self class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top" role="document">
