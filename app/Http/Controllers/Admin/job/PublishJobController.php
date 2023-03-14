@@ -20,14 +20,14 @@ class PublishJobController extends Controller
         $job->where('id', $job->id)
             ->update([
                 'is_published' => true,
-                // 'published_at' => now(),
+                'published_at' => now(),
             ]);
         $message = trans('Job has been successfully published.');
         $data = trans('Congratulations, your job has been approved and published.');
-        
+
         $job->save();
-        // dd($job->company->user, $job, $data);
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
+
         toast($message, 'success');
 
         return redirect()->route('admin.jobs.index');
