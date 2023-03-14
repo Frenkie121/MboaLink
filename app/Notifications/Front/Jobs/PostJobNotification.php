@@ -38,10 +38,8 @@ class PostJobNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $hour = date('H');
-        $greeting = ($hour > 17) ? trans("Evening ") : (($hour > 12 && $hour <= 18) ? trans("Afternoon ") : trans("Morning "));
         return (new MailMessage)
-                    ->greeting(trans('Good ') . $greeting . $notifiable->name)
+                    ->greeting(greeting() . $notifiable->name)
                     ->subject(trans('New Job Submission Notification'))
                     ->lineIf(
                         $notifiable->role_id === 1,

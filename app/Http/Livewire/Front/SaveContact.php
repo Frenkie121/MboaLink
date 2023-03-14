@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Contact;
+use App\Models\{Contact, User};
+use App\Notifications\Front\Contact\NewContactNotification;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class SaveContact extends Component
@@ -14,11 +16,11 @@ class SaveContact extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'subject' => 'nullable|string|max:255',
+            'subject' => 'required|string|max:255',
             'message' => 'required|string',
         ]);
 
-        Contact::query()
+        $contact = Contact::query()
                 ->create([
                     'name' => $this->name,
                     'email' => $this->email,
@@ -27,8 +29,9 @@ class SaveContact extends Component
                 ]);
 
         // Mail
+        Notification::send([$contact, User::query()->firstWhere('role_id', 1)], new NewContactNotification($contact));
 
-        alert('', trans('Your message has been successfully sent to the platform administrator. You will receive an email'), 'success');
+        alert('', trans('Your message has been successfully sent to the platform administrator. You will receive an email as soon as possible.'), 'success')->autoclose(7000);
 
         $this->redirectRoute('front.contact');
     }
