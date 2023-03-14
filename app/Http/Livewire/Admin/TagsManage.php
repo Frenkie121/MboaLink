@@ -73,8 +73,9 @@ class TagsManage extends Component
 
     public function destroyTag()
     {
-        DB::table('job_tag')->where('tag_id', $this->deleteId)->delete();
+        // DB::table('job_tag')->where('tag_id', $this->deleteId)->delete();
         $this->deleteTag = Tag::find($this->deleteId);
+        $this->deleteTag->jobs()->detach();
         $this->deleteTag->delete();
         $this->alert('success', trans('The Tag has been deleted'));
         $this->closeModal();

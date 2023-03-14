@@ -87,6 +87,10 @@
                                         <td style="font-weight:bold;">@lang('Updated at')</td>
                                         <td>{{ $job->updated_at }}</td>
                                     </tr>
+                                    <tr>
+                                        <td style="font-weight:bold;">@lang('Published at')</td>
+                                        <td>{{ $job->published_at }}</td>
+                                    </tr>
 
                                 </table>
                             </div>

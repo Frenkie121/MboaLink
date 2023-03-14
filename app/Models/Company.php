@@ -16,7 +16,7 @@ class Company extends Model
         'location', 'description', 'url', 'logo',
     ];
 
-    // MUTATORS
+    // ACCESSORS
     public function logo(): Attribute
     {
         return Attribute::make(

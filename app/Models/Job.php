@@ -32,20 +32,20 @@ class Job extends Model
     ];
 
     // ACCESSORS
-    // public function getDatelineAttribute($dateline)
-    // {
-    //     return formatedLocaleDate($dateline);
-    // }
+    public function getDatelineAttribute($dateline)
+    {
+        return formatedLocaleDate($dateline);
+    }
 
-    // public function getCreatedAtAttribute($created_at)
-    // {
-    //     return formatedLocaleDate($created_at);
-    // }
+    public function getCreatedAtAttribute($created_at)
+    {
+        return formatedLocaleDate($created_at);
+    }
 
-    // public function getPublishedAtAttribute($published_at)
-    // {
-    //     return formatedLocaleDate($published_at);
-    // }
+    public function getPublishedAtAttribute($published_at)
+    {
+        return formatedLocaleDate($published_at);
+    }
 
     public function getTypeAttribute($type)
     {

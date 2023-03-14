@@ -16,6 +16,6 @@ class SingleJobController extends Controller
     public function __invoke(Request $request, Job $job)
     {
         // dd($job);
-        return view('admin.jobs.showJob', ['job' => $job]);
+        return view('admin.jobs.show', ['job' => $job]);
     }
 }
