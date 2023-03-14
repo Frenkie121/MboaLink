@@ -35,12 +35,18 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.job.show', $job) }}"
-                                                    class="btn btn-icon icon-left btn-primary"><i
-                                                        class="fas fa-eye"></i> </a>
-                                                <a href="#" wire:click="deleteJob({{ $job->id }})"
+                                                    class="btn btn-icon icon-left btn-primary"><i class="fas fa-eye"></i> </a>
+                                                {{-- <a href="#" wire:click="deleteJob({{ $job->id }})"
                                                     class="btn btn-danger" data-toggle="modal" data-target="#deleteJob">
                                                     <i class="fa fa-trash"></i>
-                                                </a>
+                                                </a> --}}
+                                                <div class="dropdown d-inline">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter"></i></button>
+                                                    <div class="dropdown-menu">
+                                                      <a class="dropdown-item has-icon" href="#">@lang('Cancel')</a>
+                                                      <a class="dropdown-item has-icon" href="#">@lang('Publish')</a>
+                                                    </div>
+                                                  </div>
                                             </td>
                                         </tr>
                                     @endforeach

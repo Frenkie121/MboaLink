@@ -124,6 +124,7 @@
     "Sub-categories": "Sous-catégories",
     "The sub-category has been created": "La sous-catégorie a été ajoutée",
     "The sub-category has been updated": "La sous-catégorie a été mise à jour",
+    "The sub-category has been deleted": "La sous-catégorie a été supprimée",
     "Select a category": "Sélectionner une catégorie",
     "Edit sub-category": "Modifier la sous-catégorie",
     "Confirm": "Confirmer",
@@ -218,5 +219,10 @@
     "The content of the message: ": "Le contenu du message : ",
     " has been successfully sent to the administrator. You will receive a response as soon as possible.": " a été envoyé à l'administrateur avec succès. Vous recevrez une réponse dans les brefs délais.",
     "Quick Links": "Liens rapides",
+    "Job Details": "Détails du job",
+    "No tag": "Pas de tag",
+    "Not published yet": "Pas encore publié",
+    "No file": "Pas de fichier",
+    "Publish": "Publier",
     "": ""
 }
