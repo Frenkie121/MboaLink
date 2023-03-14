@@ -59,18 +59,17 @@
             <div class="container py-5">
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                        <h5 class="text-white mb-4">@lang('Quick Links')</h5>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.home') }}">@lang('Home')</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.about') }}">@lang('About')</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.contact') }}">@lang('Contact')</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.jobs.index') }}">@lang('Jobs')</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Contact</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <h5 class="text-white mb-4">@lang('Contact')</h5>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Douala, @lang('Cameroon')</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+237 699 999 999</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>mboalink@gmail.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
@@ -115,7 +114,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            {{-- <div class="container">
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
@@ -135,7 +134,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- Footer End -->
 

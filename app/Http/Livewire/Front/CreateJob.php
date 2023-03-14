@@ -8,6 +8,7 @@ use Livewire\{Component, WithFileUploads};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\{Category, Company, Job, Tag, User};
 use App\Notifications\Front\Jobs\PostJobNotification;
+use Illuminate\Support\Facades\Notification;
 
 class CreateJob extends Component
 {
@@ -272,16 +273,8 @@ class CreateJob extends Component
         }
 
         // II. MAILS
-
-        // 1. To Admin
-        User::query()
-            ->firstWhere('role_id', 1)
-            ->notify(new PostJobNotification($job));
-            
-        // 2. To User - Company
-        $user->notify(new PostJobNotification($job));
-        // sleep(15);
-        // 
+        Notification::send([User::query()->firstWhere('role_id', 1), $user], new PostJobNotification($job));
+        
         alert('', trans('Your job has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible. An email related to this action has been sent to you, please check your mailbox.'), 'success')->autoclose(20000);
 
         $this->redirectRoute('front.jobs.index');

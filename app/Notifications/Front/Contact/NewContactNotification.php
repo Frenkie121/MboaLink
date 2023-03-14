@@ -39,7 +39,6 @@ class NewContactNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                        ->from('mboalink@gmail.com', 'MboaLink')
                         ->greeting(greeting() . $notifiable->name)
                         ->when($notifiable->role_id === 1,
                             fn($mail) => $mail->subject(trans('New Message')),

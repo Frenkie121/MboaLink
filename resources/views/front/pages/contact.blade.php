@@ -24,7 +24,7 @@
                                 <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
                                     <i class="fa fa-map-marker-alt text-primary"></i>
                                 </div>
-                                <span>123 Street, Douala, @lang('Cameroon')</span>
+                                <span>Douala, @lang('Cameroon')</span>
                             </div>
                         </div>
                         <div class="col-md-4 wow fadeIn" data-wow-delay="0.3s">
@@ -40,7 +40,7 @@
                                 <div class="bg-white border rounded d-flex flex-shrink-0 align-items-center justify-content-center me-3" style="width: 45px; height: 45px;">
                                     <i class="fa fa-phone-alt text-primary"></i>
                                 </div>
-                                <span>+012 345 6789</span>
+                                <span>+237 699 999 999</span>
                             </div>
                         </div>
                     </div>
