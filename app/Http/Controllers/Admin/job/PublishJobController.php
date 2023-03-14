@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\job;
 
 use App\Http\Controllers\Controller;
 use App\Models\Job;
-use App\Notifications\Admin\publish\PublishCompanyNotification;
+use App\Notifications\admin\job\PublishCompanyNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 

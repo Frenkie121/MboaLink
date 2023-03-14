@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\{Job, SubCategory};
 use App\Http\Controllers\Controller;
+use App\Models\Job;
+use App\Models\SubCategory;
 
 class JobController extends Controller
 {

@@ -4,7 +4,13 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\{Category, Company, Job, Qualification, Requirement, Tag, User};
+use App\Models\Category;
+use App\Models\Company;
+use App\Models\Job;
+use App\Models\Qualification;
+use App\Models\Requirement;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

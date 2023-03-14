@@ -71,7 +71,7 @@ class ResetPasswordFrNotification extends Notification
             ->subject(trans('Password Reset Notification'))
             ->line(trans('You are receiving this email because we have received a request to reset the password for your account.'))
             ->action(trans('Reset Password'), $url)
-            ->line(trans('This password reset link will expire in ') . config('auth.passwords.users.expire') . 'minutes.')
+            ->line(trans('This password reset link will expire in ').config('auth.passwords.users.expire').'minutes.')
             ->line(trans('If you did not request a password reset, no further action is required.'));
     }
 

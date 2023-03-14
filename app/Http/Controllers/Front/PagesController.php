@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\{Category, Job};
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Job;
 use Illuminate\Database\Eloquent\Builder;
 
 class PagesController extends Controller
@@ -24,7 +25,7 @@ class PagesController extends Controller
                                     ->withCount('jobs')
                                     ->get()
                                     ->take(8)
-                                    ->sortByDesc('created_at'),                                    
+                                    ->sortByDesc('created_at'),
         ]);
     }
 
@@ -50,7 +51,7 @@ class PagesController extends Controller
                     ->whereIn('sub_category_id', $sub_categories_ids)
                     ->latest()
                     ->paginate(10);
-        
+
         return view('front.jobs.index', [
             'jobs' => $jobs,
         ]);
