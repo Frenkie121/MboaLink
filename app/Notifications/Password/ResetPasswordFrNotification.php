@@ -68,11 +68,11 @@ class ResetPasswordFrNotification extends Notification
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject('Réinitialiser la notification de mot de passe')
-            ->line('Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation du mot de passe pour votre compte.')
-            ->action('Réinitialiser le mot de passe', $url)
-            ->line('Ce lien de réinitialisation de mot de passe expirera in :count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')])
-            ->line("Si vous n'avez pas demandé de réinitialisation de mot de passe, aucune autre action n'est requise.");
+            ->subject(trans('Password Reset Notification'))
+            ->line(trans('You are receiving this email because we have received a request to reset the password for your account.'))
+            ->action(trans('Reset Password'), $url)
+            ->line(trans('This password reset link will expire in ') . config('auth.passwords.users.expire') . 'minutes.')
+            ->line(trans('If you did not request a password reset, no further action is required.'));
     }
 
     /**

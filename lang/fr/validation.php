@@ -158,5 +158,17 @@ return [
         'title' => 'titre',
         'username' => 'nom d\'utilisateur',
         'year' => 'année',
+        'requirements.0' => 'exigence',
+        'location' => 'lieu',
+        'min_salary' => 'salaire minimal',
+        'max_salary' => 'salaire maximal',
+        'file' => 'fichier',
+        'dateline' => 'date limite',
+        'category' => 'catégorie',
+        'sub_category' => 'sous-catégorie',
+        'requirements.*' => 'exigence',
+        'qualifications.0' => 'qualification',
+        'qualifications.*' => 'qualification',
+        'website' => 'site web'
     ],
 ];
