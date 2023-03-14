@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Job;
 use App\Models\SubCategory;
 
@@ -14,17 +13,11 @@ class JobController extends Controller
         return view('front.jobs.index', [
             'types' => Job::TYPES,
             'jobs' => Job::query()
+                        ->published()
+                        ->active()
                         ->with('company:id,logo')
+                        ->orderByDesc('created_at')
                         ->paginate(10),
-        ]);
-    }
-
-    public function categories()
-    {
-        return view('front.jobs.categories', [
-            'categories' => Category::query()
-                                    ->paginate(8, ['slug', 'name']),
-
         ]);
     }
 
@@ -41,7 +34,13 @@ class JobController extends Controller
     {
         return view('front.jobs.show', [
             'types' => Job::TYPES,
-            'job' => $job->load('subCategory', 'company', 'tags'),
+            'job' => $job->load([
+                'subCategory.category',
+                'company.user:id,name,email,userable_id',
+                'tags',
+                'requirements:id,content,job_id',
+                'qualifications:id,content,job_id',
+            ]),
         ]);
     }
 }

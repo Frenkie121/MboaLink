@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'home')) active @endif">@lang('Home')</a>
-            <a href="#" class="nav-item nav-link">About</a>
+            <a href="{{ route('front.about') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'about')) active @endif">@lang('About')</a>
             <div class="nav-item dropdown">
                 <a href="#" 
                     class="nav-link dropdown-toggle 
@@ -21,7 +21,7 @@
                     @endif" 
                     data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">
-                    <a href="{{ route('front.jobs.categories') }}" class="dropdown-item 
+                    <a href="{{ route('front.categories') }}" class="dropdown-item 
                         @if (Str::endsWith($currentRouteName, 'categories')) active @endif"
                     >@lang('Categories')</a>
                     <a href="{{ route('front.jobs.index') }}" class="dropdown-item
@@ -30,14 +30,6 @@
                     <a href="{{ route('front.jobs.create') }}" class="dropdown-item
                         @if (Str::endsWith($currentRouteName, 'create')) active @endif"
                     >@lang('Post A Job')</a>
-                </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="#" class="dropdown-item">Job Category</a>
-                    <a href="#" class="dropdown-item">Testimonial</a>
-                    <a href="#" class="dropdown-item">404</a>
                 </div>
             </div>
             <a href="#" class="nav-item nav-link">Contact</a>

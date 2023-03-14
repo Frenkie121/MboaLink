@@ -2,19 +2,21 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Job extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'location', 'description', 'salary', 'type', 'dateline',
+        'title', 'sub_category_id', 'location', 'description', 'salary', 'type', 'dateline',
     ];
 
     protected $casts = [
@@ -30,10 +32,20 @@ class Job extends Model
     ];
 
     // ACCESSORS
-    public function getDatelineAttribute($dateline)
-    {
-        return date_format(Carbon::make($dateline), 'F d, Y');
-    }
+    // public function getDatelineAttribute($dateline)
+    // {
+    //     return formatedLocaleDate($dateline);
+    // }
+
+    // public function getCreatedAtAttribute($created_at)
+    // {
+    //     return formatedLocaleDate($created_at);
+    // }
+
+    // public function getPublishedAtAttribute($published_at)
+    // {
+    //     return formatedLocaleDate($published_at);
+    // }
 
     public function getTypeAttribute($type)
     {
@@ -61,5 +73,39 @@ class Job extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function requirements(): HasMany
+    {
+        return $this->hasMany(Requirement::class);
+    }
+
+    public function qualifications(): HasMany
+    {
+        return $this->hasMany(Qualification::class);
+    }
+
+    // SCOPES
+    /**
+     * Scope the query to only include pusblished jobs
+     *
+     * @param  Illuminate\Database\Eloquent\Builder  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_published', true)
+                    ->whereNotNull('published_at');
+    }
+
+    /**
+     * Scope thee query to only include jobs for which the dateline has not yet passed
+     *
+     * @param  Illuminate\Database\Eloquent\Builder  $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->whereDate('dateline', '>', today());
     }
 }

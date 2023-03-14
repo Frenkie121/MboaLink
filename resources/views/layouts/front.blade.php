@@ -36,6 +36,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+    
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -152,6 +154,9 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('assets/front/js/main.js') }}"></script>
+    
+    <!-- Specific Page Ssripts -->
+    @stack('js')
 </body>
 
 </html>

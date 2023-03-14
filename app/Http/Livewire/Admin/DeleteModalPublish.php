@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use App\Notifications\Admin\publish\PublishCompanyNotification;
+use App\Notifications\admin\job\PublishCompanyNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
