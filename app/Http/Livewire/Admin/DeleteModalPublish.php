@@ -39,7 +39,7 @@ class DeleteModalPublish extends Component
     {
         $jobData = Job::find($this->deleteId);
         $jobData->is_published = false;
-        $jobData->published_at = null;
+        // $jobData->published_at = null;
         $jobData->save();
         $message = trans("Job hasn't been successfully published.");
         $data = trans('Sorry, your job has not been approved and therefore not published.');
