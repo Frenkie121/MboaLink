@@ -2,17 +2,19 @@
     <!-- Button trigger published -->
     <div>
 
-        <form method="POST" action="{{ route('admin.job.publish', $job->id) }}">
-            @csrf
-            @method('PATCH')
-            <button type="submit" style="float: right;" type="button" class="btn btn-lg btn btn-success">
-                <i class="fa fa-upload btn-sm"></i> @lang('Published') </button>
-        </form>
+        <div style="display: inline-block">
+            <button wire:loading.remove wire:click="publish({{ $job }})" class="btn btn-success">
+                <i class="fa fa-upload btn-sm"></i> @lang('Published')
+            </button>
+            <button wire:loading wire:target="publish" class="btn btn-success" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                @lang('Loading')...
+            </button>
+        </div>
 
         <a style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
             class="btn btn-lg btn btn-danger" data-toggle="modal" data-target="#deleteJob">
             <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
-
 
     </div>
 
@@ -34,8 +36,17 @@
                     <div class="modal-footer">
                         <button type="button" wire:click="closeModal()" class="btn btn-success"
                             data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="button" wire:click="destroyJob()" class="btn btn-danger">
-                            @lang('Yes! delete')</button>
+
+                        <div style="display: inline-block">
+                            <button wire:loading.remove wire:click="destroyJob()" class="btn btn-danger">
+                                <i class="fa fa-upload btn-sm"></i> @lang('Yes! delete')
+                            </button>
+                            <button wire:loading wire:target="destroyJob" class="btn btn-danger" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                @lang('Loading')...
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>

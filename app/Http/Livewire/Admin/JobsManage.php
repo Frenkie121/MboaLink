@@ -3,12 +3,11 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Support\Facades\DB;
+use App\Notifications\admin\job\PublishCompanyNotification;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Notifications\admin\job\PublishCompanyNotification;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class JobsManage extends Component
 {
@@ -60,9 +59,6 @@ class JobsManage extends Component
 
         toast($message, 'success');
     }
-
-
-
 
     public function render()
     {

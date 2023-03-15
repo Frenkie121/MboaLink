@@ -1,13 +1,12 @@
 <?php
 
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Front\JobController;
-use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Front\PagesController;
 use App\Http\Controllers\Admin\job\PublishJobController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Extra\LangController;
+use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,4 +62,4 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
 // GENERAL
 Route::get('lang/{locale}', LangController::class)->name('lang');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

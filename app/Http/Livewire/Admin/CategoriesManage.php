@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
-use App\Models\Job;
-use App\Models\SubCategory;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -86,7 +84,7 @@ class CategoriesManage extends Component
         $category->jobs()->delete();
         $category->subCategories()->delete();
         $category->delete();
-        
+
         $this->alert('success', trans('The category has been deleted'));
         $this->closeModal();
     }

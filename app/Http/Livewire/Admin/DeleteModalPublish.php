@@ -25,8 +25,23 @@ class DeleteModalPublish extends Component
 
     public function closeModal()
     {
-        
         $this->dispatchBrowserEvent('close-modal');
+    }
+
+    public function publish(Job $job)
+    {
+        $job->where('id', $job->id)
+            ->update([
+                'published_at' => now(),
+            ]);
+        $message = trans('Job has been successfully published.');
+        $data = trans('Congratulations, your job has been approved and published.');
+
+        $job->save();
+        Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
+
+        toast($message, 'success');
+        return redirect()->route('admin.jobs.index');
     }
 
     public function deleteJob($id)
@@ -34,6 +49,7 @@ class DeleteModalPublish extends Component
         $this->deleteId = $id;
         $this->title = (Job::find($this->deleteId))->title;
     }
+
     public function destroyJob()
     {
         DB::table('job_tag')->where('job_id', $this->deleteId)->delete();

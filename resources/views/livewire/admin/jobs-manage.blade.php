@@ -37,11 +37,17 @@
                                                 <a href="{{ route('admin.job.show', $job) }}"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-eye"></i> </a>
-                                                <a href="#" wire:click="publish({{ $job }})"
-                                                    class="btn btn-success">
-                                                    <i class="fa fa-upload"></i>
-                                                </a><div wire:loading>
-                                                    Processing Payment...
+                                                <div style="display: inline-block">
+                                                    <button wire:loading.remove
+                                                        wire:click="publish({{ $job }})"
+                                                        class="btn btn-success">
+                                                        <i class="fa fa-upload"></i>
+                                                    </button>
+                                                    <button wire:loading  wire:target="publish" class="btn btn-success" disabled>
+                                                        <span class="spinner-border spinner-border-xs" role="status"
+                                                            aria-hidden="true"></span>
+                                                        @lang('Loading')...
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
