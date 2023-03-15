@@ -25,7 +25,7 @@ class DeleteModalPublish extends Component
 
     public function closeModal()
     {
-        $this->reset();
+        
         $this->dispatchBrowserEvent('close-modal');
     }
 
@@ -34,24 +34,6 @@ class DeleteModalPublish extends Component
         $this->deleteId = $id;
         $this->title = (Job::find($this->deleteId))->title;
     }
-
-    public function notPublish()
-    {
-        $jobData = Job::find($this->deleteId);
-        $jobData->is_published = false;
-        $jobData->published_at = null;
-        $jobData->save();
-        $message = trans("Job hasn't been successfully published.");
-        $data = trans('Sorry, your job has not been approved and therefore not published.');
-        Notification::send($jobData->company->user, new PublishCompanyNotification($jobData, $data));
-
-        $this->closeModal();
-
-        $this->alert('success', $message);
-
-        return redirect()->route('admin.jobs.index');
-    }
-
     public function destroyJob()
     {
         DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
@@ -64,6 +46,7 @@ class DeleteModalPublish extends Component
         $job->delete();
 
         $this->closeModal();
+        $this->reset();
 
         $this->alert('success', $message);
 

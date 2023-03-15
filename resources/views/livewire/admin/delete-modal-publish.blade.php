@@ -27,12 +27,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Would you like to delete this job as well ? ?')</p>
+                    <p class="text-danger font-weight-bold">@lang('Would you like to delete this job as well ?')</p>
                     <div class="modal-footer">
                         <br>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" wire:click="notPublish()" class="btn btn-success"
+                        <button type="button" wire:click="closeModal()" class="btn btn-success"
                             data-dismiss="modal">@lang('Cancel')</button>
                         <button type="button" wire:click="destroyJob()" class="btn btn-danger">
                             @lang('Yes! delete')</button>

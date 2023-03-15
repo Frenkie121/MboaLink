@@ -15,11 +15,10 @@ class PublishJobController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request, Job $job)
+    public function publish(Request $request, Job $job)
     {
         $job->where('id', $job->id)
             ->update([
-                'is_published' => true,
                 'published_at' => now(),
             ]);
         $message = trans('Job has been successfully published.');
@@ -31,5 +30,10 @@ class PublishJobController extends Controller
         toast($message, 'success');
 
         return redirect()->route('admin.jobs.index');
+    }
+    public function show(Request $request, Job $job)
+    {
+        // dd($job);
+        return view('admin.jobs.show', ['job' => $job]);
     }
 }
