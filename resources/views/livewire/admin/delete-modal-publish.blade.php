@@ -18,6 +18,87 @@
 
     </div>
 
+    <br><br><br>
+    <div class="table-responsive  table-bordered">
+
+        <table class="table table-striped" id="table-1">
+
+            <tr>
+                <td style="font-weight:bold;">@lang('Title')</td>
+                <td>{{ $job->title }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Slug')</td>
+                <td>{{ $job->slug }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Description')</td>
+                <td>{{ $job->description }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Location')</td>
+                <td>{{ $job->location }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;"> @lang('Salary')</td>
+                <td>{{ $job->salary }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Dateline')</td>
+                <td>{{ $job->dateline }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Company')</td>
+                <td>{{ $job->company->location }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Sub-category')</td>
+                <td>{{ $job->subCategory->name }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Tag')</td>
+                <td>
+                    @forelse ($job->tags as $item)
+                        {{ $item->name }},
+                    @empty
+                        ---
+                    @endforelse
+                </td>
+            <tr>
+                <td style="font-weight:bold;">@lang('Type')</td>
+                <td>{{ $job->type }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('File')</td>
+                <td>
+                    @if ($job->file)
+                        <button wire:click.prevent="download" wire:loading.remove class="btn btn-primary "
+                            type="submit">@lang('Download files')</button>
+                        <button wire:loading class="btn btn-primary " type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            @lang('Loading')...
+                        </button>
+                    @else
+                        Any
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Created at')</td>
+                <td>{{ $job->created_at }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Updated at')</td>
+                <td>{{ $job->updated_at }}</td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">@lang('Published at')</td>
+                <td>{{ $job->published_at }}</td>
+            </tr>
+
+        </table>
+    </div>
+
     <!-- Modal Delete Tag -->
     <div wire:ignore.self class="modal fade" id="deleteJob" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-top" role="document">

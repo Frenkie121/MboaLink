@@ -43,7 +43,8 @@
                                                         class="btn btn-success">
                                                         <i class="fa fa-upload"></i>
                                                     </button>
-                                                    <button wire:loading  wire:target="publish" class="btn btn-success" disabled>
+                                                    <button wire:loading wire:target="publish" class="btn btn-success"
+                                                        disabled>
                                                         <span class="spinner-border spinner-border-xs" role="status"
                                                             aria-hidden="true"></span>
                                                         @lang('Loading')...

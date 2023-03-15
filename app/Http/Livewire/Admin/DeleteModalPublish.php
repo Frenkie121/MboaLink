@@ -41,6 +41,7 @@ class DeleteModalPublish extends Component
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
 
         toast($message, 'success');
+
         return redirect()->route('admin.jobs.index');
     }
 
