@@ -1,7 +1,7 @@
 <div>
     <!-- Button trigger published -->
     <div>
-
+    
         <div style="display: inline-block">
             <button wire:loading.remove wire:click="publish({{ $job }})" class="btn btn-success">
                 <i class="fa fa-upload btn-sm"></i> @lang('Published')
@@ -79,7 +79,8 @@
                             @lang('Loading')...
                         </button>
                     @else
-                        Any
+                        <button class="btn btn-primary" disabled> <i class="fa fa-download"></i>
+                            @lang('Download files')</button>
                     @endif
                 </td>
             </tr>

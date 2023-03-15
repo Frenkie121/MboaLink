@@ -8,8 +8,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" type="button" class="btn btn-md btn btn-primary"
-                                data-toggle="modal" data-target="#AddCategory">
+                            <button style="float: right;" wire:click="showCreateForm()" type="button"
+                                class="btn btn-md btn btn-primary">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add category') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
@@ -26,13 +26,11 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>
-                                                <a href="#" wire:click="editCategory({{ $category->id }})"
-                                                    data-toggle="modal" data-target="#EditCategory"
+                                                <a href="#" wire:click="showEditForm({{ $category }})"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#deleteCategory"
-                                                    wire:click="deleteCategory({{ $category->id }})"> <i
+                                                <a href="#" class="btn btn-danger"
+                                                    wire:click="showDeleteForm({{ $category }})"> <i
                                                         class="fa fa-trash"></i>
                                                 </a>
                                             </td>
@@ -133,7 +131,8 @@
                 <div class="modal-body">
                     <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this category?')
                         <br>
-                        @lang('This will also remove all subcategories and jobs linked to that category.')</p>
+                        @lang('This will also remove all subcategories and jobs linked to that category.')
+                    </p>
                     </span>
                     <br>
                 </div>

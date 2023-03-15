@@ -8,8 +8,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" type="button" class="btn btn-md btn btn-primary"
-                                data-toggle="modal" data-target="#AddTag">
+                            <button style="float: right;" wire:click="showCreateForm()" type="button"
+                                class="btn btn-md btn btn-primary">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add Tag') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
@@ -26,13 +26,11 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $tag->name }}</td>
                                             <td>
-                                                <a href="#" wire:click="editTag({{ $tag->id }})"
-                                                    data-toggle="modal" data-target="#AddTag"
+                                                <a href="#" wire:click="showEditForm({{ $tag }})"
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger" data-toggle="modal"
-                                                    data-target="#deleteTag"
-                                                    wire:click="deleteTag({{ $tag->id }})"> <i
+                                                <a href="#" class="btn btn-danger"
+                                                    wire:click="showDeleteForm({{ $tag }})"> <i
                                                         class="fa fa-trash"></i>
                                                 </a>
                                             </td>
