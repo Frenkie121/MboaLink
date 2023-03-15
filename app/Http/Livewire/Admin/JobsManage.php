@@ -14,27 +14,6 @@ class JobsManage extends Component
     use WithPagination;
     use LivewireAlert;
 
-    // public $deleteId;
-
-    // public $title;
-
-    // // public $deleteJob;
-
-    // public $location;
-
-    // public $salary;
-
-    // public $company;
-
-    // public $sub_category;
-
-    // public $description;
-
-    // public $dateline;
-
-    // public $created_at;
-    // public Job $job;
-
     protected $paginationTheme = 'bootstrap';
 
     public function closeModal()

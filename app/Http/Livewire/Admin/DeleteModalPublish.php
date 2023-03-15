@@ -70,6 +70,11 @@ class DeleteModalPublish extends Component
         return redirect()->route('admin.jobs.index');
     }
 
+    public function export()
+    {
+        return response()->download(storage_path('app/jobs/'.$this->job->file));
+    }
+
     public function render()
     {
         return view('livewire.admin.delete-modal-publish');

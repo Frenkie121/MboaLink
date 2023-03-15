@@ -72,9 +72,9 @@
                 <td style="font-weight:bold;">@lang('File')</td>
                 <td>
                     @if ($job->file)
-                        <button wire:click.prevent="download" wire:loading.remove class="btn btn-primary "
-                            type="submit">@lang('Download files')</button>
-                        <button wire:loading class="btn btn-primary " type="button" disabled>
+                        <button wire:click.prevent="export" wire:loading.remove class="btn btn-primary "
+                            type="submit"><i class="fa fa-download"></i> @lang('Download files')</button>
+                        <button wire:loading wire:target="export" class="btn btn-primary " type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             @lang('Loading')...
                         </button>
