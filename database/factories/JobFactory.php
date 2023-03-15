@@ -28,7 +28,7 @@ class JobFactory extends Factory
             'type' => fake()->numberBetween(1, 5),
             'dateline' => now()->addDays(fake()->numberBetween(4, 30)),
             'is_published' => fake()->boolean(75),
-            'published_at' => fake()->randomElement([fake()->dateTimeThisMonth(), null]),
+            'published_at' => fake()->randomElement([now(), null]),
         ];
     }
 }

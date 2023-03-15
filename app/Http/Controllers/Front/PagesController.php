@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
 
 class PagesController extends Controller
@@ -19,13 +20,16 @@ class PagesController extends Controller
                         ->take(5)
                         ->sortByDesc('created_at'),
             'categories' => Category::query()
-                                    ->whereHas('jobs', function (Builder $query) {
-                                        $query->where('is_published', true);
-                                    })
+                                    ->hasJobs()
                                     ->withCount('jobs')
                                     ->get()
                                     ->take(8)
                                     ->sortByDesc('created_at'),
+
+                'subCategories' => SubCategory::query()
+                                            ->hasJobs()
+                                            ->get('name'),
+                'types' => Job::TYPES,
         ]);
     }
 
@@ -33,9 +37,7 @@ class PagesController extends Controller
     {
         return view('front.jobs.categories', [
             'categories' => Category::query()
-                                    ->whereHas('jobs', function (Builder $query) {
-                                        $query->where('is_published', true);
-                                    })
+                                    ->hasJobs()
                                     ->withCount('jobs')
                                     ->latest()
                                     ->paginate(8),
@@ -54,6 +56,10 @@ class PagesController extends Controller
 
         return view('front.jobs.index', [
             'jobs' => $jobs,
+            'subCategories' => SubCategory::query()
+                                            ->hasJobs()
+                                            ->get('name'),
+            'types' => Job::TYPES,
         ]);
     }
 }

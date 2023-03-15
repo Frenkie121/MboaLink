@@ -93,7 +93,7 @@
     "Title": "Titre",
     "Dateline": "Date Limite",
     "Company": "Companie",
-    "Sub-category": "Sub-categorie",
+    "Sub-category": "Sous-catégorie",
     "File": "Fichier",
     "Created at": "Creé le",
     "Updated at": "Mis à jour le",
@@ -224,5 +224,14 @@
     "Not published yet": "Pas encore publié",
     "No file": "Pas de fichier",
     "Publish": "Publier",
+    "Eg.: Web Developper, Marketing, ...": "Ex : Développeur Web, Marketing, ...",
+    "Search results": "Résultats de la recherche",
+    "job(s) found": "job(s) trouvé(s)",
+    "Keyword": "Mot-clé",
+    "Empty": "Vide",
+    "Published at": "Publié le",
+    "Submitted at": "Soumis le",
+    "Search": "Rechercher",
+    "Clear": "Effacer",
     "": ""
 }

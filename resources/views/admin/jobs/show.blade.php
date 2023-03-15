@@ -4,6 +4,11 @@
 
 @push('css')
     @livewireStyles()
+    <style>
+        .list-group-item p {
+            margin-bottom: -10px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -38,10 +43,20 @@
                                                         <p>@lang('Salary') : <strong>{{ $job->salary }} XAF</strong></p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <p>@lang('Category') : <strong><small>{{ $job->subCategory->name . ' - ' . $job->subCategory->category->name }}</small></strong></p>
+                                                        <p>@lang('Category') : <strong>{{ $job->subCategory->category->name }}</strong></p>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <p>@lang('Sub-category') : <strong>{{ $job->subCategory->name }}</strong></p>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <p>@lang('Job Type') : <strong>{{ $job->type }}</strong></p>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <p>@lang('Dateline') : <strong>{{ $job->dateline }}</strong></p>
+                                                    </li>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <p>@lang('Submitted at') : <strong>{{ $job->created_at }}</strong></p>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -77,9 +92,10 @@
                                         <div class="card border-danger col-md-6">
                                             <div class="card-body">
                                                 <h4 class="card-title">@lang('Requirements')</h4>
+                                                <hr>
                                                 <ul>
                                                     @foreach ($job->requirements as $requirement)
-                                                        <li>
+                                                        <li class="mb-0">
                                                             <p>{{ $requirement->content }}</p>
                                                         </li>
                                                     @endforeach
@@ -89,6 +105,7 @@
                                         <div class="card border-warning col-md-6">
                                             <div class="card-body">
                                                 <h4 class="card-title">@lang('Qualifications')</h4>
+                                                <hr>
                                                 <ul>
                                                     @foreach ($job->qualifications as $qualification)
                                                         <li>
@@ -105,7 +122,7 @@
                                 <div class="row">
                                     <div class="card border-danger col-md-6">
                                         <div class="card-body">
-                                            <h6 class="card-title">@lang('Company Details')</h6>
+                                            <h4 class="card-title">@lang('Company Details')</h4>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
                                                     <p>@lang('Nom') : <strong>{{ $job->company->user->name }}</strong></p>
@@ -128,6 +145,12 @@
                                                         @endif
                                                     </p>
                                                 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card border-danger col-md-6">
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
                                                     <p>@lang('Description') : <strong>{{ $job->company->description }}</strong></p>
                                                 </li>
