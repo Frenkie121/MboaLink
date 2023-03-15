@@ -21,7 +21,7 @@ class ContactFactory extends Factory
             'email' => fake()->safeEmail(),
             'subject' => fake()->sentence(),
             'message' => fake()->paragraphs(2, true),
-            // 'response' => fake()->realTextBetween(200, 0),
+            'response' => fake()->randomElement([fake()->text(), null]),
         ];
     }
 }

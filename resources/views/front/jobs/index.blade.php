@@ -2,18 +2,19 @@
 
 @section('subtitle', __('Jobs'))
 
-@php
-    $currentRouteName = Route::currentRouteName();
-@endphp
-
 @section('content')
 
     <!-- Header End -->
-    <x-front.header :title="__('Jobs')" />
+    <x-front.header
+        :title="__('Search results')"
+        :middleLink="request()->isMethod('post')"
+        :middleTitle="__('Jobs')"
+        :middleRouteName="route('front.jobs.index')"    
+    />
     <!-- Header End -->
 
     <!-- Search Start -->
-    <div class="container-fluid bg-secondary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container-fluid bg-secondary mb-3 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
             <form action="{{ route('front.jobs.search') }}" method="post">
                 @csrf
@@ -54,7 +55,7 @@
     <!-- Jobs Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="text-center mb-2 wow fadeInUp" data-wow-delay="0.1s">@lang('Job Listing')</h1>
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Job Listing')</h1>
             @if ($category = request()->category)
                 <h6 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('For category') 
                     <strong class="text-primary">{{ $category->name }} ({{ $category->jobs->count() }})</strong>
@@ -76,7 +77,7 @@
                         @foreach ($jobs as $job)
                             <x-front.job-item :job="$job" />
                         @endforeach
-                        @if (!request()->isMethod('post'))
+                        @if (! request()->isMethod('post'))
                             <div class="float-right mt-3">
                                 {{ $jobs->links('vendor.pagination.bootstrap-5') }}
                             </div>

@@ -27,10 +27,10 @@
                                             <td>{{ $job->company->location }}</td>
                                             <td>{{ $job->salary }}</td>
                                             <td>
-                                                @if ($job->is_published)
-                                                    Yes
+                                                @if ($job->published_at)
+                                                    <span class="badge badge-pill badge-success">{{ $job->published_at }}</span>
                                                 @else
-                                                    No
+                                                    <span class="badge badge-pill badge-dark">@lang('No')</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -43,8 +43,8 @@
                                                 <div class="dropdown d-inline">
                                                     <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter"></i></button>
                                                     <div class="dropdown-menu">
-                                                      <a class="dropdown-item has-icon" href="#">@lang('Cancel')</a>
-                                                      <a class="dropdown-item has-icon" href="#">@lang('Publish')</a>
+                                                        <a class="dropdown-item has-icon" href="#">@lang('Publish')</a>
+                                                        <a class="dropdown-item has-icon" href="#">@lang('Do not publish')</a>
                                                     </div>
                                                   </div>
                                             </td>

@@ -56,7 +56,10 @@ class JobController extends Controller
         $sub_category = $request->sub_category;
         $type = $request->type;
         
-        $jobs = Job::query()
+        if (!$request->search && !$sub_category && !$type) {
+            $jobs = collect();
+        } else {
+            $jobs = Job::query()
             ->when($request->search, fn (Builder $query)
                 => $query->orWhere('title', 'LIKE', $search)
                         ->orWhere('description','LIKE',  $search)
@@ -64,7 +67,7 @@ class JobController extends Controller
             ->when($sub_category, function (Builder $query) use ($sub_category) {
                 return $query->orWhere('sub_category_id', SubCategory::query()->firstWhere('name', $sub_category)->id);
             })
-            ->when($type, fn (Builder $query)
+            ->when(in_array($type, Job::TYPES), fn (Builder $query)
                 => $query->orWhere('type', array_search($type, Job::TYPES))
             )
             ->published()
@@ -72,7 +75,8 @@ class JobController extends Controller
             ->with('company:id,logo')
             ->orderByDesc('created_at')
             ->get();
-
+        }
+        
         return view('front.jobs.index', [
             'jobs' => $jobs,
             'types' => Job::TYPES,
