@@ -47,7 +47,7 @@ class Category extends Model
     public function scopeHasJobs(Builder $query): Builder
     {
         return $query->whereHas('jobs', fn (Builder $query)
-            => $query->where('is_published', true)
+            => $query->whereNotNull('published_at')
         );
     }
 }
