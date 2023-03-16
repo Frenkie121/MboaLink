@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Category;
-use App\Models\Job;
-use App\Models\SubCategory;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -33,16 +31,23 @@ class CategoriesManage extends Component
         $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->dispatchBrowserEvent('close-modal');
+        $this->emit('closeModal');
     }
 
-    public function editCategory($id)
+    public function showCreateForm()
     {
         $this->reset();
         $this->resetErrorBag();
-        $this->resetValidation();
-        $this->editCategory = Category::find($id);
-        $this->nameEdit = $this->editCategory->name;
+        $this->emit('openModal');
+    }
+
+    public function showEditForm(Category $category)
+    {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->emit('openEditModal');
+        $this->editCategory = $category;
+        $this->nameEdit = $category->name;
     }
 
     public function updateCategory()
@@ -58,6 +63,14 @@ class CategoriesManage extends Component
         $this->closeModal();
     }
 
+    public function showDeleteForm(Category $category)
+    {
+        $this->resetErrorBag();
+        $this->emit('openDeleteModal');
+        $this->deleteId = $category->id;
+        $this->nameDelete = $category->name;
+    }
+
     public function addCategory()
     {
         $this->resetErrorBag();
@@ -70,15 +83,6 @@ class CategoriesManage extends Component
         $this->closeModal();
     }
 
-    /**
-     * drop data in database
-     */
-    public function deleteCategory($id)
-    {
-        $this->deleteId = $id;
-        $this->nameDelete = (Category::find($this->deleteId))->name;
-    }
-
     public function destroyCategory()
     {
         // select sub-category
@@ -86,7 +90,7 @@ class CategoriesManage extends Component
         $category->jobs()->delete();
         $category->subCategories()->delete();
         $category->delete();
-        
+
         $this->alert('success', trans('The category has been deleted'));
         $this->closeModal();
     }

@@ -1,19 +1,21 @@
 <div>
     <!-- Button trigger published -->
     <div>
+    
+        <div style="display: inline-block">
+            <button wire:loading.remove wire:click="publish({{ $job }})" class="btn btn-success">
+                <i class="fa fa-upload btn-sm"></i> @lang('Publish')
+            </button>
+            <button wire:loading wire:target="publish" class="btn btn-success" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                @lang('Loading')...
+            </button>
+        </div>
 
-        <form method="POST" action="{{ route('admin.job.publish', $job->id) }}">
-            @csrf
-            @method('PATCH')
-            <button type="submit" style="float: right;" type="button" class="btn btn-lg btn btn-success">
-                <i class="fa fa-upload btn-sm"></i> @lang('Published') </button>
-        </form>
-
-        <a style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
-            class="btn btn-lg btn btn-danger" data-toggle="modal" data-target="#deleteJob">
-            <i class="fas fa-times btn-sm"></i> @lang('Not Published') </a>
-
-
+        <button style="float: right;" wire:click="deleteJob({{ $job->id }})" type="button"
+            class="btn btn-lg btn-danger" data-toggle="modal" data-target="#deleteJob">
+            <i class="fas fa-times btn-sm"></i> @lang('Do not publish')
+        </button>
     </div>
 
     <!-- Modal Delete Tag -->
@@ -27,15 +29,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-danger font-weight-bold">@lang('Would you like to delete this job as well ? ?')</p>
+                    <p class="text-danger font-weight-bold">@lang('Would you like to delete this job as well ?')</p>
                     <div class="modal-footer">
                         <br>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" wire:click="notPublish()" class="btn btn-success"
+                        <button type="button" wire:click="closeModal()" class="btn btn-primary"
                             data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="button" wire:click="destroyJob()" class="btn btn-danger">
-                            @lang('Yes! delete')</button>
+
+                        <div style="display: inline-block">
+                            <button wire:loading.remove wire:click="destroyJob()" class="btn btn-danger">
+                                </i> @lang('Confirm')
+                            </button>
+                            <button wire:loading wire:target="destroyJob" class="btn btn-danger" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                ...
+                            </button>
+                        </div>
+
                     </div>
                 </div>
             </div>

@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\job\PublishJobController;
-use App\Http\Controllers\Admin\SingleJobController;
+use App\Http\Controllers\Admin\Job\ShowController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
 use App\Http\Controllers\Front\JobController;
@@ -58,8 +57,8 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
     Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
     // SUBCATEGORIES
     Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
-    Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
-    Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
+    Route::get('jobs/{job:slug}', ShowController::class)->name('job.show');
+    // Route::patch('publish/{job}', [PublishJobController::class, 'publish'])->name('job.publish');
 });
 
 // GENERAL

@@ -3,7 +3,8 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use Illuminate\Support\Facades\DB;
+use App\Notifications\admin\job\PublishCompanyNotification;
+use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,26 +13,6 @@ class JobsManage extends Component
 {
     use WithPagination;
     use LivewireAlert;
-
-    public $deleteId;
-
-    public $title;
-
-    // public $deleteJob;
-
-    public $location;
-
-    public $salary;
-
-    public $company;
-
-    public $sub_category;
-
-    public $description;
-
-    public $dateline;
-
-    public $created_at;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -43,30 +24,19 @@ class JobsManage extends Component
         $this->dispatchBrowserEvent('close-modal');
     }
 
-    public function deleteJob($id)
+    public function publish(Job $job)
     {
-        $this->deleteId = $id;
-        $this->title = (Job::find($this->deleteId))->title;
-    }
+        $job->where('id', $job->id)
+            ->update([
+                'published_at' => now(),
+            ]);
+        $message = trans('Job has been successfully published.');
+        $data = trans('Congratulations, your job has been approved and published.');
 
-    public function destroyJob()
-    {
-        DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
-        (Job::find($this->deleteId))->delete();
-        $this->alert('success', trans('The job has been deleted'));
-        $this->closeModal();
-    }
+        $job->save();
+        Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
 
-    public function showJob($id)
-    {
-        $this->title = (Job::find($id))->title;
-        $this->location = (Job::find($id))->location;
-        $this->salary = (Job::find($id))->salary;
-        $this->company = (Job::find($id))->company;
-        $this->sub_category = (Job::find($id))->subCategory;
-        $this->description = (Job::find($id))->description;
-        $this->dateline = (Job::find($id))->dateline;
-        $this->created_at = (Job::find($id))->reated_at;
+        toast($message, 'success');
     }
 
     public function render()

@@ -38,10 +38,10 @@ class Job extends Model
         return formatedLocaleDate($created_at);
     }
 
-    public function getPublishedAtAttribute($published_at)
-    {
-        return formatedLocaleDate($published_at);
-    }
+    // public function getPublishedAtAttribute($published_at)
+    // {
+    //     return formatedLocaleDate($published_at);
+    // }
 
     public function getTypeAttribute($type)
     {
