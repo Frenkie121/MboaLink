@@ -2,14 +2,21 @@
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\{Contact, User};
+use App\Models\Contact;
+use App\Models\User;
 use App\Notifications\Front\Contact\NewContactNotification;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class SaveContact extends Component
 {
-    public string $name, $email, $subject, $message;
+    public string $name;
+
+    public string $email;
+
+    public string $subject;
+
+    public string $message;
 
     public function save()
     {

@@ -19,7 +19,7 @@ class Contact extends Model
     {
         return formatedLocaleDate($created_at);
     }
-    
+
     public function getUpdatedAtAttribute($updated_at)
     {
         return formatedLocaleDate($updated_at);

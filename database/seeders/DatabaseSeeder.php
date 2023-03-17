@@ -4,7 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\{Category, Company, Contact, Job, Qualification, Requirement, Tag, User};
+use App\Models\Category;
+use App\Models\Company;
+use App\Models\Contact;
+use App\Models\Job;
+use App\Models\Qualification;
+use App\Models\Requirement;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -45,8 +52,8 @@ class DatabaseSeeder extends Seeder
             )
             ->create();
 
-            Contact::factory()
-                    ->count(10)
-                    ->create();
+        Contact::factory()
+                ->count(10)
+                ->create();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Notifications\admin\Contact;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -16,7 +15,9 @@ class replyMessageNotification extends Notification
      *
      * @return void
      */
-    public function __construct(public $reply , public $Subject)  {   }
+    public function __construct(public $reply, public $Subject)
+    {
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -38,9 +39,14 @@ class replyMessageNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->greeting(greeting().$notifiable->name)
+            ->subject(trans('Reply : '.$this->Subject))
+            ->line($this->reply)
+            ->when(
+                $notifiable->role_id === 1,
+                fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
+                fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
+            );
     }
 
     /**

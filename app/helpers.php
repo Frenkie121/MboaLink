@@ -14,8 +14,10 @@ if (! function_exists('formatedLocaleDate')) {
 }
 
 if (! function_exists('greeting')) {
-    function greeting() {
+    function greeting()
+    {
         $hour = date('H');
-        return ($hour > 17) ? trans("Good evening ") : (($hour > 12 && $hour <= 18) ? trans("Good afternoon ") : trans("Good morning "));
+
+        return ($hour > 17) ? trans('Good evening ') : (($hour > 12 && $hour <= 18) ? trans('Good afternoon ') : trans('Good morning '));
     }
 }

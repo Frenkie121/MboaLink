@@ -7,15 +7,18 @@
                         <th>#</th>
                         <th>@lang('Name')</th>
                         <th>@lang('Subject')</th>
+                        <th>@lang('Received_at')</th>
                         <th>Action</th>
                     </tr>
                     @foreach ($contacts as $contact)
-                        <tr wire:key="{{ $loop->index }}">
+                        <tr>
                             <td class="p-0 text-center">{{ $loop->iteration }}</td>
                             <td>{{ $contact->name }}</td>
                             <td>{{ $contact->subject }}</td>
+                            <td>{{ $contact->created_at }}</td>
+
                             <td>
-                                <button wire:click="showModalForm({{ $contact->id }})" class="btn btn-primary"><i
+                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-primary"><i
                                         class="fas fa-eye"></i></button>
                             </td>
                         </tr>
@@ -36,7 +39,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="AddCategoryLabel">@lang('Details Message')</h5>
+                    <h5 class="modal-title" id="MessageModalLabel">@lang('Details of message')</h5>
                     <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -45,55 +48,71 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label style="font-weight:bold;float:left;" class="control-label">@lang('Name')</label>
-                            <div style="float:right;">{{ $contact->name }}</div>
+                            <div style="float:right;">{{ $name }}</div>
                             <br>
                             <hr>
-                            <div><label for="control-label" style="font-weight:bold;float:left;">From</label>
-                                <a style="float:right;" href="">{{ $contact->email }}</a>
+                            <div><label for="control-label" style="font-weight:bold;float:left;">Email</label>
+                                <a style="float:right;" href="">{{ $email }}</a>
                             </div>
                         </div>
                         <br>
                         <hr>
                         <div class="form-group">
                             <label style="font-weight:bold;float:left;" class="control-label">@lang('Subject')</label>
-                            <div style="float:right;">{{ $contact->subject }}"</div>
+                            <div style="float:right;">{{ $subject }}</div>
                         </div>
                         <br>
                         <hr>
                         <div class="form-group">
                             <label style="font-weight:bold;float:left;" class="control-label">@lang('Message')</label>
                             <br>
-                            <div style="text-align:justify;" class="">{{ $contact->message }}"</div>
+                            <div style="text-align:justify;">{{ $message }}</div>
                         </div>
-                        <form wire:submit.prevent="replyMessage({{ $contact }})" id="InputRepyForm"
+                        <form wire:submit.prevent="replyMessage({{ $displayContact }})" id="InputRepyForm"
                             style="display:none;">
                             <hr style="background-color:blue;">
                             <div class="form-group">
                                 <label class="control-label"> @lang('Response') </label>
                                 <textarea cols="30" rows="10" type="text" wire:model.defer="reply" class="form-control"
-                                    placeholder=" {{ __('Reply to this message here...') }}"></textarea>
+                                    placeholder=" {{ __('Reply to the message here') }}..."></textarea>
                                 @error('reply')
                                     <span class="text-danger ">{{ $message }} </span>
                                 @enderror
                                 <br>
-                                <button type="submit" style="float: right;" class="btn btn-primary">@lang('Send')
-                                </button>
+                                <div>
+                                    <button wire:loading.remove type="submit" style="float: right;"
+                                        class="btn btn-success">
+                                        <i class="fa fa-paper-plane"></i>
+                                        @lang('Send')
+                                    </button>
+                                    <button wire:loading wire:target="replyMessage" style="float: right;"
+                                        class="btn btn-success" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true"></span>
+                                        ...
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </div>
 
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" wire:click="closeModal()"
-                            data-dismiss="modal">@lang('Cancel')</button>
-                        @if (!$contact->response)
-                            <button type="button" wire:click="showReplyInput()"
-                                class="btn btn-primary">@lang('Reply') </button>
-                        @endif
-                        {{-- @if ($showForm)
-                            <button type="reset" style="float: right;" class="btn btn-secondary"
-                                wire:click="closeReply()" data-dismiss="modal">@lang('Not reply')</button>
-                        @endif --}}
-
+                            data-dismiss="modal">@lang('Cancel') </button>
+                        <div>
+                            @if (!isset($displayContact->response))
+                                <button style="display: block;" type="button" id="buttonReply"
+                                    wire:click="{{ $showForm ? 'closeReply()' : 'showReplyInput()' }}"
+                                    class="btn btn-primary">
+                                    <i class="fa fa-reply"></i>
+                                    @if ($showForm)
+                                        @lang('Do not reply')
+                                    @else
+                                        @lang('Reply')
+                                    @endif
+                                </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
