@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Tag;
-use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -28,16 +27,24 @@ class TagsManage extends Component
         $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->dispatchBrowserEvent('close-modal');
+        $this->emit('closeModal');
     }
 
-    public function editTag($id)
+    public function showEditForm(Tag $tag)
     {
         $this->reset();
         $this->resetErrorBag();
+        $this->emit('openEditModal');
         $this->resetValidation();
-        $this->selectedTag = Tag::find($id);
+        $this->selectedTag = $tag;
         $this->name = $this->selectedTag->name;
+    }
+
+    public function showCreateForm(Tag $tag)
+    {
+        $this->reset();
+        $this->resetErrorBag();
+        $this->emit('openModal');
     }
 
     public function updateTag()
@@ -71,9 +78,15 @@ class TagsManage extends Component
         $this->name = (Tag::find($this->deleteId))->name;
     }
 
+    public function showDeleteForm(Tag $tag)
+    {
+        $this->emit('openDeleteModal');
+        $this->deleteId = $tag->id;
+        $this->name = $tag->name;
+    }
+
     public function destroyTag()
     {
-        // DB::table('job_tag')->where('tag_id', $this->deleteId)->delete();
         $this->deleteTag = Tag::find($this->deleteId);
         $this->deleteTag->jobs()->detach();
         $this->deleteTag->delete();

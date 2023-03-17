@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\job\PublishJobController;
-use App\Http\Controllers\Admin\SingleJobController;
+use App\Http\Controllers\Admin\Job\ShowController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
 use App\Http\Controllers\Front\JobController;

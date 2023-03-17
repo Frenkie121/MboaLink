@@ -14,11 +14,19 @@
 
 
 @push('js')
-    <script>
-        window.addEventListener('close-modal', event => {
+    <script type="text/javascript">
+        // Add/Update category modal
+        window.livewire.on('closeModal', () => {
             $('#AddTag').modal('hide');
             $('#deleteTag').modal('hide');
-            $('#EditTag').modal('hide');
+        });
+        //add Category Modal
+        window.livewire.on('openModal', () => {
+            $('#AddTag').modal('show');
+        });
+        // Delete category modal
+        window.livewire.on('openDeleteModal', () => {
+            $('#deleteTag').modal('show');
         });
     </script>
     @livewireScripts()
