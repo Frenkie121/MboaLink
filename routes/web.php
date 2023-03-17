@@ -52,13 +52,19 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
         Route::get('', 'index')->name('index');
         Route::patch('status/{user}', 'updateStatus')->name('status');
     });
+    //CATEGORIES
     Route::view('categories', 'admin.categories.index')->name('categories.index');
+    //TAGS
     Route::view('tags', 'admin.tags.index')->name('tags.index');
-    Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
     // SUBCATEGORIES
     Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
+    //JOB
+    Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
     Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
     Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
+    //CONTACTS
+    Route::view('/messages','admin.messages.index')->name('messages.index');
+
 });
 
 // GENERAL

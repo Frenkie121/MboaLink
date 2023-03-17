@@ -27,7 +27,7 @@
                                             <td>{{ $job->company->location }}</td>
                                             <td>{{ $job->salary }}</td>
                                             <td>
-                                                @if ($job->is_published)
+                                                @if ($job->published_at)
                                                     Yes
                                                 @else
                                                     No
