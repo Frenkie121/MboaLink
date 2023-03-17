@@ -59,8 +59,8 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
     Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
     //JOB
     Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
-    Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
-    Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
+    // Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
+    // Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
     //CONTACTS
     Route::view('/messages', 'admin.messages.index')->name('messages.index');
 });

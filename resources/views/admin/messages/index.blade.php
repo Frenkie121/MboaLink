@@ -1,6 +1,6 @@
 @extends('layouts.back')
 
-@section('subtitle', __('Sub-categories list'))
+@section('subtitle', __('Message list'))
 
 @section('content')
 
