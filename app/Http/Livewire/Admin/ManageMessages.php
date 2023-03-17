@@ -69,9 +69,12 @@ class ManageMessages extends Component
         ]);
         $contact->response = $response['reply'];
         $contact->save();
+
         Notification::send($contact, new replyMessageNotification($response['reply'], $contact->subject));
-       toast('success', trans('The response was successfully sent to ').$contact->name);
+
         $this->closeModal();
+
+        toast(trans('The response was successfully sent to ') . $contact->name, 'success');
 
         return redirect()->route('admin.messages.index');
     }
