@@ -16,10 +16,8 @@
                             <td>{{ $contact->name }}</td>
                             <td>{{ $contact->subject }}</td>
                             <td>{{ $contact->created_at }}</td>
-
                             <td>
-                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-primary"><i
-                                        class="fas fa-eye"></i></button>
+                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-primary"><i class="fas fa-eye"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -39,7 +37,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="MessageModalLabel">@lang('Details of message')</h5>
+                    <h5 class="modal-title" id="MessageModalLabel">@lang('Message Details')</h5>
                     <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
