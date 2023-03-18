@@ -32,14 +32,12 @@
                         <h4 class="mb-3">@lang('Job description')</h4>
                         <p>{{ $job->description }}</p>
                         <h4 class="mb-3">@lang('Responsabilities')</h4>
-                        <p>@lang('Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor')</p>
                         <ul class="list-unstyled">
                             @foreach ($job->requirements as $requirement)
                                 <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $requirement->content }}</li>
                             @endforeach
                         </ul>
                         <h4 class="mb-3">@lang('Qualifications')</h4>
-                        <p>@lang('Magna et elitr diam sed lorem. Diam diam stet erat no est est. Accusam sed lorem stet voluptua sit sit at stet consetetur, takimata at diam kasd gubergren elitr dolor')</p>
                         <ul class="list-unstyled">
                             @foreach ($job->qualifications as $qualification)
                                 <li><i class="fa fa-angle-right text-primary me-2"></i>{{ $qualification->content }}</li>

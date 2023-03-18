@@ -30,8 +30,7 @@ class DeleteModalPublish extends Component
 
     public function publish(Job $job)
     {
-        $job->where('id', $job->id)
-            ->update([
+        $job->update([
                 'published_at' => now(),
             ]);
         $message = trans('Job has been successfully published.');
@@ -65,7 +64,7 @@ class DeleteModalPublish extends Component
         $this->closeModal();
         $this->reset();
 
-        $this->alert('success', $message);
+        toast($message, 'success');
 
         return redirect()->route('admin.jobs.index');
     }
