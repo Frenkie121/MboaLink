@@ -6,10 +6,10 @@
 
     <!-- Header End -->
     <x-front.header
-        :title="__('Search results')"
-        :middleLink="request()->isMethod('post')"
-        :middleTitle="__('Jobs')"
-        :middleRouteName="route('front.jobs.index')"    
+        :title="__('Job Listing')"
+        {{-- :middleLink="request()->isMethod('post')" --}}
+        {{-- :middleTitle="__('Jobs')" --}}
+        {{-- :middleRouteName="route('front.jobs.index')"     --}}
     />
     <!-- Header End -->
 
@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-3 d-flex d-inline">
                         <button type="submit" class="btn btn-primary border-0 w-100">@lang('Search')</button>
-                        <button type="reset" class="btn btn-dark border-0 w-100">@lang('Clear')</button>
+                        {{-- <button type="reset" class="btn btn-dark border-0 w-100">@lang('Clear')</button> --}}
                     </div>
                 </div>
             </form>
