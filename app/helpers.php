@@ -9,7 +9,7 @@ if (! function_exists('formatedLocaleDate')) {
         Carbon::setLocale($locale);
         $format = $locale === 'en' ? 'F d, Y' : 'd M Y';
 
-        return Carbon::parse($date)->translatedFormat($format);
+        return $date ? Carbon::parse($date)->translatedFormat($format) : null;
     }
 }
 
