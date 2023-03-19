@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\SubCategory;
-use Illuminate\Database\Eloquent\Builder;
 
 class PagesController extends Controller
 {
@@ -26,10 +25,10 @@ class PagesController extends Controller
                                     ->take(8)
                                     ->sortByDesc('created_at'),
 
-                'subCategories' => SubCategory::query()
-                                            ->hasJobs()
-                                            ->get('name'),
-                'types' => Job::TYPES,
+            'subCategories' => SubCategory::query()
+                                        ->hasJobs()
+                                        ->get('name'),
+            'types' => Job::TYPES,
         ]);
     }
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Job;
 use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Builder;
@@ -52,23 +51,21 @@ class JobController extends Controller
 
     public function search(Request $request)
     {
-        $search = '%' . $request->search . '%';
+        $search = '%'.$request->search.'%';
         $sub_category = $request->sub_category;
         $type = $request->type;
-        
-        if (!$request->search && !$sub_category && !$type) {
+
+        if (! $request->search && ! $sub_category && ! $type) {
             $jobs = collect();
         } else {
             $jobs = Job::query()
-            ->when($request->search, fn (Builder $query)
-                => $query->orWhere('title', 'LIKE', $search)
-                        ->orWhere('description','LIKE',  $search)
+            ->when($request->search, fn (Builder $query) => $query->orWhere('title', 'LIKE', $search)
+                        ->orWhere('description', 'LIKE', $search)
             )
             ->when($sub_category, function (Builder $query) use ($sub_category) {
                 return $query->orWhere('sub_category_id', SubCategory::query()->firstWhere('name', $sub_category)->id);
             })
-            ->when(in_array($type, Job::TYPES), fn (Builder $query)
-                => $query->orWhere('type', array_search($type, Job::TYPES))
+            ->when(in_array($type, Job::TYPES), fn (Builder $query) => $query->orWhere('type', array_search($type, Job::TYPES))
             )
             ->published()
             ->active()
@@ -76,7 +73,7 @@ class JobController extends Controller
             ->orderByDesc('created_at')
             ->get();
         }
-        
+
         return view('front.jobs.index', [
             'jobs' => $jobs,
             'types' => Job::TYPES,

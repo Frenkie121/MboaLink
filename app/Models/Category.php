@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasManyThrough};
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class Category extends Model
@@ -46,8 +49,7 @@ class Category extends Model
     // SCOPES
     public function scopeHasJobs(Builder $query): Builder
     {
-        return $query->whereHas('jobs', fn (Builder $query)
-            => $query->whereNotNull('published_at')
+        return $query->whereHas('jobs', fn (Builder $query) => $query->whereNotNull('published_at')
         );
     }
 }

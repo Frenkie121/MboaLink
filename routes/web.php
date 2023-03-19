@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\Job\SingleJobController;
 use App\Http\Controllers\Admin\Job\PublishJobController;
-use App\Http\Controllers\Front\{JobController, PagesController};
+use App\Http\Controllers\Admin\Job\SingleJobController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Extra\LangController;
+use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +61,8 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
     Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
     //JOB
     Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
-    // Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
-    // Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
+    Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
+    Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
     //CONTACTS
     Route::view('/messages', 'admin.messages.index')->name('messages.index');
 });

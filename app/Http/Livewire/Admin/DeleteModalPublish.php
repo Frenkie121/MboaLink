@@ -31,8 +31,8 @@ class DeleteModalPublish extends Component
     public function publish(Job $job)
     {
         $job->update([
-                'published_at' => now(),
-            ]);
+            'published_at' => now(),
+        ]);
         $message = trans('Job has been successfully published.');
         $data = trans('Congratulations, your job has been approved and published.');
 

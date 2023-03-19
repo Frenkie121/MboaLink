@@ -17,7 +17,8 @@
                             <td>{{ $contact->subject }}</td>
                             <td>{{ $contact->created_at }}</td>
                             <td>
-                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-primary"><i class="fas fa-eye"></i></button>
+                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-primary"><i
+                                        class="fas fa-eye"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -92,12 +93,22 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
 
+                        @if (isset($displayContact->response))
+                            <div class="form-group">
+                                <label style="font-weight:bold;float:left;"
+                                    class="control-label">@lang('Response')</label>
+                                <br>
+                                <div style="text-align:justify; color:green;">{{ $response }}</div>
+                            </div>
+                        @endif
+                    </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" wire:click="closeModal()"
                             data-dismiss="modal">@lang('Cancel') </button>
                         <div>
+
+
                             @if (!isset($displayContact->response))
                                 <button style="display: block;" type="button" id="buttonReply"
                                     wire:click="{{ $showForm ? 'closeReply()' : 'showReplyInput()' }}"

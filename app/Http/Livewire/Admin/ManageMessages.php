@@ -13,6 +13,8 @@ class ManageMessages extends Component
 {
     public $name;
 
+    public $response;
+
     public $email;
 
     public $message;
@@ -47,6 +49,7 @@ class ManageMessages extends Component
         $this->email = $contact->email;
         $this->message = $contact->message;
         $this->subject = $contact->subject;
+        $this->response = $contact->response;
     }
 
     public function showReplyInput()
@@ -74,7 +77,7 @@ class ManageMessages extends Component
 
         $this->closeModal();
 
-        toast(trans('The response was successfully sent to ') . $contact->name, 'success');
+        toast(trans('The response was successfully sent to ').$contact->name, 'success');
 
         return redirect()->route('admin.messages.index');
     }
