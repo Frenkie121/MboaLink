@@ -49,7 +49,7 @@ class Job extends Model
 
     public function getTypeAttribute($type)
     {
-        return self::TYPES[$type];
+        return __(self::TYPES[$type]);
     }
 
     // MUTATORS

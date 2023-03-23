@@ -13,25 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('talent', function (Blueprint $table) {
             $table->id();
+            $table->string('talentable_type');
+            $table->integer('talentable_id');
             $table->foreignId('sub_category_id')->constrained();
-            $table->string('location')->nullable();
-            $table->text('description')->nullable();
-            $table->string('url')->nullable();
-            $table->string('logo')->nullable();
+            $table->mediumText('aspiration')->nullable();
+            $table->string('language');
+            $table->string('residence');
+            $table->string('cv')->nullable();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *;
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('talent');
     }
 };

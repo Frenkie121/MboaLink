@@ -13,25 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sub_category_id')->constrained();
-            $table->string('location')->nullable();
-            $table->text('description')->nullable();
-            $table->string('url')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('university');
+            $table->string('training_school');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *;
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('students');
     }
 };

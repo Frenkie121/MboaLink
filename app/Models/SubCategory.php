@@ -34,6 +34,16 @@ class SubCategory extends Model
         return $this->hasMany(Job::class);
     }
 
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    public function talents(): HasMany
+    {
+        return $this->hasMany(Talent::class);
+    }
+
     // SCOPES
     public function scopeHasJobs(Builder $query): Builder
     {

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\SubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
+            'sub_category_id' => SubCategory::factory(),
             'location' => fake('it_IT')->city(),
             'description' => fake()->paragraphs(2, true),
             'url' => 'www.'.fake()->domainName(),
