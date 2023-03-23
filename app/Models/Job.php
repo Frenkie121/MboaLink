@@ -42,14 +42,26 @@ class Job extends Model
         return formatedLocaleDate($created_at);
     }
 
-    // public function getPublishedAtAttribute($published_at)
-    // {
-    //     return formatedLocaleDate($published_at);
-    // }
+    public function getPublishedAtAttribute($published_at)
+    {
+        return formatedLocaleDate($published_at);
+    }
 
     public function getTypeAttribute($type)
     {
         return __(self::TYPES[$type]);
+    }
+
+    public function getSalaryAttribute($salary)
+    {
+        $salary = explode(' - ', $salary);
+        if (count($salary) === 2) {
+            return formatMoney($salary[0]) . ' - ' . formatMoney($salary[1]);
+        } else {
+            return formatMoney($salary[0]);
+        }
+
+        dd(number_format($salary[0], 0, ',', ' '));
     }
 
     // MUTATORS
