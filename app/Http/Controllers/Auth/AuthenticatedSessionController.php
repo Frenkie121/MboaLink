@@ -47,8 +47,8 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $redirect = match (auth()->user()->role->name) {
-            'Admin' => 'admin/dashboard',
+        $redirect = match (auth()->user()->role_id) {
+            1 => 'admin/dashboard',
             default => '/'
         };
 

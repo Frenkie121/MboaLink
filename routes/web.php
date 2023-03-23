@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // PROFILE
-Route::middleware(['auth', 'role:Admin'])->group(function () {
+Route::middleware(['auth', 'role:1'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -46,7 +46,7 @@ Route::name('front.')->group(function () {
 });
 
 // ADMIN
-Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(function () {
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     // USERS
     Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {

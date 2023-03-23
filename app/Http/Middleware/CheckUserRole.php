@@ -13,9 +13,9 @@ class CheckUserRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, int $role)
     {
-        if ($request->user()->role->name !== $role) {
+        if ($request->user()->role_id !== $role) {
             abort(403, "You don't have the right permission to access the requested page.");
         }
 

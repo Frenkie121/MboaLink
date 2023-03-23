@@ -10,6 +10,12 @@ class Role extends Model
 {
     use HasFactory;
 
+    // ACCESSORS
+    public function getNameAttribute()
+    {
+        return $this->attributes[app()->getLocale() . '_name'];
+    }
+
     // RELATIONSHIPS
     public function users(): HasMany
     {
