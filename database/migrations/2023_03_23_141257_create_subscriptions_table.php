@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('role_id')->constrained();
+            $table->integer('type');
             $table->integer('duration');
             $table->double('amount');
             $table->timestamps();
