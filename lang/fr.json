@@ -19,8 +19,8 @@
     "Send": "Envoyer",
     "Reply to the message here": "Répondre au message ici",
     "Response": "Réponse",
-    "Received_at": "Date de Reception",
-    "Message list": "Liste des messages",
+    "Received at": "Date de Reception",
+    "Contacts list": "Liste des contacts",
     "Hello  ": "Bonjour ",
     "Administrator": "Administrateur",
     "Publication Job Notification": "Notification de publication d'un job",
@@ -243,5 +243,6 @@
     "Submitted at": "Soumis le",
     "Search": "Rechercher",
     "Clear": "Effacer",
+    "Loading...": "Chargement...",
     "": ""
 }

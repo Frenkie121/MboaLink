@@ -46,7 +46,7 @@ Route::name('front.')->group(function () {
 });
 
 // ADMIN
-Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::view('dashboard', 'admin.dashboard')->name('dashboard');
     // USERS
     Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {
@@ -64,7 +64,7 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->grou
     Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
     Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
     //CONTACTS
-    Route::view('/messages', 'admin.messages.index')->name('messages.index');
+    Route::view('/contacts', 'admin.contacts.index')->name('contacts.index');
 });
 
 // GENERAL
