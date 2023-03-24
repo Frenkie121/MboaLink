@@ -1,13 +1,13 @@
 @extends('layouts.back')
 
-@section('subtitle', __('Message list'))
+@section('subtitle', __('Contacts list'))
 
 @section('content')
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
 
-    <x-admin.section-header :title="__('Message list')" :previousTitle="__('Dashboard')" :previousRouteName="route('admin.dashboard')" />
+    <x-admin.section-header :title="__('Contacts list')" :previousTitle="__('Dashboard')" :previousRouteName="route('admin.dashboard')" />
 
     <div class="section-body">
         <div class="row">
@@ -27,16 +27,5 @@
             //show modal details
             $('#MessageModal').modal('show');
         });
-        window.livewire.on('closeFormReply', () => {
-            // Close Input Reply and replyButton
-           document.getElementById('InputRepyForm').style.display = 'none';
-        });
-        window.livewire.on('showFormReply', () => {
-            // Show input reply
-            document.getElementById('InputRepyForm').style.display = 'block';
-            // document.getElementById('buttonReply').style.display = 'none';
-        });
-
-
     </script>
 @endpush

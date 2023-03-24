@@ -33,9 +33,9 @@
                 <a class="nav-link" href="{{ route('admin.jobs.index') }}"><i class="fa fa-briefcase"></i>
                     <span>@lang('Jobs')</span></a>
             </li>
-            <li class="@if (Str::contains($currentUri, 'messages')) active @endif">
-                <a class="nav-link" href="{{ route('admin.messages.index') }}"><i class="fa fa-comment"></i>
-                    <span>@lang('Messages')</span></a>
+            <li class="@if (Str::contains($currentUri, 'contacts')) active @endif">
+                <a class="nav-link" href="{{ route('admin.contacts.index') }}"><i class="fa fa-comment"></i>
+                    <span>@lang('Contacts')</span></a>
             </li>
         </ul>
     </aside>

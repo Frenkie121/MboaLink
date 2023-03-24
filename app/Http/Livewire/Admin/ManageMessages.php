@@ -11,32 +11,18 @@ use Livewire\WithPagination;
 
 class ManageMessages extends Component
 {
-    public $name;
-
-    public $response;
-
-    public $email;
-
-    public $message;
-
-    public $subject;
+    use WithPagination, LivewireAlert;
 
     public $reply;
 
-    use WithPagination;
-    use LivewireAlert;
-
     public $displayContact;
-
-    public $showForm = false;
 
     protected $paginationTheme = 'bootstrap';
 
     public function closeModal()
     {
-        $this->reset();
+        $this->reset(['reply', 'displayContact']);
         $this->resetErrorBag();
-        $this->resetValidation();
         $this->emit('closeModal');
     }
 
@@ -45,23 +31,6 @@ class ManageMessages extends Component
         $this->resetValidation();
         $this->emit('openModal');
         $this->displayContact = $contact;
-        $this->name = $contact->name;
-        $this->email = $contact->email;
-        $this->message = $contact->message;
-        $this->subject = $contact->subject;
-        $this->response = $contact->response;
-    }
-
-    public function showReplyInput()
-    {
-        $this->emit('showFormReply');
-        $this->showForm = true;
-    }
-
-    public function closeReply()
-    {
-        $this->emit('closeFormReply');
-        $this->showForm = false;
     }
 
     public function replyMessage(Contact $contact)
@@ -77,9 +46,9 @@ class ManageMessages extends Component
 
         $this->closeModal();
 
-        toast(trans('The response was successfully sent to ').$contact->name, 'success');
+        toast(trans('The response was successfully sent to ') . $contact->name, 'success');
 
-        return redirect()->route('admin.messages.index');
+        return redirect()->route('admin.contacts.index');
     }
 
     public function render()

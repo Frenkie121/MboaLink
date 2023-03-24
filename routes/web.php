@@ -64,7 +64,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
     Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
     //CONTACTS
-    Route::view('/messages', 'admin.messages.index')->name('messages.index');
+    Route::view('/contacts', 'admin.contacts.index')->name('contacts.index');
 });
 
 // GENERAL
