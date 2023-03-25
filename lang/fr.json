@@ -101,7 +101,7 @@
     "Tag name": "Nom du tag",
     "Title": "Titre",
     "Dateline": "Date Limite",
-    "Company": "Companie",
+    "Enterprise": "Entreprise",
     "Sub-category": "Sous-catégorie",
     "File": "Fichier",
     "Created at": "Creé le",
@@ -256,5 +256,9 @@
     "See All Plans": "Voir tous les plans",
     "Subscribe Now": "S'abonner",
     "Pricing": "Plans",
+    "Student": "Étudiant",
+    "Pupil": "Élève",
+    "Free": "Gratuit",
+    "Unemployed ": "Sans emploi",
     "": ""
 }

@@ -2,28 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsToMany, HasMany};
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 
 class Subscription extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['duration', 'amount', 'type'];
+    protected $fillable = ['name', 'duration', 'amount'];
 
-    const TYPE = [
-        1 => 'Company',
-        2 => 'Student',
-        3 => 'Pupil',
-        4 => 'Unemployed',
-        5 => 'Free',
-    ];
+    // ACCESSORS
+    public function getNameAttribute($value): string
+    {
+        return __($value);
+    }
 
     // MUTATORS
-    public function getTypeAttribute($type)
+    public function setNameAttribute($value): void
     {
-        return __(self::TYPE[$type]);
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
     }
 
     // RELATIONSHIPS

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\{Category, Company, Contact, Job, Qualification, Requirement, SubCategory, Tag, User};
+use App\Models\{Category, Company, Contact, Job, Offer, Qualification, Requirement, Subscription, Tag, User};
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
+            SubscriptionSeeder::class,
         ]);
 
         \App\Models\User::factory()->create([

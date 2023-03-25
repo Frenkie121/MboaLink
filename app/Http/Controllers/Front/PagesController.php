@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Job;
-use App\Models\SubCategory;
+use App\Models\{Category, Job, SubCategory, Subscription};
 
 class PagesController extends Controller
 {
@@ -29,6 +27,10 @@ class PagesController extends Controller
                                         ->hasJobs()
                                         ->get('name'),
             'types' => Job::TYPES,
+            'subscriptions' => Subscription::query()
+                                        ->with(['offers:id,content,subscription_id'])
+                                        ->get(['id', 'name', 'slug', 'amount'])
+                                        ->take(3),
         ]);
     }
 

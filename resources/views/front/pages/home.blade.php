@@ -119,12 +119,12 @@
         <div class="container">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Our Best Subscription Plans')</h1>
             <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                @foreach ([1, 2, 3] as $item)
-                    <x-front.subscription-item />
+                @foreach ($subscriptions as $subscription)
+                    <x-front.subscription-item :subscription="$subscription" />
                 @endforeach
             </div>
             <div class="text-center">
-                <a class="btn btn-primary py-3 px-5" href="{{ route('front.jobs.index') }}">@lang('See All Plans')</a>
+                <a class="btn btn-primary py-3 px-5" href="{{ route('front.subscriptions.pricing') }}">@lang('See All Plans')</a>
             </div>
         </div>
     </div>
