@@ -204,7 +204,7 @@
     "Read More": "Lire plus",
     "About": "À propos",
     "Companies": "Les entreprises",
-    "Unemployed": "Les sans emploi fixe",
+    "Unemployed ": "Les sans emploi fixe",
     "Students": "Les étudiants",
     "Pupils": "Les élèves",
     "Our target audience": "Nos cibles",
@@ -259,6 +259,6 @@
     "Student": "Étudiant",
     "Pupil": "Élève",
     "Free": "Gratuit",
-    "Unemployed ": "Sans emploi",
+    "Unemployed": "Sans emploi",
     "": ""
 }

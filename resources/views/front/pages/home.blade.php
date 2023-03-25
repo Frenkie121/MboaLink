@@ -117,13 +117,14 @@
     <!-- Plans Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Our Best Subscription Plans')</h1>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <hr>
+            <h1 class="text-center mb-3 wow fadeInUp" data-wow-delay="0.1s">@lang('Our Best Subscription Plans')</h1>
+            <div class="row row-cols-1 row-cols-md-3 text-center">
                 @foreach ($subscriptions as $subscription)
                     <x-front.subscription-item :subscription="$subscription" />
                 @endforeach
             </div>
-            <div class="text-center">
+            <div class="text-center" style="margin-top: 45px">
                 <a class="btn btn-primary py-3 px-5" href="{{ route('front.subscriptions.pricing') }}">@lang('See All Plans')</a>
             </div>
         </div>
@@ -133,6 +134,7 @@
     <!-- Jobs Start -->
     <div class="container-xxl py-5">
         <div class="container">
+            <hr>
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Latest Jobs')</h1>
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">
@@ -151,7 +153,8 @@
     <!-- Category Start -->
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Explore By Category')</h1>
+            <hr>
+            <h1 class="text-center mb-3 wow fadeInUp" data-wow-delay="0.1s">@lang('Explore By Category')</h1>
             <div class="row g-4">
                 @foreach ($categories as $category)
                     <x-front.category-item :category="$category" />

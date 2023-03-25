@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item bg-light rounded p-4">
-                    <h3 class="text-primary mb-3"> @lang('Unemployed')</h3>
+                    <h3 class="text-primary mb-3"> @lang('Unemployed ')</h3>
                     <p style="text-align: justify;">@lang('You are a Cameroonian graduate, without a permanent job and maybe even with exceptional aptitude in one or more professional fields and wish to register in a career project, subscribe with the status without permanent job and apply for the position that corresponds to your abilities while benefiting from our tools and formulas to reach your goals faster and your objectives and enhance your MboaLink experience.')</p>
                     <div class="d-flex align-items-center">
                         {{-- <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
