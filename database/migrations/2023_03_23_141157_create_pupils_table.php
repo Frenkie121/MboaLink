@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('pupils', function (Blueprint $table) {
             $table->id();
-            $table->string('school');
-            $table->string('cycle');
             $table->string('section');
+            $table->string('cycle');
             $table->string('serie');
-            $table->string('parent_contact');
+            $table->string('class');
+            $table->string('school');
             $table->timestamps();
         });
     }

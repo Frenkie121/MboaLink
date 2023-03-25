@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('unemployeds', function (Blueprint $table) {
             $table->id();
             $table->string('diploma');
-            $table->mediumText('qualifications');
             $table->string('current_job')->nullable();
-            $table->string('aptitudes')->nullable();
+            $table->mediumText('aptitudes')->nullable();
             $table->timestamps();
         });
     }
