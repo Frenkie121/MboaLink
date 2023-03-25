@@ -15,24 +15,19 @@ class RoleSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'en_name' => 'Administrator',
-            'fr_name' => 'Administrateur',
+            'name' => 'Administrator',
         ]);
         Role::create([
-            'en_name' => 'Company',
-            'fr_name' => 'Entreprise',
+            'name' => 'Company',
         ]);
         Role::create([
-            'en_name' => 'Student',
-            'fr_name' => 'Étudiant',
+            'name' => 'Student',
         ]);
         Role::create([
-            'en_name' => 'Pupil',
-            'fr_name' => 'Élève',
+            'name' => 'Pupil',
         ]);
         Role::create([
-            'en_name' => 'Unemployed',
-            'fr_name' => 'Sans emploi fixe',
+            'name' => 'Unemployed',
         ]);
     }
 }

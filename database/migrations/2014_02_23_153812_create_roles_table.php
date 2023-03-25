@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('en_name');
-            $table->string('fr_name');
+            $table->string('name');
             $table->timestamps();
         });
     }

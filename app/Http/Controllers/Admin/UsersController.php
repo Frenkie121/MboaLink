@@ -12,7 +12,7 @@ class UsersController extends Controller
     {
         return view('admin.users.index', [
             'users' => User::query()
-                            ->with('role:id,en_name,fr_name')
+                            ->with('role:id,name')
                             ->get(),
         ]);
     }
