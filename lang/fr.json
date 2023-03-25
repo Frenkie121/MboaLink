@@ -159,7 +159,7 @@
     "Salary": "Salaire",
     "Location": "Lieu",
     "Latest Jobs": "Derniers Jobs",
-    "Browse More Jobs": "Voir Plus",
+    "Browse More Jobs": "Voir tous les jobs",
     "For category": "Pour la catégorie",
     "Company Details": "Détails de l'entreprise",
     "Website": "Site web",
@@ -251,5 +251,10 @@
     "Internship": "Stage",
     "Remote": "À distance",
     "Loading...": "Chargement...",
+    "Our Best Subscription Plans": "Nos meilleurs plans d'abonnement",
+    "Our Subscription Plans": "Nos plans d'abonnement",
+    "See All Plans": "Voir tous les plans",
+    "Subscribe Now": "S'abonner",
+    "Pricing": "Plans",
     "": ""
 }

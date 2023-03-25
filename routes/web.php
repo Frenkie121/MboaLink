@@ -4,8 +4,7 @@ use App\Http\Controllers\Admin\Job\PublishJobController;
 use App\Http\Controllers\Admin\Job\SingleJobController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Front\JobController;
-use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,11 +36,17 @@ Route::name('front.')->group(function () {
         Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs');
     });
 
+    // JOBS
     Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
+    });
+
+    // SUBSCRIPTIONS
+    Route::controller(SubscriptionController::class)->name('subscriptions.')->group(function () {
+        Route::get('pricing', 'pricing')->name('pricing');
     });
 });
 
