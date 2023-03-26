@@ -125,7 +125,7 @@
                 @endforeach
             </div>
             <div class="text-center" style="margin-top: 45px">
-                <a class="btn btn-primary py-3 px-5" href="{{ route('front.subscriptions.pricing') }}">@lang('See All Plans')</a>
+                <a class="btn btn-primary py-3 px-5" href="{{ route('front.subscriptions.index') }}">@lang('See All Plans')</a>
             </div>
         </div>
     </div>

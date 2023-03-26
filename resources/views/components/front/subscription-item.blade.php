@@ -16,7 +16,7 @@
                 @endforeach
             </ul>
             <div class="position-absolute top-100 start-50 translate-middle mb-2 w-75">
-                <button type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">@lang('Subscribe Now')</button>
+                <a href="{{ route('front.subscriptions.subscribe', $subscription->slug) }}" type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">@lang('Subscribe Now')</a>
             </div>
         </div>
     </div>

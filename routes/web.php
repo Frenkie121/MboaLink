@@ -45,8 +45,9 @@ Route::name('front.')->group(function () {
     });
 
     // SUBSCRIPTIONS
-    Route::controller(SubscriptionController::class)->name('subscriptions.')->group(function () {
-        Route::get('pricing', 'pricing')->name('pricing');
+    Route::controller(SubscriptionController::class)->prefix('pricing')->name('subscriptions.')->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::get('{subscription:slug}/subscribe', 'subscribe')->name('subscribe');
     });
 });
 

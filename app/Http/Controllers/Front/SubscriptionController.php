@@ -14,17 +14,19 @@ class SubscriptionController extends Controller
      * @return \Illuminate\Contracts\View\View
      * 
      */
-    public function pricing(): View
+    public function index(): View
     {
-        return view('front.subscriptions.pricing', [
+        return view('front.subscriptions.index', [
             'subscriptions' => Subscription::query()
                                         ->with(['offers:id,content,subscription_id'])
                                         ->get(['id', 'name', 'slug', 'amount']),
         ]);
     }
 
-    public function subscribe()
+    public function subscribe(Subscription $subscription)
     {
-        
+        return view('front.subscriptions.subscribe', [
+            'subscription' => $subscription,
+        ]);
     }
 }
