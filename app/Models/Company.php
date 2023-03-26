@@ -36,8 +36,8 @@ class Company extends Model
         return $this->hasMany(Job::class);
     }
 
-    public function subCategory(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(Category::class);
     }
 }

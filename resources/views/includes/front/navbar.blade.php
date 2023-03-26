@@ -13,7 +13,7 @@
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'home')) active @endif">@lang('Home')</a>
             <a href="{{ route('front.about') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'about')) active @endif">@lang('About')</a>
-            <a href="{{ route('front.subscriptions.index') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'subscriptions.index')) active @endif">@lang('Pricing')</a>
+            <a href="{{ route('front.subscriptions.index') }}" class="nav-item nav-link @if (Str::contains($currentRouteName, 'subscriptions')) active @endif">@lang('Pricing')</a>
             <div class="nav-item dropdown">
                 <a href="#" 
                     class="nav-link dropdown-toggle 

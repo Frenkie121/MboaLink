@@ -46,6 +46,11 @@ class Category extends Model
         return $this->hasManyThrough(Job::class, SubCategory::class);
     }
 
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class);
+    }
+
     // SCOPES
     public function scopeHasJobs(Builder $query): Builder
     {

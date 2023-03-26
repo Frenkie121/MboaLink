@@ -159,7 +159,7 @@ return [
         'username' => 'nom d\'utilisateur',
         'year' => 'année',
         'requirements.0' => 'exigence',
-        'location' => 'lieu',
+        'location' => 'localisation',
         'min_salary' => 'salaire minimal',
         'max_salary' => 'salaire maximal',
         'file' => 'fichier',
@@ -171,5 +171,6 @@ return [
         'qualifications.*' => 'qualification',
         'website' => 'site web',
         'reply' => 'réponse',
+        'phone_number' => 'Numéro de téléphone'
     ],
 ];

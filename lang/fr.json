@@ -157,7 +157,7 @@
     "Published On": "Publié Le",
     "Job Type": "Type de Job",
     "Salary": "Salaire",
-    "Location": "Lieu",
+    "Location": "Localisation",
     "Latest Jobs": "Derniers Jobs",
     "Browse More Jobs": "Voir tous les jobs",
     "For category": "Pour la catégorie",
@@ -264,5 +264,11 @@
     "Subscribe to a new subscription": "Souscrire à un nouvel abonnement",
     "Fill the form below to save your subscription": "Remplissez le formulaire ci-dessous pour enregistrer votre abonnement",
     "Follow the steps below save your subscription": "Suivez les étapes ci-dessous pour enregistrer votre abonnement",
+    "Company Informations": "Informations de l'entreprise",
+    "Personal Informations": "Informations personnelles",
+    "Payment": "Paiement",
+    "Select your activity field": "Sélectionner votre domaine d'activité",
+    "Select the field you are looking for": "Sélectionner le domaine recherché",
+    "Phone Number": "Numéro de téléphone",
     "": ""
 }
