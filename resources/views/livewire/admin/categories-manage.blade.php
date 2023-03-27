@@ -12,7 +12,7 @@
                                 class="btn btn-md btn btn-primary">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add category') </button>
                             <br><br>
-                            <table cla class="table table-striped" id="table-1">
+                            <table  class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>

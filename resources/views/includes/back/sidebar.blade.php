@@ -37,6 +37,10 @@
                 <a class="nav-link" href="{{ route('admin.contacts.index') }}"><i class="fa fa-comment"></i>
                     <span>@lang('Contacts')</span></a>
             </li>
+            <li class="@if (Str::contains($currentUri, 'subscription')) active @endif">
+                <a class="nav-link" href="{{ route('admin.subscription.index') }}"><i class="fas fa-plug"></i>
+                    <span>@lang('Subscriptions')</span></a>
+            </li>
         </ul>
     </aside>
 </div>
