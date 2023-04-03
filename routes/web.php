@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\Job\PublishJobController;
+use App\Http\Controllers\Admin\Job\SingleJobController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Extra\LangController;
+use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\Front\SubscriptionController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Admin\Job\SingleJobController;
-use App\Http\Controllers\Admin\Job\PublishJobController;
-use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -79,4 +81,4 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
 // GENERAL
 Route::get('lang/{locale}', LangController::class)->name('lang');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -56,7 +56,7 @@ class Job extends Model
     {
         $salary = explode(' - ', $salary);
         if (count($salary) === 2) {
-            return formatMoney($salary[0]) . ' - ' . formatMoney($salary[1]);
+            return formatMoney($salary[0]).' - '.formatMoney($salary[1]);
         } else {
             return formatMoney($salary[0]);
         }

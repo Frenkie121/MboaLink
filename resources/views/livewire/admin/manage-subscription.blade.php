@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <a style="float: right;" href="{{ route('admin.subscription.add') }}"  type="button"
+                            <a style="float: right;" href="{{ route('admin.subscription.add') }}" type="button"
                                 class="btn btn-md btn btn-primary">
                                 <i class="fa fa-plus btn-md"></i> @lang('Add Subscription') </a>
                             <br><br>
@@ -28,12 +28,11 @@
                                             <td>{{ $subscription->duration }}</td>
                                             <td>{{ $subscription->amount }}</td>
                                             <td>
-                                                <a href="#" wire:click="showEditForm({{ $subscription }})"
+                                                <a href="#" {{-- wire:click="showEditForm({{ $subscription }})" --}}
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger"
-                                                    wire:click="showDeleteForm({{ $subscription }})"> <i
-                                                        class="fa fa-trash"></i>
+                                                <a href="#" class="btn btn-danger" {{-- wire:click="showDeleteForm({{ $subscription }})" --}}>
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>

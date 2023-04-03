@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Category, Job, SubCategory, Subscription};
+use App\Models\Category;
+use App\Models\Job;
+use App\Models\SubCategory;
+use App\Models\Subscription;
 
 class PagesController extends Controller
 {
