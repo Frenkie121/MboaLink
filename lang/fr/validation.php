@@ -171,5 +171,12 @@ return [
         'qualifications.*' => 'qualification',
         'website' => 'site web',
         'reply' => 'réponse',
+        'duration' => 'durée',
+        'amount' => 'somme',
+        'offer.0' => 'offre.0',
+        'offer.*' => 'offre.*',
+        'subs_name' => 'nom abonnement',
+
+
     ],
 ];

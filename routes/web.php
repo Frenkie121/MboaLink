@@ -74,11 +74,11 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     //CONTACTS
     Route::view('contacts', 'admin.contacts.index')->name('contacts.index');
     //SUBSCRIPTION
-    Route::view('subscription', 'admin.subscriptions.index')->name('subscription.index');
-    Route::view('subscription/add', 'admin.subscriptions.add')->name('subscription.add');
+    Route::view('subscriptions', 'admin.subscriptions.index')->name('subscription.index');
+    Route::view('subscription/create', 'admin.subscriptions.add')->name('subscription.add');
 });
 
 // GENERAL
 Route::get('lang/{locale}', LangController::class)->name('lang');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

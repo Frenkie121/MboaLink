@@ -10,7 +10,7 @@ class Store extends Component
 {
     public $i = 1;
 
-    public $key, $offers,$amount, $duration, $name_s;
+    public $key, $offer,$amount, $duration, $subs_name;
 
     public array $offersInput = [];
 
@@ -30,21 +30,21 @@ class Store extends Component
     public function save()
     {
         $data = $this->validate([
-            'offers.0' => ['required', 'string', 'distinct'],
-            'offers.*' => ['required', 'string', 'distinct'],
-            'name_s' => ['required', 'string', 'unique:subscriptions,name'],
+            'offer.0' => ['required', 'string', 'distinct'],
+            'offer.*' => ['required', 'string', 'distinct'],
+            'subs_name' => ['required', 'string', 'unique:subscriptions,name'],
             'amount' => ['required', 'numeric', 'min:0'],
             'duration' => ['required', 'numeric', 'min:0', 'max:12'],
 
         ]);
         $subscription = Subscription::create([
-            'name' => $data['name_s'],
-            'slug' => Str::slug($data['name_s']),
+            'name' => $data['subs_name'],
+            'slug' => Str::slug($data['subs_name']),
             'amount' => $data['amount'],
             'duration' => $data['duration'],
         ]);
 
-        foreach ($this->offers as  $value) {
+        foreach ($this->offer as  $value) {
             $subscription->offers()->create(['content' => $value]);
         }
         toast(trans('The Subscription has been created'), 'success');

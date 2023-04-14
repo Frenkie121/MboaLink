@@ -109,7 +109,7 @@ class ManageSubCategories extends Component
     {
         return view('livewire.admin.manage-sub-categories', [
             'subCategories' => SubCategory::query()
-                                            ->with('category')
+                                             ->with('category')
                                             ->latest()
                                             ->paginate(5),
             'categories' => Category::query()

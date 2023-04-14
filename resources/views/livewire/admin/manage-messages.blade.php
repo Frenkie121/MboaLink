@@ -17,7 +17,8 @@
                             <td>{{ $contact->subject }}</td>
                             <td>{{ $contact->created_at }}</td>
                             <td>
-                                <button wire:click="showModalForm({{ $contact }})" class="btn btn-{{ $contact->response ? 'primary' : 'danger' }}"><i
+                                <button wire:click="showModalForm({{ $contact }})"
+                                    class="btn btn-{{ $contact->response ? 'primary' : 'danger' }}"><i
                                         class="fas fa-eye"></i></button>
                             </td>
                         </tr>
@@ -47,25 +48,28 @@
                     @if ($displayContact)
                         <div class="modal-body">
                             <div class="form-group">
-                                <label style="font-weight:bold;float:left;" class="control-label">@lang('Name')</label>
+                                <label style="font-weight:bold;float:left;"
+                                    class="control-label">@lang('Name')</label>
                                 <div style="float:right;">{{ $displayContact->name }}</div>
-                                <br>
+                              <div class="row"></div>
                                 <hr>
                                 <div><label for="control-label" style="font-weight:bold;float:left;">Email</label>
                                     <div style="float:right;" href="">{{ $displayContact->email }}</div>
                                 </div>
                             </div>
-                            <br>
+                          <div class="row"></div>
                             <hr>
                             <div class="form-group">
-                                <label style="font-weight:bold;float:left;" class="control-label">@lang('Subject')</label>
+                                <label style="font-weight:bold;float:left;"
+                                    class="control-label">@lang('Subject')</label>
                                 <div style="float:right;">{{ $displayContact->subject }}</div>
                             </div>
-                            <br>
+                          <div class="row"></div>
                             <hr>
                             <div class="form-group">
-                                <label style="font-weight:bold;float:left;" class="control-label">@lang('Message')</label>
-                                <br>
+                                <label style="font-weight:bold;float:left;"
+                                    class="control-label">@lang('Message')</label>
+                              <div class="row"></div>
                                 <div style="text-align:justify;">{{ $displayContact->message }}</div>
                             </div>
                             @if (!$displayContact->response)
@@ -78,7 +82,7 @@
                                         @error('reply')
                                             <span class="text-danger ">{{ $message }} </span>
                                         @enderror
-                                        <br>
+                                      <div class="row"></div>
                                         <div>
                                             <button wire:loading.remove type="submit" style="float: right;"
                                                 class="btn btn-success">
@@ -97,9 +101,10 @@
                             @else
                                 <div class="form-group">
                                     <label class="control-label">@lang('Response')</label>
-                                    <br>
+                                  <div class="row"></div>
                                     <strong>{{ $displayContact->response }}</strong>
-                                    <div class="d-flex justify-content-end"><small>{{ $displayContact->updated_at }}</small></div>
+                                    <div class="d-flex justify-content-end">
+                                        <small>{{ $displayContact->updated_at }}</small></div>
                                 </div>
                             @endif
                         </div>

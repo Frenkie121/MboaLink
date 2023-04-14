@@ -1,6 +1,6 @@
 @extends('layouts.back')
 
-@section('subtitle', __('Job Details'))
+@section('subtitle', __('Add new subscription'))
 
 @push('css')
     {{-- @livewireStyles() --}}
@@ -16,7 +16,7 @@
 
     <x-livewire-alert::scripts />
     <div>
-        <x-admin.section-header :title="__('Add Subscription')" :previousTitle="__('Subscription list')" :previousRouteName="route('admin.subscription.index')" />
+        <x-admin.section-header :title="__('Add new subscription')" :previousTitle="__('Subscription list')" :previousRouteName="route('admin.subscription.index')" />
         <div class="section-body row">
             <div class=" offset-md-0"></div>
 

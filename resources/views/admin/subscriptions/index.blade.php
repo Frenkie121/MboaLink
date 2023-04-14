@@ -17,15 +17,15 @@
 @endsection
 
 @push('js')
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
             // close message  modal
         window.livewire.on('closeModal', () => {
-            $('#MessageModal').modal('hide');
-            $('#InputRepyForm').modal('hide');
+            // $('#MessageModal').modal('hide');
+            $('#deleteSubscription').modal('hide');
         });
-        window.livewire.on('openModal', () => {
+        window.livewire.on('openModalDelete', () => {
             //show modal details
-            $('#MessageModal').modal('show');
+            $('#deleteSubscription').modal('show');
         });
-    </script> --}}
+    </script>
 @endpush

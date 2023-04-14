@@ -31,7 +31,7 @@
                                                 <a href="#" {{-- wire:click="showEditForm({{ $subscription }})" --}}
                                                     class="btn btn-icon icon-left btn-primary"><i
                                                         class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger" {{-- wire:click="showDeleteForm({{ $subscription }})" --}}>
+                                                <a href="#" class="btn btn-danger" wire:click="showDeleteForm({{ $subscription }})">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
@@ -121,5 +121,29 @@
             </div>
         </div>
         {{-- end modal confirmation delete User --}}
+    <!-- Modal Delete Tag -->
+    <div wire:ignore.self class="modal fade" id="deleteSubscription" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-top" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteTag">@lang('Delete Subscritpion') <strong>{{ $name }}</strong></h5>
+                    <button type="button" class="close" wire:click="closeModal()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this subscription?')</p>
+                    <div class="modal-footer">
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
+                        <button type="button" wire:click="destroy()" class="btn btn-danger">
+                            @lang('Yes! delete')</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- end modal confirmation delete User --}}
 
-</div>
+    </div>
