@@ -28,12 +28,13 @@
                                             <td>{{ $subscription->duration }}</td>
                                             <td>{{ $subscription->amount }}</td>
                                             <td>
-                                                <a href="#" {{-- wire:click="showEditForm({{ $subscription }})" --}}
-                                                    class="btn btn-icon icon-left btn-primary"><i
-                                                        class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger" wire:click="showDeleteForm({{ $subscription }})">
+                                                <a href="#" class="btn btn-danger"
+                                                    wire:click="showDeleteForm({{ $subscription }})">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
+                                                <a href="{{ route('admin.subscription.edit', ['subscription' => $subscription]) }}"
+                                                    class="btn btn-icon icon-left btn-primary"><i
+                                                        class="fas fa-pen"></i> </a>
                                             </td>
                                         </tr>
                                     @endforeach

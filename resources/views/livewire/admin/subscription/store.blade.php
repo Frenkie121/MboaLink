@@ -1,13 +1,8 @@
 <div>
     <form action="post" wire:submit.prevent="save()">
         <div class="card">
-            {{-- <div class="card-header">
-                <h5 class="card-title">@lang('Subscription')</h5>
-                <hr>
-            </div> --}}
             <div class="card-body">
                 <br>
-
                 <div class="form-group">
                     <label> @lang('Name')</label>
                     <input value="{{ old('subs_name') }}" type="text"
@@ -56,7 +51,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="">
+                                    <div>
                                         <input value="{{ old('offer.0') }}" type="text" wire:model.defer="offer.0"
                                             class="form-control  @error('amount') is-invaild  @enderror"
                                             placeholder=" text... ">
@@ -73,22 +68,20 @@
                                 </td>
                             </tr>
                             @foreach ($offersInput as $key => $index)
-                                <tr wire:key="{{ $index }}">
+                                <tr wire:key="{{ $key }}">
                                     <td>
                                         <div>
-                                            <input placeholder="text..." value="{{ old('offers' . $index) }}"
-                                                type="text"
-                                                class="form-control @error('offer.{{ $index }}') is-invalid @enderror"
+                                            <input placeholder="text..." type="text"
+                                                class="form-control input-lg @error('offer.{{ $index }}') is-invalid @enderror"
                                                 wire:model.defer="offer.{{ $index }}">
                                             @error('offer.{{ $index }}')
                                                 <span class="text-danger"> <small> {{ $message }}</small></span>
                                             @enderror
-
                                         </div>
                                     </td>
                                     <td>
                                         <div wire:click.prevent="remove({{ $key }})"
-                                            class="btn btn-danger btn-lg col-12"> <i class="fa fa-minus"></i>
+                                            class="btn btn-danger btn-lg"> <i class="fa fa-minus col-12"></i>
                                         </div>
                                     </td>
                                 </tr>
