@@ -52,10 +52,10 @@
                             <tr>
                                 <td>
                                     <div>
-                                        <input value="{{ old('offer.0') }}" type="text" wire:model.defer="offer.0"
+                                        <input value="{{ old('offers.0') }}" type="text" wire:model.defer="offers.0"
                                             class="form-control  @error('amount') is-invaild  @enderror"
                                             placeholder=" text... ">
-                                        @error('offer.0')
+                                        @error('offers.0')
                                             <span class="text-danger"> <small> {{ $message }}</small></span>
                                         @enderror
                                     </div>
@@ -72,9 +72,9 @@
                                     <td>
                                         <div>
                                             <input placeholder="text..." type="text"
-                                                class="form-control input-lg @error('offer.{{ $index }}') is-invalid @enderror"
-                                                wire:model.defer="offer.{{ $index }}">
-                                            @error('offer.{{ $index }}')
+                                                class="form-control input-lg @error('offers.' .  $loop->iteration) is-invalid @enderror"
+                                                wire:model.defer="offers.{{ $loop->iteration }}">
+                                            @error('offers.' . $loop->iteration)
                                                 <span class="text-danger"> <small> {{ $message }}</small></span>
                                             @enderror
                                         </div>

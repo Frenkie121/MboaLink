@@ -10,7 +10,7 @@ class Store extends Component
 {
     public $i = 1;
 
-    public $key, $offer,$amount, $duration, $subs_name;
+    public $key, $offers, $amount, $duration, $subs_name;
 
     public array $offersInput = [];
 
@@ -30,8 +30,8 @@ class Store extends Component
     public function save()
     {
         $data = $this->validate([
-            'offer.0' => ['required', 'string', 'distinct'],
-            'offer.*' => ['required', 'string', 'distinct'],
+            'offers.0' => ['required', 'string', 'distinct'],
+            'offers.*' => ['required', 'string', 'distinct'],
             'subs_name' => ['required', 'string', 'unique:subscriptions,name'],
             'amount' => ['required', 'numeric', 'min:0'],
             'duration' => ['required', 'numeric', 'min:0', 'max:12'],
@@ -44,7 +44,7 @@ class Store extends Component
             'duration' => $data['duration'],
         ]);
 
-        foreach ($this->offer as  $value) {
+        foreach ($this->offers as  $value) {
             $subscription->offers()->create(['content' => $value]);
         }
         toast(trans('The Subscription has been created'), 'success');
