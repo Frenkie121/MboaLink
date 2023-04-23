@@ -296,6 +296,10 @@
     "Describe your aptitudes in a few words": "Décrivez vos aptitudes en quelques mots",
     "Describe your qualifications in a few words": "Décrivez vos qualifications en quelques mots",
     "Coming soon ...": "A venir ...",
-    "Your subscription has been successfully registered. You will be contacted shortly for further details.": "Votre abonnement a été enregistré avec succès. Vous serez recontactez dans les brefs délais pour la suite des modalités.",
+    "Your request for new subscription has been successfully sent. You will be contacted shortly for further details.": "Votre demande de nouvel abonnement a été envoyée avec succès. Vous serez contacté prochainement pour de plus amples informations.",
+    "Go to subscription details": "Ouvrir les détails",
+    "New Subscription Request": "Nouvelle demande d'abonnement",
+    "A new request for a type subscription: ": "Une nouvelle demande d'abonnement de type : ",
+    " has been made by: ": " a été faite par : ",
     "": ""
 }

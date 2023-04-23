@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Front;
 
+use App\Models\User;
 use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
-use App\Models\{Category, Pupil, Student, Unemployed};
+use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use App\Models\{Category, Pupil, Student, Unemployed};
+use App\Notifications\Front\Subscription\NewSubscriptionNotification;
 
 class Subscriptions extends Component
 {
@@ -175,7 +178,9 @@ class Subscriptions extends Component
             'role_id' => $role,
         ]);
 
-        alert('', trans('Your subscription has been successfully registered. You will be contacted shortly for further details.'), 'success')->autoclose(7000);
+        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
+
+        alert('', trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.'), 'success')->autoclose(10000);
         return redirect()->route('front.home');
     }
     
