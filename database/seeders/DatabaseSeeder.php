@@ -38,8 +38,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(4)->create();
 
         Category::factory(10)
-                ->hasSubCategories(3)
-                ->create();
+            ->hasSubCategories(3)
+            ->create();
 
         Tag::factory(5)->create();
 
@@ -48,13 +48,14 @@ class DatabaseSeeder extends Seeder
             ->has(Tag::factory(rand(1, 3)))
             ->has(Requirement::factory(rand(3, 5)))
             ->has(Qualification::factory(rand(3, 5)))
-            ->for(Company::factory()
-                        ->has(User::factory())
+            ->for(
+                Company::factory()
+                    ->has(User::factory())
             )
             ->create();
 
         Contact::factory()
-                ->count(10)
-                ->create();
+            ->count(10)
+            ->create();
     }
 }

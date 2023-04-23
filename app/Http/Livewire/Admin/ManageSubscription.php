@@ -27,11 +27,7 @@ class ManageSubscription extends Component
         $this->deleteId = $subscription->id;
         $this->name = $subscription->name;
     }
-    // public function delete($id)
-    // {
-    //     $this->deleteId = $id;
-    //     $this->name = (Subscription::find($this->deleteId))->name;
-    // }
+  
     public function destroy()
     {
         // Offer::where('subscription_id', $this->deleteId)->delete();

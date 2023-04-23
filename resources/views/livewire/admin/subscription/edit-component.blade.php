@@ -123,10 +123,10 @@
                                 </div>
                                 <div class="text-right">
                                     <hr style="background-color:rgb(61, 126, 217);">
-                                    <button class="btn btn-secondary btn-lg mr-3"
-                                        type="reset">@lang('Reset')</button>
+                                    <a href="{{ route('admin.subscription.index') }}" {{-- wire:click="back()" --}}
+                                        class="btn btn-secondary btn-lg mr-3">@lang('Back')</a>
                                     <button class="btn btn-primary btn-lg mt-7 mr-3"
-                                        type="submit">@lang('Updated at')</button>
+                                        type="submit">@lang('Update')</button>
                                 </div>
                             </div>
 

@@ -28,6 +28,11 @@ class EditComponent extends Component
 
         $this->resetErrorBag();
     }
+    // public function back()
+    // {
+    //     $this->reset();
+    //     $this->redirectRoute('admin.subscription.index');
+    // }
 
     public function remove($i): void
     {
