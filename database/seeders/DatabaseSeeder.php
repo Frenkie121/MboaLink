@@ -4,7 +4,14 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\{Category, Company, Contact, Job, Offer, Qualification, Requirement, Subscription, Tag, User};
+use App\Models\Category;
+use App\Models\Company;
+use App\Models\Contact;
+use App\Models\Job;
+use App\Models\Qualification;
+use App\Models\Requirement;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,8 +38,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(4)->create();
 
         Category::factory(10)
-                ->hasSubCategories(3)
-                ->create();
+            ->hasSubCategories(3)
+            ->create();
 
         Tag::factory(5)->create();
 
@@ -41,13 +48,14 @@ class DatabaseSeeder extends Seeder
             ->has(Tag::factory(rand(1, 3)))
             ->has(Requirement::factory(rand(3, 5)))
             ->has(Qualification::factory(rand(3, 5)))
-            ->for(Company::factory()
-                        ->has(User::factory())
+            ->for(
+                Company::factory()
+                    ->has(User::factory())
             )
             ->create();
 
         Contact::factory()
-                ->count(10)
-                ->create();
+            ->count(10)
+            ->create();
     }
 }

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Subscription;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SubscriptionSeeder extends Seeder
 {
@@ -45,25 +44,25 @@ class SubscriptionSeeder extends Seeder
             'duration' => fake()->randomDigit(),
         ]);
 
-        for ($i=0; $i < 7; $i++) { 
+        for ($i = 0; $i < 7; $i++) {
             $free->offers()->create([
-                'content' => fake()->sentence()
+                'content' => fake()->sentence(),
             ]);
-            
+
             $enterprise->offers()->create([
-                'content' => fake()->sentence()
+                'content' => fake()->sentence(),
             ]);
-            
+
             $student->offers()->create([
-                'content' => fake()->sentence()
+                'content' => fake()->sentence(),
             ]);
-            
+
             $pupil->offers()->create([
-                'content' => fake()->sentence()
+                'content' => fake()->sentence(),
             ]);
 
             $unemployed->offers()->create([
-                'content' => fake()->sentence()
+                'content' => fake()->sentence(),
             ]);
         }
     }

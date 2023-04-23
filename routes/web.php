@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\Admin\Job\PublishJobController;
 use App\Http\Controllers\Admin\Job\SingleJobController;
+use App\Http\Controllers\Admin\SubscriptionBackController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
+use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\PagesController;
+use App\Http\Controllers\Front\SubscriptionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Admin\Subscription\Edit;
+use App\Http\Livewire\Admin\Subscription\EditComponent;
+use App\Models\Subscription;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,10 +76,15 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
     Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
     //CONTACTS
-    Route::view('/contacts', 'admin.contacts.index')->name('contacts.index');
+    Route::view('contacts', 'admin.contacts.index')->name('contacts.index');
+    //SUBSCRIPTION
+    Route::view('subscriptions', 'admin.subscriptions.index')->name('subscription.index');
+    Route::get('subscription/edit/{subscription:slug}', EditComponent::class)->name('subscription.edit');
+    Route::patch('subscription/update/{id}', [SubscriptionBackController::class, 'update'])->name('subscription.update');
+    Route::view('subscription/create', 'admin.subscriptions.add')->name('subscription.add');
 });
 
 // GENERAL
 Route::get('lang/{locale}', LangController::class)->name('lang');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Models\{Subscription};
 use App\Http\Controllers\Controller;
+use App\Models\{Subscription};
 use Illuminate\Contracts\View\View;
 
 class SubscriptionController extends Controller
 {
     /**
      * Display listing subscription plans
-     *
-     * @return \Illuminate\Contracts\View\View
-     * 
      */
     public function index(): View
     {

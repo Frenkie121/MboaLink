@@ -46,7 +46,7 @@ class ManageMessages extends Component
 
         $this->closeModal();
 
-        toast(trans('The response was successfully sent to ') . $contact->name, 'success');
+        toast(trans('The response was successfully sent to ').$contact->name, 'success');
 
         return redirect()->route('admin.contacts.index');
     }
