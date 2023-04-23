@@ -10,7 +10,7 @@ class Talent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['aspiration', 'language', 'residence', 'cv'];
+    protected $fillable = ['aspiration', 'language', 'location', 'cv', 'category_id'];
 
     const LANGUAGES = [
         1 => 'English',

@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('talentable_type');
             $table->integer('talentable_id');
-            $table->foreignId('sub_category_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->mediumText('aspiration')->nullable();
             $table->string('language');
-            $table->string('residence');
+            $table->string('location');
             $table->string('cv')->nullable();
             $table->timestamps();
         });

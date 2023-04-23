@@ -22,7 +22,7 @@ class SubscriptionSeeder extends Seeder
         ]);
 
         $enterprise = Subscription::create([
-            'name' => 'Enterprise',
+            'name' => 'Company',
             'amount' => fake()->randomElement([1000, 2000, 3000, 5000]),
             'duration' => fake()->randomDigit(),
         ]);
