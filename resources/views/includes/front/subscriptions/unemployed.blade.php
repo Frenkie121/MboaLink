@@ -1,6 +1,6 @@
 <div class="col-md-6">
     <div class="form-floating">
-        <input type="text" class="form-control @error('Name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
         <label for="name">@lang('Name') <small><b class="text-danger">*</b></small></label>
     </div>
     @error('name')
@@ -18,14 +18,23 @@
 </div>
 <div class="col-md-6">
     <div class="form-floating">
-        <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" placeholder="@lang('Phone Number') (WhatsApp)" wire:model.defer="phone_number">
-        <label for="phone_number">@lang('Phone Number') {{ $subscription_id === 4 ? __('parent') : '' }} (WhatsApp) <small><b class="text-danger">*</b></small></label>
+        <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" placeholder="@lang('Parent Phone Number') (WhatsApp)" wire:model.defer="phone_number">
+        <label for="phone_number">@lang('Parent Phone Number') (WhatsApp) <small><b class="text-danger">*</b></small></label>
     </div>
     @error('phone_number')
         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
     @enderror
 </div>
 <div class="col-md-6">
+    <div class="form-floating">
+        <input type="date" class="form-control @error('birth_date') is-invalid @enderror" id="birth_date" placeholder="@lang('Birth Date')" wire:model.defer="birth_date">
+        <label for="birth_date">@lang('Birth Date') <small><b class="text-danger">*</b></small></label>
+    </div>
+    @error('birth_date')
+        <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+    @enderror
+</div>
+<div class="col-md-12">
     <div class="form-floating">
         <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" placeholder="@lang('Location')" wire:model.defer="location">
         <label for="location">@lang('Location') <small><b class="text-danger">*</b></small></label>
@@ -74,7 +83,7 @@
         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
     @enderror
 </div>
-<div class="col-6">
+<div class="col-md-6">
     <div class="form-floating">
         <textarea class="form-control @error('qualifications') is-invalid @enderror" placeholder="@lang('Describe your qualifications in a few words')" id="qualifications" style="height: 150px" wire:model.defer="qualifications"></textarea>
         <label for="qualifications">@lang('Describe your qualifications in a few words')</label>
@@ -83,7 +92,7 @@
         @enderror
     </div>
 </div>
-<div class="col-6">
+<div class="col-md-6">
     <div class="form-floating">
         <textarea class="form-control @error('aptitudes') is-invalid @enderror" placeholder="@lang('Describe your aptitudes in a few words')" id="aptitudes" style="height: 150px" wire:model.defer="aptitudes"></textarea>
         <label for="aptitudes">@lang('Describe your aptitudes in a few words')</label>
@@ -94,9 +103,9 @@
 </div>
 <div class="col-12">
     <div class="form-floating">
-        <textarea class="form-control @error('description') is-invalid @enderror" placeholder="@lang('Add a description')" id="description" style="height: 150px" wire:model.defer="description"></textarea>
-        <label for="description">@lang('Describe your aspirations in a few words') <small><b class="text-danger">*</b></small></label>
-        @error('description')
+        <textarea class="form-control @error('aspiration') is-invalid @enderror" placeholder="@lang('Add a description')" id="aspiration" style="height: 150px" wire:model.defer="aspiration"></textarea>
+        <label for="aspiration">@lang('Describe your aspiration in a few words') <small><b class="text-danger">*</b></small></label>
+        @error('aspiration')
             <span class="text-danger fw-light"><small>{{ $message }}</small></span>
         @enderror
     </div>

@@ -1,6 +1,6 @@
 <div class="col-md-6">
     <div class="form-floating">
-        <input type="text" class="form-control @error('Name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
         <label for="name">@lang('Name') <small><b class="text-danger">*</b></small></label>
     </div>
     @error('name')

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('diploma');
             $table->string('current_job')->nullable();
             $table->mediumText('aptitudes')->nullable();
+            $table->mediumText('qualifications')->nullable();
             $table->timestamps();
         });
     }

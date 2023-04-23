@@ -6,7 +6,8 @@ use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use App\Models\{Category, User};
+use Illuminate\Validation\Rule;
+use App\Models\{Category, Pupil, Student, Unemployed};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Subscriptions extends Component
@@ -26,13 +27,19 @@ class Subscriptions extends Component
     // Company properties
     public $description, $website, $logo;
 
-    // Pupils
-    public $educations, $sections, $cycles, $languages;
-    public $education_type, $section, $serie, $cycle, $current_class;
+    // Talent properties
+    public $aspiration, $birth_date;
 
     // Students
     public $universities;
     public $university, $training_school;
+
+    // Pupils
+    public $educations, $sections, $cycles, $languages;
+    public $education_type, $section, $serie, $cycle, $current_class, $school;
+
+    // Unemployed
+    public $current_job, $diploma, $aptitudes, $qualifications;
 
     public function mount()
     {
@@ -66,23 +73,46 @@ class Subscriptions extends Component
             'website' => 'nullable|url',
             'logo' => 'nullable|image|mimes:png,jpeg,jpg|max:512',
         ];
+
+        $talentRules = [
+            'birth_date' => 'required|date',
+            'aspiration' => 'required|string|max:255',
+            'language' => 'required|string|' . Rule::in(array_keys(config('subscriptions.language'))),
+        ];
+
+        $studentRules = [
+            'university' => 'required|string',
+            'training_school' => 'required|string',
+        ];
+
+        $pupilRules = [
+            'section' => 'required|string',
+            'cycle' => 'required|string',
+            'serie' => 'required|string',
+            'current_class' => 'required|string',
+            'school' => 'required|string',
+        ];
+
+        $unemployedRules = [
+            'diploma' => 'required|string',
+            'current_job' => 'required|string',
+            'aptitudes' => 'required|string',
+            'qualifications' => 'required|string',
+        ];
+
         return match($this->subscription_id) {
             1 => '',
-            2 => array_merge($commonRules, $companyRules)
+            2 => array_merge($commonRules, $companyRules),
+            3 => array_merge($commonRules, $talentRules, $studentRules),
+            4 => array_merge($commonRules, $talentRules, $pupilRules),
+            5 => array_merge($commonRules, $talentRules, $unemployedRules),
+            default => $commonRules
         };
     }
 
     public function save()
     {
         $this->validate($this->rules());
-        
-        $company = Company::query()->create([
-            'category_id' => $this->category,
-            'location' => $this->location,
-            'description' => $this->description,
-            'url' => $this->website,
-        ]);
-
         $password = Str::random(10);
         $role = match($this->subscription_id) {
             2 => 2,
@@ -90,20 +120,60 @@ class Subscriptions extends Component
             4 => 4,
             5 => 5
         };
-        $user = $company->user()->create([
+
+        if ($this->subscription_id === 2) {
+            $userable = Company::query()->create([
+                'category_id' => $this->category,
+                'location' => $this->location,
+                'description' => $this->description,
+                'url' => $this->website,
+            ]);
+
+            if ($this->logo) {
+                $name = uniqid() . '.' .$this->logo->extension();
+                $this->logo->storeAs('public/companies/', $name);
+                $userable->logo = $name;
+                $userable->save();
+            }
+        } elseif (in_array($this->subscription_id, [3, 4, 5])) {
+            if ($this->subscription_id === 3) { // Student
+                $talentable = Student::query()->create([
+                    'university' => config('subscriptions.university.' . $this->university),
+                    'training_school' => config('subscriptions.training_school.' . $this->university)[$this->training_school],
+                ]);
+            } elseif ($this->subscription_id === 4) { // Pupil
+                $talentable = Pupil::query()->create([
+                    'section' => $this->section,
+                    'cycle' => $this->cycle,
+                    'serie' => $this->serie,
+                    'class' => $this->current_class,
+                    'school' => $this->school
+                ]);
+            } elseif ($this->subscription_id === 5) { // Unemployed
+                $talentable = Unemployed::query()->create([
+                    'diploma' => $this->diploma,
+                    'current_job' => $this->current_job,
+                    'aptitudes' => $this->aptitudes,
+                    'qualifications' => $this->qualifications,
+                ]);
+            }
+
+            $userable = $talentable->talent()->create([
+                'category_id' => $this->category,
+                'aspiration' => $this->aspiration,
+                'language' => $this->language,
+                'location' => $this->location,
+                'birth_date' => $this->birth_date,
+            ]);
+        }
+
+        $user = $userable->user()->create([
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'password' => $password,
             'role_id' => $role,
         ]);
-
-        if ($this->logo) {
-            $name = Str::slug($user->name).'.'.$this->logo->extension();
-            $this->logo->storeAs('public/companies/', $name);
-            $company->logo = $name;
-            $company->save();
-        }
 
         alert('', trans('Your subscription has been successfully registered. You will be contacted shortly for further details.'), 'success')->autoclose(7000);
         return redirect()->route('front.home');

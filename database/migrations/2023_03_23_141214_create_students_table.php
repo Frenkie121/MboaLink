@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('university');
             $table->string('training_school');
-            $table->string('level');
-            $table->string('field');
+            $table->string('level')->nullable();
+            $table->string('field')->nullable();
             $table->timestamps();
         });
     }

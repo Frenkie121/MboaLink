@@ -10,7 +10,7 @@ class Pupil extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['school', 'cycle', 'section', 'serie', 'parent_contact'];
+    protected $fillable = ['school', 'cycle', 'section', 'serie', 'parent_contact', 'class'];
 
     // RELATIONSHIPS
     public function talent(): MorphOne

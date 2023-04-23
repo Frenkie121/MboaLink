@@ -1,6 +1,6 @@
 <div class="col-md-6">
     <div class="form-floating">
-        <input type="text" class="form-control @error('Name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="@lang('Name')" wire:model.defer="name">
         <label for="name">@lang('Name') <small><b class="text-danger">*</b></small></label>
     </div>
     @error('name')
@@ -90,9 +90,9 @@
 </div>
 <div class="col-12">
     <div class="form-floating">
-        <textarea class="form-control @error('description') is-invalid @enderror" placeholder="@lang('Add a description')" id="description" style="height: 150px" wire:model.defer="description"></textarea>
-        <label for="description">@lang('Describe your aspirations in a few words') <small><b class="text-danger">*</b></small></label>
-        @error('description')
+        <textarea class="form-control @error('aspiration') is-invalid @enderror" placeholder="@lang('Add a description')" id="aspiration" style="height: 150px" wire:model.defer="aspiration"></textarea>
+        <label for="aspiration">@lang('Describe your aspiration in a few words') <small><b class="text-danger">*</b></small></label>
+        @error('aspiration')
             <span class="text-danger fw-light"><small>{{ $message }}</small></span>
         @enderror
     </div>
