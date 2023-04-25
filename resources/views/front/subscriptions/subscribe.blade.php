@@ -38,13 +38,12 @@
         <div class="container" id="tabs">
             <h1 class="text-center mb-2 wow fadeInUp" data-wow-delay="0.1s">@lang('Subscribe to a new subscription')</h1>
             <h6 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
-                {{-- @if ($subscription->id === 1) --}}
-                    @lang('Fill the form below to save your subscription')
-                {{-- @else
-                    @lang('Follow the steps below save your subscription') 
-                @endif --}}
+                @lang('Fill the form below to save your subscription')
             </h6>
-            <div class="d-flex justify-content-center">
+            <div class="row d-flex justify-content-between">
+                <div class="col-md-4">
+                    <x-front.subscription-item :subscription="$subscription" />
+                </div>
                 <div class="col-md-8">
                     @livewire('front.subscriptions')
                 </div>
