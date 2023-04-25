@@ -18,12 +18,14 @@ class SubscriptionBackController extends Controller
     {
         // dd($request);
         $data = $request->validate([
-            'offer.*' => ['required', 'string', 'distinct'],
-            'offer_add.*' => ['required', 'string', 'distinct'],
+            'offers.*' => ['required', 'string', 'distinct'],
+            'offers_add.*' => ['required', 'string', 'distinct', 'different:offers.*'],
             'subs_name' => ['required', 'string', 'unique:subscriptions,name,' . $id],
             'amount' => ['required', 'numeric', 'min:0'],
             'duration' => ['required', 'numeric', 'min:0', 'max:12'],
 
+        ], [
+            'offers_add.*.different' => __('The new offer :position and current offers must be different')
         ]);
         $subscription = Subscription::find($id);
         $subscription->update([
@@ -34,12 +36,12 @@ class SubscriptionBackController extends Controller
         ]);
         $subscription->offers()->delete();
         // field existing
-        foreach ($data['offer'] as  $value) {
+        foreach ($data['offers'] as  $value) {
             $subscription->offers()->create(['content' => $value]);
         }
         // new field whom adding
-        if (isset($data['offer_add'])) {
-            foreach ($data['offer_add'] as  $value) {
+        if (isset($data['offers_add'])) {
+            foreach ($data['offers_add'] as  $value) {
                 $subscription->offers()->create(['content' => $value]);
             }
         }

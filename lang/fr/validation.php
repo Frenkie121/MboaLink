@@ -174,8 +174,8 @@ return [
         'phone_number' => 'numéro de téléphone',
         'duration' => 'durée',
         'amount' => 'somme',
-        'offer.0' => 'offre.0',
-        'offer.*' => 'offre.*',
+        'offer.0' => 'offre 0',
+        'offer.*' => 'offre :position',
         'offers.0' => 'offre 0',
         'offers.*' => 'offre :position',
         'subs_name' => 'nom abonnement',
@@ -188,5 +188,7 @@ return [
         'serie' => 'série',
         'diploma' => 'dernier diplôme',
         'current_job' => 'job actuel',
+        'offers_add.*' => 'nouvelle offre :position',
+        'subs_name' => 'nom',
     ],
 ];

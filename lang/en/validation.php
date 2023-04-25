@@ -179,6 +179,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'offers_add.*' => 'new offer :position',
+        'subs_name' => 'name',
+        'offers.*' => 'offer :position'
+    ],
 
 ];
