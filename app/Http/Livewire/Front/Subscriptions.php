@@ -10,7 +10,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\{Category, Pupil, Student, Unemployed};
+use App\Models\{Category, Pupil, Student, Subscription, Unemployed};
 use App\Notifications\Front\Subscription\NewSubscriptionNotification;
 
 class Subscriptions extends Component
@@ -176,6 +176,13 @@ class Subscriptions extends Component
             'phone_number' => $this->phone_number,
             'password' => $password,
             'role_id' => $role,
+        ]);
+
+        $subscription = Subscription::query()->find($this->subscription_id);
+        $user->subscriptions()->attach($this->subscription_id, [
+            'amount' => $subscription->amount,
+            'starts_at' => now(),
+            'ends_at' => now()->addWeeks($subscription->duration)
         ]);
 
         Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
