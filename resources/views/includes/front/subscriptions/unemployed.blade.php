@@ -104,7 +104,7 @@
 <div class="col-12">
     <div class="form-floating">
         <textarea class="form-control @error('aspiration') is-invalid @enderror" placeholder="@lang('Add a description')" id="aspiration" style="height: 150px" wire:model.defer="aspiration"></textarea>
-        <label for="aspiration">@lang('Describe your aspiration in a few words') <small><b class="text-danger">*</b></small></label>
+        <label for="aspiration">@lang('Describe your aspirations in a few words') <small><b class="text-danger">*</b></small></label>
         @error('aspiration')
             <span class="text-danger fw-light"><small>{{ $message }}</small></span>
         @enderror
