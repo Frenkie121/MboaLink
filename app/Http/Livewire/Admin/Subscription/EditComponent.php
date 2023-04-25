@@ -10,9 +10,10 @@ use App\Models\Subscription;
 class EditComponent extends Component
 {
     public $subscription, $i = 1, $number;
-    public   $offersInput = [];
+    public $offersInput = [];
     public $subs_name, $duration, $amount, $index;
     public array $offersInputAdd = [];
+
     public function mount(Subscription $subscription)
     {
         $this->subs_name = $subscription->name;
@@ -21,6 +22,7 @@ class EditComponent extends Component
         $this->offersInput = Offer::where('subscription_id', $this->subscription->id)->get();
         $this->number = count($this->offersInput);
     }
+
     public function add($i): void
     {
         $this->i = ++$i;
@@ -28,6 +30,7 @@ class EditComponent extends Component
 
         $this->resetErrorBag();
     }
+    
     // public function back()
     // {
     //     $this->reset();

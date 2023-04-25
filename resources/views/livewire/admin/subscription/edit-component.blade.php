@@ -70,11 +70,10 @@
                                                     <td>
                                                         <div>
                                                             <input placeholder="text..." type="text"
-                                                                class="form-control " name="offer[]"
-                                                                value="{{ $value->content }}">
-                                                            @error('offer[]')
-                                                                <span class="text-danger"> <small>
-                                                                        {{ $message }}</small></span>
+                                                                class="form-control @error('offers.' .  $key) is-invalid @enderror" name="offers[]"
+                                                                value="{{ old('offers.' . $key) ?? $value->content }}">
+                                                            @error('offers.' . $key)
+                                                                <span class="text-danger"> <small>{{ $message }}</small></span>
                                                             @enderror
                                                         </div>
                                                     </td>
@@ -95,21 +94,52 @@
                                                     @endif
                                                 </tr>
                                             @endforeach
+                                            {{-- @if ($errors->any())
+                                                @dd($errors)
+                                            @endif --}}
+                                            @if (old('offers_add'))
+                                                @forelse (old('offers_add') as $key => $value)
+                                                    @php
+                                                        $length = $loop->iteration + count($offersInput)
+                                                    @endphp
+                                                    <tr wire:key="{{ $length }}">
+                                                        <td>
+                                                            <div>
+                                                                <input placeholder="text..." type="text"
+                                                                    class="form-control @error('offers_add.' .  $key) is-invalid @enderror" name="offers_add[]" value="{{ $value }}">
+                                                                @error('offers_add.' . $key)
+                                                                    <span class="text-danger"> <small>{{ $message }}</small></span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div wire:click.prevent="remove({{ $length }})"
+                                                                class="btn btn-danger btn-lg"> <i
+                                                                    class="fa fa-minus col-12"></i>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                @endforelse
+                                            @endif
+
                                             @foreach ($offersInputAdd as $key => $value)
-                                                <tr wire:key="{{ $index }}">
+                                                @php
+                                                    $new_length = $key + count($offersInput) + (old('offers_add') ? count(old('offers_add')) : 0);
+                                                @endphp
+                                                <tr wire:key="{{ $new_length }}">
                                                     <td>
                                                         <div>
                                                             <input placeholder="text..." type="text"
-                                                                class="form-control " name="offer_add[]">
-                                                            @error('offer_add[]')
-                                                                <span class="text-danger"> <small>
-                                                                        {{ $message }}</small></span>
+                                                                class="form-control @error('offers_add.' .  $key) is-invalid @enderror" name="offers_add[]">
+                                                            @error('offers_add.' . $key)
+                                                                <span class="text-danger"> <small>{{ $message }}</small></span>
                                                             @enderror
                                                         </div>
                                                     </td>
 
                                                     <td>
-                                                        <div wire:click.prevent="remove({{ $key }})"
+                                                        <div wire:click.prevent="remove({{ $new_length }})"
                                                             class="btn btn-danger btn-lg"> <i
                                                                 class="fa fa-minus col-12"></i>
                                                         </div>
