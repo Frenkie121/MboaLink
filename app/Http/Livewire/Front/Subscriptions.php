@@ -135,8 +135,8 @@ class Subscriptions extends Component
         $subscription = Subscription::query()->find($this->subscription_id);
         $user->subscriptions()->attach($this->subscription_id, [
             'amount' => $subscription->amount,
-            'starts_at' => now(),
-            'ends_at' => now()->addWeeks($subscription->duration)
+            // 'starts_at' => now(),
+            // 'ends_at' => now()->addWeeks($subscription->duration)
         ]);
 
         Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
