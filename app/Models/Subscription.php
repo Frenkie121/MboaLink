@@ -19,6 +19,7 @@ class Subscription extends Model
     {
         return __($value);
     }
+   
 
     // MUTATORS
     public function setNameAttribute($value): void

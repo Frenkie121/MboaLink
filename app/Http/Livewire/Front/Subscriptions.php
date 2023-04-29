@@ -27,7 +27,7 @@ class Subscriptions extends Component
 
     // User properties
     public $name, $email, $phone_number;
-    
+
     // Company properties
     public $description, $website, $logo;
 
@@ -126,6 +126,7 @@ class Subscriptions extends Component
 
         $user = $userable->user()->create([
             'name' => $this->name,
+            // 'slug' => Str::slug($this->name),
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'password' => $password,
@@ -144,7 +145,7 @@ class Subscriptions extends Component
         alert('', trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.'), 'success')->autoclose(10000);
         return redirect()->route('front.home');
     }
-    
+
     public function render()
     {
         $series = [];
@@ -154,7 +155,7 @@ class Subscriptions extends Component
                 $series = config('subscriptions.series.' . $this->section . '.' . $this->education_type);
             }
         }
-        
+
         $classes = [];
         if (! is_null($this->cycle)) {
             $classes = array_merge(config('subscriptions.class.en'), config('subscriptions.class.fr'));

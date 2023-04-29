@@ -19,7 +19,8 @@ class UserFactory extends Factory
     {
         return [
             'role_id' => fake()->numberBetween(2, 3),
-            'name' => fake()->name(),
+            'name' => $name = fake()->name(),
+            'slug' => Str::slug($name),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => 'password',
