@@ -3,15 +3,12 @@
 namespace App\Http\Livewire\Front;
 
 use App\Http\Requests\SubscriptionRequest;
-use App\Models\User;
-use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\{Category, Pupil, Student, Subscription, Unemployed};
+use App\Models\{Category, Company, Pupil, Student, Subscription, Unemployed, User};
 use App\Notifications\Front\Subscription\NewSubscriptionNotification;
 
 class Subscriptions extends Component
@@ -22,7 +19,6 @@ class Subscriptions extends Component
     public $subscription_id;
     public $categories;
     public $language;
-
     public $location, $category;
 
     // User properties
@@ -44,6 +40,10 @@ class Subscriptions extends Component
 
     // Unemployed
     public $current_job, $diploma, $aptitudes, $qualifications;
+
+    protected $messages = [
+        'birth_date.before' => 'You must have at least 18 years old',
+    ];
 
     public function mount()
     {
@@ -87,7 +87,7 @@ class Subscriptions extends Component
             ]);
 
             if ($this->logo) {
-                $name = uniqid() . '.' .$this->logo->extension();
+                $name = uniqid('company-') . '.' .$this->logo->extension();
                 $this->logo->storeAs('public/companies/', $name);
                 $userable->logo = $name;
                 $userable->save();

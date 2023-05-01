@@ -6,7 +6,7 @@
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
             <a href="{{ route('admin.dashboard') }}">
-                <img alt="image" src="{{ asset('assets/logo.jpg') }}" class="rounded-circle mr-1" width="60">
+                <img alt="image" src="{{ asset('assets/logo.png') }}" class="rounded-circle mr-1" width="60">
                 {{ config('app.name', 'MboaLink') }}
             </a>
         </div>

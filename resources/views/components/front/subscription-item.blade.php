@@ -7,7 +7,7 @@
 <div class="col wow fadeInUp {{ $index ? 'mt-5' : '' }}" data-wow-delay="0.{{ array_rand([1, 3, 5, 7]) }}s">
     <div class="card mb-4 rounded-3 shadow-sm border-{{ $subscription->id === 1 ? 'primary' : 'secondary' }} h-100">
         <div class="card-header py-3 bg-{{ $subscription->id === 1 ? 'primary' : 'secondary' }} border-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
-            <h4 class="my-0 fw-normal">{{ $subscription->name }}</h4>
+            <h4 class="my-0 fw-normal text-center">{{ $subscription->name }}</h4>
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center">

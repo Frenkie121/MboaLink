@@ -8,7 +8,7 @@
     <title>{{ config('app.name', 'MboaLink') }} | @yield('subtitle')</title>
     
     <!-- Favicon -->
-    <link href="{{ asset('assets/favicon.ico') }}" rel="icon">
+    <link href="{{ asset('assets/favicon.png') }}" rel="icon">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

@@ -22,8 +22,12 @@
         @endif
     </div>
     <div class="d-flex justify-content-end mt-2">
-        <button wire:loading.class="isDisabled" class="btn btn-primary">
+        <button wire:loading.remove class="btn btn-primary">
             <span class="d-md-inline d-sm-inline">@lang('Confirm')</span>
+        </button>
+        <button wire:loading class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="sr-only">@lang('Loading...')</span>@lang('Loading...')
         </button>
     </div>
 </form>

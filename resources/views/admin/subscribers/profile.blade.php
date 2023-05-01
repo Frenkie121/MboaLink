@@ -20,7 +20,7 @@
                     <div class="profile-widget-header">
 
                         <img alt="image"
-                            @if ($user->role_id === 2) src="{{ asset('storage/companies/' . $user->userable->logo) }}" @else  src="{{ asset('assets/back/img/avatar/avatar-2.png') }}" @endif
+                            src="@if ($user->role_id !== 2 && is_null($user->userable->logo)) {{ asset('assets/back/img/avatar/avatar-2.png') }} @else {{ asset($user->userable->logo) }} @endif" 
                             class="rounded-circle profile-widget-picture">
                     </div>
 

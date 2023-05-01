@@ -39,7 +39,7 @@ class SubscriptionRequest extends FormRequest
         ];
 
         $talentRules = [
-            'birth_date' => 'required|date',
+            'birth_date' => 'required|date|before:' . now()->subYears(18)->format('d-m-Y'),
             'aspiration' => 'required|string|max:255',
             'language' => 'required|string|' . Rule::in(array_keys(config('subscriptions.language'))),
         ];
