@@ -20,7 +20,7 @@
                     <div class="profile-widget-header">
 
                         <img alt="image"
-                            src="@if ($user->role_id !== 2 && is_null($user->userable->logo)) {{ asset('assets/back/img/avatar/avatar-2.png') }} @else {{ asset($user->userable->logo) }} @endif" 
+                            src="@if ($user->role_id !== 2 && is_null($user->userable->logo)) {{ asset('assets/back/img/avatar/avatar-2.png') }} @else {{ asset($user->userable->logo) }} @endif"
                             class="rounded-circle profile-widget-picture">
                     </div>
 
@@ -43,15 +43,17 @@
                             @lang('Any')
                         @endif
 
-                        <br><br>
-                        <span class="mr-2">@lang('Birth Date') :</span>
-                        @if ($user->birth_date)
-                            {{ $user->birth_date }}
-                        @else
-                            @lang('Any')
+                        @if ($user->role_id > 2)
+                            <br><br>
+                            <span class="mr-2">@lang('Birth Date') :</span>
+                            @if ($user->birth_date)
+                                {{ $user->birth_date }}
+                            @else
+                                @lang('Any')
+                            @endif
+                            <br><br>
+                            <hr>
                         @endif
-                        <br><br>
-                        <hr>
 
                     </div>
 
@@ -169,8 +171,6 @@
                             @endif
                             <br><br>
                         </div>
-
-                        <img src="{{ asset('storage/companies/' . $user->userable->logo) }}" alt="">
                     @endif
 
                 </div>

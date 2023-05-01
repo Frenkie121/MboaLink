@@ -16,7 +16,7 @@
                                     @foreach ($subscription->users()->with(['role', 'subscriptions'])->get() as $subscriber)
                                         @if ($user->id === $subscriber->id)
                                             @if ($subscriber->pivot->starts_at)
-                                                {{ $subscriber->pivot->starts_at }}
+                                                {{ formatedLocaleDate($subscriber->pivot->starts_at) }}
                                             @else
                                                 @lang('No')
                                             @endif
@@ -24,8 +24,6 @@
                                     @endforeach
                                 </span>
                                 <span class="bullet"></span>
-
-
                             </div>
                             <p> {{ $subscription->name }}</p>
                         </div>
@@ -38,13 +36,10 @@
                     </div>
                     <div class="activity-detail">
                         <div class="mb-2">
-                            <span class="text-job"> hour ago</span>
-                            <span class="bullet"></span>
-
-
+                            <span class="text-job"> ----</span>
+                            <span class="bullet"> </span>
                         </div>
-                        <p>Moved the task "<a href="#">Fix some features that are bugs in the master module</a>"
-                            from Progress to Finish.</p>
+                        <p>@lang("All of the above represent subscriptions to which this subscriber has subscribed")</p>
                     </div>
                 </div>
 

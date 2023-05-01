@@ -41,10 +41,10 @@
                                             <td>
                                                 @if ($user->role_id !== 1)
                                                     <form method="POST"
-                                                        action="{{ route('admin.users.status', $user->id) }}">
+                                                        action="{{ route('admin.users.status', $user->slug) }}">
                                                         @csrf
                                                         @method('PATCH')
-                                                        <a href="{{ route('admin.users.status', $user->id) }}"
+                                                        <a href="{{ route('admin.users.status', $user->slug) }}"
                                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();"
                                                             class="btn btn-{{ $user->is_active ? 'danger' : 'primary' }}">

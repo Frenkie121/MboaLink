@@ -26,17 +26,6 @@ class Talent extends Model
     //     return __(self::LANGUAGES[$key]);
     // }
 
-    // public function cv(): Attribute
-    // {
-    //     return Attribute::make(
-    //         set: function($cv) {
-    //             $name = uniqid('cv-') . '.' . $cv->extension;
-    //             $cv->storeAs('public/cv/', $name);
-    //             $this->attributes['cv'] = $name;
-    //         }
-    //     );
-    // }
-
     // RELATIONSHIPS
     public function talentable(): MorphTo
     {

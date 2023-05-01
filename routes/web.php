@@ -82,19 +82,15 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::get('subscription/edit/{subscription:slug}', EditComponent::class)->name('subscription.edit');
     Route::patch('subscription/update/{id}', [SubscriptionBackController::class, 'update'])->name('subscription.update');
     Route::view('subscription/create', 'admin.subscriptions.add')->name('subscription.add');
-    // subscribers
-    // Route::controller(SubscriptionController::class)->prefix('subscribers')->name('subscribers.')->group(function () {
-    // Route::get('', 'index')->name('index');
-    // Route::get('subscribers', [SubscribersController::class,'index'])->name('subscribers.index');
 
     // Newsletter
     Route::view('newsletters', 'admin.newsletters.index')->name('newsletters.add');
 
 
 
-    Route::get('subscriber/{User:id}', [SubscribersController::class, 'show'])->name('subscribers.profile');
     Route::get('subscribers/talents', [SubscribersController::class, 'indexTalent'])->name('subscribers.talent.index');
     Route::get('subscribers/companies', [SubscribersController::class, 'indexCompany'])->name('subscribers.company.index');
+    Route::get('subscribers/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
 });
 
 // GENERAL

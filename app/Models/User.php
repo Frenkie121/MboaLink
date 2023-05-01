@@ -33,7 +33,8 @@ class User extends Authenticatable
         'password',
         'is_active',
         'role_id',
-        'phone_number'
+        'phone_number',
+        'slug',
     ];
 
     /**
@@ -71,16 +72,22 @@ class User extends Authenticatable
         }
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';   
+    }
+
     // MUTATORS
     public function password(): Attribute
     {
         return Attribute::set(fn ($value) => Hash::make($value));
     }
-    // public function setTitleAttribute($value): void
-    // {
-    //     $this->attributes['name'] = $value;
-    //     $this->attributes['slug'] = Str::slug($value);
-    // }
+
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     // RELATIONSHIPS
     public function role(): BelongsTo

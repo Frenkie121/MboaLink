@@ -19,7 +19,7 @@ class Subscription extends Model
     {
         return __($value);
     }
-   
+
 
     // MUTATORS
     public function setNameAttribute($value): void
@@ -34,6 +34,7 @@ class Subscription extends Model
         return $this->belongsToMany(User::class)
                     ->withPivot(['amount', 'starts_at', 'ends_at']);
     }
+  
 
     public function offers(): HasMany
     {

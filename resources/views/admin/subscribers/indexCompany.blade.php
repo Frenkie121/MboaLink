@@ -43,15 +43,15 @@
                                                     @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
                                                         @if ($user->id === $subscriber->id)
                                                             @if ($user->pivot->starts_at)
-                                                                {{ $user->pivot->starts_at }}
+                                                                {{ formatedLocaleDate($user->pivot->starts_at) }}
                                                             @else
-                                                                @lang("Any")
+                                                                @lang('Any')
                                                             @endif
                                                         @endif
                                                     @endforeach
                                                 </td>
 
-                                                <td>@if($subscriber->phone_number){{ $subscriber->phone_number }}@else @lang('Any') @endif</td>
+                                                <td>{{ $subscriber->phone_number }}</td>
 
                                                 <td>
                                                     <a class="btn btn-primary"
