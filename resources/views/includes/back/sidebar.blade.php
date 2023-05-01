@@ -22,11 +22,8 @@
                 <a class="nav-link" href="{{ route('admin.users.index') }}"><i class="fas fa-users"></i>
                     <span>@lang('Users')</span></a>
             </li>
-            {{-- <li class="@if (Str::contains($currentUri, 'subscriber')) active @endif">
-                <a class="nav-link" href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user-check"></i>
-                    <span>@lang('Subscribers')</span></a>
-            </li> --}}
-            <li class="dropdown active">
+
+            <li class="dropdown @if (Str::contains($currentUri, 'talent') || Str::contains($currentUri, 'companies')) active @endif">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-check"></i>
                     <span>@lang('Subscribers')</span></a>
                 <ul class="dropdown-menu">
