@@ -66,7 +66,7 @@ class SubscriptionRequest extends FormRequest
         ];
         
         return match($subscription_id) {
-            1 => '',
+            1 => $commonRules,
             2 => array_merge($commonRules, $companyRules),
             3 => array_merge($commonRules, $talentRules, $studentRules),
             4 => array_merge($commonRules, $talentRules, $pupilRules),

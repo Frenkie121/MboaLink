@@ -41,6 +41,9 @@ class Subscriptions extends Component
     // Unemployed
     public $current_job, $diploma, $aptitudes, $qualifications;
 
+    // Free
+    public $subscription_types, $type;
+
     protected $messages = [
         'birth_date.before' => 'You must have at least 18 years old',
     ];
@@ -51,14 +54,18 @@ class Subscriptions extends Component
         $this->categories = Category::query()->get(['id', 'name']);
         $this->languages = config('subscriptions.language');
 
-        if ($this->subscription_id === 4) {
+        if (in_array($this->subscription_id, [4, 1])) {
             $this->educations = config('subscriptions.education');
             $this->sections = config('subscriptions.section');
             $this->cycles = config('subscriptions.cycle');
         }
 
-        if ($this->subscription_id === 3) {
+        if (in_array($this->subscription_id, [3, 1])) {
             $this->universities = config('subscriptions.university');
+        }
+
+        if ($this->subscription_id === 1) {
+            $this->subscription_types = Subscription::query()->get(['id', 'name'])->except(1);
         }
     }
 
