@@ -77,16 +77,17 @@ class Subscriptions extends Component
 
     public function save()
     {
-        // dd($this->rules());
         $this->validate($this->rules());
-        $password = Str::random(10);
+        
         $role = match($this->subscription_id) {
-            1 => 1,
+            1 => 6,
             2 => 2,
             3 => 3,
             4 => 4,
             5 => 5,
         };
+
+        $password = Str::random(10);
 
         if ($this->subscription_id === 2 || ($this->subscription_id === 1 && (int) $this->type === 2)) {
             $userable = Company::query()->create([
@@ -153,10 +154,14 @@ class Subscriptions extends Component
         $user->subscriptions()->attach($this->subscription_id, [
             'amount' => $subscription->amount,
         ]);
+        
+        $message = 'Your request for new subscription has been successfully sent. You will be contacted shortly via WhatsApp for further details in order to validate your subscription.';
+        
+        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
 
-        // Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
-
-        alert('', trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.'), 'success')->autoclose(10000);
+        
+        alert('', trans($message), 'success')->autoclose(10000);
+        
         return redirect()->route('front.home');
     }
 

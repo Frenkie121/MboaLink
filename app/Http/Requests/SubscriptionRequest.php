@@ -25,7 +25,7 @@ class SubscriptionRequest extends FormRequest
     public function rules(int $subscription_id, $type = null)
     {
         $commonRules = [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|email|unique:users,email|max:255',
             'phone_number' => 'required|string|max:255',
             'category' => 'required|exists:categories,id',

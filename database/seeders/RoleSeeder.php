@@ -29,5 +29,8 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'Unemployed',
         ]);
+        Role::create([
+            'name' => 'Free',
+        ]);
     }
 }

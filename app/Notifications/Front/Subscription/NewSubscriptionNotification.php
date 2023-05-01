@@ -46,10 +46,14 @@ class NewSubscriptionNotification extends Notification
                         )
                         ->lineIf(
                             $notifiable->role_id !== 1,
-                            trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.')
+                            trans($this->data['message'])
+                        )
+                        ->lineIf(
+                            $notifiable->role_id !== 1 && $this->data['type'] != 1,
+                            trans('Your password for future login is: ') . $this->data['password'] . '. ' . trans('You can change it any time on your profile.')
                         )
                         ->when($notifiable->role_id === 1,
-                            fn ($mail) => $mail->action(trans('Go to subscription details'), url('/admin/jobs')),
+                            fn ($mail) => $mail->action(trans('Go to subscription details'), url("/admin/subscribers/{$this->data['slug']}")),
                             fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
                         );
     }
