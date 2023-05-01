@@ -24,9 +24,9 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Name')</th>
-                                        <th>@lang('Phone Number')</th>
+                                        <th>@lang('active')</th>
                                         <th>@lang('Subscriptions')</th>
-                                        <th>@lang('End At')</th>
+                                        <th>@lang('Phone Number')</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -35,14 +35,29 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $subscriber->name }}</td>
-                                            <td>{{ $subscriber->phone_number }}</td>
+                                            <td>
+                                                @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
+                                                    @if ($user->id === $subscriber->id)
+                                                        @if ($user->pivot->starts_at)
+                                                            {{ $user->pivot->starts_at }}
+                                                        @else
+                                                            @lang('Any')
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <div class="badge badge-info">
                                                     {{ $subscriber->subscriptions->last()->name }}
-                                                    {{-- ) @lang('In Progress') @else @lang('finish') @endif</div> --}}
-                                                    {{-- {{ count($subscriber->subscriptions) }} --}}
                                             </td>
-                                            <td>{{ $subscriber->subscriptions()->first()->pivot->starts_at }}</td>
+                                            {{-- <td>{{ $subscriber->subscriptions()->first()->pivot->starts_at }}</td> --}}
+                                            <td>
+                                                @if ($subscriber->phone_number)
+                                                    {{ $subscriber->phone_number }}
+                                                @else
+                                                    @lang('Any')
+                                                @endif
+                                            </td>
 
                                             <td>
                                                 <a class="btn btn-primary"
@@ -65,7 +80,8 @@
 
 @push('js')
     <script src="{{ asset('assets/back/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
+    </script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/back/js/page/modules-datatables.js') }}"></script>
 @endpush

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\User;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Livewire\Admin\ProfileSubscriber\SuscriptionList;
 
 class SubscribersController extends Controller
 {
@@ -15,15 +17,9 @@ class SubscribersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function indexTalent()
     {
-        // $subscribersData = DB::table('subscription_user')->get();
-        // dd($subscribersData);
-        // foreach ($subscribersData as  $value) {
-
-        // }
-
-        $users = User::with(['role', 'subscriptions'])->get();
+        $users = User::with(['role', 'subscriptions'])->where('role_id', '>', 2)->get();
 
         $subscribers = [];
         foreach ($users as $user) {
@@ -32,16 +28,11 @@ class SubscribersController extends Controller
                 array_push($subscribers,  $subscriber);
             }
         }
-        // dd($subscribers);->subscriptions()->first()
-        // DB::table('subscription_user')->where('')
-        // dd(User::find(2)->subscriptions->first()->pivot->starts_at);
 
-        return view('admin.subscribers.index', [
+        return view('admin.subscribers.indexTalent', [
             'subscribers' =>  $subscribers,
         ]);
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -49,9 +40,22 @@ class SubscribersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function indexCompany()
     {
-        //
+        $users = User::with(['role', 'subscriptions'])->where('role_id',  2)->get();
+
+        $subscribers = [];
+        foreach ($users as $user) {
+            if (count($user->subscriptions) > 0) {
+                $subscriber = $user;
+                array_push($subscribers,  $subscriber);
+            }
+        }
+
+
+        return view('admin.subscribers.indexCompany', [
+            'subscribers' =>  $subscribers,
+        ]);
     }
 
     /**
@@ -62,7 +66,7 @@ class SubscribersController extends Controller
      */
     public function show(User $User)
     {
-        // dd($User);
+
         return view(
             'admin.subscribers.profile',
             ['user' => $User]

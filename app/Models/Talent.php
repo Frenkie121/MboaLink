@@ -20,10 +20,10 @@ class Talent extends Model
     ];
 
     // MUTATORS
-    public function getLanguageAttribute($key)
-    {
-        return __(self::LANGUAGES[$key]);
-    }
+    // public function getLanguageAttribute($key)
+    // {
+    //     return __(self::LANGUAGES[$key]);
+    // }
 
     // RELATIONSHIPS
     public function talentable(): MorphTo
@@ -36,8 +36,8 @@ class Talent extends Model
         return $this->morphOne(User::class, 'userable');
     }
 
-    public function subCategory()
+    public function category()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(category::class);
     }
 }

@@ -31,11 +31,12 @@
                     <span>@lang('Subscribers')</span></a>
                 <ul class="dropdown-menu">
 
-                    <li class="@if (Str::contains($currentUri, 'subscriber')) active @endif"><a class="nav-link"
-                            href="{{ route('admin.subscribers.index') }}">
+                    <li class="@if (Str::contains($currentUri, 'talent')) active @endif"><a class="nav-link"
+                            href="{{ route('admin.subscribers.talent.index') }}">
                             {{-- <i class="fas fa-user-check"></i> --}}
                             <span>@lang('Unemployed')</span></a></li>
-                    <li><a class="nav-link" href="{{ route('admin.subscribers.index') }}">
+                    <li class="@if (Str::contains($currentUri, 'companies')) active @endif"><a class="nav-link"
+                            href="{{ route('admin.subscribers.company.index') }}">
                             {{-- <i  class="fas fa-user-check"></i> --}}
                             <span>@lang('Companies')</span></a></li>
                 </ul>
