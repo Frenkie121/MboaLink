@@ -141,3 +141,15 @@
         @enderror
     </div>
 </div>
+
+@if ($subscription_id !== 1)
+    <div class="col-md-12">
+        <div class="form-floating">
+            <input type="file" class="form-control @error('cv') is-invalid @enderror" id="cv" wire:model="cv" placeholder="@lang('Add a CV')" accept=".pdf,.doc,.docx">
+            <label for="cv">@lang('Add a CV')</label>
+            @error('cv')
+                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+            @enderror
+        </div>
+    </div>
+@endif

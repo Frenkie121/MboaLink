@@ -58,9 +58,11 @@
 <div class="col-md-6">
     <select class="form-select @error('training_school') is-invalid @enderror" wire:model.lazy="training_school" id="training_school">
         <option hidden>@lang('Select your training school') <b class="text-danger">*</b></option>
-        @foreach ($training_schools as $key => $training_school)
-            <option value="{{ $key }}">{{ __($training_school) }}</option>
-        @endforeach
+        @if (!is_null($university))
+            @foreach ($training_schools as $key => $training_school)
+                <option value="{{ $key }}">{{ __($training_school) }}</option>
+            @endforeach
+        @endif
     </select>
     @error('training_school')
         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -97,3 +99,15 @@
         @enderror
     </div>
 </div>
+
+@if ($subscription_id !== 1)
+    <div class="col-md-12">
+        <div class="form-floating">
+            <input type="file" class="form-control @error('cv') is-invalid @enderror" id="cv" wire:model="cv" placeholder="@lang('Add a CV')" accept=".pdf,.doc,.docx">
+            <label for="cv">@lang('Add a CV')</label>
+            @error('cv')
+                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+            @enderror
+        </div>
+    </div>
+@endif

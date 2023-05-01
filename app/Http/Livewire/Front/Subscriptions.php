@@ -3,15 +3,12 @@
 namespace App\Http\Livewire\Front;
 
 use App\Http\Requests\SubscriptionRequest;
-use App\Models\User;
-use App\Models\Company;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\{Category, Pupil, Student, Subscription, Unemployed};
+use App\Models\{Category, Company, Pupil, Student, Subscription, Unemployed, User};
 use App\Notifications\Front\Subscription\NewSubscriptionNotification;
 
 class Subscriptions extends Component
@@ -22,17 +19,16 @@ class Subscriptions extends Component
     public $subscription_id;
     public $categories;
     public $language;
-
     public $location, $category;
 
     // User properties
     public $name, $email, $phone_number;
-    
+
     // Company properties
     public $description, $website, $logo;
 
     // Talent properties
-    public $aspiration, $birth_date;
+    public $aspiration, $birth_date, $cv;
 
     // Students
     public $universities;
@@ -45,20 +41,31 @@ class Subscriptions extends Component
     // Unemployed
     public $current_job, $diploma, $aptitudes, $qualifications;
 
+    // Free
+    public $subscription_types, $type;
+
+    protected $messages = [
+        'birth_date.before' => 'You must have at least 18 years old',
+    ];
+
     public function mount()
     {
         $this->subscription_id = request()->subscription->id;
         $this->categories = Category::query()->get(['id', 'name']);
         $this->languages = config('subscriptions.language');
 
-        if ($this->subscription_id === 4) {
+        if (in_array($this->subscription_id, [4, 1])) {
             $this->educations = config('subscriptions.education');
             $this->sections = config('subscriptions.section');
             $this->cycles = config('subscriptions.cycle');
         }
 
-        if ($this->subscription_id === 3) {
+        if (in_array($this->subscription_id, [3, 1])) {
             $this->universities = config('subscriptions.university');
+        }
+
+        if ($this->subscription_id === 1) {
+            $this->subscription_types = Subscription::query()->get(['id', 'name'])->except(1);
         }
     }
 
@@ -87,7 +94,7 @@ class Subscriptions extends Component
             ]);
 
             if ($this->logo) {
-                $name = uniqid() . '.' .$this->logo->extension();
+                $name = uniqid('company-') . '.' . $this->logo->extension();
                 $this->logo->storeAs('public/companies/', $name);
                 $userable->logo = $name;
                 $userable->save();
@@ -122,6 +129,13 @@ class Subscriptions extends Component
                 'location' => $this->location,
                 'birth_date' => $this->birth_date,
             ]);
+
+            if ($this->cv) {
+                $name = uniqid('cv-') . '.' . $this->cv->extension();
+                $this->cv->storeAs('public/cv/', $name);
+                $userable->cv = $name;
+                $userable->save();
+            }
         }
 
         $user = $userable->user()->create([
@@ -144,7 +158,7 @@ class Subscriptions extends Component
         alert('', trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.'), 'success')->autoclose(10000);
         return redirect()->route('front.home');
     }
-    
+
     public function render()
     {
         $series = [];
@@ -154,7 +168,7 @@ class Subscriptions extends Component
                 $series = config('subscriptions.series.' . $this->section . '.' . $this->education_type);
             }
         }
-        
+
         $classes = [];
         if (! is_null($this->cycle)) {
             $classes = array_merge(config('subscriptions.class.en'), config('subscriptions.class.fr'));

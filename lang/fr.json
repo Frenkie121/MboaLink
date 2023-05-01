@@ -4,10 +4,12 @@
     "A new verification link has been sent to the email address you provided during registration.": "Un nouveau lien de vérification a été envoyé à l'adresse email que vous avez indiquée lors de votre inscription.",
     "Email Password Reset Link": "Lien de réinitialisation du mot de passe par e-mail",
     "Password": "Mot de passe",
+    "More details":"Plus de détails",
     "Sorry, your job has not been approved and therefore not published.": "Désolé, votre job n'a pas été approuvé et par consequent n'a pas été publié",
     "Congratulations, your job has been approved and published.": "Félicitations, votre job a été approuvé et publié ",
     "Log in": "Se connecter",
     "Offer": "Offre",
+    "Any":"Aucun",
     "The Subscription has been created": "L'abonnement a été créé",
     "The Subscription has been updated": "L'abonnement a été mis à jour",
     "Subscription": "Abonnement",
@@ -319,5 +321,7 @@
     " has been made by: ": " a été faite par : ",
     "Look at other plans": "Voir d'autres plans",
     "The new offer :position and current offers must be different": "La nouvelle offre :position et les offres actuelles doivent avoir des valeurs différentes",
+    "Add a CV": "Ajouter un CV",
+    "Select the desired subscription type": "Sélectionnez le type d'abonnement souhaité",
     "": ""
 }

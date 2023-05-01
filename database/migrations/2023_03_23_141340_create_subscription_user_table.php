@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('subscription_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->double('amount');
-            $table->timestamp('validated_at')->nullable();
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();
             $table->timestamps();
