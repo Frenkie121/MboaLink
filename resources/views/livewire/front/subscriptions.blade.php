@@ -45,7 +45,7 @@
             <p class="text-center alert alert-info">@lang('Coming soon ...')</p>
         @endif
     </div>
-    @if ($free && $type || !in_array($subscription_id, [1, 2, 3, 4, 5]))
+    @if (($free && $type) || in_array($subscription_id, [2, 3, 4, 5]))
         <div class="d-flex justify-content-end mt-2">
             <button wire:loading.remove class="btn btn-primary">
                 <span class="d-md-inline d-sm-inline">@lang('Confirm')</span>

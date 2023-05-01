@@ -122,11 +122,14 @@ return [
     'uploaded' => 'Le fichier du champ :attribute n\'a pu être téléversé.',
     'url' => 'Le format de l\'URL de :attribute n\'est pas valide.',
     'uuid' => 'Le champ :attribute doit être un UUID valide',
+
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'birth_date' => [
+            'before' => 'Vous devez avoir au moins 18 ans',
+            'after' => 'Vous devez avoir moins de 50 ans',
         ],
     ],
+
     'attributes' => [
         'address' => 'adresse',
         'age' => 'âge',
@@ -190,5 +193,11 @@ return [
         'current_job' => 'job actuel',
         'offers_add.*' => 'nouvelle offre :position',
         'subs_name' => 'nom',
+    ],
+
+    'custom-values' => [
+        'field' => [
+            'value' => 'custom-value'
+        ],
     ],
 ];

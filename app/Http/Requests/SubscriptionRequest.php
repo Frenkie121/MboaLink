@@ -22,7 +22,7 @@ class SubscriptionRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules(int $subscription_id)
+    public function rules(int $subscription_id, $type = null)
     {
         $commonRules = [
             'name' => 'required|string|max:255',
@@ -39,7 +39,7 @@ class SubscriptionRequest extends FormRequest
         ];
 
         $talentRules = [
-            'birth_date' => 'required|date|before:' . now()->subYears(18)->format('d-m-Y'),
+            'birth_date' => 'required|date|before:' . now()->subYears(18)->format('d-m-Y') . '|after:' . now()->subYears(50)->format('d-m-Y'),
             'aspiration' => 'required|string|max:255',
             'language' => 'required|string|' . Rule::in(array_keys(config('subscriptions.language'))),
             'cv' => 'nullable|file|mimes:doc,docx,pdf|max:1024',
@@ -64,14 +64,21 @@ class SubscriptionRequest extends FormRequest
             'aptitudes' => 'required|string',
             'qualifications' => 'required|string',
         ];
+
+        $rules = [];
         
-        return match($subscription_id) {
-            1 => $commonRules,
-            2 => array_merge($commonRules, $companyRules),
-            3 => array_merge($commonRules, $talentRules, $studentRules),
-            4 => array_merge($commonRules, $talentRules, $pupilRules),
-            5 => array_merge($commonRules, $talentRules, $unemployedRules),
-            default => $commonRules
-        };
+        if ($subscription_id === 2 || ($subscription_id === 1 && (int) $type === 2)) {
+            $rules = array_merge($commonRules, $companyRules);
+        } elseif ($subscription_id === 3  || ($subscription_id === 1 && (int) $type === 3)) {
+            $rules = array_merge($commonRules, $talentRules, $studentRules);
+        } elseif ($subscription_id === 4 || ($subscription_id === 1 && (int) $type === 4)) {
+            $rules = array_merge($commonRules, $talentRules, $pupilRules);
+        } elseif ($subscription_id === 5 || ($subscription_id === 1 && (int) $type === 5)) {
+            $rules = array_merge($commonRules, $talentRules, $unemployedRules);
+        } else {
+            $rules = $commonRules;
+        }
+        
+        return $rules;
     }
 }

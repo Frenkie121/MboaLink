@@ -1,10 +1,10 @@
 @props(['subscription'])
 
 @php
-    $route = Route::currentRouteName();
+    $subscribe_route = Route::currentRouteName() === 'front.subscriptions.subscribe';
 @endphp
 
-<div class="col wow fadeInUp {{ $route === 'front.subscriptions.index' ? 'mt-5' : '' }}" data-wow-delay="0.{{ array_rand([1, 3, 5, 7]) }}s">
+<div class="col wow fadeInUp {{ !$subscribe_route ? 'mt-5' : '' }}" data-wow-delay="0.{{ array_rand([1, 3, 5, 7]) }}s">
     <div class="card mb-4 rounded-3 shadow-sm border-{{ $subscription->id === 1 ? 'primary' : 'secondary' }} h-100">
         <div class="card-header py-3 bg-{{ $subscription->id === 1 ? 'primary' : 'secondary' }} border-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
             <h4 class="my-0 fw-normal text-center">{{ $subscription->name }}</h4>
@@ -20,11 +20,11 @@
                 @endforeach
             </ul>
             <div class="position-absolute top-100 start-50 translate-middle mb-2 w-75">
-                <a href="{{ route('front.subscriptions.subscribe', $subscription->slug) }}" type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
-                    @if ($route === 'front.subscriptions.index' || $route === 'front.home')
-                        @lang('Subscribe Now')
-                    @else
+                <a href="{{ $subscribe_route ? route('front.subscriptions.index') : route('front.subscriptions.subscribe', $subscription->slug) }}" type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
+                    @if ($subscribe_route)
                         @lang('Look at other plans')
+                    @else
+                        @lang('Subscribe Now')
                     @endif
                 </a>
             </div>

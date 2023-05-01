@@ -46,6 +46,7 @@ class Subscriptions extends Component
 
     protected $messages = [
         'birth_date.before' => 'You must have at least 18 years old',
+        'birth_date.after' => 'You must have less than 50 years old',
     ];
 
     public function mount()
@@ -71,21 +72,23 @@ class Subscriptions extends Component
 
     protected function rules(): array
     {
-        return (new SubscriptionRequest())->rules($this->subscription_id);
+        return (new SubscriptionRequest())->rules($this->subscription_id, $this->type);
     }
 
     public function save()
     {
+        // dd($this->rules());
         $this->validate($this->rules());
         $password = Str::random(10);
         $role = match($this->subscription_id) {
+            1 => 1,
             2 => 2,
             3 => 3,
             4 => 4,
-            5 => 5
+            5 => 5,
         };
 
-        if ($this->subscription_id === 2) {
+        if ($this->subscription_id === 2 || ($this->subscription_id === 1 && (int) $this->type === 2)) {
             $userable = Company::query()->create([
                 'category_id' => $this->category,
                 'location' => $this->location,
@@ -99,13 +102,13 @@ class Subscriptions extends Component
                 $userable->logo = $name;
                 $userable->save();
             }
-        } elseif (in_array($this->subscription_id, [3, 4, 5])) {
-            if ($this->subscription_id === 3) { // Student
+        } elseif (in_array($this->subscription_id, [1, 3, 4, 5])) {
+            if ($this->subscription_id === 3 || ($this->subscription_id === 1 && (int) $this->type === 3)) { // Student
                 $talentable = Student::query()->create([
                     'university' => config('subscriptions.university.' . $this->university),
                     'training_school' => config('subscriptions.training_school.' . $this->university)[$this->training_school],
                 ]);
-            } elseif ($this->subscription_id === 4) { // Pupil
+            } elseif ($this->subscription_id === 4 || ($this->subscription_id === 1 && (int) $this->type === 4)) { // Pupil
                 $talentable = Pupil::query()->create([
                     'section' => $this->section,
                     'cycle' => $this->cycle,
@@ -113,7 +116,7 @@ class Subscriptions extends Component
                     'class' => $this->current_class,
                     'school' => $this->school
                 ]);
-            } elseif ($this->subscription_id === 5) { // Unemployed
+            } elseif ($this->subscription_id === 5 || ($this->subscription_id === 1 && (int) $this->type === 5)) { // Unemployed
                 $talentable = Unemployed::query()->create([
                     'diploma' => $this->diploma,
                     'current_job' => $this->current_job,
@@ -149,11 +152,9 @@ class Subscriptions extends Component
         $subscription = Subscription::query()->find($this->subscription_id);
         $user->subscriptions()->attach($this->subscription_id, [
             'amount' => $subscription->amount,
-            // 'starts_at' => now(),
-            // 'ends_at' => now()->addWeeks($subscription->duration)
         ]);
 
-        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
+        // Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $user->role->name, 'from' => $user->name]));
 
         alert('', trans('Your request for new subscription has been successfully sent. You will be contacted shortly for further details.'), 'success')->autoclose(10000);
         return redirect()->route('front.home');
