@@ -39,7 +39,8 @@
                                                 @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
                                                     @if ($user->id === $subscriber->id)
                                                         @if ($user->pivot->starts_at)
-                                                            {{ $user->pivot->starts_at }}
+                                                            <span class="text-danger">
+                                                                {{ formatedLocaleDate($user->pivot->starts_at) }}</span>
                                                         @else
                                                             @lang('Any')
                                                         @endif
@@ -51,13 +52,7 @@
                                                     {{ $subscriber->subscriptions->last()->name }}
                                             </td>
                                             {{-- <td>{{ $subscriber->subscriptions()->first()->pivot->starts_at }}</td> --}}
-                                            <td>
-                                                @if ($subscriber->phone_number)
-                                                    {{ $subscriber->phone_number }}
-                                                @else
-                                                    @lang('Any')
-                                                @endif
-                                            </td>
+                                            <td> {{ $subscriber->phone_number }} </td>
 
                                             <td>
                                                 <a class="btn btn-primary"
@@ -80,8 +75,7 @@
 
 @push('js')
     <script src="{{ asset('assets/back/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
-    </script>
+    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/back/js/page/modules-datatables.js') }}"></script>
 @endpush
