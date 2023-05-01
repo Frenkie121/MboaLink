@@ -2,35 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Str;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SubscriptionBackController extends Controller
 {
-    public function index()
+    public function index() // create()
     {
-        return view('admin.subscriptions.add');
+        return view('admin.subscriptions.add'); // admin.subscriptions.creste
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Subscription $subscription)
     {
         // dd($request);
         $data = $request->validate([
             'offers.*' => ['required', 'string', 'distinct'],
             'offers_add.*' => ['required', 'string', 'distinct', 'different:offers.*'],
-            'subs_name' => ['required', 'string', 'unique:subscriptions,name,' . $id],
+            'subs_name' => ['required', 'string', 'unique:subscriptions,name,' . $subscription->id],
             'amount' => ['required', 'numeric', 'min:0'],
             'duration' => ['required', 'numeric', 'min:0', 'max:12'],
 
         ], [
             'offers_add.*.different' => __('The new offer :position and current offers must be different')
         ]);
-        $subscription = Subscription::find($id);
+        // $subscription = Subscription::find($id);
+        // $subscription->update($data);
         $subscription->update([
             'name' => $data['subs_name'],
-            'slug' => Str::slug($data['subs_name']),
+            // 'slug' => Str::slug($data['subs_name']),
             'amount' => $data['amount'],
             'duration' => $data['duration'],
         ]);

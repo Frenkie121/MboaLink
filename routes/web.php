@@ -80,7 +80,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     //SUBSCRIPTION
     Route::view('subscriptions', 'admin.subscriptions.index')->name('subscription.index');
     Route::get('subscription/edit/{subscription:slug}', EditComponent::class)->name('subscription.edit');
-    Route::patch('subscription/update/{id}', [SubscriptionBackController::class, 'update'])->name('subscription.update');
+    Route::patch('subscription/update/{subscription}', [SubscriptionBackController::class, 'update'])->name('subscription.update');
     Route::view('subscription/create', 'admin.subscriptions.add')->name('subscription.add');
 });
 
