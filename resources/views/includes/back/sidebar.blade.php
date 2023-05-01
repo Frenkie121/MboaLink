@@ -23,12 +23,12 @@
                     <span>@lang('Users')</span></a>
             </li>
 
-            <li class="dropdown @if (Str::contains($currentUri, 'talent') || Str::contains($currentUri, 'companies')) active @endif">
+            <li class="dropdown @if (Str::contains($currentUri, 'subscribers')) active @endif">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-check"></i>
                     <span>@lang('Subscribers')</span></a>
                 <ul class="dropdown-menu">
 
-                    <li class="@if (Str::contains($currentUri, 'talent')) active @endif"><a class="nav-link"
+                    <li class="@if (Str::contains($currentUri, 'talents')) active @endif"><a class="nav-link"
                             href="{{ route('admin.subscribers.talent.index') }}">
                             {{-- <i class="fas fa-user-check"></i> --}}
                             <span>@lang('Unemployed')</span></a></li>

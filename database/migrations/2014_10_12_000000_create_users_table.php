@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('userable_type')->nullable();
             $table->foreignId('role_id')->constrained();
             $table->string('name');
-            // $table->string('slug');
+            $table->string('slug');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
