@@ -28,7 +28,7 @@ class Subscriptions extends Component
     public $description, $website, $logo;
 
     // Talent properties
-    public $aspiration, $birth_date;
+    public $aspiration, $birth_date, $cv;
 
     // Students
     public $universities;
@@ -87,7 +87,7 @@ class Subscriptions extends Component
             ]);
 
             if ($this->logo) {
-                $name = uniqid('company-') . '.' .$this->logo->extension();
+                $name = uniqid('company-') . '.' . $this->logo->extension();
                 $this->logo->storeAs('public/companies/', $name);
                 $userable->logo = $name;
                 $userable->save();
@@ -122,6 +122,13 @@ class Subscriptions extends Component
                 'location' => $this->location,
                 'birth_date' => $this->birth_date,
             ]);
+
+            if ($this->cv) {
+                $name = uniqid('cv-') . '.' . $this->cv->extension();
+                $this->cv->storeAs('public/cv/', $name);
+                $userable->cv = $name;
+                $userable->save();
+            }
         }
 
         $user = $userable->user()->create([

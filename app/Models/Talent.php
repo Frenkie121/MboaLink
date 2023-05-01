@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Talent extends Model
 {
@@ -23,6 +24,17 @@ class Talent extends Model
     // public function getLanguageAttribute($key)
     // {
     //     return __(self::LANGUAGES[$key]);
+    // }
+
+    // public function cv(): Attribute
+    // {
+    //     return Attribute::make(
+    //         set: function($cv) {
+    //             $name = uniqid('cv-') . '.' . $cv->extension;
+    //             $cv->storeAs('public/cv/', $name);
+    //             $this->attributes['cv'] = $name;
+    //         }
+    //     );
     // }
 
     // RELATIONSHIPS
