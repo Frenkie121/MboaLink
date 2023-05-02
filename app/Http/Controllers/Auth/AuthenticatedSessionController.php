@@ -47,10 +47,17 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $redirect = match (auth()->user()->role_id) {
-            1 => 'admin/dashboard',
-            default => '/'
-        };
+        $redirect = '/';
+        $auth = auth()->user();
+        if ($auth->role_id === 2) {
+            if ($auth->userable->jobs->isEmpty()) {
+                $redirect = '/jobs/create';
+            } else {
+                $redirect = '/jobs';
+            }
+        } else {
+            $redirect = '/jobs';
+        }
 
         return redirect()->intended($redirect);
     }

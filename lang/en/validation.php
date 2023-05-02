@@ -182,7 +182,11 @@ return [
     'attributes' => [
         'offers_add.*' => 'new offer :position',
         'subs_name' => 'name',
-        'offers.*' => 'offer :position'
+        'offers.*' => 'offer :position',
+        'qualifications.1' => 'qualification',
+        'qualifications.*' => 'qualification',
+        'requirements.1' => 'requirement',
+        'requirements.*' => 'requirement',
     ],
 
 ];

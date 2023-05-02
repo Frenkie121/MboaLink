@@ -9,11 +9,14 @@
         @if (session('status'))
             <p class="text-success font-weight-bold">@lang('Your password has been successfully reset. You can login with your new password.')</p>
         @endif
+        @if (session('subscription'))
+            <p class="text-success font-weight-bold">@lang('Log in to get started')</p>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group {{ $errors->has('email') ? 'has-error': '' }}" >
                 <label for="email" class="control-label">@lang('Email')</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" tabindex="1" required autofocus>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ session()->has('subscription') ? session()->get('subscription')['email'] : old('email') }}" tabindex="1" required autofocus>
                 @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

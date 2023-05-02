@@ -159,10 +159,9 @@ class Subscriptions extends Component
         
         Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
 
-        
-        alert('', trans($message), 'success')->autoclose(10000);
-        
-        return redirect()->route('front.home');
+        alert('', trans($message), 'success')->autoclose(15000);
+
+        return redirect()->route('login')->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
     }
 
     public function render()

@@ -16,7 +16,7 @@ class Job extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'sub_category_id', 'location', 'description', 'salary', 'type', 'dateline',
+        'title', 'sub_category_id', 'description', 'salary', 'type', 'dateline',
     ];
 
     protected $casts = [
@@ -61,7 +61,7 @@ class Job extends Model
             return formatMoney($salary[0]);
         }
 
-        dd(number_format($salary[0], 0, ',', ' '));
+        // dd(number_format($salary[0], 0, ',', ' '));
     }
 
     // MUTATORS

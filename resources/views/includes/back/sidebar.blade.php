@@ -31,7 +31,7 @@
                     <li class="@if (Str::contains($currentUri, 'talents')) active @endif"><a class="nav-link"
                             href="{{ route('admin.subscribers.talent.index') }}">
                             {{-- <i class="fas fa-user-check"></i> --}}
-                            <span>@lang('Unemployed')</span></a></li>
+                            <span>@lang('Job seekers')</span></a></li>
                     <li class="@if (Str::contains($currentUri, 'companies')) active @endif"><a class="nav-link"
                             href="{{ route('admin.subscribers.company.index') }}">
                             {{-- <i  class="fas fa-user-check"></i> --}}

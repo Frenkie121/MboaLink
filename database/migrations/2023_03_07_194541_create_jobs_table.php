@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->string('title');
             $table->string('slug');
-            $table->string('location');
+            // $table->string('location');
             $table->text('description');
             $table->string('salary');
             $table->string('type');

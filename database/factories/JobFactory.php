@@ -22,7 +22,7 @@ class JobFactory extends Factory
             'sub_category_id' => SubCategory::factory(),
             'company_id' => Company::factory(),
             'title' => fake()->jobTitle(),
-            'location' => fake('it_IT')->city(),
+            // 'location' => fake('it_IT')->city(),
             'description' => fake()->paragraph(5),
             'salary' => fake()->numberBetween(10000, 20000).' - '.fake()->numberBetween(25000, 50000),
             'type' => fake()->numberBetween(1, 5),

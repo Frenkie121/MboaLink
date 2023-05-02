@@ -225,6 +225,7 @@
     "About": "À propos",
     "Companies": "Les entreprises",
     "Unemployed ": "Les sans emploi fixe",
+    "Unemployed": "Sans emploi fixe",
     "Students": "Les étudiants",
     "Pupils": "Les élèves",
     "Our target audience": "Nos cibles",
@@ -283,7 +284,7 @@
     "Pupil": "Élève",
     "Free": "Gratuit",
     "Subscribers list": "Liste des abonnés",
-    "Unemployed": "Chercheurs d'emploi",
+    "Job seekers": "Chercheurs d'emploi",
     "Subscribe to a new subscription": "Souscrire à un nouvel abonnement",
     "Fill the form below to save your subscription": "Remplissez le formulaire ci-dessous pour enregistrer votre abonnement",
     "Follow the steps below save your subscription": "Suivez les étapes ci-dessous pour enregistrer votre abonnement",
@@ -329,5 +330,7 @@
     "Select the desired subscription type": "Sélectionnez le type d'abonnement souhaité",
     "Your password for future login is: ": "Votre mot de passe pour future connexion est : ",
     "You can change it any time on your profile.": "Vous pouvez le modifier à n'importe quel moment à partir de votre profil.",
+    "Log in to get started": "Connectez-vous pour commencer",
+    "Deadline for applications": "Date limite de dépôt des candidatures",
     "": ""
 }

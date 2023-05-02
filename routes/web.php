@@ -45,7 +45,7 @@ Route::name('front.')->group(function () {
     // JOBS
     Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
+        Route::get('/create', 'create')->name('create')->middleware('auth');
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
     });
