@@ -319,7 +319,7 @@
     "Describe your aptitudes in a few words": "Décrivez vos aptitudes en quelques mots",
     "Describe your qualifications in a few words": "Décrivez vos qualifications en quelques mots",
     "Coming soon ...": "A venir ...",
-    "Your request for new subscription has been successfully sent. You will be contacted shortly via WhatsApp for further details in order to validate your subscription.": "Votre demande de nouvel abonnement a été envoyée avec succès. Vous serez contacté prochainement via WhatsApp pour de plus amples informations afin de valider votre abonnement.",
+    "Your request for subscription has been successfully sent. You will be contacted shortly via WhatsApp for further details in order to validate your subscription.": "Votre demande d'abonnement a été envoyée avec succès. Vous serez contacté prochainement via WhatsApp pour de plus amples informations afin de valider votre abonnement.",
     "Go to subscription details": "Ouvrir les détails",
     "New Subscription Request": "Nouvelle demande d'abonnement",
     "A new request for a type subscription: ": "Une nouvelle demande d'abonnement de type : ",
@@ -332,5 +332,6 @@
     "You can change it any time on your profile.": "Vous pouvez le modifier à n'importe quel moment à partir de votre profil.",
     "Log in to get started": "Connectez-vous pour commencer",
     "Deadline for applications": "Date limite de dépôt des candidatures",
+    "Your password has been sent to you by email.": "Votre mot de passe vous a été envoyé par mail.",
     "": ""
 }
