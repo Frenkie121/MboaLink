@@ -57,8 +57,19 @@
                                                     <a class="btn btn-primary"
                                                         href="{{ route('admin.subscribers.profile', $subscriber) }}"> <i
                                                             class="fa fa-eye"></i></a>
-                                                    <a class="btn btn-success" href="#"> <i
-                                                            class="fas fa-check"></i></a>
+                                                    @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
+                                                        @if ($user->id === $subscriber->id)
+                                                            @if ($user->pivot->starts_at)
+                                                                {{-- <a class="btn btn-danger" href="#">
+                                                                    <i class="fas fa-times"> @lang('Validate')</i></a> --}}
+                                                            @else
+                                                                <a class="btn btn-success"
+                                                                    href="{{ route('admin.subscribers.validate', $subscriber) }}">
+                                                                    <i class="fas fa-check"></i>  @lang('Validate') </a>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+
                                                 </td>
                                             </tr>
                                         @endif

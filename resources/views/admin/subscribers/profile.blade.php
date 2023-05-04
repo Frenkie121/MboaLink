@@ -36,9 +36,9 @@
                         <h6 class="text-center">@lang('General Informations')</h6>
                         <br>
                         <span class="mr-2">@lang('Email') :</span>
-                        <b>{{ $user->email }}</b> <span class="mr-2 ml-4">@lang('Phone Number') :</span>
+                        <b>{{ $user->email }}</b> <br><br> <span class="mr-2">@lang('Phone Number') :</span>
                         @if ($user->phone_number)
-                            {{ $user->phone_number }}
+                            <b> {{ $user->phone_number }}</b>
                         @else
                             @lang('Any')
                         @endif

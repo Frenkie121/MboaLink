@@ -6,9 +6,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Livewire\Admin\ProfileSubscriber\SuscriptionList;
+use App\Notifications\ValidateNotification;
 
 class SubscribersController extends Controller
 {
@@ -66,22 +69,35 @@ class SubscribersController extends Controller
      */
     public function show(User $User)
     {
-
         return view(
             'admin.subscribers.profile',
             ['user' => $User]
         );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function Active(User $subscriber)
     {
-        //
+
+        $week = $subscriber->subscriptions->last()->duration;
+        // dd($week, $subscriber->subscriptions->last()->id);
+        foreach ($subscriber->subscriptions->last()->users()->get() as $user) {
+            if ($user->id === $subscriber->id) {
+                DB::table('subscription_user')->where([
+                    "user_id" => $subscriber->id,
+                    "subscription_id" => $subscriber->subscriptions->last()->id,
+                ])->update([
+                    'starts_at' => now(),
+                    'ends_at' => now()->addWeeks($week)
+                ]);
+            }
+        }
+
+
+        Notification::send($subscriber, new ValidateNotification(now()->addWeeks($week)));
+
+        toast(trans("The subscription has been successfully validated"), 'success');
+
+        return back();
     }
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Notifications\Admin;
+namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewslettesrNotification extends Notification
+class ValidateNotification extends Notification
 {
     use Queueable;
 
@@ -16,7 +16,7 @@ class NewslettesrNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(public $ends_at)
     {
         //
     }
@@ -40,19 +40,18 @@ class NewslettesrNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        // $hour = date('H');
-        // $greeting = ($hour > 17) ? trans('Evening ') : (($hour > 12 && $hour <= 18) ? trans('Afternoon ') : trans('Morning '));
+        $hour = date('H');
+        $greeting = ($hour > 17) ? trans('Evening ') : (($hour > 12 && $hour <= 18) ? trans('Afternoon ') : trans('Morning '));
 
-        // return (new MailMessage)
-        //     ->greeting(trans('Good ') . $greeting . $notifiable->name)
-        //     ->subject(trans('Activation of your subscription'))
-        //     ->line(trans('You receive this e-mail to confirm the publication of your job, the title of which is: ') . $this->job->title)
-        //     ->line($this->data)
-        //     ->when(
-        //         $notifiable->role_id === 1,
-        //         fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
-        //         fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
-        //     );
+        return (new MailMessage)
+            ->greeting(trans('Good ') . $greeting . $notifiable->name)
+            ->subject("🎉✨" . trans('Congratulations on the activation of your subscription') . "🎉✨")
+            ->line(trans('You will receive this email to confirm the validation of your subscription, which will take effect from this date on :') . $this->ends_at)
+            ->when(
+                $notifiable->role_id === 1,
+                fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
+                fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
+            );
     }
 
     /**

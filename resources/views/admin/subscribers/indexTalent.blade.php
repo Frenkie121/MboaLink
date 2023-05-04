@@ -39,7 +39,7 @@
                                                 @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
                                                     @if ($user->id === $subscriber->id)
                                                         @if ($user->pivot->starts_at)
-                                                            <span class="text-danger">
+                                                            <span class="text-success">
                                                                 {{ formatedLocaleDate($user->pivot->starts_at) }}</span>
                                                         @else
                                                             @lang('Any')
@@ -58,7 +58,19 @@
                                                 <a class="btn btn-primary"
                                                     href="{{ route('admin.subscribers.profile', $subscriber) }}"> <i
                                                         class="fa fa-eye"></i></a>
-                                                <a class="btn btn-success" href="#"> <i class="fas fa-check"></i></a>
+                                                @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
+                                                    @if ($user->id === $subscriber->id)
+                                                        @if ($user->pivot->starts_at)
+                                                            {{-- <a class="btn btn-danger" href="#">
+                                                                <i class="fas fa-times"> @lang('Validate')</i></a> --}}
+                                                        @else
+                                                            <a class="btn btn-success"
+                                                                href="{{ route('admin.subscribers.validate', $subscriber) }}">
+                                                                <i class="fas fa-check"></i></a>
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -75,7 +87,8 @@
 
 @push('js')
     <script src="{{ asset('assets/back/modules/datatables/datatables.min.js') }}"></script>
-    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
+    </script>
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/back/js/page/modules-datatables.js') }}"></script>
 @endpush
