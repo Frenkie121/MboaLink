@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\{Category, Company, Pupil, Student, Subscription, Unemployed, User};
 use App\Notifications\Front\Subscription\NewSubscriptionNotification;
+use Illuminate\Support\Arr;
 
 class Subscriptions extends Component
 {
@@ -43,11 +44,6 @@ class Subscriptions extends Component
 
     // Free
     public $subscription_types, $type;
-
-    protected $messages = [
-        'birth_date.before' => 'You must have at least 18 years old',
-        'birth_date.after' => 'You must have less than 50 years old',
-    ];
 
     public function mount()
     {
@@ -161,35 +157,46 @@ class Subscriptions extends Component
 
         alert('', trans($message) . ' ' . trans('Your password has been sent to you by email.'), 'success')->autoclose(25000);
 
-        return redirect()->route('login')->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
+        $redirect = auth()->check() ? 'front.jobs.index' : 'login';
+        return redirect()->route($redirect)->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
     }
 
     public function render()
     {
-        $series = [];
-        if (! is_null($this->section)) {
-            $series = array_merge(config('subscriptions.series.' . $this->section . '.gn'), config('subscriptions.series.' . $this->section . '.th'));
-            if (! is_null($this->education_type)) {
-                $series = config('subscriptions.series.' . $this->section . '.' . $this->education_type);
+        $data = [];
+
+        if ($this->subscription_id === 3) {
+            $training_schools = [];
+            if (! is_null($this->university)) {
+                $training_schools = config('subscriptions.training_school.' . $this->university);
             }
+            $data = [
+                'training_schools' => $training_schools
+            ];
         }
 
-        $classes = [];
-        if (! is_null($this->cycle)) {
-            $classes = array_merge(config('subscriptions.class.en'), config('subscriptions.class.fr'));
+        if ($this->subscription_id === 4) {
+            $series = [];
             if (! is_null($this->section)) {
-                $classes = config('subscriptions.class.' . $this->section);
+                $series = Arr::collapse(config('subscriptions.series.' . $this->section));
+                if (! is_null($this->education_type)) {
+                    $series = config('subscriptions.series.' . $this->section . '.' . $this->education_type);
+                }
             }
-        }
 
-        $training_schools = [];
-        if (! is_null($this->university)) {
-            $training_schools = config('subscriptions.training_school.' . $this->university);
+            $classes = [];
+            if (! is_null($this->section)) {
+                $classes = Arr::collapse(config('subscriptions.class.' . $this->section));
+                if (! is_null($this->cycle)) {
+                    $classes = config('subscriptions.class.' . $this->section . '.' . $this->cycle);
+                }
+            }
+
+            $data = [
+                'series' => $series,
+                'classes' => $classes,
+            ];
         }
-        return view('livewire.front.subscriptions', [
-            'series' => $series,
-            'classes' => $classes,
-            'training_schools' => $training_schools,
-        ]);
+        return view('livewire.front.subscriptions', $data);
     }
 }

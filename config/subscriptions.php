@@ -32,8 +32,14 @@ return [
     ],
 
     'class' => [
-        'fr' => ['4è', '3è', '2nd', '1ère', 'Tle'],
-        'en' => ['Form 4', 'Form 5', 'Lower sixth', 'Upper sixth']
+        'fr' => [
+            1 => ['4è', '3è'],
+            2 => ['2nd', '1ère', 'Tle']
+        ],
+        'en' => [
+            1 => ['Form 3', 'Form 4', 'Form 5'],
+            2 => ['Lower sixth', 'Upper sixth'],
+        ]
     ],
 
     'language' => [

@@ -163,8 +163,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'birth_date' => [
+            'before' => 'You must have at least 18 years old',
+            'after' => 'You must have less than 50 years old',
         ],
     ],
 
