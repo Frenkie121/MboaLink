@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,7 +21,7 @@ class Company extends Model
     public function logo(): Attribute
     {
         return Attribute::make(
-            get: fn ($logo) => $logo ? asset("storage/companies/{$logo}") : 'https://via.placeholder.com/640x480.png/f9460C?text='.$this->load('user')->user->name,
+            get: fn ($logo) => asset("storage/companies/{$logo}")
         );
     }
 

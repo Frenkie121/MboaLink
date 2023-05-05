@@ -11,7 +11,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0">
+        <div class="navbar-nav p-4 p-lg-0">
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'home')) active @endif">@lang('Home')</a>
             <a href="{{ route('front.about') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'about')) active @endif">@lang('About')</a>
             <a href="{{ route('front.subscriptions.index') }}" class="nav-item nav-link @if (Str::contains($currentRouteName, 'subscriptions')) active @endif">@lang('Pricing')</a>
@@ -45,6 +45,6 @@
                 <a href="{{ route('lang', 'en') }}" class="dropdown-item">En</a>
             </div>
         </div>
-        <a href="{{ route('front.jobs.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-3 d-none d-lg-block">@lang('Post A Job')<i class="fa fa-arrow-right ms-3"></i></a>
+        {{-- <a href="{{ route('front.jobs.create') }}" class="btn btn-primary rounded-0 py-4 px-lg-3 d-none d-lg-block">@lang('Post A Job')<i class="fa fa-arrow-right ms-3"></i></a> --}}
     </div>
 </nav>

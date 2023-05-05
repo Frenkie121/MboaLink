@@ -92,7 +92,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::get('subscribers/talents', [SubscribersController::class, 'indexTalent'])->name('subscribers.talent.index');
     Route::get('subscribers/companies', [SubscribersController::class, 'indexCompany'])->name('subscribers.company.index');
     Route::get('subscriber/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
-    Route::get('subscriber/validate/{subscriber}', [SubscribersController::class, 'Active'])->name('subscribers.validate');
+    Route::get('subscriber/validate/{subscriber}', [SubscribersController::class, 'active'])->name('subscribers.validate');
 });
 
 // GENERAL

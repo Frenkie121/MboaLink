@@ -32,7 +32,8 @@ class Subscription extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
-                    ->withPivot(['amount', 'starts_at', 'ends_at']);
+                    ->withPivot(['amount', 'starts_at', 'ends_at'])
+                    ->withTimestamps(updatedAt: null);
     }
   
 
