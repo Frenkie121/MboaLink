@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Subscription;
 use App\Http\Controllers\Controller;
+use App\Notifications\Admin\ValidateSubscriptionNotification;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\ValidateNotification;
+
 
 class SubscribersController extends Controller
 {
@@ -17,13 +21,15 @@ class SubscribersController extends Controller
      */
     public function indexTalent()
     {
+        // $date=Carbon::parse(User::find(7)->subscriptions->last()->pivot->ends_at);
+        // dd($date->format('Y,d,m'));
         $subscribers = User::query()
-                    ->withWhereHas('subscriptions')
-                    ->with(['role'])
-                    ->where('role_id', '>', 2)
-                    ->get();
+            ->withWhereHas('subscriptions')
+            ->with(['role'])
+            ->where('role_id', '>', 2)
+            ->get();
 
-        return view('admin.subscribers.indexTalent', [ // talents than indexTalent
+        return view('admin.subscribers.Talents', [ // talents than indexTalent
             'subscribers' =>  $subscribers,
         ]);
     }
@@ -36,13 +42,14 @@ class SubscribersController extends Controller
      */
     public function indexCompany()
     {
-        $subscribers = User::query()
-                        ->withWhereHas('subscriptions')
-                        ->with(['role'])
-                        ->where('role_id',  2)
-                        ->get();
 
-        return view('admin.subscribers.indexCompany', [ // companies than indexCompany
+        $subscribers = User::query()
+            ->withWhereHas('subscriptions')
+            ->with(['role'])
+            ->where('role_id',  2)
+            ->get();
+
+        return view('admin.subscribers.Companies', [ // companies than indexCompany
             'subscribers' =>  $subscribers,
         ]);
     }
@@ -65,16 +72,20 @@ class SubscribersController extends Controller
     {
         $subscription = $subscriber->subscriptions->last();
         $ends_at = now()->addWeeks($subscription->duration);
-        // dd($week, $subscriber->subscriptions->last()->id);
+       
         $subscriber->subscriptions()->updateExistingPivot($subscription->id, [
             'starts_at' => now(),
             'ends_at' => $ends_at
         ]);
 
-        Notification::send($subscriber, new ValidateNotification($ends_at));
+        Notification::send($subscriber, new ValidateSubscriptionNotification(Carbon::parse($ends_at)));
 
         toast(trans("The subscription has been successfully validated"), 'success');
 
         return back();
+    }
+    public function download()
+    {
+        $url = Storage::download();
     }
 }
