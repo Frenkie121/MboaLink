@@ -85,14 +85,20 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::patch('subscription/update/{id}', [SubscriptionBackController::class, 'update'])->name('subscription.update');
     Route::view('subscription/create', 'admin.subscriptions.add')->name('subscription.add');
 
+
     // Newsletter
     Route::view('newsletters', 'admin.newsletters.index')->name('newsletters.add');
 
+    Route::prefix('subscribers')->name('subscribers.')->controller(SubscribersController::class)->group(function () {
+        Route::get('/talents', 'indexTalent')->name('talent.index');
+        Route::get('/companies', 'indexCompany')->name('company.index');
+        // Route::get('/{user}', 'show')->name('profile');
+        Route::get('/validate/{id}', 'active')->name('validate');
+        Route::get('/{user:name}', 'download')->name('download');
+    });
 
-    Route::get('subscribers/talents', [SubscribersController::class, 'indexTalent'])->name('subscribers.talent.index');
-    Route::get('subscribers/companies', [SubscribersController::class, 'indexCompany'])->name('subscribers.company.index');
     Route::get('subscriber/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
-    Route::get('subscriber/validate/{subscriber}', [SubscribersController::class, 'active'])->name('subscribers.validate');
+
 });
 
 // GENERAL

@@ -1,0 +1,46 @@
+<!-- small modal -->
+<div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCategoryModalLabel">
+                    @lang('Validate the subscription of')
+                    <span id="modal-subscriber_name"></span>
+                    {{-- <strong>{{ $subscriber->id }}</strong> --}}
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="smallBody">
+                <div>
+                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to validate this subscription ?') </p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('Cancel')</button>
+
+                        <button type="button" class="btn btn-success" href="#"
+                            id="modal-confirm_validation">@lang('Confirm')</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function loadDeleteModal(id, name) {
+
+        $('#modal-subscriber_name').html(name);
+        $('#modal-confirm_validation').attr('onclick', `confirmDelete(${id})`);
+
+        $('#smallModal').modal('show');
+    }
+
+    function confirmDelete(id) {
+
+        var url = "{{ route('admin.subscribers.validate', ':id') }}";
+        url = url.replace(':id', id);
+        location.href = url;
+
+    }
+</script>

@@ -7,10 +7,11 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Subscription;
 use App\Http\Controllers\Controller;
-use App\Notifications\Admin\ValidateSubscriptionNotification;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Notification;
-
+use App\Notifications\Admin\ValidateSubscriptionNotification;
+use PhpParser\Node\Stmt\Return_;
 
 class SubscribersController extends Controller
 {
@@ -21,15 +22,13 @@ class SubscribersController extends Controller
      */
     public function indexTalent()
     {
-        // $date=Carbon::parse(User::find(7)->subscriptions->last()->pivot->ends_at);
-        // dd($date->format('Y,d,m'));
         $subscribers = User::query()
             ->withWhereHas('subscriptions')
             ->with(['role'])
             ->where('role_id', '>', 2)
             ->get();
 
-        return view('admin.subscribers.Talents', [ // talents than indexTalent
+        return view('admin.subscribers.talents', [
             'subscribers' =>  $subscribers,
         ]);
     }
@@ -49,7 +48,7 @@ class SubscribersController extends Controller
             ->where('role_id',  2)
             ->get();
 
-        return view('admin.subscribers.Companies', [ // companies than indexCompany
+        return view('admin.subscribers.companies', [
             'subscribers' =>  $subscribers,
         ]);
     }
@@ -67,12 +66,15 @@ class SubscribersController extends Controller
             ['user' => $User]
         );
     }
-
-    public function active(User $subscriber)
+    /**
+     *this function will active a subscription of  user
+     */
+    public function active($id)
     {
+        $subscriber = User::find($id);
         $subscription = $subscriber->subscriptions->last();
         $ends_at = now()->addWeeks($subscription->duration);
-       
+
         $subscriber->subscriptions()->updateExistingPivot($subscription->id, [
             'starts_at' => now(),
             'ends_at' => $ends_at
@@ -84,8 +86,10 @@ class SubscribersController extends Controller
 
         return back();
     }
-    public function download()
+    public function download(User $user)
     {
-        $url = Storage::download();
+        return Response::download(public_path("storage/cv/" . $user->userable->cv),  $user->slug);
+        // return Storage::download(public_path("storage/cv/" . $user->userable->cv) , 'CV_' . $user->name);
+
     }
 }

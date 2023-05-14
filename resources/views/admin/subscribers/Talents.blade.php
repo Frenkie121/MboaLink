@@ -38,7 +38,9 @@
                                             <td>
                                                 @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
                                                     @if ($user->id === $subscriber->id)
-                                                        @if ($user->pivot->ends_at >= now())
+                                                        @if (!$user->pivot->ends_at)
+                                                            <span class="text-info">----</span>
+                                                        @elseif ($user->pivot->ends_at >= now())
                                                             <span class="text-success">
                                                                 {{ formatedLocaleDate($user->pivot->ends_at) }}</span>
                                                         @else
@@ -52,7 +54,7 @@
                                                 <div class="badge badge-info">
                                                     {{ $subscriber->subscriptions->last()->name }}
                                             </td>
-                                            {{-- <td>{{ $subscriber->subscriptions()->first()->pivot->starts_at }}</td> --}}
+
                                             <td> {{ $subscriber->phone_number }} </td>
 
                                             <td>
@@ -62,15 +64,16 @@
                                                 @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
                                                     @if ($user->id === $subscriber->id)
                                                         @if (!$user->pivot->starts_at)
-                                                            <a class="btn btn-success" title="@lang('Validate')"
-                                                                href="{{ route('admin.subscribers.validate', $subscriber) }}">
-                                                                <i class="fas fa-check"></i></a>
+                                                            <a  class="btn btn-success" title="@lang('Validate subscription')"
+                                                                onclick="loadDeleteModal({{ $subscriber->id }}, `{{ $subscriber->name }}`)">
+                                                                <i style="color: white;" class="fas fa-check"></i></a>
                                                         @endif
                                                     @endif
                                                 @endforeach
 
                                             </td>
                                         </tr>
+                                        @include('includes.back.subscribers.confirmationValidateModal')
                                     @endforeach
                                 </tbody>
                             </table>
@@ -80,6 +83,7 @@
             </div>
         </div>
     </div>
+
 
 @endsection
 

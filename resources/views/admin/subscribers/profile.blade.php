@@ -29,7 +29,26 @@
                     <div class="profile-widget-description">
                         <div class="profile-widget-name"> {{ $user->name }} <div
                                 class="text-muted d-inline font-weight-normal">
-                                <div class="slash"></div> {{ $user->role_id !== 2 ? __('Talent') : __('Company') }}
+                                <div class="slash"></div>
+                                {{ $user->userable_type !== 'App\Models\Company' ? __('Talent') : __('Company') }}
+
+                                <div class="slash"></div>
+                                @if ($user->userable->talentable_type === 'App\Models\Student')
+                                    @lang('Student')
+                                @elseif ($user->userable->talentable_type === 'App\Models\Unemployed')
+                                    @lang('Unemployed')
+                                @elseif ($user->userable->talentable_type === 'App\Models\Pupil')
+                                    @lang('Pupil')
+                                @endif
+
+                                <div
+                                    class="badge badge-{{ $user->subscriptions->last()->id === 1 ? 'danger' : 'success' }}">
+                                    @if ($user->subscriptions->last()->id === 1)
+                                        @lang('Free')
+                                    @else
+                                        @lang('Premuim')
+                                    @endif
+                                </div>
 
                             </div>
                         </div>
@@ -45,18 +64,21 @@
                             @lang('Any')
                         @endif
                         <br><br>
-                        <span class="mr-2">@lang('Birth Date') :</span>
-                        @if ($user->userable->birth_date)
-                            <b>{{ $user->userable->birth_date }}</b>
-                        @else
-                            @lang('Any')
+                        @if ($user->userable_type !== 'App\Models\Company')
+                            <span class="mr-2">@lang('Birth Date') :</span>
+                            @if ($user->userable->birth_date)
+                                <b>{{ $user->userable->birth_date }}</b>
+                            @else
+                                @lang('Any')
+                            @endif
                         @endif
+
                         <br><br>
                         <hr>
 
                     </div>
 
-                    @if ($user->role_id > 2)
+                    @if ($user->userable_type !== 'App\Models\Company')
                         <div class="profile-widget-description">
 
                             <h6>@lang('Personal Informations')</h6>
@@ -76,7 +98,8 @@
                                 @endif
                             </b>
 
-                            <span class="mr-6 ml-4"> @lang('CV') : </span><a href="#" class="btn btn-primary"
+                            <span class="mr-6 ml-4"> @lang('CV') : </span><a
+                                href="{{ route('admin.subscribers.download', $user) }}" class="btn btn-primary"
                                 title="@lang('Download')"><i class="fa fa-download"></i> </a>
                             <br><br>
                             <p> @lang('Aspirations') : <strong> {{ $user->userable->aspiration }}</strong> </p>
@@ -84,16 +107,16 @@
                             <hr>
 
                             @if ($user->role->id === 3)
-                                @include('includes.back.subscriptions.student')
+                                @include('includes.back.subscribers.student')
                             @elseif ($user->role->id === 4)
                                 {{-- Pupil --}}
-                                @include('includes.back.subscriptions.pupil')
+                                @include('includes.back.subscribers.pupil')
                             @elseif ($user->role->id === 5)
-                                @include('includes.back.subscriptions.unemployed')
+                                @include('includes.back.subscribers.unemployed')
                             @endif
                         </div>
-                    @elseif($user->role_id === 2)
-                        @include('includes.back.subscriptions.company')
+                    @elseif($user->userable_type === 'App\Models\Company')
+                        @include('includes.back.subscribers.company')
                     @endif
 
                 </div>

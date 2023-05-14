@@ -1,5 +1,3 @@
-
-<hr>
 <div class="profile-widget-description">
 
     <h6>@lang('Other informations')</h6>
