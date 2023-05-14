@@ -98,9 +98,13 @@
                                 @endif
                             </b>
 
-                            <span class="mr-6 ml-4"> @lang('CV') : </span><a
-                                href="{{ route('admin.subscribers.download', $user) }}" class="btn btn-primary"
-                                title="@lang('Download')"><i class="fa fa-download"></i> </a>
+                            <span class="mr-6 ml-4"> @lang('CV') : </span>
+                            @if ($user->userable->cv)
+                                <a href="{{ route('admin.subscribers.download', $user) }}" class="btn btn-primary"
+                                    title="@lang('Download')"><i class="fa fa-download"></i> </a>
+                            @else
+                                <span class="mr-2 ml-4 text-danger"> @lang('Any')</span>
+                            @endif
                             <br><br>
                             <p> @lang('Aspirations') : <strong> {{ $user->userable->aspiration }}</strong> </p>
 
