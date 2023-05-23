@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <button wire:click.prevent="save" wire:loading.remove class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                    <button wire:click.prevent="save" wire:loading.remove class="btn btn-primary w-100 py-3" type="submit">@lang('Send Message')</button>
                     <button wire:loading class="btn btn-primary w-100 py-3" type="button" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         @lang('Loading')...

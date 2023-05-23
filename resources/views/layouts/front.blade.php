@@ -1,3 +1,6 @@
+@php
+    $fr_locale = app()->getLocale() === 'fr';
+@endphp
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -32,6 +35,48 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/front/css/style.css') }}" rel="stylesheet">
 
+    <style>
+        #lang {
+            color: #f9460c !important;
+        }
+        #copyright-text {
+            font-size: 25%;
+        }
+
+        #lang-dropdown {
+            width: 180px;
+        }
+
+        @media (min-width: 1290px) {
+            #navbar-nav {
+                margin-left: 400px;
+            }
+            .auth {
+                margin-left: 100px;
+            }
+        }
+
+        @media (max-width: 1050px) and (min-width: 992px) {
+            #navbar-nav {
+                margin-left: 150px;
+            }
+
+            .auth {
+                margin-left: 80px;
+            }
+        }
+
+        @media (max-width: 1290px) and (min-width: 1050px) {
+            #navbar-nav {
+                margin-left: 215px;
+            }
+
+            .auth {
+                margin-left: 80px;
+            }
+        }
+    </style>
+
     @stack('css')
 </head>
 
@@ -42,7 +87,7 @@
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
+                <span class="sr-only">@lang('Loading...')</span>
             </div>
         </div>
         <!-- Spinner End -->
@@ -86,55 +131,38 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">@lang('Sign In')</h5>
-                        @auth
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    @if (auth()->user()->role_id === 1)
-                                        <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">@lang('Go to dashboard')</a></li>
-                                    @endif
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <li>
-                                            <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            this.closest('form').submit();"
-                                            class="dropdown-item"> @lang('Log Out')
-                                            </a>
-                                        </li>
-                                    </form>
-                                </ul>
-                            </div>
-                        @else
-                            <div class="position-relative mx-auto" style="max-width: 400px;">
-                                <a href="{{ route('login') }}" type="button" class="btn btn-primary py-2 position-absolute top-0 mt-2 me-2">@lang('Log in')</a>
-                            </div>
-                        @endauth
+                        <h5 class="text-white mb-4">@lang('Change Language')</h5>
+                        <div class="dropdown">
+                            <button id="lang-dropdown" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">@if ($fr_locale) @lang('French') @else @lang('English') @endif</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item {{ $fr_locale ? 'active' : '' }}" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
+                                    <li><a class="dropdown-item {{ $fr_locale ? '' : 'active' }}" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="container">
+            <div class="container">
                 <div class="copyright">
                     <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <div id="copyright-text" class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Rights Reserved. 
 							
 							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                             </br>Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
                         </div>
-                        <div class="col-md-6 text-center text-md-end">
+                        {{-- <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="">Home</a>
                                 <a href="">Cookies</a>
                                 <a href="">Help</a>
                                 <a href="">FQAs</a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
         <!-- Footer End -->
 
