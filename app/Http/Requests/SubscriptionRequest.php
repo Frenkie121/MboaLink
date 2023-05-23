@@ -27,13 +27,13 @@ class SubscriptionRequest extends FormRequest
         $commonRules = [
             'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|email|unique:users,email|max:255',
-            'phone_number' => 'required|string|max:255',
+            'phone_number' => 'required|numeric|digits:9|starts_with:65,67,68,69,66,232',
             'category' => 'required|exists:categories,id',
             'location' => 'required|string|max:255',
         ];
 
         $companyRules = [
-            'description' => 'required|string',
+            'description' => 'required|string|max:500',
             'website' => 'nullable|url',
             'logo' => 'nullable|image|mimes:png,jpeg,jpg|max:512',
         ];

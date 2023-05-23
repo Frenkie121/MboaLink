@@ -83,6 +83,7 @@ class Subscriptions extends Component
             5 => 5,
         };
 
+        $app_name = strtolower(config('app.name'));
         $password = Str::random(10);
 
         if ($this->subscription_id === 2 || ($this->subscription_id === 1 && (int) $this->type === 2)) {
@@ -94,7 +95,7 @@ class Subscriptions extends Component
             ]);
 
             if ($this->logo) {
-                $name = uniqid('company-') . '.' . $this->logo->extension();
+                $name = uniqid($app_name) . '.' . $this->logo->extension();
                 $this->logo->storeAs('public/companies/', $name);
                 $userable->logo = $name;
                 $userable->save();
@@ -131,7 +132,7 @@ class Subscriptions extends Component
             ]);
 
             if ($this->cv) {
-                $name = uniqid('cv-') . '.' . $this->cv->extension();
+                $name = uniqid($app_name) . '.' . $this->cv->extension();
                 $this->cv->storeAs('public/cv/', $name);
                 $userable->cv = $name;
                 $userable->save();

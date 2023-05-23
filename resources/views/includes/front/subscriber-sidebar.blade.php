@@ -1,5 +1,6 @@
 @php
-    $currentRouteName = Route::currentRouteName();
+  $currentRouteName = Route::currentRouteName();
+  $auth = auth()->user();
 @endphp
 
 @push('css')
@@ -68,9 +69,13 @@
 <main class="col-md-3 wow fadeInUp" data-wow-delay="0.5s">
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="min-width: 280px;">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <img alt="image" width="50" height="50" src="{{ asset('assets/back/img/avatar/avatar-2.png') }}" class="rounded-circle profile-widget-picture mr-2">
-            <span class="fs-4 fw-bolder">{{ auth()->user()->name }}</span>
-        </a>
+            <img alt="image" width="50" height="50" src="{{ 
+              ($auth->role_id === 2 && $auth->userable->logo)
+              ? asset($auth->userable->logo)
+              : asset('assets/back/img/avatar/avatar-2.png') }}" class="rounded-circle profile-widget-picture mr-2">
+            <span class="fs-4 fw-bolder" style="margin-left: 10px">{{ $auth->name }}</span>
+          </a>
+          <p class="fs-4 my-2 badge bg-secondary">{{ $auth->role->name }}</p>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>

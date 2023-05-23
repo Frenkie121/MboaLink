@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
             <div class="form-floating">
-                <input type="text" class="form-control" id="phone_number" wire:model.defer="phone_number" placeholder="@lang('Phone Number')">
+                <input type="number" class="form-control" id="phone_number" wire:model.defer="phone_number" placeholder="@lang('Phone Number')" pattern="[0-9]+">
                 <label for="phone_number">@lang('Phone Number')</label>
                 @error('phone_number')
                     <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -60,8 +60,8 @@
         @if (auth()->user()->role_id !== 2)
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input type="file" class="form-control @error('cv') is-invalid @enderror" id="cv" wire:model="cv" placeholder="@lang('Add a CV')" accept=".pdf,.doc,.docx">
-                    <label for="cv">@lang('Add a CV')</label>
+                    <input type="file" class="form-control @error('cv') is-invalid @enderror" id="cv" wire:model="cv" placeholder="@lang('Update CV')" accept=".pdf,.doc,.docx">
+                    <label for="cv">@lang('Update CV')</label>
                     @error('cv')
                         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                     @enderror
@@ -70,8 +70,8 @@
         @else
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" placeholder="@lang('Add a logo')" wire:model.defer="logo" accept=".png,.jpeg,.jpg">
-                    <label for="logo">@lang('Add a logo')</label>
+                    <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" placeholder="@lang('Update logo')" wire:model.defer="logo" accept=".png,.jpeg,.jpg">
+                    <label for="logo">@lang('Update logo')</label>
                     @error('logo')
                         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                     @enderror
@@ -81,7 +81,7 @@
         @if (auth()->user()->role_id === 2)
             <div class="col-12">
                 <div class="form-floating">
-                    <textarea class="form-control" wire:model.defer="description" id="description" style="height: 150px"></textarea>
+                    <textarea class="form-control" wire:model.defer="description" id="description" style="height: 150px">{{ $description }}</textarea>
                     <label for="description">Description</label>
                     @error('description')
                         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -91,7 +91,7 @@
         @else
             <div class="col-12">
                 <div class="form-floating">
-                    <textarea class="form-control" wire:model.defer="aspiration" id="aspiration" style="height: 150px"></textarea>
+                    <textarea class="form-control" wire:model.defer="aspiration" id="aspiration" style="height: 150px">{{ $aspiration }}</textarea>
                     <label for="aspiration">Aspiration</label>
                     @error('aspiration')
                         <span class="text-danger fw-light"><small>{{ $message }}</small></span>
@@ -100,8 +100,8 @@
             </div>
         @endif
         <div class="col-12">
-            <button wire:click.prevent="save" wire:loading.remove class="btn btn-primary w-100 py-3" type="submit">@lang('Save')</button>
-            <button wire:loading class="btn btn-primary w-100 py-3" type="button" disabled>
+            <button wire:click.prevent="update" wire:loading.remove class="btn btn-primary w-100 py-3" type="submit">@lang('Update')</button>
+            <button wire:loading wire:target="update" class="btn btn-primary w-100 py-3" type="button" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 @lang('Loading')...
             </button>

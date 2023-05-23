@@ -2,6 +2,9 @@
 
 @section('subtitle', __('Profile'))
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<x-livewire-alert::scripts />
+
 @push('css')
     @livewireStyles
 @endpush
