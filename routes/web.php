@@ -13,6 +13,7 @@ use App\Http\Livewire\Admin\Subscription\EditComponent;
 use App\Http\Controllers\Admin\Job\PublishJobController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\SubscriptionBackController;
+use App\Http\Controllers\Front\SubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,11 @@ Route::name('front.')->group(function () {
     Route::controller(SubscriptionController::class)->prefix('pricing')->name('subscriptions.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('{subscription:slug}/subscribe', 'subscribe')->name('subscribe');
+    });
+
+    // SUBSCRIBER PROFILE
+    Route::controller(SubscriberController::class)->middleware(['auth', 'role:2,3,4,5'])->prefix('me')->name('subscriber.')->group(function () {
+        Route::get('', 'editProfile')->name('profile');
     });
 });
 

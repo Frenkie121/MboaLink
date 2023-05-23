@@ -44,7 +44,7 @@
                     @if (auth()->user()->role_id === 1)
                         <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">@lang('Go to dashboard')</a></li>
                     @elseif (in_array(auth()->user()->role_id, [2, 3, 4, 5]))
-                        <li><a class="dropdown-item" href="{{ '#' }}">@lang('My dashboard')</a></li>
+                        <li><a class="dropdown-item" href="{{ route('front.subscriber.profile') }}">@lang('My dashboard')</a></li>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

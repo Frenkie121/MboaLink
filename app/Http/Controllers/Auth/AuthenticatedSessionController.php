@@ -47,14 +47,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $redirect = '/';
         $auth = auth()->user();
-        if ($auth->role_id === 2) {
-            if ($auth->userable->jobs->isEmpty()) {
-                $redirect = '/jobs/create';
-            } else {
-                $redirect = '/jobs';
-            }
+        if ($auth->role_id === 1) {
+            $redirect = 'admin/dashboard';
+        } elseif ($auth->role_id === 2) {
+            $redirect = '/jobs/create';
+        } elseif (in_array($auth->role_id, [2, 3, 4, 5]) || ($auth->role_id === 2 && $auth->userable->jobs->isEmpty())) {
+            $redirect = '/me';
         } else {
             $redirect = '/jobs';
         }
