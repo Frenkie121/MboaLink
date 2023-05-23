@@ -291,6 +291,7 @@
     "Follow the steps below save your subscription": "Suivez les étapes ci-dessous pour enregistrer votre abonnement",
     "Company Informations": "Informations de l'entreprise",
     "Personal Informations": "Informations personnelles",
+    "Personal Information": "Informations personnelles",
     "Payment": "Paiement",
     "Select your activity field": "Sélectionnez votre domaine d'activité",
     "Select the field you are looking for": "Sélectionnez le domaine recherché",
@@ -340,5 +341,8 @@
     "My dashboard": "Mon tableau de bord",
     "My Jobs": "Mes jobs",
     "My Profile": "Mes profil",
+    "Update your personal information using the form below": "Modifiez vos informations personnelles à partir du formulaire ci-dessous",
+    "Update your password using the form below": "Modifiez votre mot de passe à partir du formulaire ci-dessous",
+    "Confirm new password": "Confirmez le nouveau mot de passe",
     "": ""
 }
