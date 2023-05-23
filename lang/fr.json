@@ -27,6 +27,7 @@
     "Would you like to delete this job as well ?": "Voudriez-vous egalement supprimer ce job ?",
     "Sign In": "Connexion",
     "Log Out": "Se déconnecter",
+    "Remember Me": "Se souvenir de moi",
     "The response was successfully sent to ": "La réponse a été envoyée avec succès à ",
     "Hello!": "Bonjour!",
     "Do not reply": "Ne pas repondre",
@@ -55,7 +56,7 @@
     "Password Reset Notification": "Notification pour réinitialisation du mot de passe",
     "All rights reserved.": "Tous droits réservés.",
     "Forgot your password?": "Mot de passe oublié ?",
-    "Your account is disable, Please contact administrator.": "votre compte est desactivé,svp contactez l'administrateur de la plateforme",
+    "Your account is disable, Please contact administrator.": "Votre compte est desactivé, veuillez contacter l'administrateur de la plateforme.",
     "These credentials do not match our records.": "Ces informations d'identification ne correspondent pas.",
     "The provided password is incorrect.": "Le mot de passe fourni est incorrect.",
     "Too many login attempts. Please try again in some seconds.": "Trop de tentatives de connexion. Veuillez réessayer dans quelques secondes.",
@@ -336,5 +337,6 @@
     "The form contains errors. Please check them before resubmitting the form.": "Le formulaire contient des erreurs. Vérifiez-les avant de soumettre à nouveau le formulaire.",
     "Send Message": "Envoyer",
     "Change Language": "Changer la langue",
+    "My dashboard": "Mon tableau de bord",
     "": ""
 }

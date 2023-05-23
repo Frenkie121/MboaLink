@@ -36,6 +36,14 @@
     <link href="{{ asset('assets/front/css/style.css') }}" rel="stylesheet">
 
     <style>
+        @media (min-width: 576px) {
+            #logo-nav {
+                margin-left: 15px;
+            }
+        }
+        #auth-btn {
+            min-width: 120px;
+        }
         #lang {
             color: #f9460c !important;
         }

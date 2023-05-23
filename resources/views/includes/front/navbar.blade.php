@@ -39,10 +39,12 @@
         </div>
         @auth
             <div class="nav-item dropdown auth">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</button>
+                <button id="auth-btn" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ auth()->user()->name }}</button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     @if (auth()->user()->role_id === 1)
                         <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">@lang('Go to dashboard')</a></li>
+                    @elseif (in_array(auth()->user()->role_id, [2, 3, 4, 5]))
+                        <li><a class="dropdown-item" href="{{ '#' }}">@lang('My dashboard')</a></li>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
