@@ -60,6 +60,8 @@ Route::name('front.')->group(function () {
     // SUBSCRIBER PROFILE
     Route::controller(SubscriberController::class)->middleware(['auth', 'role:2,3,4,5'])->prefix('me')->name('subscriber.')->group(function () {
         Route::get('', 'editProfile')->name('profile');
+        Route::get('password', 'editPassword')->name('password');
+        Route::get('my-jobs', 'listJobs')->name('jobs');
     });
 });
 
