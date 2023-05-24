@@ -15,7 +15,7 @@ class ListJobs extends Component
         $user = User::query()->findOrFail(auth()->id());
 
         return view('livewire.front.subscriber.list-jobs', [
-            'jobs' => $user->userable->jobs()->with('subCategory.category:name,id')->paginate(5),
+            'jobs' => $user->userable->jobs()->with('subCategory.category:name,id')->latest()->paginate(5),
         ])
         ->layout('front.subscribers.main-layout', ['subtitle' => trans('Jobs list')]);
     }

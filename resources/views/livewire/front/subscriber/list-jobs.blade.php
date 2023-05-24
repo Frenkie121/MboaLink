@@ -2,7 +2,7 @@
     <h3 class="text-center fw-bolder">@lang('Jobs list')</h3>
     <p class="mb-4 text-center fw-bold">
         @if (auth()->user()->role_id === 2)
-            @lang('Your created jobs are listing in the table below.')
+            @lang('Your created jobs are listed in the table below.')
         @else
             @lang('The jobs you have applied for are listed in the table below.')
         @endif
@@ -18,7 +18,7 @@
         </p>
     @else
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr class="table-warning">
                     <th scope="col">#</th>

@@ -347,7 +347,7 @@
     "Update logo": "Modifier le logo",
     "Update CV": "Modifier le CV",
     "Profile has been successfully updated.": "Le profil a été mis à jour avec succès.",
-    "Your created jobs are listing in the table below.": "Les emplois que vous avez créés sont répertoriés dans le tableau ci-dessous.",
+    "Your created jobs are listed in the table below.": "Les emplois que vous avez créés sont répertoriés dans le tableau ci-dessous.",
     "The jobs you have applied for are listed in the table below.": "Les emplois auxquels vous avez postulé sont listés dans le tableau ci-dessous.",
     "You have not submitted a job yet.": "Vous n'avez pas encore soumis d'offre d'emploi.",
     "You have not applied for a job yet.": "Vous n'avez pas encore postulé à une offre d'emploi.",
@@ -355,5 +355,11 @@
     "Applicants list": "Liste des candidatures",
     "My Applications": "Mes candidatures",
     "Back to my dashboard": "Retourner à mon tableau de bord",
+    "My Subscriptions": "Mes abonnements",
+    "My subscriptions list": "Liste de mes abonnements",
+    "Your subscriptions are listed in the table below.": "Vos abonnements sont répertoriés dans le tableau ci-dessous.",
+    "Submission date": "Date de soumission",
+    "Start date": "Date de début",
+    "End date": "Date de fin",
     "": ""
 }
