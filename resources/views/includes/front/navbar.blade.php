@@ -20,7 +20,7 @@
                 <a href="#" 
                     class="nav-link dropdown-toggle 
                     @if (Str::contains($currentRouteName, 'categories') 
-                    || (Str::contains($currentRouteName, 'jobs'))) active 
+                    || (Str::contains($currentRouteName, 'jobs.'))) active 
                     @endif" 
                     data-bs-toggle="dropdown">Jobs</a>
                 <div class="dropdown-menu rounded-0 m-0">

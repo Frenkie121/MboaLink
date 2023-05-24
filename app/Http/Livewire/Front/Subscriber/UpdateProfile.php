@@ -79,6 +79,7 @@ class UpdateProfile extends Component
 
     public function render()
     {
-        return view('livewire.front.subscriber.update-profile');
+        return view('livewire.front.subscriber.update-profile')
+                ->layout('front.subscribers.main-layout', ['subtitle' => trans('Profile')]);
     }
 }

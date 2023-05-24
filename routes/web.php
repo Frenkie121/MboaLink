@@ -2,18 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Front\PagesController;
-use App\Http\Controllers\Admin\SubscribersController;
-use App\Http\Controllers\Front\SubscriptionController;
-use App\Http\Controllers\Admin\Job\SingleJobController;
+use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
 use App\Http\Livewire\Admin\Subscription\EditComponent;
-use App\Http\Controllers\Admin\Job\PublishJobController;
-use App\Http\Controllers\Admin\StatisticsController;
-use App\Http\Controllers\Admin\SubscriptionBackController;
-use App\Http\Controllers\Front\SubscriberController;
+use App\Http\Controllers\Admin\{StatisticsController, SubscribersController, SubscriptionBackController, UsersController};
+use App\Http\Livewire\Front\Subscriber\{ListJobs, UpdatePassword, UpdateProfile};
 
 /*
 |--------------------------------------------------------------------------
@@ -58,10 +52,10 @@ Route::name('front.')->group(function () {
     });
 
     // SUBSCRIBER PROFILE
-    Route::controller(SubscriberController::class)->middleware(['auth', 'role:2,3,4,5'])->prefix('me')->name('subscriber.')->group(function () {
-        Route::view('', 'front.subscribers.profile')->name('profile');
-        Route::view('password', 'front.subscribers.password')->name('password');
-        Route::get('my-jobs', 'listJobs')->name('jobs');
+    Route::middleware(['auth', 'role:2,3,4,5'])->prefix('me')->name('subscriber.')->group(function () {
+        Route::get('', UpdateProfile::class)->name('profile');
+        Route::get('password', UpdatePassword::class)->name('password');
+        Route::get('my-jobs', ListJobs::class)->name('jobs');
     });
 });
 
