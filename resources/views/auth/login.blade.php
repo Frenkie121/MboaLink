@@ -3,8 +3,11 @@
 @section('subtitle', __('Log in'))
 
 @section('content')
-
-    <div class="card-header"><h4>@lang('Log in')</h4></div>
+    <div class="text-center h6 font-weight-bold mb-0 mt-3">
+        @lang("Don't have an account yet?") <a href="{{ route('front.subscriptions.index') }}" class="font-weight-bold text-danger" title="@lang('You have the possibility to start with a free subscription.')">@lang('Subscribe here.')</a>
+    </div>
+    <hr>
+    <div class="card-header text-center"><h3>@lang('Log in')</h3></div>
     <div class="card-body">
         @if (session('status'))
             <p class="text-success font-weight-bold">@lang('Your password has been successfully reset. You can login with your new password.')</p>

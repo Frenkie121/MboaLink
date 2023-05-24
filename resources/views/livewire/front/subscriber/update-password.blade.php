@@ -30,9 +30,9 @@
                     @enderror
                 </div>
             </div>
-            <div class="col-10">
-                <button wire:click.prevent="update" wire:loading.remove class="btn btn-primary w-100 py-3" type="submit">@lang('Save')</button>
-                <button wire:loading class="btn btn-primary w-100 py-3" type="button" disabled>
+            <div class="col-10 d-flex justify-content-end">
+                <button wire:click.prevent="update" wire:loading.remove class="btn btn-primary w-25 py-3" type="submit">@lang('Update')</button>
+                <button wire:loading wire:target="update" class="btn btn-primary w-25 py-3" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     @lang('Loading')...
                 </button>

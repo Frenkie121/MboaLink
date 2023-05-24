@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
-use App\Models\SubCategory;
+use App\Models\{Job, SubCategory, User};
+use App\Notifications\Front\Jobs\ApplyJobNotification;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class JobController extends Controller
 {
@@ -37,16 +38,20 @@ class JobController extends Controller
 
     public function show(Job $job)
     {
-        return view('front.jobs.show', [
-            'types' => Job::TYPES,
-            'job' => $job->load([
-                'subCategory.category',
-                'company.user:id,name,email,userable_id',
-                'tags',
-                'requirements:id,content,job_id',
-                'qualifications:id,content,job_id',
-            ]),
-        ]);
+        if ((is_null($job->published_at) && in_array(auth()->user()->role_id, [1, 2])) || $job->published_at) {
+            return view('front.jobs.show', [
+                'types' => Job::TYPES,
+                'job' => $job->load([
+                    'subCategory.category',
+                    'company.user.userable:id,location',
+                    'tags',
+                    'requirements:id,content,job_id',
+                    'qualifications:id,content,job_id',
+                ]),
+            ]);
+        }
+        toast(trans('This job has not been published yet.'), 'error');
+        return redirect()->route('front.jobs.index');
     }
 
     public function search(Request $request)
@@ -81,5 +86,21 @@ class JobController extends Controller
                                         ->has('jobs')
                                         ->get('name'),
         ]);
+    }
+
+    public function apply(Job $job)
+    {
+        $user = auth()->user();
+        $job->talents()->attach($user->userable->id);
+
+        Notification::send([User::query()->firstWhere('role_id', 1), $user], new ApplyJobNotification($job, $user));
+
+        alert('', trans('Your application has been successfully submitted. An email has been sent to you.'), 'success');
+        
+        if ($user->role_id === 6) {
+            return back();
+        } else {
+            return redirect()->route('front.subscriber.profile');
+        }
     }
 }

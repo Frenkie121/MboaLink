@@ -34,15 +34,16 @@ Route::name('front.')->group(function () {
         Route::view('about', 'front.pages.about')->name('about');
         Route::view('contact', 'front.pages.contact')->name('contact');
         Route::get('categories', 'categories')->name('categories');
-        Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs');
+        Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs')->middleware('auth');
     });
 
     // JOBS
-    Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
+    Route::controller(JobController::class)->middleware('auth')->prefix('jobs')->name('jobs.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create')->middleware('auth');
+        Route::get('/create', 'create')->name('create')->middleware(['role:2']);
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
+        Route::post('/apply/{job}', 'apply')->name('apply')->middleware(['role:3,4,5,6']);
     });
 
     // SUBSCRIPTIONS

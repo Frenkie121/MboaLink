@@ -101,6 +101,13 @@ class Job extends Model
         return $this->hasMany(Qualification::class);
     }
 
+    public function talents(): BelongsToMany
+    {
+        return $this->belongsToMany(Talent::class)
+                    ->withTimestamps(updatedAt: null)
+                    ->withPivot('created_at');
+    }
+
     // SCOPES
     /**
      * Scope the query to only include pusblished jobs

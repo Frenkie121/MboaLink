@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\{BelongsToMany, MorphTo, MorphOne};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Talent extends Model
@@ -19,12 +17,6 @@ class Talent extends Model
         2 => 'French',
         3 => 'Bilingual',
     ];
-
-    // MUTATORS
-    // public function getLanguageAttribute($key)
-    // {
-    //     return __(self::LANGUAGES[$key]);
-    // }
 
     // RELATIONSHIPS
     public function talentable(): MorphTo
@@ -40,5 +32,12 @@ class Talent extends Model
     public function category()
     {
         return $this->belongsTo(category::class);
+    }
+
+    public function jobs(): BelongsToMany
+    {
+        return $this->belongsToMany(Job::class)
+                ->withTimestamps(updatedAt: null)
+                ->withPivot('created_at');
     }
 }
