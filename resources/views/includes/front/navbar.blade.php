@@ -15,7 +15,7 @@
         <div id="navbar-nav" class="navbar-nav p-4 p-lg-0 px-5">
             <a href="{{ route('front.home') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'home')) active @endif">@lang('Home')</a>
             <a href="{{ route('front.about') }}" class="nav-item nav-link @if (Str::endsWith($currentRouteName, 'about')) active @endif">@lang('About')</a>
-            <a href="{{ route('front.subscriptions.index') }}" class="nav-item nav-link @if (Str::contains($currentRouteName, 'subscriptions')) active @endif">@lang('Pricing')</a>
+            <a href="{{ route('front.subscriptions.index') }}" class="nav-item nav-link @if (Str::contains($currentRouteName, 'subscriptions.index') || (Str::endsWith($currentRouteName, 'subscribe'))) active @endif">@lang('Pricing')</a>
             <div class="nav-item dropdown">
                 <a href="#" 
                     class="nav-link dropdown-toggle 

@@ -43,7 +43,6 @@ Route::name('front.')->group(function () {
         Route::get('/create', 'create')->name('create')->middleware(['role:2']);
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
-        Route::post('/apply/{job}', 'apply')->name('apply')->middleware(['role:3,4,5,6']);
     });
 
     // SUBSCRIPTIONS

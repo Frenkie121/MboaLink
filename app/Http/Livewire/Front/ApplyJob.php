@@ -19,6 +19,8 @@ class ApplyJob extends Component
     public function apply()
     {
         $user = auth()->user();
+        abort_if(! in_array($user->role_id, [3, 4, 5, 6]), 403, trans('You cannot perform this action.'));
+
         $this->job->talents()->attach($user->userable->id);
 
         Notification::send([User::query()->firstWhere('role_id', 1), $user, $this->job->company->user], new ApplyJobNotification($this->job, $user));

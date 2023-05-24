@@ -32,10 +32,10 @@ class Subscription extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)
-                    ->withPivot(['amount', 'starts_at', 'ends_at']);
+                    ->withPivot(['amount', 'starts_at', 'ends_at'])
+                    ->orderByPivot('created_at', 'DESC');
     }
   
-
     public function offers(): HasMany
     {
         return $this->hasMany(Offer::class);

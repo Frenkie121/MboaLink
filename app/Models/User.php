@@ -103,6 +103,7 @@ class User extends Authenticatable
     public function subscriptions(): BelongsToMany
     {
         return $this->belongsToMany(Subscription::class)
-                    ->withPivot(['amount', 'starts_at', 'ends_at']);
+                    ->withPivot(['amount', 'starts_at', 'ends_at'])
+                    ->orderByPivot('created_at', 'DESC');
     }
 }

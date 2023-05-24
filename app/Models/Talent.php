@@ -38,6 +38,14 @@ class Talent extends Model
     {
         return $this->belongsToMany(Job::class)
                 ->withTimestamps(updatedAt: null)
-                ->withPivot('created_at');
+                ->withPivot('created_at')
+                ->orderByPivot('created_at', 'DESC');
+    }
+
+    
+    // CUSTOM METHODS
+    public function hasApplied(Job $job): bool
+    {
+        return $this->jobs->contains($job);
     }
 }

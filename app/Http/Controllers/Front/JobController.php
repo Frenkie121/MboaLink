@@ -87,20 +87,4 @@ class JobController extends Controller
                                         ->get('name'),
         ]);
     }
-
-    public function apply(Job $job)
-    {
-        $user = auth()->user();
-        $job->talents()->attach($user->userable->id);
-
-        Notification::send([User::query()->firstWhere('role_id', 1), $user], new ApplyJobNotification($job, $user));
-
-        alert('', trans('Your application has been successfully submitted. An email has been sent to you.'), 'success');
-        
-        if ($user->role_id === 6) {
-            return back();
-        } else {
-            return redirect()->route('front.subscriber.profile');
-        }
-    }
 }

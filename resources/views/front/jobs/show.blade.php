@@ -21,7 +21,7 @@
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gy-5 gx-4">
-                @if (url()->previous() === url('me/my-jobs'))
+                @if (Str::contains(url()->previous(), 'me/my-jobs'))
                     <a class="fw-bolder" href="{{ url()->previous() }}"><i class="fa fa-arrow-left"></i>  @lang('Back to my dashboard')</a>
                 @endif
                 <div class="col-lg-8">

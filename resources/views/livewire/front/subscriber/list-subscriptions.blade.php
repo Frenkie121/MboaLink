@@ -34,6 +34,5 @@
             </tbody>
         </table>
     </div>
-        
-    {{ $subscriptions->links('vendor.pagination.bootstrap-5') }}
+    {{ $subscriptions->links('vendor.livewire.bootstrap') }}
 </div>

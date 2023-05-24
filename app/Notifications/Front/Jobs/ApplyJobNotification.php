@@ -60,7 +60,7 @@ class ApplyJobNotification extends Notification
                         if ($notifiable->role_id !== 6) {
                             return $mail->action(trans('Go to website'), url("jobs/{$this->job->slug}"));
                         } else {
-                            return $mail->action(trans('Go to Dashboard'), url('/me/profile'));
+                            return $mail->action(trans('Go to Dashboard'), url('/me/my-jobs'));
                         }
                     }
                 );

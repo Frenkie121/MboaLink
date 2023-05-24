@@ -105,7 +105,8 @@ class Job extends Model
     {
         return $this->belongsToMany(Talent::class)
                     ->withTimestamps(updatedAt: null)
-                    ->withPivot('created_at');
+                    ->withPivot('created_at')
+                    ->orderByPivot('created_at', 'DESC');
     }
 
     // SCOPES

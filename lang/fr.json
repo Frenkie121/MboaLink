@@ -375,5 +375,10 @@
     "Your application for job: ": "Votre candidature pour le job : ",
     " has been successfully sent to the company: ": " a été envoyée avec succès à l'entreprise : ",
     " will guide you through this process.": " vous accompagnera tout au long de ce processus.",
+    "You cannot perform this action.": "Vous ne pouvez pas effectuer cette action.",
+    "Applied on": "Postulé le",
+    "Logout": "Déconnexion",
+    "Details": "Détails",
+    "You've already applied for this job": "Vous avez déjà postulé à ce job",
     "": ""
 }

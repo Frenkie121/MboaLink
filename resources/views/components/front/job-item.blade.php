@@ -13,7 +13,7 @@
         </div>
         <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
             <div class="d-flex mb-3">
-                <a class="btn btn-primary" href="{{ route('front.jobs.show', $job->slug) }}">@lang('Apply Now')</a>
+                <a class="btn btn-primary" href="{{ route('front.jobs.show', $job->slug) }}">@lang('Details')</a>
             </div>
             <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>@lang('Date Line'): {{ $job->dateline }}</small>
         </div>
