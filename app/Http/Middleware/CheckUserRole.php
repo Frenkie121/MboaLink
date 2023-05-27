@@ -15,10 +15,17 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (! in_array($request->user()->role_id, $roles)) {
+        $role = $request->user()->role_id;
+        if (
+            in_array($role, $roles) || (
+                $role === 6 
+                && $request->user()->subscriptions->first()->pivot->subscription_id === 1
+                && $request->user()->userable_type === 'App\Models\Company'
+                )
+            ) {
+            return $next($request);
+        } else {
             abort(403, "You don't have the right permission to access the requested page.");
         }
-
-        return $next($request);
     }
 }

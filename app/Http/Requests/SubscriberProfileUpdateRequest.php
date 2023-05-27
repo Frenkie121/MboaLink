@@ -26,7 +26,7 @@ class SubscriberProfileUpdateRequest extends FormRequest
         $commonRules = [
             'name' => 'required|string|max:100|unique:users,name,' . auth()->id(),
             'email' => 'required|email|unique:users,email,' . auth()->id(),
-            'phone_number' => 'required|numeric|digits:9|starts_with:65,67,68,69,66,232',
+            'phone_number' => 'required|string|size:9|starts_with:65,67,68,69,66,232',
             'location' => 'required|string|max:100',
         ];
 
