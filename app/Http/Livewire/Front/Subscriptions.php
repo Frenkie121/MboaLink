@@ -152,7 +152,7 @@ class Subscriptions extends Component
             'amount' => $subscription->amount,
         ]);
         
-        $message = 'Your request for subscription has been successfully sent. You will be contacted shortly via WhatsApp for further details in order to validate your subscription.';
+        $message = 'Your request for subscription has been successfully sent. You will be contacted shortly via WhatsApp by administrator for further details in order to validate your subscription.';
         
         Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
 

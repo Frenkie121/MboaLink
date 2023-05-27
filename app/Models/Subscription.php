@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Subscription extends Model
 {
@@ -39,5 +40,30 @@ class Subscription extends Model
     public function offers(): HasMany
     {
         return $this->hasMany(Offer::class);
+    }
+
+    // CUSTOM
+    /**
+     * Get the absolute number of days left for a subscription
+     *
+     * @return float
+     * 
+     */
+    public function lastSubscriptionDaysLeft(): float
+    {
+        return Carbon::parse($this->pivot->ends_at)->floatDiffInDays(now());
+    }
+    
+    /**
+     * Check if a subscription is same as another one (Just to mark it in the dashboard history)
+     *
+     * @param Subscription $subscription
+     * 
+     * @return bool
+     * 
+     */
+    public function isSameAs(Subscription $subscription): bool
+    {
+        return $this->pivot->id === $subscription->pivot->id;
     }
 }

@@ -76,7 +76,7 @@
             <span class="fs-4 fw-bolder" style="margin-left: 10px">{{ $auth->name }}</span>
           </a>
           <p class="fs-4 my-2 badge bg-secondary">{{ $auth->role->name }}</p>
-          <p class="fs-10 fw-bold">{{ $auth->userable->category->name }}</p>
+          <p class="fs-10 fw-bold mb-0">{{ $auth->userable->category->name }}</p>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li>

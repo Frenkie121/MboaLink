@@ -6,16 +6,14 @@ namespace App\Models;
 
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{App, Hash};
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, MorphTo};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Notifications\Password\ResetPasswordFrNotification;
+use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
@@ -103,7 +101,20 @@ class User extends Authenticatable
     public function subscriptions(): BelongsToMany
     {
         return $this->belongsToMany(Subscription::class)
-                    ->withPivot(['amount', 'starts_at', 'ends_at'])
-                    ->orderByPivot('created_at', 'DESC');
+                    ->withPivot(['id', 'amount', 'starts_at', 'ends_at', 'created_at']);
+    }
+
+    // CUSTOM
+    /**
+     * Get the current subscription instance for the authenticated user
+     *
+     * @return App\Models\Subscription
+     * 
+     */
+    public function currentSubscription(): Subscription
+    {
+        return $this->subscriptions->filter(
+                    fn ($item) => Carbon::parse($item->pivot->ends_at)->isFuture() && Carbon::parse($item->pivot->starts_at)->isPast()
+                )->first();
     }
 }
