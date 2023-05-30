@@ -19,7 +19,7 @@
                 <thead>
                     <tr class="table-warning">
                         <th scope="col">#</th>
-                        <th scope="col">@lang('Title')</th>
+                        <th scope="col">@lang('Type')</th>
                         <th scope="col">@lang('Cost')</th>
                         <th scope="col">@lang('Status')</th>
                         <th scope="col">@lang('Start date')</th>

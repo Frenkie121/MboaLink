@@ -40,10 +40,13 @@
             #logo-nav {
                 margin-left: 15px;
             }
+            /* #auth-btn {
+                margin-left: 45px;
+            } */
         }
-        #auth-btn {
+        /* #auth-btn {
             min-width: 120px;
-        }
+        } */
         #lang {
             color: #f9460c !important;
         }
@@ -57,30 +60,41 @@
 
         @media (min-width: 1290px) {
             #navbar-nav {
-                margin-left: 400px;
+                margin-left: 300px;
             }
             .auth {
-                margin-left: 100px;
+                margin-left: 110px;
+            }
+            .auth-btn {
+                margin-left: 110px;
             }
         }
 
         @media (max-width: 1050px) and (min-width: 992px) {
             #navbar-nav {
-                margin-left: 150px;
+                margin-left: 100px;
             }
 
             .auth {
-                margin-left: 80px;
+                margin-left: 38px;
+            }
+
+            #auth-btn {
+                margin-left: 0;
             }
         }
 
         @media (max-width: 1290px) and (min-width: 1050px) {
             #navbar-nav {
-                margin-left: 215px;
+                margin-left: 100px;
             }
 
             .auth {
                 margin-left: 80px;
+            }
+
+            #auth-btn {
+                min-width: 10px;
             }
         }
     </style>

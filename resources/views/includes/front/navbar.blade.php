@@ -22,7 +22,7 @@
                     @if (Str::contains($currentRouteName, 'categories') 
                     || (Str::contains($currentRouteName, 'jobs.'))) active 
                     @endif" 
-                    data-bs-toggle="dropdown">Jobs</a>
+                    data-bs-toggle="dropdown">@lang('Jobs')</a>
                 <div class="dropdown-menu rounded-0 m-0">
                     <a href="{{ route('front.categories') }}" class="dropdown-item 
                         @if (Str::endsWith($currentRouteName, 'categories')) active @endif"
