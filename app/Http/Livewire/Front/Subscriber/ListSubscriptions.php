@@ -2,10 +2,9 @@
 
 namespace App\Http\Livewire\Front\Subscriber;
 
+use App\Actions\RequestSubscriptionRenewal;
 use App\Models\{Subscription, User};
-use App\Notifications\Front\Subscription\SubscriptionRenewalRequestNotification;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class ListSubscriptions extends Component
@@ -19,32 +18,9 @@ class ListSubscriptions extends Component
         $this->last_subscription = $this->user->subscriptions->last();  
     }
 
-    public function sendRequest()
+    public function sendRequest(RequestSubscriptionRenewal $requestSubscriptionRenewal)
     {
-        $this->user->subscriptions()->attach($this->last_subscription->id, [
-            'amount' => $this->last_subscription->amount,
-        ]);
-
-        // For admin validation
-        // $last_ends_date = Carbon::parse($last_subscription->pivot->ends_at);
-        // $this->user->subscriptions()->wherePivot('id', $last_subscription->pivot->id)->attach($last_subscription->id, [
-        //     'amount' => $subscription->amount,
-        //     'starts_at' => $last_ends_date->isPast() ? now() : $last_ends_date,
-        //     'ends_at' => $last_ends_date->isPast() ? now()->addWeeks($subscription->duration) : $last_ends_date->addWeeks($subscription->duration)
-        // ]);
-        
-        // EMAIL
-        $message = trans('Your subscription renewal request as been successfully sent. You will be contacted shortly via WhatsApp by administrator for further details in order to validate your subscription.');
-        $data = [
-            'message' => $message,
-            'type' => $this->last_subscription->name,
-            'slug' => $this->user->slug,
-            'from' => $this->user->name,
-        ];
-
-        Notification::send([User::query()->firstWhere('role_id', 1), $this->user], new SubscriptionRenewalRequestNotification($data));
-
-        alert('', $message . ' ' . trans('An email has been sent to you.'), 'success')->autoclose(25000);
+        $requestSubscriptionRenewal->send($this->last_subscription->id);
 
         $this->redirectRoute('front.subscriber.subscriptions');
     }

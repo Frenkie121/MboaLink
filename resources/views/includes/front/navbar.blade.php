@@ -28,7 +28,7 @@
                         @if (Str::endsWith($currentRouteName, 'categories')) active @endif"
                     >@lang('Categories')</a>
                     <a href="{{ route('front.jobs.index') }}" class="dropdown-item
-                        @if (Str::endsWith($currentRouteName, 'index')) active @endif"
+                        @if (Str::endsWith($currentRouteName, 'jobs.index')) active @endif"
                     >@lang('Job List')</a>
                     <a href="{{ route('front.jobs.create') }}" class="dropdown-item
                         @if (Str::endsWith($currentRouteName, 'create')) active @endif"
@@ -45,6 +45,8 @@
                         <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">@lang('Go to dashboard')</a></li>
                     @elseif (in_array(auth()->user()->role_id, [2, 3, 4, 5]))
                         <li><a class="dropdown-item" href="{{ route('front.subscriber.profile') }}">@lang('My dashboard')</a></li>
+                    @elseif (auth()->user()->subscriptions->isNotEmpty() && auth()->user()->subscriptions->first()->pivot->starts_at)
+                        <li><a class="dropdown-item" href="{{ route('front.subscriptions.renew') }}">@lang('Upgrade my subscription')</a></li>
                     @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\{Job, SubCategory, User};
-use App\Notifications\Front\Jobs\ApplyJobNotification;
+use App\Models\{Job, SubCategory};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 
 class JobController extends Controller
 {
@@ -29,6 +27,11 @@ class JobController extends Controller
 
     public function create()
     {
+        abort_if(
+            auth()->user()->userable_type !== 'App\Models\Company',
+            403,
+        );
+
         return view('front.jobs.create', [
             'types' => Job::TYPES,
             'subCategories' => SubCategory::query()

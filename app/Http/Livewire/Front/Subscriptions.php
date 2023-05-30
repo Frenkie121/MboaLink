@@ -145,6 +145,7 @@ class Subscriptions extends Component
             'phone_number' => $this->phone_number,
             'password' => $password,
             'role_id' => $role,
+            'is_active' => true,
         ]);
 
         $subscription = Subscription::query()->find($this->subscription_id);

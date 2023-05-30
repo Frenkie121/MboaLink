@@ -19,15 +19,17 @@
                     <li class="fs-6 mb-1" style="text-align: justify;"><small>{{ $offer->content }}</small></li>
                 @endforeach
             </ul>
-            <div class="position-absolute top-100 start-50 translate-middle mb-2 w-75">
-                <a href="{{ $subscribe_route ? route('front.subscriptions.index') : route('front.subscriptions.subscribe', $subscription->slug) }}" type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
-                    @if ($subscribe_route)
-                        @lang('Look at other plans')
-                    @else
-                        @lang('Subscribe Now')
-                    @endif
-                </a>
-            </div>
+            @guest
+                <div class="position-absolute top-100 start-50 translate-middle mb-2 w-75">
+                    <a href="{{ $subscribe_route ? route('front.subscriptions.index') : route('front.subscriptions.subscribe', $subscription->slug) }}" type="button" class="w-100 btn btn-lg btn-{{ $subscription->id === 1 ? 'primary' : 'secondary' }}">
+                        @if ($subscribe_route)
+                            @lang('Look at other plans')
+                        @else
+                            @lang('Subscribe Now')
+                        @endif
+                    </a>
+                </div>
+            @endguest
         </div>
     </div>
 </div>

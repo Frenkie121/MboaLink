@@ -40,7 +40,7 @@ Route::name('front.')->group(function () {
     // JOBS
     Route::controller(JobController::class)->middleware('auth')->prefix('jobs')->name('jobs.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create')->middleware(['role:2']);
+        Route::get('/create', 'create')->name('create');
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
     });
@@ -49,6 +49,10 @@ Route::name('front.')->group(function () {
     Route::controller(SubscriptionController::class)->prefix('pricing')->name('subscriptions.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('{subscription:slug}/subscribe', 'subscribe')->name('subscribe');
+        Route::middleware(['auth', 'role:6'])->group(function () {
+            Route::get('/renew-subscription', 'showRenewPage')->name('renew-show');
+            Route::post('/renew-subscription', 'renew')->name('renew');
+        });
     });
 
     // SUBSCRIBER PROFILE
