@@ -45,6 +45,11 @@
             <p class="text-center alert alert-info">@lang('Coming soon ...')</p>
         @endif
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger text-center fw-bold mt-2">
+            <span>@lang('The form contains errors. Please check them before resubmitting the form.')</span>
+        </div>
+    @endif
     @if (($free && $type) || in_array($subscription_id, [2, 3, 4, 5]))
         <div class="d-flex justify-content-end mt-2">
             <button wire:loading.remove class="btn btn-primary">

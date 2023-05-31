@@ -29,7 +29,7 @@ class AuthenticatedSessionController extends Controller
     {
         $message = '';
         $remember = (bool) $request->remember;
-        if (! Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
             $user = User::where('email', $request->email)->first();
             if ($user) {
                 if (Hash::check($request->password, $user->password)) {
@@ -47,14 +47,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        $redirect = '/';
         $auth = auth()->user();
-        if ($auth->role_id === 2) {
-            if ($auth->userable->jobs->isEmpty()) {
-                $redirect = '/jobs/create';
-            } else {
-                $redirect = '/jobs';
-            }
+        if ($auth->role_id === 1) {
+            $redirect = 'admin/dashboard';
+        } elseif (
+            ($auth->role_id === 2 && $auth->userable->jobs->isEmpty())
+            || ($auth->role_id === 6 && $auth->userable->type === 'App\Models\Company')
+        ) {
+            $redirect = '/jobs/create';
+        } elseif (
+            in_array($auth->role_id, [2, 3, 4, 5])
+            || ($auth->role_id === 2 && $auth->userable->jobs->isNotEmpty())
+        ) {
+            $redirect = '/me';
         } else {
             $redirect = '/jobs';
         }

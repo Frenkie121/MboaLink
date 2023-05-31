@@ -1,20 +1,13 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Front\Subscriptions;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Front\JobController;
+use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\Front\PagesController;
-use App\Http\Controllers\Admin\StatisticsController;
-use App\Http\Controllers\Admin\SubscribersController;
-use App\Http\Controllers\Front\SubscriptionController;
-use App\Http\Controllers\Admin\Job\SingleJobController;
+use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
 use App\Http\Livewire\Admin\Subscription\EditComponent;
-use App\Http\Controllers\Admin\Job\PublishJobController;
-use App\Http\Controllers\Admin\SubscriptionBackController;
+use App\Http\Controllers\Admin\{StatisticsController, SubscribersController, SubscriptionBackController, UsersController};
+use App\Http\Livewire\Front\Subscriber\{ListApplications, ListJobs, ListSubscriptions, UpdatePassword, UpdateProfile};
 
 /*
 |--------------------------------------------------------------------------
@@ -41,13 +34,13 @@ Route::name('front.')->group(function () {
         Route::view('about', 'front.pages.about')->name('about');
         Route::view('contact', 'front.pages.contact')->name('contact');
         Route::get('categories', 'categories')->name('categories');
-        Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs');
+        Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs')->middleware('auth');
     });
 
     // JOBS
-    Route::controller(JobController::class)->prefix('jobs')->name('jobs.')->group(function () {
+    Route::controller(JobController::class)->middleware('auth')->prefix('jobs')->name('jobs.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create')->middleware('auth');
+        Route::get('/create', 'create')->name('create');
         Route::get('/{job:slug}', 'show')->name('show');
         Route::post('/search', 'search')->name('search');
     });
@@ -56,6 +49,19 @@ Route::name('front.')->group(function () {
     Route::controller(SubscriptionController::class)->prefix('pricing')->name('subscriptions.')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('{subscription:slug}/subscribe', 'subscribe')->name('subscribe');
+        Route::middleware(['auth', 'role:6'])->group(function () {
+            Route::get('/renew-subscription', 'showRenewPage')->name('renew-show');
+            Route::post('/renew-subscription', 'renew')->name('renew');
+        });
+    });
+
+    // SUBSCRIBER PROFILE
+    Route::middleware(['auth', 'role:2,3,4,5'])->prefix('me')->name('subscriber.')->group(function () {
+        Route::get('', UpdateProfile::class)->name('profile');
+        Route::get('password', UpdatePassword::class)->name('password');
+        Route::get('my-jobs', ListJobs::class)->name('jobs');
+        Route::get('my-jobs/{job:slug}/applications', ListApplications::class)->name('job.applications');
+        Route::get('my-subscriptions', ListSubscriptions::class)->name('subscriptions');
     });
 });
 

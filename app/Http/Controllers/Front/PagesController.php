@@ -3,10 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Job;
-use App\Models\SubCategory;
-use App\Models\Subscription;
+use App\Models\{Category, Job, SubCategory, Subscription};
 
 class PagesController extends Controller
 {
@@ -16,6 +13,7 @@ class PagesController extends Controller
             'jobs' => Job::query()
                         ->with('company:id,logo')
                         ->published()
+                        ->active()
                         ->get()
                         ->take(5)
                         ->sortByDesc('created_at'),

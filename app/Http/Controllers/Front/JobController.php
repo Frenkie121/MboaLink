@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
-use App\Models\Job;
-use App\Models\SubCategory;
+use App\Models\{Job, SubCategory};
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -28,6 +27,11 @@ class JobController extends Controller
 
     public function create()
     {
+        abort_if(
+            auth()->user()->userable_type !== 'App\Models\Company',
+            403,
+        );
+
         return view('front.jobs.create', [
             'types' => Job::TYPES,
             'subCategories' => SubCategory::query()
@@ -37,16 +41,20 @@ class JobController extends Controller
 
     public function show(Job $job)
     {
-        return view('front.jobs.show', [
-            'types' => Job::TYPES,
-            'job' => $job->load([
-                'subCategory.category',
-                'company.user:id,name,email,userable_id',
-                'tags',
-                'requirements:id,content,job_id',
-                'qualifications:id,content,job_id',
-            ]),
-        ]);
+        if ((is_null($job->published_at) && in_array(auth()->user()->role_id, [1, 2])) || $job->published_at) {
+            return view('front.jobs.show', [
+                'types' => Job::TYPES,
+                'job' => $job->load([
+                    'subCategory.category',
+                    'company.user.userable:id,location',
+                    'tags',
+                    'requirements:id,content,job_id',
+                    'qualifications:id,content,job_id',
+                ]),
+            ]);
+        }
+        toast(trans('This job has not been published yet.'), 'error');
+        return redirect()->route('front.jobs.index');
     }
 
     public function search(Request $request)

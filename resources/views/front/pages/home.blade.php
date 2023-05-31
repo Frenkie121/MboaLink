@@ -115,7 +115,7 @@
     <!-- About End -->
 
     <!-- Plans Start -->
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5" id="pricing">
         <div class="container">
             <hr>
             <h1 class="text-center mb-3 wow fadeInUp" data-wow-delay="0.1s">@lang('Our Best Subscription Plans')</h1>
@@ -137,14 +137,18 @@
             <hr>
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Latest Jobs')</h1>
             <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        @foreach ($jobs as $job)
-                            <x-front.job-item :job="$job" />
-                        @endforeach
-                        <a class="btn btn-primary py-3 px-5" href="{{ route('front.jobs.index') }}">@lang('Browse More Jobs')</a>
+                @auth
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            @foreach ($jobs as $job)
+                                <x-front.job-item :job="$job" />
+                            @endforeach
+                            <a class="btn btn-primary py-3 px-5" href="{{ route('front.jobs.index') }}">@lang('Browse More Jobs')</a>
+                        </div>
                     </div>
-                </div>
+                @else
+                    <a href="#pricing" class="h6 text-primary">@lang('Subscribe to see the different jobs.')</a>
+                @endauth
             </div>
         </div>
     </div>

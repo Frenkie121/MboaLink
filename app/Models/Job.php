@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, BelongsToMany, HasMany};
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -60,8 +58,14 @@ class Job extends Model
         } else {
             return formatMoney($salary[0]);
         }
+    }
 
-        // dd(number_format($salary[0], 0, ',', ' '));
+    public function getReduceTitleAttribute()
+    {
+        $title = $this->attributes['title'];
+        return strlen($title) > 15
+                ? substr($title, 0, 15) . ' ...'
+                : $title;
     }
 
     // MUTATORS
@@ -95,6 +99,14 @@ class Job extends Model
     public function qualifications(): HasMany
     {
         return $this->hasMany(Qualification::class);
+    }
+
+    public function talents(): BelongsToMany
+    {
+        return $this->belongsToMany(Talent::class)
+                    ->withTimestamps(updatedAt: null)
+                    ->withPivot('created_at')
+                    ->orderByPivot('created_at', 'DESC');
     }
 
     // SCOPES

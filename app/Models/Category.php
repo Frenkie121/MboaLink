@@ -28,8 +28,8 @@ class Category extends Model
     public function getShortNameAttribute(): string
     {
         $name = $this->attributes['name'];
-        if (str_word_count($name) > 2 && strlen($name) > 25) {
-            return substr($name, 0, 20).'...';
+        if (str_word_count($name) > 2 && strlen($name) > 17) {
+            return substr($name, 0, 17).'...';
         }
 
         return $name;
