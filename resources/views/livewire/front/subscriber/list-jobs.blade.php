@@ -41,6 +41,9 @@
             </thead>
             <tbody>
                 @foreach ($jobs as $job)
+                    @php
+                        $hasTalent = $job->talents->isNotEmpty();
+                    @endphp
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td class="fw-bold" title="{{ $job->title }}">{{ $job->reduce_title }}</td>
@@ -62,7 +65,12 @@
                         <td class="text-center">
                             <a href="{{ route('front.jobs.show', $job->slug) }}" class="btn btn-secondary" title="@lang('Job Details')"><i class="fas fa-eye"></i></a>
                             @if ($company)
-                                <a href="{{ route('front.jobs.show', $job->slug) }}" class="btn btn-primary" title="@lang('Applicants list')"><i class="fas fa-folder"></i></a>
+                                <a 
+                                    href="@if($hasTalent){{ route('front.subscriber.job.applications', $job->slug) }} @else # @endif"
+                                    class="btn btn-{{ $hasTalent ? 'primary' : 'dark' }}"
+                                    title="@if($hasTalent)@lang('Applicants list')@else @lang('No applicant yet')@endif">
+                                    <i class="fas fa-folder"></i>
+                                </a>
                             @endif
                         </td>
                     </tr>

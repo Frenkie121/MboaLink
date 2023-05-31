@@ -12,6 +12,17 @@ class Pupil extends Model
 
     protected $fillable = ['school', 'cycle', 'section', 'serie', 'parent_contact', 'class'];
 
+    // ACCESSORS
+    public function getSectionAttribute($value): string
+    {
+        return __(config('subscriptions.section')[$value]);
+    }
+
+    public function getCycleAttribute($value): string
+    {
+        return __(config('subscriptions.cycle')[$value]);
+    }
+
     // RELATIONSHIPS
     public function talent(): MorphOne
     {

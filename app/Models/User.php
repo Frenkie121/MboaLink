@@ -117,4 +117,21 @@ class User extends Authenticatable
                     fn ($item) => Carbon::parse($item->pivot->ends_at)->isFuture() && Carbon::parse($item->pivot->starts_at)->isPast()
                 )->first();
     }
+
+    public function getFreeSubscriptionType()
+    {
+        if ($this->userable_type === 'App\Models\Company') {
+            $type = 2;
+        } elseif ($this->userable_type === 'App\Models\Talent') {
+            if ($this->load('userable')->userable->talentable_type === 'App\Models\Student') {
+                $type = 3;
+            } elseif ($this->load('userable')->userable->talentable_type === 'App\Models\Pupil') {
+                $type = 4;
+            } else {
+                $type = 5;
+            }
+        }
+        
+        return Subscription::query()->find($type);
+    }
 }

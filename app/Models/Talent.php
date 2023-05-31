@@ -18,6 +18,20 @@ class Talent extends Model
         3 => 'Bilingual',
     ];
 
+    // ACCESSORS
+    public function getLanguageAttribute($language): string
+    {
+        if ($language === 'en') {
+            $key = 1;
+        } elseif ($language === 'fr') {
+            $key = 2;
+        } else {
+            $key = 3;
+        }
+
+        return __(self::LANGUAGES[$key]);
+    }
+
     // RELATIONSHIPS
     public function talentable(): MorphTo
     {

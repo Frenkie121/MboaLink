@@ -7,7 +7,7 @@ use App\Http\Controllers\Extra\LangController;
 use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
 use App\Http\Livewire\Admin\Subscription\EditComponent;
 use App\Http\Controllers\Admin\{StatisticsController, SubscribersController, SubscriptionBackController, UsersController};
-use App\Http\Livewire\Front\Subscriber\{ListJobs, ListSubscriptions, UpdatePassword, UpdateProfile};
+use App\Http\Livewire\Front\Subscriber\{ListApplications, ListJobs, ListSubscriptions, UpdatePassword, UpdateProfile};
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,7 @@ Route::name('front.')->group(function () {
         Route::get('', UpdateProfile::class)->name('profile');
         Route::get('password', UpdatePassword::class)->name('password');
         Route::get('my-jobs', ListJobs::class)->name('jobs');
+        Route::get('my-jobs/{job:slug}/applications', ListApplications::class)->name('job.applications');
         Route::get('my-subscriptions', ListSubscriptions::class)->name('subscriptions');
     });
 });

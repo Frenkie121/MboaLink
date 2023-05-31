@@ -24,4 +24,12 @@
 
 @push('js')
     @livewireScripts
+
+    @if (Route::currentRouteName() === 'front.subscriber.job.applications')
+        <script type="text/javascript">
+            window.livewire.on('openModal', () => {
+                $('#applicantDetailsModal').modal('show');
+            });
+        </script>
+    @endif
 @endpush

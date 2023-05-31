@@ -100,7 +100,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('front.subscriber.jobs') }}" class="nav-link {{ Str::endsWith($currentRouteName, 'jobs') ? 'active' : 'link-dark' }} mb-2">
+                <a href="{{ route('front.subscriber.jobs') }}" class="nav-link {{ Str::endsWith($currentRouteName, 'jobs') || Str::endsWith($currentRouteName, 'applications') ? 'active' : 'link-dark' }} mb-2">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
                     @if ($auth->role_id === 2)
                       @lang('My Jobs')

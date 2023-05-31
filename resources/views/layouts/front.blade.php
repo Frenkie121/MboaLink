@@ -36,17 +36,6 @@
     <link href="{{ asset('assets/front/css/style.css') }}" rel="stylesheet">
 
     <style>
-        @media (min-width: 576px) {
-            #logo-nav {
-                margin-left: 15px;
-            }
-            /* #auth-btn {
-                margin-left: 45px;
-            } */
-        }
-        /* #auth-btn {
-            min-width: 120px;
-        } */
         #lang {
             color: #f9460c !important;
         }
@@ -56,6 +45,16 @@
 
         #lang-dropdown {
             width: 180px;
+        }
+
+        .fs-custom {
+            font-size: 10pt;
+        }
+        
+        @media (min-width: 576px) {
+            #logo-nav {
+                margin-left: 15px;
+            }
         }
 
         @media (min-width: 1290px) {
