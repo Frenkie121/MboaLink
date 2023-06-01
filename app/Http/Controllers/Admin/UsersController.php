@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\UpdateUserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -20,16 +21,14 @@ class UsersController extends Controller
     /**
      * Enable or disable user account
      */
-    public function updateStatus(User $user): RedirectResponse
+    public function updateStatus(UpdateUserStatus $updateUserStatus, User $user): RedirectResponse
     {
-        if ($user->is_active) {
-            $user->is_active = false;
-            $message = trans('Account has been successfully unblocked.');
-        } else {
-            $user->is_active = true;
-            $message = trans('Account has been successfully blocked.');
-        }
-        $user->save();
+        $updateUserStatus->handle($user);
+
+        $message = match (intval($user->is_active)) {
+            1 => __('Account has been successfully unblocked.'),
+            0 => __('Account has been successfully blocked.'),
+        };
 
         toast($message, 'success');
 

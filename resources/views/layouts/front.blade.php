@@ -56,6 +56,17 @@
                 margin-left: 15px;
             }
         }
+        
+        @media (max-width: 992px) {
+            .auth {
+                margin-left: 30px;
+            }
+
+            #auth-btn {
+                margin-left: 15px;
+                margin-bottom: 10px;
+            }
+        }
 
         @media (min-width: 1290px) {
             #navbar-nav {

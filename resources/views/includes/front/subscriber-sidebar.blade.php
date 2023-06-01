@@ -66,8 +66,8 @@
     </symbol>
 </svg>
 
-<main class="col-md-3 wow fadeInUp" data-wow-delay="0.5s" style="height: auto">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="min-width: 280px;">
+<main class="col-md-3 wow fadeInUp" data-wow-delay="0.5s" style="height: fit-content;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: auto;">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img alt="image" width="50" height="50" src="{{ 
               ($auth->role_id === 2 && $auth->userable->logo)
@@ -111,9 +111,15 @@
             </li>
             <li>
                 <a href="{{ route('front.subscriber.subscriptions') }}" class="nav-link {{ Str::endsWith($currentRouteName, 'subscriptions') ? 'active' : 'link-dark' }} mb-2">
-                  <svg class="bi me-2" width="16" height="16" xmlnsxmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"/></svg>
+                  <svg class="bi me-2" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
                 @lang('My Subscriptions')
                 </a>
+            </li>
+            <li>
+              <a href="{{ route('front.subscriber.status') }}" class="nav-link {{ Str::endsWith($currentRouteName, 'status') ? 'active' : 'link-dark' }} mb-2">
+                <svg class="bi me-2" width="16" height="16" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><path d="M576 0c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V32c0-17.7 14.3-32 32-32zM448 96c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V128c0-17.7 14.3-32 32-32zM352 224V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V224c0-17.7 14.3-32 32-32s32 14.3 32 32zM192 288c17.7 0 32 14.3 32 32V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V320c0-17.7 14.3-32 32-32zM96 416v64c0 17.7-14.3 32-32 32s-32-14.3-32-32V416c0-17.7 14.3-32 32-32s32 14.3 32 32z"/></svg>
+                @lang('Account Status')
+              </a>
             </li>
             <li>
                 <form method="POST" action="{{ route('logout') }}">

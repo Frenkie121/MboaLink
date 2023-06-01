@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone_number')->nullable();
             $table->boolean('is_active')->default(false);
+            $table->integer('disabled_by')->nullable();
+            $table->timestamp('disabled_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

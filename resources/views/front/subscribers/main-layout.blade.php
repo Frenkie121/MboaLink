@@ -14,7 +14,7 @@
     <div class="container-xxl py-5 row">
         @include('includes.front.subscriber-sidebar')
         <div class="col-md-9">
-            <div class="wow fadeInUp" data-wow-delay="0.7s">
+            <div class="wow fadeInUp mt-md-5" data-wow-delay="0.7s">
                 {{ $slot }}
             </div>
         </div>
