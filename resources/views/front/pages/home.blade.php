@@ -8,41 +8,35 @@
     <div class="container-fluid p-0">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-1.jpg') }}" alt="">
+                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-1.jpg') }}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-3 text-white animated slideInDown mb-4">@lang("MBOALINK THE CHOICE OF EMPLOYMENT NEARBY")</h1>
-                                {{-- <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p> --}}
-                                {{-- <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a> --}}
-                                {{-- <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a> --}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-2.jpg') }}" alt="">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-2.png') }}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Search A Job</a>
-                                <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Find A Talent</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
     <!-- Carousel End -->
 
     <!-- Search Start -->
-    <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    {{-- <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
             <form action="{{ route('front.jobs.search') }}" method="post">
                 @csrf
@@ -64,7 +58,7 @@
                                 <select class="form-select border-0" name="type">
                                     <option disabled selected>@lang('Job Type')</option>
                                     @foreach ($types as $type)
-                                        <option @selected(request()->type === $type) value="{{ $type }}">{{ $type }}</option>
+                                        <option @selected(request()->type === $type) value="{{ $type }}">{{ __($type) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -77,7 +71,8 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div> --}}
+    @include('includes.front.search-bar')
     <!-- Search End -->
 
     <!-- About Start -->

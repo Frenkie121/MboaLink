@@ -2,10 +2,6 @@
 
 @section('subtitle', __('Contact'))
 
-@push('css')
-    @livewireStyles
-@endpush
-
 @section('content')
 
     <!-- Header End -->
@@ -61,4 +57,14 @@
 
 @push('js')
     @livewireScripts
+@endpush
+
+@push('css')
+    @livewireStyles
+
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5)), url({{ asset('assets/front/img/contact.jpg') }}) center center no-repeat;
+        }
+    </style>
 @endpush
