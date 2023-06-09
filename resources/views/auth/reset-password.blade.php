@@ -4,17 +4,18 @@
 
 @section('content')
 
+    {{-- @dd($errors) --}}
     <div class="card-header"><h4>@lang('Reset Password')</h4></div>
     <div class="card-body">
         <form method="POST" action="{{ route('password.store') }}">
             @csrf
 
             <!-- Password Reset Token -->
-            <input type="hidden" name="token" value="{{ $request->route('token') }}">
+            <input type="hidden" name="token" value="{{ $token }}">
 
             <div class="form-group">
                 <label for="email">@lang('Email')</label>
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $request->email) }}" tabindex="1" required autofocus>
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $email) }}" tabindex="1" required autofocus>
                 @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

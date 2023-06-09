@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -17,9 +19,18 @@ class NewPasswordController extends Controller
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create(Request $request): View | \Illuminate\Http\RedirectResponse
     {
-        return view('auth.reset-password', ['request' => $request]);
+        $reset_created = Carbon::parse(DB::table('password_resets')->where('email', $request->email)->first()->created_at);
+        if (now()->diffInMinutes($reset_created) > 60) {
+            toast(trans('The password reset link has expired, please request a new password reset.'), 'error')->autoclose(10000);
+            return redirect()->route('password.request');
+        }
+
+        return view('auth.reset-password', [
+            'email' => $request->email,
+            'token' => $request->route('token'),
+        ]);
     }
 
     /**
@@ -34,7 +45,6 @@ class NewPasswordController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
@@ -42,7 +52,7 @@ class NewPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
                 $user->forceFill([
-                    'password' => Hash::make($request->password),
+                    'password' => $request->password,
                     'remember_token' => Str::random(60),
                 ])->save();
 
