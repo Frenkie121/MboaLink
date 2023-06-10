@@ -40,21 +40,26 @@
                                             </td>
                                             <td>
                                                 @if ($user->role_id !== 1)
-                                                    <form method="POST"
-                                                        action="{{ route('admin.users.status', $user->slug) }}">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <a href="{{ route('admin.users.status', $user->slug) }}"
-                                                            onclick="event.preventDefault();
-                                                            this.closest('form').submit();"
-                                                            class="btn btn-{{ $user->is_active ? 'danger' : 'primary' }}">
-                                                            @if ($user->is_active)
-                                                                @lang('Block')
-                                                            @else
-                                                                @lang('Unblock')
-                                                            @endif
-                                                        </a>
-                                                    </form>
+                                                    @if (! $user->is_active && ($user->disabled_by !== auth()->id()) && $user->disabled_at)
+                                                        <a role="link" aria-disabled="true" class="btn btn-secondary" title="@lang('You cannot enable this account because it was disabled by its owner.')">@lang('Unblock')</a>
+                                                    @else
+                                                        <form method="POST"
+                                                            action="{{ route('admin.users.status', $user->slug) }}">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <a href="{{ route('admin.users.status', $user->slug) }}"
+                                                                onclick="event.preventDefault();
+                                                                this.closest('form').submit();"
+                                                                class="btn btn-{{ $user->is_active ? 'danger' : 'primary' }}">
+                                                                @if ($user->is_active)
+                                                                    @lang('Block')
+                                                                @else
+                                                                    @lang('Unblock')
+                                                                @endif
+                                                            </a>
+                                                        </form>
+                                                    @endif
+                                                    
                                                 @endif
                                             </td>
                                         </tr>

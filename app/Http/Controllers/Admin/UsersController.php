@@ -14,7 +14,7 @@ class UsersController extends Controller
         return view('admin.users.index', [
             'users' => User::query()
                             ->with('role:id,name')
-                            ->get(['id', 'name', 'email', 'role_id', 'slug', 'is_active']),
+                            ->get(['id', 'name', 'email', 'role_id', 'slug', 'is_active', 'disabled_by', 'disabled_at']),
         ]);
     }
 
@@ -23,6 +23,11 @@ class UsersController extends Controller
      */
     public function updateStatus(UpdateUserStatus $updateUserStatus, User $user): RedirectResponse
     {
+        if (! $user->is_active && ($user->disabled_by !== auth()->id()) && $user->disabled_at) {
+            toast(__('You cannot enable this account because it was disabled by its owner.'), 'info');
+            return back();
+        }
+
         $updateUserStatus->handle($user);
 
         $message = match (intval($user->is_active)) {

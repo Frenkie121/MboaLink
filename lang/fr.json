@@ -461,5 +461,6 @@
     " your account.": " votre compte.",
     "You can contact the administrator to find out more:": "Vous pouvez contacter l'administrateur pour en savoir plus :",
     "The password reset link has expired, please request a new password reset.": "Le lien de réinitialisation a expiré, veuillez faire une nouvelle demande.",
+    "You cannot enable this account because it was disabled by its owner.": "Vous ne pouvez pas activer ce compte car il a été désactivé par son propriétaire.",
     "": ""
 }
