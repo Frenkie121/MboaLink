@@ -42,6 +42,10 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">@lang('Reset Password')</button>
             </div>
+
+            <div class="float-left">
+                <a href="{{ route('front.home') }}" class="text-small">@lang('Back to home')</a>
+            </div>
         </form>
     </div>
 

@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                    @lang('Send the link')
+                    {{ ! session('status') ? __('Send the link') : __('Resend the link') }}
                 </button>
             </div>
         </form>
