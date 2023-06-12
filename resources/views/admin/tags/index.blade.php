@@ -20,6 +20,10 @@
             $('#AddTag').modal('hide');
             $('#deleteTag').modal('hide');
         });
+        //Edit Tag Modal
+        window.livewire.on('openEditModal', () => {
+            $('#AddTag').modal('show');
+        });
         //add Category Modal
         window.livewire.on('openModal', () => {
             $('#AddTag').modal('show');

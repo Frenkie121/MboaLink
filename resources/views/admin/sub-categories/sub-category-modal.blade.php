@@ -46,7 +46,7 @@
                     <div class="modal-footer">
                         <button type="reset" wire:click="closeModal()" class="btn btn-secondary"
                             data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="submit" class="btn btn-primary">@lang('Save')</button>
+                        <button type="submit" class="btn btn-primary">{{ $selectedSubCategory ? __('Edit') : __('Save') }}</button>
                     </div>
                 </form>
             </div>

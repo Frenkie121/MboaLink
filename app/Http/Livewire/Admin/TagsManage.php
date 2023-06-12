@@ -32,6 +32,7 @@ class TagsManage extends Component
 
     public function showEditForm(Tag $tag)
     {
+        // dd($tag);
         $this->reset();
         $this->resetErrorBag();
         $this->emit('openEditModal');
@@ -96,6 +97,11 @@ class TagsManage extends Component
 
     public function render()
     {
-        return view('livewire.admin.tags-manage', ['tags' => Tag::query()->OrderBy('id', 'desc')->paginate(5)]);
+        return view('livewire.admin.tags-manage', [
+            'tags' => Tag::query()
+                        ->withCount('jobs')
+                        ->latest()
+                        ->paginate(10)
+        ]);
     }
 }

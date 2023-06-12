@@ -8,15 +8,14 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" wire:click="showCreateForm()" type="button"
-                                class="btn btn-md btn btn-primary">
-                                <i class="fa fa-plus btn-md"></i> @lang('Add Tag') </button>
+                            <button style="float: right;" wire:click="showCreateForm()" type="button" class="btn btn-md btn btn-primary">@lang('Add Tag') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Name')</th>
+                                        <th>@lang('Included in ... job(s)')</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -25,14 +24,10 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $tag->name }}</td>
+                                            <td>{{ $tag->jobs_count }}</td>
                                             <td>
-                                                <a href="#" wire:click="showEditForm({{ $tag }})"
-                                                    class="btn btn-icon icon-left btn-primary"><i
-                                                        class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger"
-                                                    wire:click="showDeleteForm({{ $tag }})"> <i
-                                                        class="fa fa-trash"></i>
-                                                </a>
+                                                <button wire:click="showEditForm({{ $tag }})" class="btn btn-icon icon-left btn-primary"><i class="fas fa-pen"></i></button>
+                                                <button class="btn btn-danger" wire:click="showDeleteForm({{ $tag }})"> <i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -73,7 +68,7 @@
                         <div class="form-group">
                             <label class="control-label"> @lang('Tag name') </label>
                             <input type="text" wire:model.defer="name" class="form-control"
-                                placeholder=" {{ __('Tag Name here') }}" />
+                                placeholder=" {{ __('Name') }}" />
                             @error('name')
                                 <span class="text-danger ">{{ $message }} </span>
                             @enderror
@@ -108,14 +103,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this tag?')</p>
-                    <div class="modal-footer">
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="button" wire:click="destroyTag()" class="btn btn-danger">
-                            @lang('Yes! delete')</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                    <button type="button" wire:click="destroyTag()" class="btn btn-danger">@lang('Confirmer')</button>
                 </div>
             </div>
         </div>
