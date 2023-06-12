@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <button type="button" wire:click="showCreateForm()" class="btn btn-primary float-right">@lang('Add new sub-category')</button>
+                <button type="button" wire:click="showCreateForm()" class="btn btn-primary float-right mb-2">@lang('Add new sub-category')</button>
                 <table class="table table-striped">
                     <tr>
                         <th>#</th>

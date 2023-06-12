@@ -156,7 +156,7 @@
                                     <a href="{{ route('admin.subscription.index') }}" {{-- wire:click="back()" --}}
                                         class="btn btn-secondary btn-lg mr-3">@lang('Back')</a>
                                     <button class="btn btn-primary btn-lg mt-7 mr-3"
-                                        type="submit">@lang('Update')</button>
+                                        type="submit">@lang('Edit')</button>
                                 </div>
                             </div>
 

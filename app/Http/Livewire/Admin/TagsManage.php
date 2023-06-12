@@ -24,7 +24,7 @@ class TagsManage extends Component
 
     public function closeModal()
     {
-        $this->reset();
+        $this->reset('name');
         $this->resetErrorBag();
         $this->resetValidation();
         $this->emit('closeModal');
@@ -33,7 +33,7 @@ class TagsManage extends Component
     public function showEditForm(Tag $tag)
     {
         // dd($tag);
-        $this->reset();
+        $this->reset('name');
         $this->resetErrorBag();
         $this->emit('openEditModal');
         $this->resetValidation();
@@ -41,9 +41,9 @@ class TagsManage extends Component
         $this->name = $this->selectedTag->name;
     }
 
-    public function showCreateForm(Tag $tag)
+    public function showCreateForm()
     {
-        $this->reset();
+        $this->reset('name');
         $this->resetErrorBag();
         $this->emit('openModal');
     }
@@ -93,6 +93,11 @@ class TagsManage extends Component
         $this->deleteTag->delete();
         $this->alert('success', trans('The Tag has been deleted'));
         $this->closeModal();
+    }
+
+    public function resetAttributes()
+    {
+        $this->reset(['name', 'deleteId', 'selectedTag', 'deleteTag']);
     }
 
     public function render()

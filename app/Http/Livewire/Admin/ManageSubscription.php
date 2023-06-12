@@ -43,8 +43,11 @@ class ManageSubscription extends Component
 
     public function render()
     {
-        return view('livewire.admin.manage-subscription', ['subscriptions' => Subscription::query()
-            ->latest()
-            ->paginate(5)]);
+        return view('livewire.admin.manage-subscription', [
+            'subscriptions' => Subscription::query()
+                                            ->withCount('users')
+                                            ->latest()
+                                            ->paginate(5)
+        ]);
     }
 }

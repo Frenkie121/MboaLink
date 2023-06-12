@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" wire:click="showCreateForm()" type="button" class="btn btn-md btn btn-primary">@lang('Add category')</button>
+                            <button wire:click="showCreateForm()" type="button" class="btn btn-primary float-right">@lang('Add category')</button>
                             <br><br>
                             <table  class="table table-striped" id="table-1">
                                 <thead>
@@ -34,8 +34,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="#" wire:click="showEditForm({{ $category }})" class="btn btn-icon icon-left btn-primary"><i class="fas fa-pen"></i> </a>
-                                                <a href="#" class="btn btn-danger" wire:click="showDeleteForm({{ $category }})"> <i class="fa fa-trash"></i></a>
+                                                <button wire:click="showEditForm({{ $category }})" class="btn btn-icon icon-left btn-primary"><i class="fas fa-pen"></i> </button>
+                                                <button class="btn btn-danger" wire:click="showDeleteForm({{ $category }})"> <i class="fa fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach

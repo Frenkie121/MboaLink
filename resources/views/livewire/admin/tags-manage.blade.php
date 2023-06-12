@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <button style="float: right;" wire:click="showCreateForm()" type="button" class="btn btn-md btn btn-primary">@lang('Add Tag') </button>
+                            <button wire:click="showCreateForm()" type="button" class="btn btn-primary float-right">@lang('Add Tag') </button>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
                                 <thead>

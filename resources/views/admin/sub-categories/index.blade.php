@@ -17,7 +17,6 @@
 @endsection
     
 @push('js')
-    
     <script type="text/javascript">
         // Add/Update category modal
         window.livewire.on('closeModal', () => {
@@ -29,7 +28,7 @@
 
         // Delete category modal
         window.livewire.on('openDeleteModal', () => {
-            $('#deleteCategoryModal').modal('show');
+            $('#deleteSubCategoryModal').modal('show');
         });
     </script>
 @endpush

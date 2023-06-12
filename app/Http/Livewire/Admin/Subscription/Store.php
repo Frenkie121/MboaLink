@@ -30,11 +30,11 @@ class Store extends Component
     public function save()
     {
         $data = $this->validate([
-            'offers.0' => ['required', 'string', 'distinct'],
-            'offers.*' => ['required', 'string', 'distinct'],
+            'offers.0' => ['required', 'string', 'distinct:ignore_case'],
+            'offers.*' => ['required', 'string', 'distinct:ignore_case'],
             'subs_name' => ['required', 'string', 'unique:subscriptions,name'],
-            'amount' => ['required', 'numeric', 'min:0'],
-            'duration' => ['required', 'numeric', 'min:0', 'max:12'],
+            'amount' => ['required', 'numeric', 'min:1000'],
+            'duration' => ['required', 'numeric', 'min:1', 'max:12'],
 
         ]);
         $subscription = Subscription::create([

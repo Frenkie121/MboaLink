@@ -497,5 +497,6 @@
     "Too Many Requests": "Trop De Requêtes",
     "You have made too many requests, retry later.": "Vous avez repété la même action trop de fois, veuillez réessayer plus tard.",
     "Method Not Allowed": "Méthode Non Allouée",
+    "This element cannot be deleted, as it is already attached to at least one subscriber.": "Cet élément ne peut pas être supprimé, car il est déjà rattaché à au moins un abonné.",
     "": ""
 }

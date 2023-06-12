@@ -6,9 +6,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <!-- Button trigger modal -->
-                            <a style="float: right;" href="{{ route('admin.subscription.add') }}" type="button"
-                                class="btn btn-md btn btn-primary">
-                                <i class="fa fa-plus btn-md"></i> @lang('Add Subscription') </a>
+                            <a href="{{ route('admin.subscription.add') }}" type="button" class="btn btn-primary float-right"> @lang('Add Subscription') </a>
                             <br><br>
                             <table cla class="table table-striped" id="table-1">
                                 <thead>
@@ -28,13 +26,14 @@
                                             <td>{{ $subscription->duration }}</td>
                                             <td>{{ $subscription->amount }}</td>
                                             <td>
-                                                <a href="#" class="btn btn-danger"
-                                                    wire:click="showDeleteForm({{ $subscription }})">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                                <a href="{{ route('admin.subscription.edit', ['subscription' => $subscription]) }}"
-                                                    class="btn btn-icon icon-left btn-primary"><i
-                                                        class="fas fa-pen"></i> </a>
+                                                <a href="{{ route('admin.subscription.edit',['subscription' => $subscription]) }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-pen"></i> </a>
+                                                @if ($subscription->users_count > 0)
+                                                    <button class="btn btn-dark disabled"><i class="fa fa-trash" title="@lang('This element cannot be deleted, as it is already attached to at least one subscriber.')"></i>
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-danger" wire:click="showDeleteForm({{ $subscription }})"><i class="fa fa-trash"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -134,14 +133,10 @@
                 </div>
                 <div class="modal-body">
                     <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this subscription?')</p>
-                    <div class="modal-footer">
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">@lang('Cancel')</button>
-                        <button type="button" wire:click="destroy()" class="btn btn-danger">
-                            @lang('Yes! delete')</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                    <button type="button" wire:click="destroy()" class="btn btn-danger">@lang('Confirm')</button>
                 </div>
             </div>
         </div>

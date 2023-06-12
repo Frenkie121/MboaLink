@@ -21,14 +21,14 @@ class ManageSubCategories extends Component
 
     public function showCreateForm()
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->emit('openModal');
     }
 
     public function closeModal()
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->emit('closeModal');
     }
@@ -51,7 +51,7 @@ class ManageSubCategories extends Component
 
     public function showEditForm(SubCategory $subCategory)
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->selectedSubCategory = $subCategory;
 
@@ -108,6 +108,11 @@ class ManageSubCategories extends Component
 
         $message = $status ? trans('enabled') : trans('disabled ');
         $this->alert('success', trans('The sub-category has been ') . $message);
+    }
+
+    public function resetAttributes()
+    {
+        $this->reset(['name', 'category', 'selectedSubCategory']);
     }
 
     public function render()
