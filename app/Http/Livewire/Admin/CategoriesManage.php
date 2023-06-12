@@ -101,8 +101,10 @@ class CategoriesManage extends Component
     {
         // select sub-category
         $category = Category::query()->find($this->deleteId);
-        $category->jobs()->delete();
-        $category->subCategories()->delete();
+        // $category->jobs()->delete();
+        if ($category->has('subCategories') && $category->doesntHave('jobs')) {
+            $category->subCategories()->delete();
+        }
         $category->delete();
 
         $this->alert('success', trans('The category has been deleted'));

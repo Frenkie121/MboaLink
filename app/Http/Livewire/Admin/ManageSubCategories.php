@@ -2,25 +2,20 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Category;
-use App\Models\Job;
-use App\Models\SubCategory;
+use App\Models\{Category, SubCategory};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class ManageSubCategories extends Component
 {
     use WithPagination, LivewireAlert;
 
     public $selectedSubCategory;
-
     public $name;
-
     public $category;
 
     protected $rules = [
-        'name' => 'required|unique:sub_categories,name',
+        'name' => 'required|min:3|unique:sub_categories,name',
         'category' => 'required|exists:categories,id',
     ];
 
@@ -69,7 +64,7 @@ class ManageSubCategories extends Component
     public function update()
     {
         $this->validate([
-            'name' => 'required|unique:sub_categories,name,'.$this->selectedSubCategory->id,
+            'name' => 'required|min:3|unique:sub_categories,name,'.$this->selectedSubCategory->id,
             'category' => 'required|exists:categories,id',
         ]);
 
@@ -94,8 +89,6 @@ class ManageSubCategories extends Component
 
     public function confirmDelete()
     {
-        //delete jobs before
-        Job::where('sub_category_id', $this->selectedSubCategory->id)->delete();
         $this->selectedSubCategory->delete();
 
         $this->closeModal();
@@ -105,14 +98,29 @@ class ManageSubCategories extends Component
         ]);
     }
 
+    public function updateStatus()
+    {
+        $status = $this->selectedSubCategory->disabled_at;
+        $this->selectedSubCategory->update([
+            'disabled_at' => $status ? NULL : now()
+        ]);
+        $this->closeModal();
+
+        $message = $status ? trans('enabled') : trans('disabled ');
+        $this->alert('success', trans('The sub-category has been ') . $message);
+    }
+
     public function render()
     {
         return view('livewire.admin.manage-sub-categories', [
             'subCategories' => SubCategory::query()
-                                             ->with('category')
-                                            ->latest()
-                                            ->paginate(5),
+                                            ->with('category:name,id')
+                                            ->withCount('jobs')
+                                            ->latest('created_at')
+                                            ->paginate(10),
             'categories' => Category::query()
+                                    ->oldest('name')
+                                    ->enabled()
                                     ->get(['id', 'name']),
         ]);
     }

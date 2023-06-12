@@ -11,12 +11,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-danger font-weight-bold">@lang('Are you sure you want to delete this subcategory?') <br> @lang('This will also delete all jobs related to this subcategory.')</p>
-                <div class="modal-footer">
-                    <button type="button" wire:click="closeModal()" class="btn btn-success"
-                        data-dismiss="modal">@lang('Cancel')</button>
-                    <button type="button" wire:click="confirmDelete()"
-                        class="btn btn-danger">@lang('Confirm')</button>
+                <p class="text-danger font-weight-bold">
+                    @if($selectedSubCategory->jobs->count() > 0) 
+                        @lang('This sub-category contains') {{ $selectedSubCategory->jobs->count() }} @lang('job offer(s)'). @lang('You cannot delete it').
+                        @if (! $selectedSubCategory->disabled_at)
+                            @lang('You can, however, disable it, and it will no longer appear in the proposals made to users.')
+                        @endif
+                    @else
+                        @lang('Are you sure you want to delete this subcategory?')
+                        <br>
+                        @if (! $selectedSubCategory->disabled_at)
+                            @lang("You can disable it if you don't want to delete it permanently.")
+                        @endif
+                        {{-- <br> @lang('This will also delete all jobs related to this subcategory.')</p> --}}
+                    @endif
+                </p>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button type="button" wire:click="closeModal()" class="btn btn-secondary">@lang('Cancel')</button>
+                <div class="">
+                    <button type="button" class="btn btn-{{ $selectedSubCategory->disabled_at ? 'success' : 'warning' }}" wire:click="updateStatus()">{{ $selectedSubCategory->disabled_at ? __('Enable') : __('Disable') }}</button>
+                    @if ($selectedSubCategory->jobs->count() === 0)
+                        <button type="button" wire:click="confirmDelete()" class="btn btn-danger">@lang('Confirm')</button>
+                    @endif
                 </div>
             </div>
         </div>

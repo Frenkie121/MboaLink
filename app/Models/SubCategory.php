@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\{Builder, Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 use Illuminate\Support\Str;
 
 class SubCategory extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'category_id'];
+    protected $fillable = ['name', 'category_id', 'disabled_at'];
+
+    protected $dates = [
+        'disabled_at'
+    ];
 
     // MUTATORS
     public function setNameAttribute($value): void
@@ -49,5 +50,10 @@ class SubCategory extends Model
     {
         return $query->whereHas('jobs', fn (Builder $query) => $query->whereNotNull('published_at')
         );
+    }
+
+    public function scopeEnabled(Builder $query)
+    {
+        return $query->where('disabled_at', null);
     }
 }
