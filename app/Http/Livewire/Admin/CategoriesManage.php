@@ -26,9 +26,12 @@ class CategoriesManage extends Component
 
     public $nameEdit;
 
+    // Added when writing test document
+    public $selectedCategory;
+
     public function closeModal()
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->resetValidation();
         $this->emit('closeModal');
@@ -36,14 +39,14 @@ class CategoriesManage extends Component
 
     public function showCreateForm()
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->emit('openModal');
     }
 
     public function showEditForm(Category $category)
     {
-        $this->reset();
+        $this->resetAttributes();
         $this->resetErrorBag();
         $this->emit('openEditModal');
         $this->editCategory = $category;
@@ -53,20 +56,31 @@ class CategoriesManage extends Component
     public function updateCategory()
     {
         $newData = $this->validate([
-            'nameEdit' => ['string', 'unique:categories,name,'.$this->editCategory->id.'', 'required', 'min:3'],
+            'nameEdit' => ['string', 'unique:categories,name,' . $this->editCategory->id . '', 'required', 'min:3'],
         ]);
-        Category::where('id', $this->editCategory->id)
-            ->update([
-                'name' => $newData['nameEdit'],
-            ]);
+        
+        // Category::where('id', $this->editCategory->id)
+        //     ->update([
+        //         'name' => $newData['nameEdit'],
+        //     ]);
+
+        /*
+        |- The method above doesn't touch mutators. For example the slug wasn't update there. -|
+        */
+        $this->editCategory->update(['name' => $newData['nameEdit']]);
+        
         $this->alert('success', trans('The category has been updated'));
         $this->closeModal();
     }
 
     public function showDeleteForm(Category $category)
     {
-        $this->resetErrorBag();
+        // $this->resetErrorBag();
         $this->emit('openDeleteModal');
+
+        // ***
+        $this->selectedCategory = $category;
+
         $this->deleteId = $category->id;
         $this->nameDelete = $category->name;
     }
@@ -76,10 +90,10 @@ class CategoriesManage extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $newData = $this->validate([
-            'name' => ['string', 'unique:categories,name', 'required', 'min:3'],
+            'name' => ['required', 'unique:categories,name', 'string', 'min:3'],
         ]);
         Category::create($newData);
-        $this->alert('success', trans('The new category has been created'));
+        $this->alert('success', trans('The category has been created'));
         $this->closeModal();
     }
 
@@ -95,8 +109,30 @@ class CategoriesManage extends Component
         $this->closeModal();
     }
 
+    public function updateStatus()
+    {
+        $status = $this->selectedCategory->disabled_at;
+        $this->selectedCategory->update([
+            'disabled_at' => $status ? NULL : now()
+        ]);
+        $this->closeModal();
+
+        $message = $status ? trans('enabled') : trans('disabled ');
+        $this->alert('success', trans('The category has been ') . $message);
+    }
+
+    public function resetAttributes()
+    {
+        $this->reset(['name', 'deleteId', 'nameDelete', 'editCategory', 'deleteCategory', 'nameEdit']);
+    }
+
     public function render()
     {
-        return view('livewire.admin.categories-manage', ['categories' => Category::query()->OrderBy('id', 'desc')->paginate(5)]);
+        return view('livewire.admin.categories-manage', [
+            'categories' => Category::query()
+                                    ->withCount(['jobs'])
+                                    ->orderBy('id', 'desc')
+                                    ->paginate(10)
+        ]);
     }
 }

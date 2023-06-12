@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->string('name')->unique();
             $table->string('slug');
+            $table->timestamp('disabled_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -14,7 +14,11 @@ class Category extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'disabled_at'];
+
+    protected $dates = [
+        'disabled_at'
+    ];
 
     // MUTATORS
     public function setNameAttribute($value): void

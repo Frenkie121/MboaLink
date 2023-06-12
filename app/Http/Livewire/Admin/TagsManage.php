@@ -68,7 +68,7 @@ class TagsManage extends Component
             'name' => ['string', 'unique:tags,name', 'required', 'min:2'],
         ]);
         Tag::create($newData);
-        $this->alert('success', trans('The new Tag has been created'));
+        $this->alert('success', trans('The Tag has been created'));
         $this->closeModal();
     }
 
