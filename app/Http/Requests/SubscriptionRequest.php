@@ -27,7 +27,7 @@ class SubscriptionRequest extends FormRequest
         $commonRules = [
             'name' => 'required|string|max:255|unique:users,name',
             'email' => 'required|email|unique:users,email|max:255',
-            'phone_number' => 'required|string|size:9|starts_with:65,67,68,69,66,232',
+            'phone_number' => 'required|unique:users,phone_number|string|size:9|starts_with:65,67,68,69,66,232',
             'category' => 'required|exists:categories,id',
             'location' => 'required|string|max:255',
         ];

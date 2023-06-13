@@ -498,5 +498,11 @@
     "You have made too many requests, retry later.": "Vous avez repété la même action trop de fois, veuillez réessayer plus tard.",
     "Method Not Allowed": "Méthode Non Allouée",
     "This element cannot be deleted, as it is already attached to at least one subscriber.": "Cet élément ne peut pas être supprimé, car il est déjà rattaché à au moins un abonné.",
+    "Submit": "Soumettre",
+    "Create Password": "Créer un mot de passe",
+    "Your password has been successfully created.": "Votre mot de passe a été créé avec succès.",
+    "If the link has expired, you can use the password reset link on the login page to create a new one.": "Si le lien a expiré, vous pouvez utiliser le lien de réinitialisation du mot de passe sur la page de connexion pour en créer un nouveau.",
+    "Click on the link below to create your password. It is valid for one hour.": "Cliquez sur le lien ci-dessous pour créer votre mot de passe. Il est valide pour une heure.",
+    "A link to create a password has been sent to you by email.": "Un lien pour créer un mot de passe vous a été envoyé par e-mail.",
     "": ""
 }

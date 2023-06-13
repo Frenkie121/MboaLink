@@ -3,9 +3,10 @@
 namespace App\Notifications\Front\Subscription;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class NewSubscriptionNotification extends Notification
 {
@@ -50,11 +51,15 @@ class NewSubscriptionNotification extends Notification
                         )
                         ->lineIf(
                             $notifiable->role_id !== 1 && $this->data['type'] != 1,
-                            trans('Your password for future login is: ') . $this->data['password'] . '. ' . trans('You can change it any time on your profile.')
+                            trans('Click on the link below to create your password. It is valid for one hour.')
                         )
                         ->when($notifiable->role_id === 1,
                             fn ($mail) => $mail->action(trans('Go to subscription details'), url("/admin/subscribers/{$this->data['slug']}")),
-                            fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
+                            fn ($mail) => $mail->action(trans('Create Password'), url(URL::temporarySignedRoute('password.create', now()->addHour(), ['email' => $this->data['email']]))),
+                        )
+                        ->lineIf(
+                            $notifiable->role_id !== 1 && $this->data['type'] != 1,
+                            trans('If the link has expired, you can use the password reset link on the login page to create a new one.')
                         );
     }
 }

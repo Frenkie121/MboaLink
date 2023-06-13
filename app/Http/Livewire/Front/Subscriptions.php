@@ -3,9 +3,8 @@
 namespace App\Http\Livewire\Front;
 
 use App\Http\Requests\SubscriptionRequest;
-use Livewire\Component;
+use Livewire\{Component, WithFileUploads};
 use Illuminate\Support\Str;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use App\Models\{Category, Company, Pupil, Student, Subscription, Unemployed, User};
@@ -26,7 +25,7 @@ class Subscriptions extends Component
     public $name, $email, $phone_number;
 
     // Company properties
-    public $description, $website, $logo;
+    public $description, $website = 'http://', $logo;
 
     // Talent properties
     public $aspiration, $birth_date, $cv;
@@ -48,8 +47,11 @@ class Subscriptions extends Component
     public function mount()
     {
         $this->subscription_id = request()->subscription->id;
-        $this->categories = Category::query()->get(['id', 'name']);
         $this->languages = config('subscriptions.language');
+        $this->categories = Category::query()
+                                    ->oldest('name')
+                                    ->enabled()
+                                    ->get(['id', 'name']);
 
         if (in_array($this->subscription_id, [4, 1])) {
             $this->educations = config('subscriptions.education');
@@ -155,11 +157,11 @@ class Subscriptions extends Component
         
         $message = 'Your request for subscription has been successfully sent. You will be contacted shortly via WhatsApp by administrator for further details in order to validate your subscription.';
         
-        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
+        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'email' => $user->email, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
 
-        alert('', trans($message) . ' ' . trans('Your password has been sent to you by email.'), 'success')->autoclose(25000);
+        alert('', trans($message) . ' ' . trans('A link to create a password has been sent to you by email.'), 'success')->autoclose(25000);
 
-        $redirect = auth()->check() ? 'front.jobs.index' : 'login';
+        $redirect = auth()->check() ? 'front.jobs.index' : 'password.create';
         return redirect()->route($redirect)->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
     }
 

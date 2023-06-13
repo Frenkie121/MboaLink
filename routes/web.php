@@ -104,7 +104,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/{user:name}', 'download')->name('download');
     });
 
-    Route::get('subscriber/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
+    Route::get('subscribers/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
 
 });
 

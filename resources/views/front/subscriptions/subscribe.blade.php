@@ -40,12 +40,9 @@
             <h6 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">
                 @lang('Fill the form below to save your subscription')
             </h6>
-            <div class="row d-flex justify-content-between">
+            <div class="d-flex justify-content-center">
                 <div class="col-md-8">
                     @livewire('front.subscriptions')
-                </div>
-                <div class="col-md-4">
-                    <x-front.subscription-item :subscription="$subscription" />
                 </div>
             </div>
         </div>
