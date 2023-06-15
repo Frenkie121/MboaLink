@@ -101,7 +101,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
         Route::get('/companies', 'indexCompany')->name('company.index');
         // Route::get('/{user}', 'show')->name('profile');
         Route::get('/validate/{id}', 'active')->name('validate');
-        Route::get('/{user:name}', 'download')->name('download');
+        Route::get('/{user}/cv', 'download')->name('download');
     });
 
     Route::get('subscribers/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');

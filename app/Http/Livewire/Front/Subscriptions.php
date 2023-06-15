@@ -157,11 +157,11 @@ class Subscriptions extends Component
         
         $message = 'Your request for subscription has been successfully sent. You will be contacted shortly via WhatsApp by administrator for further details in order to validate your subscription.';
         
-        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'email' => $user->email, 'slug' => $user->slug, 'password' => $password, 'message' => $message]));
+        Notification::send([$user, User::query()->firstWhere('role_id', 1)], new NewSubscriptionNotification(['type' => $subscription->name, 'from' => $user->name, 'email' => $user->email, 'slug' => $user->slug, 'message' => $message]));
 
         alert('', trans($message) . ' ' . trans('A link to create a password has been sent to you by email.'), 'success')->autoclose(25000);
 
-        $redirect = auth()->check() ? 'front.jobs.index' : 'password.create';
+        $redirect = auth()->check() ? 'front.jobs.index' : 'front.home';
         return redirect()->route($redirect)->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
     }
 

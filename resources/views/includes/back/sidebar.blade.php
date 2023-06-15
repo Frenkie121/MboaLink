@@ -48,18 +48,21 @@
             </li>
 
             <li class="dropdown @if (Str::contains($currentUri, 'subscribers')) active @endif">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-check"></i>
-                    <span>@lang('Subscribers')</span></a>
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-user-check"></i>
+                    <span>@lang('Subscribers')</span>
+                </a>
                 <ul class="dropdown-menu">
-
-                    <li class="@if (Str::contains($currentUri, 'talents')) active @endif"><a class="nav-link"
-                            href="{{ route('admin.subscribers.talent.index') }}">
-                            {{-- <i class="fas fa-user-check"></i> --}}
-                            <span>@lang('Job seekers')</span></a></li>
-                    <li class="@if (Str::contains($currentUri, 'companies')) active @endif"><a class="nav-link"
-                            href="{{ route('admin.subscribers.company.index') }}">
-                            {{-- <i  class="fas fa-user-check"></i> --}}
-                            <span>@lang('Companies')</span></a></li>
+                    <li class="@if (Str::contains(url()->previous(), 'talents')) active @endif">
+                        <a class="nav-link" href="{{ route('admin.subscribers.talent.index') }}">  
+                            <span>@lang('Job seekers')</span>
+                        </a>
+                    </li>
+                    <li class="@if (Str::contains(url()->previous(), 'companies')) active @endif">
+                        <a class="nav-link" href="{{ route('admin.subscribers.company.index') }}">
+                            <span>@lang('Companies')</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

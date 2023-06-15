@@ -13,14 +13,10 @@
                 </button>
             </div>
             <div class="modal-body" id="smallBody">
-                <div>
-                    <p class="text-danger font-weight-bold">@lang('Are you sure you want to validate this subscription ?') </p>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('Cancel')</button>
-
-                        <button type="button" class="btn btn-success" href="#"
-                            id="modal-confirm_validation">@lang('Confirm')</button>
-                    </div>
+                <p class="text-danger font-weight-bold">@lang('Are you sure you want to validate this subscription ?')</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                    <button type="button" class="btn btn-primary" href="#" id="modal-confirm_validation">@lang('Confirm')</button>
                 </div>
             </div>
         </div>

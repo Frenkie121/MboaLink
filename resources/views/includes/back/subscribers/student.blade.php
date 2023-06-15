@@ -1,9 +1,7 @@
-<h6>@lang('Cursus')</h6>
-<br>
-<span class="mr-2">@lang('University of ') :</span>
-<b>{{ $user->userable->talentable->university }}</b> <br><br>
-<span class="mr-2">@lang('Training school') :</span><b>
-    {{ $user->userable->talentable->training_school }}</b> <br><br>
+<h4 class="mb-4">@lang('Academic information')</h4>
+<p class="mr-2">@lang('University of ') : <b>{{ $user->userable->talentable->university }}</b></p>
+
+<p class="mr-2">@lang('Training school') : <b>{{ $user->userable->talentable->training_school }}</b></p>
 {{-- <span class="mr-2">@lang('Field ') :</span>
  @if ($user->userable->talentable->field)
    <b>  {{ $user->userable->talentable->field }}</b>

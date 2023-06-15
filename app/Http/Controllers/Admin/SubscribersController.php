@@ -26,6 +26,7 @@ class SubscribersController extends Controller
             ->withWhereHas('subscriptions')
             ->with(['role'])
             ->where('role_id', '>', 2)
+            ->latest()
             ->get();
 
         return view('admin.subscribers.talents', [
@@ -46,6 +47,7 @@ class SubscribersController extends Controller
             ->withWhereHas('subscriptions')
             ->with(['role'])
             ->where('role_id',  2)
+            ->oldest()
             ->get();
 
         return view('admin.subscribers.companies', [
@@ -59,11 +61,11 @@ class SubscribersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show(User $user)
     {
         return view(
             'admin.subscribers.profile',
-            ['user' => $User]
+            ['user' => $user]
         );
     }
     /**
@@ -79,8 +81,16 @@ class SubscribersController extends Controller
             'starts_at' => now(),
             'ends_at' => $ends_at
         ]);
+        
+        $subscriber->is_active = true;
+        $subscriber->save();
 
-        Notification::send($subscriber, new ValidateSubscriptionNotification(Carbon::parse($ends_at)));
+        $data = [
+            'type' => __($subscription->name),
+            'created_at' => $subscription->pivot->created_at,
+            'ends_at' => $ends_at,
+        ];
+        Notification::send($subscriber, new ValidateSubscriptionNotification($data));
 
         toast(trans("The subscription has been successfully validated"), 'success');
 
@@ -88,7 +98,8 @@ class SubscribersController extends Controller
     }
     public function download(User $user)
     {
-        return Response::download(public_path("storage/cv/" . $user->userable->cv),  $user->slug);
+        return Response::file(public_path("storage/cv/" . $user->userable->cv));
+        // return Response::download(public_path("storage/cv/" . $user->userable->cv),  $user->slug);
         // return Storage::download(public_path("storage/cv/" . $user->userable->cv) , 'CV_' . $user->name);
 
     }

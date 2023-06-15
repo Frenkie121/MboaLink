@@ -40,7 +40,7 @@ class SubscriptionRequest extends FormRequest
 
         $talentRules = [
             'birth_date' => 'required|date|before:' . now()->subYears(18)->format('d-m-Y') . '|after:' . now()->subYears(50)->format('d-m-Y'),
-            'aspiration' => 'required|string|max:255',
+            'aspiration' => 'required|string|max:500',
             'language' => 'required|string|' . Rule::in(array_keys(config('subscriptions.language'))),
             'cv' => 'nullable|file|mimes:doc,docx,pdf|max:1024',
         ];
@@ -60,9 +60,9 @@ class SubscriptionRequest extends FormRequest
 
         $unemployedRules = [
             'diploma' => 'required|string',
-            'current_job' => 'required|string',
-            'aptitudes' => 'required|string',
-            'qualifications' => 'required|string',
+            'current_job' => 'nullable|string',
+            'aptitudes' => 'required|string|max:300',
+            'qualifications' => 'required|string|max:300',
         ];
 
         $rules = [];

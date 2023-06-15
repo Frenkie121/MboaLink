@@ -1,19 +1,6 @@
-<span class="mr-2">@lang('Diploma') :</span>
-<b>{{ $user->userable->talentable->diploma }}</b> <br><br>
-<span class="mr-2">@lang('Current Job') :</span><b>
-    {{ $user->userable->talentable->current_job }}</b> <br><br>
-<span class="mr-2">@lang('Aptitudes') :</span>
-@if ($user->userable->talentable->aptitudes)
-    {{ $user->userable->talentable->aptitudes }}
-@else
-    No-data
-@endif
+<h4 class="mb-4">@lang('Other Information')</h4>
 
-<br><br>
-<span class="mr-2">@lang('Qualifications') :</span>
-@if ($user->userable->talentable->qualifications)
-    {{ $user->userable->talentable->qualifications }}
-@else
-    No-data
-@endif
-{{-- @endif --}}
+<p>@lang('Diploma') : <b>{{ $user->userable->talentable->diploma }}</b></p>
+<p>@lang('Current Job') : <b>{{ $user->userable->talentable->current_job ?? __('Nothing') }}</b></p>
+<p>@lang('Aptitudes') : <b>{{ $user->userable->talentable->aptitudes ?? __('Nothing') }}</b></p>
+<p>@lang('Qualifications') : <b>{{ $user->userable->talentable->qualifications ?? __('Nothing') }}</b></p>

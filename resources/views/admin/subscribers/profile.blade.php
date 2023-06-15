@@ -22,27 +22,28 @@
                 <div class="card profile-widget">
                     <div class="profile-widget-header">
                         <img alt="image"
-                            src="@if (!$user->userable->logo) {{ asset('assets/back/img/avatar/avatar-2.png') }} @else {{ asset($user->userable->logo) }} @endif"
-                            class="rounded-circle profile-widget-picture" width="100px" height="100px">
+                            src="{{ ($user->role_id === 2 && $user->userable->logo) ? asset("storage/companies/{$user->userable->logo}") : asset('assets/back/img/avatar/avatar-2.png') }}"
+                            class="rounded-circle profile-widget-picture" width="100px" height="100px"
+                        >
                     </div>
 
                     <div class="profile-widget-description">
-                        <div class="profile-widget-name"> {{ $user->name }} <div
-                                class="text-muted d-inline font-weight-normal">
-                                <div class="slash"></div>
-                                {{ $user->userable_type !== 'App\Models\Company' ? __('Talent') : __('Company') }}
-
-                                <div class="slash"></div>
-                                @if ($user->userable->talentable_type === 'App\Models\Student')
-                                    @lang('Student')
-                                @elseif ($user->userable->talentable_type === 'App\Models\Unemployed')
-                                    @lang('Unemployed')
-                                @elseif ($user->userable->talentable_type === 'App\Models\Pupil')
-                                    @lang('Pupil')
+                        <div class="profile-widget-name">
+                            {{ $user->userable_type !== 'App\Models\Company' ? __('Job seekers') : __('Company') }}
+                            <div class="text-muted d-inline font-weight-normal">
+                                @if ($user->role_id !== 2)
+                                    <div class="slash"></div>
+                                    @if ($user->userable->talentable_type === 'App\Models\Student')
+                                        @lang('Student')
+                                    @elseif ($user->userable->talentable_type === 'App\Models\Unemployed')
+                                        @lang('Unemployed')
+                                    @elseif ($user->userable->talentable_type === 'App\Models\Pupil')
+                                        @lang('Pupil')
+                                    @endif
                                 @endif
-
-                                <div
-                                    class="badge badge-{{ $user->subscriptions->last()->id === 1 ? 'danger' : 'success' }}">
+                                <div class="slash"></div><b>{{ $user->name }}</b>
+                                <div class="badge badge-{{ $user->subscriptions->last()->id === 1 ? 'danger' : 'success' }}">
+                                    
                                     @if ($user->subscriptions->last()->id === 1)
                                         @lang('Free')
                                     @else
@@ -52,63 +53,41 @@
 
                             </div>
                         </div>
-                        <div class="row"></div>
-                        <hr>
-                        <h6>@lang('General Informations')</h6>
-                        <br> <br>
-                        <span class="mr-2">@lang('Email') :</span>
-                        <b>{{ $user->email }}</b> <span class="mr-2 ml-4">@lang('Phone Number') :</span>
-                        @if ($user->phone_number)
-                            <b> {{ $user->phone_number }}</b>
-                        @else
-                            @lang('Any')
-                        @endif
-                        <br><br>
-                        @if ($user->userable_type !== 'App\Models\Company')
-                            <span class="mr-2">@lang('Birth Date') :</span>
-                            @if ($user->userable->birth_date)
-                                <b>{{ $user->userable->birth_date }}</b>
-                            @else
-                                @lang('Any')
-                            @endif
-                        @endif
-
-                        <br><br>
-                        <hr>
-
                     </div>
+
+                    <hr class="my-0">
+
+                    <div class="profile-widget-description">
+                        
+                        <h4 class="mb-4">@lang('General Informations')</h4>
+                        <p>@lang('Email') : <b>{{ $user->email }}</b></p>
+                        <p>@lang('Phone Number') : <b>{{ $user->phone_number }}</b></p>
+                        @if ($user->userable_type !== 'App\Models\Company')
+                            <p>@lang('Birth Date') : <b>{{ $user->userable->birth_date }}</b></p> 
+                        @endif
+                    </div>
+
+                    <hr class="my-0">
 
                     @if ($user->userable_type !== 'App\Models\Company')
                         <div class="profile-widget-description">
 
-                            <h6>@lang('Personal Informations')</h6>
-                            <br><br>
+                            <h4 class="mb-4">@lang('Personal Informations')</h4>
 
-                            <span class="mr-2"> @lang('Research Area') : </span> <b>{{ $user->userable->category->name }}</b>
+                            <p> @lang('Research Area') : <b>{{ $user->userable->category->name }}</b></p>
+                            <p>@lang('Location') : <b>{{ $user->userable->location }}</b></p>
+                            <p>@lang('Language') : <b>{{ $user->userable->language }}</b></p>
 
-                            <span class="mr-2 ml-4">@lang('Location') :</span> <b>{{ $user->userable->location }}</b><br>
-                            <br>
-                            <span class="mr-2">@lang('Language') :</span><b>
-                                @if ($user->userable->language === 'fr')
-                                    @lang('French')
-                                @elseif($user->userable->language === 'en')
-                                    @lang('English')
-                                @elseif($user->userable->language === 'bi')
-                                    @lang('Bilingual')
+                            <p> @lang('CV') :
+                                @if ($user->userable->cv)
+                                    <a href="{{ route('admin.subscribers.download', $user) }}" class="btn btn-primary" title="@lang('Download')" target="_blank"><i class="fa fa-download"></i></a>
+                                @else
+                                    <span class="text-danger"> @lang('No CV')</span>
                                 @endif
-                            </b>
+                            </p>
+                            <p> @lang('Aspirations') :  <b>{{ $user->userable->aspiration }}</b></p>
 
-                            <span class="mr-6 ml-4"> @lang('CV') : </span>
-                            @if ($user->userable->cv)
-                                <a href="{{ route('admin.subscribers.download', $user) }}" class="btn btn-primary"
-                                    title="@lang('Download')"><i class="fa fa-download"></i> </a>
-                            @else
-                                <span class="mr-2 ml-4 text-danger"> @lang('Any')</span>
-                            @endif
-                            <br><br>
-                            <p> @lang('Aspirations') : <strong> {{ $user->userable->aspiration }}</strong> </p>
-
-                            <hr>
+                            <hr class="my-0">
 
                             @if ($user->role->id === 3)
                                 @include('includes.back.subscribers.student')
@@ -126,9 +105,6 @@
                 </div>
             </div>
 
-
-
-
             {{-- ----------------------- --}}
             <div class="col-12 col-md-12 col-lg-5">
 
@@ -141,8 +117,6 @@
             </div>
 
             {{-- ------------------------ --}}
-
-
         </div>
     </div>
 
