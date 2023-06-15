@@ -2,16 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Subscription;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\{Response, Notification};
 use App\Notifications\Admin\ValidateSubscriptionNotification;
-use PhpParser\Node\Stmt\Return_;
 
 class SubscribersController extends Controller
 {
@@ -42,7 +36,6 @@ class SubscribersController extends Controller
      */
     public function indexCompany()
     {
-
         $subscribers = User::query()
             ->withWhereHas('subscriptions')
             ->with(['role'])

@@ -30,6 +30,8 @@ class CreateJob extends Component
     public $qualifications;
     public array $qualificationsInputs = [];
 
+    // Confirmation
+    public $selectedTags;
     // Other
     // public bool $disabled = false;
 
@@ -39,18 +41,22 @@ class CreateJob extends Component
 
     public function mount()
     {
-        $this->categories = Category::query()->with('subCategories:id,name,category_id')->get(['id', 'name']);
         $this->all_tags = Tag::query()->get(['id', 'name']);
         $this->types = Job::TYPES;
         $this->sub_categories = collect();
+        $this->categories = Category::query()
+                                    ->with('subCategories:id,name,category_id')
+                                    ->oldest('name')
+                                    ->enabled()
+                                    ->get(['id', 'name']);
     }
 
     /**
      * Navigate in form wizard from one step to another
      */
-    public function previous(int $step): void
+    public function previous(): void
     {
-        $this->currentStep = $step;
+        $this->currentStep--;
     }
 
     // STEP I
@@ -63,7 +69,12 @@ class CreateJob extends Component
     public function updatedCategory($category): void
     {
         if (! is_null($category) && is_int(intval($category))) {
-            $this->sub_categories = Category::query()->findOrFail($category)->subCategories;
+            $this->sub_categories = Category::query()
+                                            ->findOrFail($category)
+                                            ->subCategories()
+                                            ->enabled()
+                                            ->oldest('name')
+                                            ->get();
         }
     }
 
@@ -174,7 +185,8 @@ class CreateJob extends Component
 
         alert('', trans('Your job has been successfully registered. It will be studied and you will be informed of its publication or not as soon as possible. An email related to this action has been sent to you, please check your mailbox.'), 'success')->autoclose(20000);
 
-        $this->redirectRoute('front.jobs.index');
+        $redirect = $user->role_id === 2 ? 'front.subscriber.jobs' : 'front.jobs.index';
+        $this->redirectRoute($redirect);
     }
 
     /**

@@ -53,12 +53,12 @@
                     <span>@lang('Subscribers')</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="@if (Str::contains(url()->previous(), 'talents')) active @endif">
+                    <li class="@if (Str::contains($currentUri, 'talents')) active @endif">
                         <a class="nav-link" href="{{ route('admin.subscribers.talent.index') }}">  
                             <span>@lang('Job seekers')</span>
                         </a>
                     </li>
-                    <li class="@if (Str::contains(url()->previous(), 'companies')) active @endif">
+                    <li class="@if (Str::contains($currentUri, 'companies')) active @endif">
                         <a class="nav-link" href="{{ route('admin.subscribers.company.index') }}">
                             <span>@lang('Companies')</span>
                         </a>

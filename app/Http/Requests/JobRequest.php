@@ -15,7 +15,7 @@ class JobRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() && auth()->user()->role_id === 1;
+        return auth()->check() && auth()->user()->role_id === 2;
     }
 
     /**
@@ -26,8 +26,8 @@ class JobRequest extends FormRequest
     public function rules(int $step)
     {
         $generalRules = [
-            'title' => 'required|string|max:100',
-            'min_salary' => 'required|numeric',
+            'title' => 'required|string|max:150',
+            'min_salary' => 'required|numeric|min:50000',
             'max_salary' => 'nullable|numeric|gt:min_salary',
             'category' => 'required|exists:categories,id',
             'sub_category' => 'required|exists:sub_categories,id',
@@ -40,13 +40,13 @@ class JobRequest extends FormRequest
         ];
 
         $requirementsRules = [
-            'requirements.1' => 'required|string|max:255',
-            'requirements.*' => 'required|string|distinct:ignore_case|max:255',
+            'requirements.1' => 'required|string|max:200',
+            'requirements.*' => 'required|string|distinct:ignore_case|max:200',
         ];
 
         $qualificationsRules = [
-            'qualifications.1' => 'required|string|max:255',
-            'qualifications.*' => 'required|string|distinct:ignore_case|max:255',
+            'qualifications.1' => 'required|string|max:200',
+            'qualifications.*' => 'required|string|distinct:ignore_case|max:200',
         ];
 
         return match ($step) {

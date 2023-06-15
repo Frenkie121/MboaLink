@@ -31,7 +31,7 @@
                             <label for="title">@lang('Title')<b class="text-danger">*</b></label>
                         </div>
                         @error('title')
-                            <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                            <span class="text-danger"><small>{{ $message }}</small></span>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -89,7 +89,7 @@
                         <select class="form-select @error('type') is-invalid @enderror" wire:model.defer="type" id="type">
                             <option hidden>@lang('Select the job type')<b class="text-danger">*</b></option>
                             @foreach ($types as $key => $type)
-                                <option value="{{ $key }}">{{ $type }}</option>
+                                <option value="{{ $key }}">{{ __($type) }}</option>
                             @endforeach
                         </select>
                         @error('type')
@@ -114,7 +114,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-12" wire:ignore>
+                    {{-- <div class="col-md-12" wire:ignore>
                         <select class="form-select select2-multiple @error('tags') is-invalid @enderror" wire:model.defer="tags" id="tags" data-placeholder="@lang('Select Tags')" multiple>
                             @foreach ($all_tags as $tag)
                                 <option value="{{ $tag->id }}">{{ $tag->name }}</option>
@@ -123,7 +123,7 @@
                         @error('tags')
                             <span class="text-danger fw-light"><small>{{ $message }}</small></span>
                         @enderror
-                    </div>
+                    </div> --}}
                 </div>
             </form>
         </div>
@@ -243,18 +243,26 @@
                             <label for="file">@lang('File')</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-floating">
                             <textarea class="form-control" id="description" readonly>{{ $description }}</textarea>
                             <label for="description">@lang('Description')</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-floating">
-                            <textarea class="form-control" id="tags" readonly>@foreach ($tags as $tag) {{ App\Models\Tag::find($tag)->name }}@if(!$loop->last), @else. @endif @endforeach</textarea>
-                            <label for="tags">@lang('Tags')</label>
+                    
+                    @if ($tags)
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="tags" readonly>
+                                    @foreach ($tags as $tag)
+                                        @dump(App\Models\Tag::find($tag))
+                                        {{ App\Models\Tag::find($tag)->name }}@if(!$loop->last), @else. @endif 
+                                    @endforeach
+                                </textarea>
+                                <label for="tags">@lang('Tags')</label>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <hr>
                     <h5>@lang('Requirements')</h5>
@@ -265,6 +273,7 @@
                                 <label for="requirement-{{ $loop->iteration }}">@lang('Requirement') {{ $loop->iteration }}</label>
                             </div>
                         </div>
+                        <br>
                     @endforeach
 
                     <hr>
@@ -283,7 +292,7 @@
     </div>
 
     <div class="col-{{ $currentStep === 2 || $currentStep === 3 ? '11' : '12' }} d-flex justify-content-between mt-2">
-        <a @if($currentStep === 4) href="#tabs" @endif wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-dark w-40 py-3 {{ $currentStep === 1 ? 'isDisabled' : '' }}" wire:click="previous(@if($currentStep === 2)1 @elseif($currentStep === 3)2 @elseif($currentStep === 4)3 @endif)"><i class="fa fa-caret-left"></i>  <span class="d-none d-md-inline d-sm-inline">@lang('Previous')</span></a>
+        <a @if($currentStep === 4) href="#tabs" @endif wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-dark w-40 py-3 {{ $currentStep === 1 ? 'isDisabled' : '' }}" wire:click="previous({{ $currentStep }})"><i class="fa fa-caret-left"></i>  <span class="d-none d-md-inline d-sm-inline">@lang('Previous')</span></a>
 
         <div class="d-flex justify-content-end">
             @if ($currentStep === 4)
@@ -291,7 +300,7 @@
             @endif
 
             <div class="mx-1">
-                <a href="#tabs" wire:loading.class="isDisabled"
+                <a @if($currentStep !== 4)href="#tabs"@endif wire:loading.class="isDisabled"
                     class="btn btn-{{ $currentStep === 4 ? 'secondary' : 'primary' }} w-40 py-3"
                     wire:click="@if($currentStep === 1)validateGeneralInformations()@elseif($currentStep === 2)validateRequirements()@elseif($currentStep === 3)validateQualifications()@else confirm()@endif">
                     <span class="d-none d-md-inline d-sm-inline">
