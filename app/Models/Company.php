@@ -3,10 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, MorphOne};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Company extends Model
@@ -18,11 +15,10 @@ class Company extends Model
     ];
 
     // ACCESSORS
-    public function logo(): Attribute
+    public function getFrontLogoAttribute()
     {
-        return Attribute::make(
-            get: fn ($logo) => $logo ? asset("storage/companies/{$logo}") : asset('assets/back/img/avatar/avatar-2.png')
-        );
+        $logo = $this->attributes['logo'];
+        return $logo ? asset("storage/companies/{$logo}") : asset('assets/front/img/biz_bag.png');
     }
 
     // RELATIONSHIPS
