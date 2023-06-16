@@ -52,7 +52,7 @@ class AuthenticatedSessionController extends Controller
             $redirect = 'admin/dashboard';
         } elseif (
             ($auth->role_id === 2 && $auth->userable->jobs->isEmpty())
-            || ($auth->role_id === 6 && $auth->userable->type === 'App\Models\Company')
+            || ($auth->role_id === 6 && $auth->userable_type === 'App\Models\Company')
         ) {
             $redirect = '/jobs/create';
         } elseif (

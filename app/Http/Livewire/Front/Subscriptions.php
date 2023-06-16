@@ -166,8 +166,7 @@ class Subscriptions extends Component
 
         alert('', trans($message) . ' ' . trans('A link to create a password has been sent to you by email.'), 'success')->autoclose(25000);
 
-        $redirect = auth()->check() ? 'front.jobs.index' : 'front.home';
-        return redirect()->route($redirect)->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
+        return redirect()->route('front.home')->with('subscription', ['subscription_id' => $this->subscription_id, 'email' => $user->email]);
     }
 
     public function render()

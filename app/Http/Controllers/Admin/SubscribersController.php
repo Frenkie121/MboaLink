@@ -19,9 +19,10 @@ class SubscribersController extends Controller
         $subscribers = User::query()
             ->withWhereHas('subscriptions')
             ->with(['role'])
-            ->where('role_id', '>', 2)
+            ->where('role_id', '>=', 3)
             ->latest()
-            ->get();
+            ->get()
+            ->filter(fn ($subscriber) => $subscriber->userable_type !== 'App\Models\Company');
 
         return view('admin.subscribers.talents', [
             'subscribers' =>  $subscribers,
@@ -40,9 +41,11 @@ class SubscribersController extends Controller
             ->withWhereHas('subscriptions')
             ->with(['role'])
             ->where('role_id',  2)
-            ->oldest()
-            ->get();
-
+            ->orWhere('role_id', 6)
+            ->latest()
+            ->get()
+            ->filter(fn ($subscriber) => $subscriber->userable_type === 'App\Models\Company');
+            
         return view('admin.subscribers.companies', [
             'subscribers' =>  $subscribers,
         ]);
