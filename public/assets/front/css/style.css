@@ -132,13 +132,13 @@
     .navbar .nav-item .dropdown-menu {
         display: block;
         top: 100%;
+        right: 0px;
         margin-top: 0;
         transform: rotateX(-75deg);
         transform-origin: 0% 0%;
         opacity: 0;
         visibility: hidden;
         transition: .5s;
-        
     }
 
     .navbar .nav-item:hover .dropdown-menu {
