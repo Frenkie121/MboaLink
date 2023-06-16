@@ -58,7 +58,7 @@
 <div class="col-md-6">
     <select class="form-select @error('training_school') is-invalid @enderror" wire:model.lazy="training_school" id="training_school">
         <option hidden>@lang('Select your training school') <b class="text-danger">*</b></option>
-        @if (!is_null($university))
+        @if (! is_null($university))
             @foreach ($training_schools as $key => $training_school)
                 <option value="{{ $key }}">{{ __($training_school) }}</option>
             @endforeach

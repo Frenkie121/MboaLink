@@ -73,6 +73,11 @@ class Subscriptions extends Component
         return (new SubscriptionRequest())->rules($this->subscription_id, $this->type);
     }
 
+    public function updatedType($type)
+    {
+        $this->type = $type;
+    }
+
     public function save()
     {
         $this->validate($this->rules());
@@ -168,8 +173,7 @@ class Subscriptions extends Component
     public function render()
     {
         $data = [];
-
-        if ($this->subscription_id === 3) {
+        if ($this->subscription_id === 3 || ($this->subscription_id === 1 && ($this->type && $this->type == 3))) {
             $training_schools = [];
             if (! is_null($this->university)) {
                 $training_schools = config('subscriptions.training_school.' . $this->university);
@@ -179,7 +183,7 @@ class Subscriptions extends Component
             ];
         }
 
-        if ($this->subscription_id === 4) {
+        if ($this->subscription_id === 4 || ($this->subscription_id === 1 && ($this->type && $this->type == 4))) {
             $series = [];
             if (! is_null($this->section)) {
                 $series = Arr::collapse(config('subscriptions.series.' . $this->section));
@@ -201,6 +205,7 @@ class Subscriptions extends Component
                 'classes' => $classes,
             ];
         }
+        
         return view('livewire.front.subscriptions', $data);
     }
 }
