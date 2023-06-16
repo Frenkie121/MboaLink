@@ -7,15 +7,14 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-
                             <table cla class="table table-striped" id="table-1">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Title')</th>
                                         <th>@lang('Company')</th>
-                                        <th>@lang('Salary')</th>
-                                        <th>@lang('Published')</th>
+                                        <th>@lang('Submitted at')</th>
+                                        <th>@lang('Status')</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -25,7 +24,7 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $job->title }}</td>
                                             <td>{{ $job->company->location }}</td>
-                                            <td>{{ $job->salary }}</td>
+                                            <td>{{ $job->created_at }}</td>
                                             <td>
                                                 @if ($job->published_at)
                                                     <span class="badge badge-pill badge-success">{{ $job->published_at }}</span>
@@ -40,7 +39,6 @@
                                             </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>

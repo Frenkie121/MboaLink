@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\admin\job;
+namespace App\Notifications\admin\Job;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;

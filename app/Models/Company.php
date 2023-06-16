@@ -18,12 +18,12 @@ class Company extends Model
     ];
 
     // ACCESSORS
-    // public function logo(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($logo) => $logo ? asset("storage/companies/{$logo}") : asset('assets/back/img/avatar/avatar-2.png')
-    //     );
-    // }
+    public function logo(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($logo) => $logo ? asset("storage/companies/{$logo}") : asset('assets/back/img/avatar/avatar-2.png')
+        );
+    }
 
     // RELATIONSHIPS
     public function user(): MorphOne

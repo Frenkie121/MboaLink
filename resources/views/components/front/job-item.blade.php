@@ -6,7 +6,7 @@
             <img class="flex-shrink-0 img-fluid border rounded" src="{{ $job->company->logo }}" alt="" style="width: 80px; height: 80px;">
             <div class="text-start ps-4">
                 <h5 class="mb-3">{{ $job->title }}</h5>
-                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}</span>
+                {{-- <span class="text-truncate me-3"><i class="fa fa-calendar-alt text-primary me-2"></i>{{ $job->dateline }}</span> --}}
                 <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ $job->type }}</span>
                 <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ $job->salary }} XAF</span>
             </div>

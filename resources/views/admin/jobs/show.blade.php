@@ -28,16 +28,12 @@
                             <div class="card card-primary">
                                 <div class="card-body">
                                     <h4 class="card-title">@lang('General Informations')</h4>
-                                    <hr>
                                     <div class="row">
-                                        <div class="card border-danger col-md-6">
+                                        <div class="card border-success col-md-6">
                                             <div class="card-body">
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">
                                                         <p>@lang('Title') : <strong>{{ $job->title }}</strong></p>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <p>@lang('Location') : <strong>{{ $job->location }}</strong></p>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <p>@lang('Salary') : <strong>{{ $job->salary }} XAF</strong></p>
@@ -49,7 +45,7 @@
                                                         <p>@lang('Sub-category') : <strong>{{ $job->subCategory->name }}</strong></p>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <p>@lang('Job Type') : <strong>{{ $job->type }}</strong></p>
+                                                        <p>@lang('Job Type') : <strong>{{ __($job->type) }}</strong></p>
                                                     </li>
                                                     <li class="list-group-item">
                                                         <p>@lang('Dateline') : <strong>{{ $job->dateline }}</strong></p>
@@ -61,20 +57,20 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="card border-warning col-md-6">
+                                        <div class="card border-danger col-md-6">
                                             <div class="card-body">
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">
                                                         <p>@lang('Published at') : <strong>{{ $job->published_at ?? trans('Not published yet') }}</strong></p>
                                                     </li>
-                                                    <li class="list-group-item d-inline">
+                                                    {{-- <li class="list-group-item d-inline">
                                                         <p>@lang('Tags') : <strong>{{ $job->tags->isNotEmpty() ? implode(', ', $job->tags->pluck('name')->toArray()) : trans('No tag') }}</strong></p>
-                                                    </li>
+                                                    </li> --}}
                                                     <li class="list-group-item">
                                                         <p>@lang('File') : 
                                                             <strong>
                                                                 @if ($job->file)
-                                                                    <a href="#" class="btn btn-icon icon-left btn-primary"><i class="fas fa-download"></i> @lang('Download')</a>
+                                                                    <a href="{{ route('admin.job.download', $job) }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-download"></i></a>
                                                                 @else
                                                                     @lang('No file')
                                                                 @endif
@@ -89,7 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="card border-danger col-md-6">
+                                        <div class="card border-warning col-md-6">
                                             <div class="card-body">
                                                 <h4 class="card-title">@lang('Requirements')</h4>
                                                 <hr>
@@ -102,7 +98,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="card border-warning col-md-6">
+                                        <div class="card border-success col-md-6">
                                             <div class="card-body">
                                                 <h4 class="card-title">@lang('Qualifications')</h4>
                                                 <hr>
@@ -136,10 +132,7 @@
                                                 <li class="list-group-item">
                                                     <p>@lang('Website') : 
                                                         @if ($url = $job->company->url)
-                                                            <a href="/{{ $url }}" class="btn btn-primary">
-                                                            @lang('Open')
-                                                            <i class="fa fa-browser"></i>
-                                                            </a>
+                                                            <a href="{{ $url }}">{{ $url }}</a>
                                                         @else
                                                             @lang('No website address')
                                                         @endif
@@ -148,7 +141,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="card border-danger col-md-6">
+                                    <div class="card border-warning col-md-6">
                                         <div class="card-body">
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">

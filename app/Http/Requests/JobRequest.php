@@ -34,7 +34,7 @@ class JobRequest extends FormRequest
             'type' => 'required|' . Rule::in(array_keys(Job::TYPES)),
             'dateline' => 'required|date|after:'.now()->addWeek()->format('d-m-Y'),
             'description' => 'required|string|max:1000',
-            'file' => 'nullable|file|mimes:doc,docx,pdf,ppt,.xlsx|max:512',
+            'file' => 'nullable|file|mimes:doc,docx,pdf,ppt,xlsx|max:512',
             'tags' => 'nullable|array',
             'tags.*' => 'nullable|exists:tags,id',
         ];

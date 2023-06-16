@@ -157,10 +157,12 @@ class CreateJob extends Component
             'type' => $this->type,
             'dateline' => $this->dateline,
         ]);
-
+        
         if ($this->file) {
-            $filename = $job->slug.'_'.uniqid().$this->file->extension();
+            $filename = $job->slug . '.' . $this->file->extension();
             $this->file->storeAs('public/jobs', $filename);
+            $job->file = $filename;
+            $job->save();
         }
 
         // 2. Tags

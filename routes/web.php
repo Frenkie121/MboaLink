@@ -80,10 +80,13 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::view('tags', 'admin.tags.index')->name('tags.index');
     // SUBCATEGORIES
     Route::view('sub-categories', 'admin.sub-categories.index')->name('sub-categories.index');
-    //JOB
+    //JOBS
     Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
-    Route::get('jobs/{job:slug}', SingleJobController::class)->name('job.show');
-    Route::patch('publish/{job}', PublishJobController::class)->name('job.publish');
+    Route::controller(SingleJobController::class)->prefix('jobs')->name('job.')->group(function () {
+        Route::get('{job:slug}', 'show')->name('show');
+        Route::get('download/{job:slug}', 'download')->name('download');
+    });
+    
     //CONTACTS
     Route::view('contacts', 'admin.contacts.index')->name('contacts.index');
     //SUBSCRIPTION

@@ -3,17 +3,14 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Job;
-use App\Notifications\admin\job\PublishCompanyNotification;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
+use App\Notifications\admin\Job\PublishCompanyNotification;
+use Illuminate\Support\Facades\{DB, Notification};
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class DeleteModalPublish extends Component
 {
-    use WithPagination;
-    use LivewireAlert;
+    use LivewireAlert, WithPagination;
 
     public $deleteId;
 
@@ -30,18 +27,16 @@ class DeleteModalPublish extends Component
 
     public function publish(Job $job)
     {
-        $job->update([
-            'published_at' => now(),
-        ]);
-        $message = trans('Job has been successfully published.');
+        $job->published_at = now();
+        $job->save();
+
         $data = trans('Congratulations, your job has been approved and published.');
 
-        $job->save();
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
 
-        toast($message, 'success');
+        toast(__('Job has been successfully published.'), 'success');
 
-        return redirect()->route('admin.jobs.index');
+        return redirect()->route('admin.job.show', $job);
     }
 
     public function deleteJob($id)
@@ -52,26 +47,26 @@ class DeleteModalPublish extends Component
 
     public function destroyJob()
     {
-        DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
-        DB::table('qualifications')->where('job_id', $this->deleteId)->delete();
-        DB::table('requirements')->where('job_id', $this->deleteId)->delete();
-        $message = trans("Job hasn't been successfully published.");
+        $job = Job::query()->findOrFail($this->deleteId);
+        // DB::table('job_tag')->where('job_id', $this->deleteId)->delete();
+        $job->tags()->detach();
+        // DB::table('qualifications')->where('job_id', $this->deleteId)->delete();
+        $job->qualifications()->delete();
+        // DB::table('requirements')->where('job_id', $this->deleteId)->delete();
+        $job->requirements()->delete();
+
         $data = trans('Sorry, your job has not been approved and therefore not published.');
-        $job = Job::find($this->deleteId);
         Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
         $job->delete();
 
-        $this->closeModal();
-        $this->reset();
-
-        toast($message, 'success');
+        toast(__('Job has been successfully deleted'), 'success');
 
         return redirect()->route('admin.jobs.index');
     }
 
     public function export()
     {
-        return response()->download(storage_path('app/jobs/'.$this->job->file));
+        return response()->download(public_path('storage/jobs/' . $this->job->file));
     }
 
     public function render()
