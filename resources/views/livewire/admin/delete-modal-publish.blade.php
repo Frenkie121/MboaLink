@@ -20,19 +20,19 @@
                     <span class="font-weight-bold">@lang('The company will receive notification for the deletion of its job.')</span>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <button wire:loading.remove wire:click="publish({{ $job }})" class="btn btn-primary"> @lang('Publish')</button>
-                    <button wire:loading wire:target="publish" class="btn btn-primary" disabled>
+                    <button wire:loading.remove wire:click="destroyJob()" class="btn btn-danger"></i> @lang('Delete')</button>
+                    <button wire:loading wire:target="destroyJob" class="btn btn-danger" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         @lang('Loading')...
                     </button>
                     <div>
                         <button type="button" wire:click="closeModal()" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
 
-                        <button wire:loading.remove wire:click="destroyJob()" class="btn btn-danger"></i> @lang('Delete')</button>
-                        <button wire:loading wire:target="destroyJob" class="btn btn-danger" disabled>
+                        <button wire:loading.remove wire:click="publish({{ $job }})" class="btn btn-primary"> @lang('Publish')</button>
+                        <button wire:loading wire:target="publish" class="btn btn-primary" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             @lang('Loading')...
-                        </button>
+                        </button>    
                     </div>
                 </div>
             </div>

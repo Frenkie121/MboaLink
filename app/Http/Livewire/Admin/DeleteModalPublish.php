@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Job;
+use App\Models\{Job, User};
 use App\Notifications\admin\Job\PublishCompanyNotification;
-use Illuminate\Support\Facades\{DB, Notification};
+use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\{Component, WithPagination};
 
@@ -27,12 +27,24 @@ class DeleteModalPublish extends Component
 
     public function publish(Job $job)
     {
+        $targets = User::query()
+                            ->with([
+                                'userable.category',
+                            ])
+                            ->withWhereHas('subscriptions', function ($query) {
+                                $query->whereNotNull('starts_at')
+                                    ->whereNotNull('ends_at');
+                            })
+                            ->get()
+                            ->whereIn('role_id', [3, 4, 5])
+                            ->filter(fn ($item) => $item->userable->category->id === $job->company->category->id);
+                            
         $job->published_at = now();
         $job->save();
 
         $data = trans('Congratulations, your job has been approved and published.');
 
-        Notification::send($job->company->user, new PublishCompanyNotification($job, $data));
+        Notification::send($targets->add($job->company->user), new PublishCompanyNotification($job, $data));
 
         toast(__('Job has been successfully published.'), 'success');
 

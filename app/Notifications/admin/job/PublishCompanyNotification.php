@@ -38,31 +38,27 @@ class PublishCompanyNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $hour = date('H');
-        $greeting = ($hour > 17) ? trans('Evening ') : (($hour > 12 && $hour <= 18) ? trans('Afternoon ') : trans('Morning '));
-
         return (new MailMessage)
-            ->greeting(trans('Good ').$greeting.$notifiable->name)
-            ->subject(trans('Publication Job Notification'))
-            ->line(trans('You receive this e-mail to confirm the publication of your job, the title of which is: ').$this->job->title)
-            ->line($this->data)
+            ->greeting(greeting() . $notifiable->name)
             ->when(
-                $notifiable->role_id === 1,
-                fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs')),
+                $notifiable->role_id === 2,
+                fn ($mail) => $mail->subject('🎉✨ ' . trans('Job offer published') . ' 🎉✨'),
+                fn ($mail) => $mail->subject(trans('New Job publiation')),
+            )
+            ->lineIf(
+                $notifiable->role_id === 2,
+                trans('You are receiving this e-mail to confirm the publication of your job offer, the title of which is: ') . $this->job->title . trans(', submitted at ') . $this->job->created_at . '.'
+            )
+            ->lineIf(
+                $notifiable->role_id !== 2,
+                trans('A new job offer: ') . $this->job->title .
+                // . trans(' from category: ') . $this->job->category->name . 
+                trans(' has been published on the website from the company ') . $this->job->company->user->name . trans('. Click on the link below to see details.')
+            )
+            ->when(
+                $notifiable->role_id !== 2,
+                fn ($mail) => $mail->action(trans('Go to job details'), route('front.jobs.show', $this->job)),
                 fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
             );
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
     }
 }

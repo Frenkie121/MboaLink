@@ -51,7 +51,7 @@
     "Hello  ": "Bonjour ",
     "Administrator": "Administrateur",
     "Jobs": "Offres d'emploi",
-    "Publication Job Notification": "Notification de publication d'une offre d'emploi",
+    "Job offer published": "Offre d'emploi publiée",
     "Thank you for using our application!": "Merci d'utiliser cette application ",
     "Consult the list of other available jobs": "Consulter la liste des autres offres d'emploi disponibles",
     "You receive this e-mail to confirm the publication of your job, the title of which is": "Vous recevez cet e-mail pour vous confirmer effectivement la publication de votre offre d'emploi dont le titre est :",
@@ -522,5 +522,12 @@
     "Target jobseekers with a valid subscription will receive notification for this job.": "Les Chercheurs d'emploi cibles ayant un abonnement valide recevront une notification pour cette offre.",
     "Alternatively, you can also delete it.": "Sinon, vous pouvez aussi supprimer cette offre.",
     "The company will receive notification for the deletion of its job.": "L'entreprise recevra une notification concernant la suppression de son offre.",
+    "You are receiving this e-mail to confirm the publication of your job offer, the title of which is: ": "Vous recevez cet e-mail pour confirmer la publication de votre offre d'emploi, dont le titre est : ",
+    ", submitted at ": ", soumise le ",
+    "A new job offer: ": "Une nouvelle offre d'emploi ",
+    " from category: ": " de la catégorie ",
+    " has been published on the website from the company ": " a été publiée sur le site de l'entreprise ",
+    ". Click on the link below to see details.": ". Cliquer sur le lien ci-dessous pour voir les détails",
+    "New Job publication": "Nouvelle offre d'emploi publiée",
     "": ""
 }
