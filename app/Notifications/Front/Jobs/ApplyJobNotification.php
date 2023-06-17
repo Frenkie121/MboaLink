@@ -2,9 +2,8 @@
 
 namespace App\Notifications\Front\Jobs;
 
-use App\Models\{Job, User};
+use App\Models\{Job};
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -19,7 +18,7 @@ class ApplyJobNotification extends Notification
      */
     public function __construct(
         public Job $job,
-        public User $user
+        public string $user_name
     ){}
 
     /**
@@ -46,7 +45,7 @@ class ApplyJobNotification extends Notification
                 ->subject(trans('New Job Application Notification'))
                 ->when(
                     in_array($notifiable->role_id, [1, 2]),
-                    fn ($mail) => $mail->line(trans('A new application for job: ') . $this->job->title . trans(' has been submitted by: ') . $this->job->company->user->name.'.'),
+                    fn ($mail) => $mail->line(trans('A new application for job: ') . $this->job->title . trans(' has been submitted by: ') . $this->user_name . '.'),
                     fn ($mail) => $mail->line(trans('Your application for job: ') . $this->job->title . trans(' has been successfully sent to the company: ') . $this->job->company->user->name . '.')
                 )
                 ->lineIf(
@@ -57,10 +56,11 @@ class ApplyJobNotification extends Notification
                     $notifiable->role_id === 1,
                     fn ($mail) => $mail->action(trans('Go to job details'), url('/admin/jobs/' . $this->job->slug)),
                     function ($mail) use ($notifiable) {
-                        if ($notifiable->role_id !== 6) {
+                        if ($notifiable->role_id === 6) {
                             return $mail->action(trans('Go to website'), url("jobs/{$this->job->slug}"));
                         } else {
-                            return $mail->action(trans('Go to Dashboard'), url('/me/my-jobs'));
+                            $url = $notifiable->role_id === 1 ? 'admin/jobs/' . $this->job->slug : 'me/my-jobs';
+                            return $mail->action(trans('Go to Dashboard'), url($url));
                         }
                     }
                 );

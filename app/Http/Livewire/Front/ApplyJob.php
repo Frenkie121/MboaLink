@@ -23,14 +23,14 @@ class ApplyJob extends Component
 
         $this->job->talents()->attach($user->userable->id);
 
-        Notification::send([User::query()->firstWhere('role_id', 1), $user, $this->job->company->user], new ApplyJobNotification($this->job, $user));
+        Notification::send([User::query()->firstWhere('role_id', 1), $user, $this->job->company->user], new ApplyJobNotification($this->job, $user->name));
 
         alert('', trans('Your application has been successfully submitted. You will receive an email confirming your action.'), 'success')->autoclose(10000);
         
         if ($user->role_id === 6) {
-            $this->redirectRoute('front.jobs', $this->job->slug);
+            $this->redirectRoute('front.jobs.show', $this->job->slug);
         } else {
-            $this->redirectRoute('front.subscriber.profile');
+            $this->redirectRoute('front.subscriber.jobs');
         }
     }
 

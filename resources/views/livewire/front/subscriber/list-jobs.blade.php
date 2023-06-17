@@ -12,8 +12,8 @@
         @endif
     </p>
     
-    @empty($jobs)
-        <p class="text-center text-info">
+    @if(is_null($jobs))
+        <p class="text-center text-primary fw-bold">
             @if ($company)
                 @lang('You have not submitted a job yet.')
             @else
@@ -79,5 +79,5 @@
         </table>
     </div>
     {{ $jobs->links('vendor.livewire.bootstrap') }}
-    @endempty
+    @endif
 </div>

@@ -1,7 +1,7 @@
 <div>
     <h3 class="text-center fw-bolder">@lang('Applicants list')</h3>
     <p class="mb-4 text-center fw-bold">
-        @lang('The different applications for job') <span class="text-secondary">{{ $job->title }}</span> @lang('are listed in the table below').
+        @lang('The different applications for job') <span><a href="{{ route('front.jobs.show', $job) }}" class="text-secondary">{{ $job->title }}</a></span> @lang('are listed in the table below').
     </p>
 
     <div class="table-responsive">
