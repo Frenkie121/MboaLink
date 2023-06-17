@@ -20,7 +20,7 @@
                             <select class="form-select border-0" name="type">
                                 <option disabled selected>@lang('Job Type')</option>
                                 @foreach ($types as $type)
-                                    <option @selected(request()->type === $type) value="{{ $type }}">{{ $type }}</option>
+                                    <option @selected(request()->type === $type) value="{{ $type }}">{{ __($type) }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -12,16 +12,9 @@ class JobController extends Controller
     public function index()
     {
         return view('front.jobs.index', [
-            'types' => Job::TYPES,
-            'jobs' => Job::query()
-                        ->published()
-                        ->active()
-                        ->with('company:id,logo')
-                        ->orderByDesc('created_at')
-                        ->paginate(10),
-            'subCategories' => SubCategory::query()
-                        ->has('jobs')
-                        ->get('name'),
+            'types' => $this->getDefault()['types'],
+            'jobs' => $this->getDefault()['jobs']->paginate(10),
+            'subCategories' => $this->getDefault()['subCategories'],
         ]);
     }
 
@@ -33,7 +26,7 @@ class JobController extends Controller
         );
 
         return view('front.jobs.create', [
-            'types' => Job::TYPES,
+            'types' => $this->getDefault()['types'],
             'subCategories' => SubCategory::query()
                                             ->get(),
         ]);
@@ -43,7 +36,7 @@ class JobController extends Controller
     {
         if ((is_null($job->published_at) && in_array(auth()->user()->role_id, [1, 2])) || $job->published_at) {
             return view('front.jobs.show', [
-                'types' => Job::TYPES,
+                'types' => $this->getDefault()['types'],
                 'job' => $job->load([
                     'subCategory.category',
                     'company.user.userable:id,location',
@@ -64,11 +57,11 @@ class JobController extends Controller
         $type = $request->type;
 
         if (! $request->search && ! $sub_category && ! $type) {
-            $jobs = collect();
+            $jobs = $this->getDefault()['jobs']->get();
         } else {
             $jobs = Job::query()
-            ->when($request->search, fn (Builder $query) => $query->orWhere('title', 'LIKE', $search)
-                        ->orWhere('description', 'LIKE', $search)
+                ->when($request->search, fn (Builder $query) => $query->orWhere('title', 'LIKE', $search)
+                ->orWhere('description', 'LIKE', $search)
             )
             ->when($sub_category, function (Builder $query) use ($sub_category) {
                 return $query->orWhere('sub_category_id', SubCategory::query()->firstWhere('name', $sub_category)->id);
@@ -84,10 +77,24 @@ class JobController extends Controller
 
         return view('front.jobs.index', [
             'jobs' => $jobs,
+            'types' => $this->getDefault()['types'],
+            'subCategories' => $this->getDefault()['subCategories'],
+        ]);
+    }
+
+    public function getDefault()
+    {
+        return [
             'types' => Job::TYPES,
+            'jobs' => Job::query()
+                        ->published()
+                        ->active()
+                        ->with('company:id,logo')
+                        ->orderByDesc('created_at'),
             'subCategories' => SubCategory::query()
                                         ->has('jobs')
+                                        ->oldest('name')
                                         ->get('name'),
-        ]);
+        ];    
     }
 }
