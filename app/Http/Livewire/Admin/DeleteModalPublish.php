@@ -37,14 +37,12 @@ class DeleteModalPublish extends Component
                             })
                             ->get()
                             ->whereIn('role_id', [3, 4, 5])
-                            ->filter(fn ($item) => $item->userable->category->id === $job->company->category->id);
-                            
+                            ->filter(fn ($item) => $item->userable->category->id === $job->subCategory->category->id);
+        
         $job->published_at = now();
         $job->save();
 
-        $data = trans('Congratulations, your job has been approved and published.');
-
-        Notification::send($targets->add($job->company->user), new PublishCompanyNotification($job, $data));
+        Notification::send($targets->add($job->company->user), new PublishCompanyNotification($job));
 
         toast(__('Job has been successfully published.'), 'success');
 

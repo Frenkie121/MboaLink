@@ -2,6 +2,7 @@
 
 namespace App\Notifications\admin\Job;
 
+use App\Models\Job;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
@@ -15,7 +16,7 @@ class PublishCompanyNotification extends Notification
      *
      * @return void
      */
-    public function __construct(public $job, public $data)
+    public function __construct(public Job $job)
     {
     }
 
@@ -43,7 +44,7 @@ class PublishCompanyNotification extends Notification
             ->when(
                 $notifiable->role_id === 2,
                 fn ($mail) => $mail->subject('🎉✨ ' . trans('Job offer published') . ' 🎉✨'),
-                fn ($mail) => $mail->subject(trans('New Job publiation')),
+                fn ($mail) => $mail->subject(trans('New Job publication')),
             )
             ->lineIf(
                 $notifiable->role_id === 2,
@@ -51,9 +52,11 @@ class PublishCompanyNotification extends Notification
             )
             ->lineIf(
                 $notifiable->role_id !== 2,
-                trans('A new job offer: ') . $this->job->title .
-                // . trans(' from category: ') . $this->job->category->name . 
-                trans(' has been published on the website from the company ') . $this->job->company->user->name . trans('. Click on the link below to see details.')
+                trans('A new job offer ') . $this->job->title . ',' . trans(' from category ') . $this->job->subCategory->category->name . ',' . trans(' from the company ') . $this->job->company->user->name . ',' . trans(' has been published on the website.')
+            )
+            ->lineIf(
+                $notifiable->role_id !== 2,
+                trans('Click on the link below to see details.')
             )
             ->when(
                 $notifiable->role_id !== 2,
