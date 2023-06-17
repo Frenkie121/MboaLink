@@ -28,10 +28,10 @@
                 </thead>
                 <tbody>
                     @foreach ($subscriptions as $subscription)
-                    @php
-                        $starts_at = Carbon\Carbon::parse($subscription->pivot->starts_at);
-                        $ends_at = Carbon\Carbon::parse($subscription->pivot->ends_at);
-                    @endphp
+                        @php
+                            $starts_at = Carbon\Carbon::parse($subscription->pivot->starts_at);
+                            $ends_at = Carbon\Carbon::parse($subscription->pivot->ends_at);
+                        @endphp
                         <tr class="table-{{ $subscription->isSameAs($current_subscription) ? 'secondary' : '' }}">
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td class="fw-bold">{{ $subscription->name }}</td>

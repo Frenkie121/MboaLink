@@ -20,7 +20,7 @@ class SuscriptionList extends Component
     public function render()
     {
         return view('livewire.admin.profile-subscriber.suscription-list', [
-            'subscriptions' => $this->user->subscriptions()->paginate(5),
+            'subscriptions' => $this->user->subscriptions()->orderByPivot('created_at', 'DESC')->paginate(5),
         ]);
     }
 }

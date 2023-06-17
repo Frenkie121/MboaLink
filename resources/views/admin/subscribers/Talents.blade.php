@@ -24,7 +24,7 @@
                                     <tr>
                                         <th class="text-center">#</th>
                                         <th>@lang('Name')</th>
-                                        <th>@lang('Type')</th>
+                                        <th>@lang('Subscriptions')</th>
                                         <th>@lang('Active until')</th>
                                         <th>@lang('Email')</th>
                                         <th>@lang('Phone Number')</th>
@@ -40,11 +40,14 @@
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $subscriber->name }}</td>
                                             <td>
-                                                <span class="badge badge-info">{{ $subscriber->role->name }}</span>
+                                                <span class="badge badge-info">
+                                                    {{ $subscriber->role->name }} <span class="badge badge-light">{{ $subscriber->subscriptions->count() }}</span>
+                                                    <span class="sr-only">unread messages</span>
+                                                </span>
                                             </td>
                                             <td>
                                                 @if (! $last_subscription->ends_at)
-                                                    <span class="badge bg-dark">@lang('Inactive')</span>
+                                                    <span class="badge badge-dark">@lang('Inactive')</span>
                                                 @elseif ($last_subscription->ends_at >= now())
                                                     <span class="text-success font-weight-bold">{{ formatedLocaleDate($last_subscription->ends_at) }}</span>
                                                 @else
@@ -63,7 +66,7 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 @if (! $last_subscription->starts_at)
-                                                    <a  class="btn btn-success" title="@lang('Validate subscription')"
+                                                    <a  class="btn btn-success" title="{{ $subscriber->subscriptions_count > 1 ? __('Validate the renewal') : __('Validate Subscription') }}"
                                                         onclick="loadDeleteModal({{ $subscriber->id }}, `{{ $subscriber->name }}`)">
                                                         <i style="color: white;" class="fas fa-check"></i></a>
                                                 @else
@@ -72,7 +75,7 @@
                                                 @endif
                                             </td>
                                         </tr>
-                                        @include('includes.back.subscribers.confirmationValidateModal')
+                                        @include('includes.back.subscribers.confirmationValidateModal', ['subscriptions_count' => $subscriber->subscriptions->count()])
                                     @endforeach
                                 </tbody>
                             </table>

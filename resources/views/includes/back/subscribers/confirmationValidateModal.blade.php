@@ -4,7 +4,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteCategoryModalLabel">
-                    @lang('Validate the subscription of')
+                    @if ($subscriptions_count === 1)
+                        @lang('Validate the subscription of')
+                    @else
+                        @lang('Validate the subscription renewal of')
+                    @endif
                     <span id="modal-subscriber_name"></span>
                     {{-- <strong>{{ $subscriber->id }}</strong> --}}
                 </h5>
@@ -14,10 +18,10 @@
             </div>
             <div class="modal-body" id="smallBody">
                 <p class="text-danger font-weight-bold">@lang('Are you sure you want to validate this subscription ?')</p>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
-                    <button type="button" class="btn btn-primary" href="#" id="modal-confirm_validation">@lang('Confirm')</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('Cancel')</button>
+                <button type="button" class="btn btn-primary" href="#" id="modal-confirm_validation">@lang('Confirm')</button>
             </div>
         </div>
     </div>

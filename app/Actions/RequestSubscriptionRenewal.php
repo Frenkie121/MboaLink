@@ -23,14 +23,6 @@ class RequestSubscriptionRenewal
             'amount' => $amount ?? $this->last_subscription->amount,
         ]);
 
-        // For admin validation
-        // $last_ends_date = Carbon::parse($last_subscription->pivot->ends_at);
-        // $user->subscriptions()->wherePivot('id', $last_subscription->pivot->id)->attach($last_subscription->id, [
-        //     'amount' => $subscription->amount,
-        //     'starts_at' => $last_ends_date->isPast() ? now() : $last_ends_date,
-        //     'ends_at' => $last_ends_date->isPast() ? now()->addWeeks($subscription->duration) : $last_ends_date->addWeeks($subscription->duration)
-        // ]);
-
         // EMAIL
         $message = trans('Your subscription renewal request as been successfully sent. You will be contacted shortly via WhatsApp by administrator for further details in order to validate your subscription.');
         $data = [

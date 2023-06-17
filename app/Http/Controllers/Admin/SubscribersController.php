@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\{Response, Notification};
+use Illuminate\Support\Facades\{DB, Response, Notification};
 use App\Notifications\Admin\ValidateSubscriptionNotification;
 
 class SubscribersController extends Controller
@@ -18,6 +19,7 @@ class SubscribersController extends Controller
     {
         $subscribers = User::query()
             ->withWhereHas('subscriptions')
+            ->withCount('subscriptions')
             ->with(['role'])
             ->where('role_id', '>=', 3)
             ->latest()
@@ -39,6 +41,7 @@ class SubscribersController extends Controller
     {
         $subscribers = User::query()
             ->withWhereHas('subscriptions')
+            ->withCount('subscriptions')
             ->with(['role'])
             ->where('role_id',  2)
             ->orWhere('role_id', 6)
@@ -71,20 +74,37 @@ class SubscribersController extends Controller
     {
         $subscriber = User::find($id);
         $subscription = $subscriber->subscriptions->last();
-        $ends_at = now()->addWeeks($subscription->duration);
+        if ($subscriber->subscriptions->count() === 1) {
+            $ends_at = now()->addWeeks($subscription->duration);
 
-        $subscriber->subscriptions()->updateExistingPivot($subscription->id, [
-            'starts_at' => now(),
-            'ends_at' => $ends_at
-        ]);
-        
-        $subscriber->is_active = true;
-        $subscriber->save();
+            $subscriber->subscriptions()->updateExistingPivot($subscription->id, [
+                'starts_at' => now(),
+                'ends_at' => $ends_at
+            ]);
+            
+            $subscriber->is_active = true;
+            $subscriber->save();
+        } else {
+            // Get the previous last subscription
+            $subscriptions = DB::table('subscription_user')->where('user_id', $id)->get();
+            $end_date = strval($subscriptions[$subscriptions->count() - 2]->ends_at);
+            
+            $starts_at = Carbon::parse($end_date)->isPast() ? now() : Carbon::parse($end_date);
+            $ends_at = Carbon::parse($end_date)->isPast() ? now()->addWeeks($subscription->duration) : Carbon::parse($end_date)->addWeeks($subscription->duration);
+
+            DB::table('subscription_user')->where('id', $subscriptions->last()->id)->update([
+                'starts_at' => $starts_at,
+                'ends_at' => $ends_at,
+            ]);
+        }
 
         $data = [
             'type' => __($subscription->name),
+            'type_id' => $subscription->id,
             'created_at' => $subscription->pivot->created_at,
+            'starts_at' => $starts_at ?? '',
             'ends_at' => $ends_at,
+            'amount' => $subscription->amount,
         ];
         Notification::send($subscriber, new ValidateSubscriptionNotification($data));
 

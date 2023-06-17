@@ -114,7 +114,8 @@ class User extends Authenticatable
     public function currentSubscription(): Subscription
     {
         return $this->subscriptions->filter(
-                    fn ($item) => Carbon::parse($item->pivot->ends_at)->isFuture() && Carbon::parse($item->pivot->starts_at)->isPast()
+                    fn ($item) => Carbon::parse($item->pivot->ends_at)->isFuture() 
+                    && Carbon::parse($item->pivot->starts_at)->isPast()
                 )->first();
     }
 

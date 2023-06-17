@@ -32,24 +32,15 @@ class SubscriptionController extends Controller
     public function showRenewPage()
     {
         $user = auth()->user();
-        $type = $this->getNextSubscriptionType();
-        
         abort_if($user->role_id !== 6, 403);
         
+        $type = $this->getNextSubscriptionType();
         $current_subscription = $user->subscriptions->first();
         $subscription = Subscription::query()->findOrFail($type);
-        $current_ends_at = Carbon::parse($current_subscription->pivot->ends_at)->isPast();
-        $starts_at = $current_ends_at ? now()
-                    : Carbon::parse($current_subscription->pivot->ends_at);
-        $ends_at = $current_ends_at
-                        ? now()->addWeeks($subscription->duration)
-                        : Carbon::parse($current_subscription->pivot->ends_at)->addWeeks($subscription->duration);
         
         $next_subscription = [
             'name' => $subscription->name,
             'amount' => $subscription->amount,
-            'starts_at' => formatedLocaleDate($starts_at),
-            'ends_at' => formatedLocaleDate($ends_at),
         ];
 
         return view('front.subscriptions.renew', [

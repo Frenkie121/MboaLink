@@ -411,6 +411,7 @@
     "You can renew your subscription one week before the end of the current one.": "Vous pourrez renouveler votre abonnement une semaine avant la fin de celui en cours.",
     "Send renewal request": "Envoyer la demande",
     "Renew my subscription": "Renouveler mon abonnement",
+    "Validate the renewal": "Valider le renouvellement",
     "Dear subscriber, you have": "Cher abonné, il vous reste",
     "day": "jour",
     "days": "jours",
@@ -515,7 +516,7 @@
     "Subscription activated": "Abonnement activé",
     "Your subscription ": "Votre abonnement ",
     " made on ": " effectué le ",
-    " has been validated and is now active.": " a été validé et est activé dès à présent.",
+    " has been validated and is now active.": " a été validé et est actif dès à présent.",
     "It takes effect from ": "Il prend effet du ",
     " to ": " au ",
     "Do you confirm the publication of this job?": "Confirmez-vous la publication de cette offre d'emploi ?",
@@ -530,5 +531,6 @@
     " has been published on the website.": " a été publiée sur la plate-forme.",
     "Click on the link below to see details.": "Cliquer sur le lien ci-dessous pour voir les détails.",
     "New Job publication": "Nouvelle offre d'emploi publiée",
+    "Your renewal request for subscription ": "Votre demande de renouvellement pour l'abonnement ",
     "": ""
 }

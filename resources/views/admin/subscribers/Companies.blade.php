@@ -40,7 +40,7 @@
                                             <td>{{ $subscriber->name }}</td>
                                             <td>
                                                 @if (! $last_subscription->ends_at)
-                                                    <span class="badge bg-dark">@lang('Inactive')</span>
+                                                    <span class="badge badge-dark">@lang('Inactive')</span>
                                                 @elseif ($last_subscription->ends_at >= now())
                                                     <span class="text-success font-weight-bold">{{ formatedLocaleDate($last_subscription->ends_at) }}</span>
                                                 @else
@@ -59,7 +59,7 @@
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 @if (! $last_subscription->starts_at)
-                                                    <a  class="btn btn-success" title="@lang('Validate subscription')"
+                                                    <a  class="btn btn-success" title="{{ $subscriber->subscriptions_count > 1 ? __('Validate the renewal') : __('Validate Subscription') }}"
                                                         onclick="loadDeleteModal({{ $subscriber->id }}, `{{ $subscriber->name }}`)">
                                                         <i style="color: white;" class="fas fa-check"></i></a>
                                                 @else
@@ -68,7 +68,7 @@
                                                 @endif
                                             </td>
                                         </tr>
-                                        @include('includes.back.subscribers.confirmationValidateModal')
+                                        @include('includes.back.subscribers.confirmationValidateModal', ['subscriptions_count' => $subscriber->subscriptions->count()])
                                     @endforeach
                                     {{-- @foreach ($subscribers as $subscriber)
                                         @if ($subscriber->role_id === 2)

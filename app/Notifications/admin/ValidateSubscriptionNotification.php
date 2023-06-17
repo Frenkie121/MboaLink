@@ -39,18 +39,26 @@ class ValidateSubscriptionNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $sentence = __(' made on ') . formatedLocaleDate($this->data['created_at']) . __(' has been validated and is now active.');
+        $starts_at = $notifiable->subscriptions->count() === 1 ? now() : formatedLocaleDate($this->data['starts_at']);
+
         return (new MailMessage)
             ->greeting(greeting() . $notifiable->name)
             ->subject("🎉✨" . trans('Subscription activated') . "🎉✨")
-            ->line(
-                trans('Your subscription ') . $this->data['type'] . __(' made on ') . formatedLocaleDate($this->data['created_at']) . __(' has been validated and is now active.')
-            )
-            ->line(
-                __('It takes effect from ') . formatedLocaleDate(now()) . __(' to ') . formatedLocaleDate($this->data['ends_at']) . trans(' at ') . $this->data['ends_at']->format('H:i') . '.'
-            )
-            ->action(trans('Go to website'), url('/jobs'))
             ->when(
-                $this->data['type'] === 1,
+                $notifiable->subscriptions->count() === 1,
+                fn ($mail) => $mail->line(
+                    trans('Your subscription ') . $this->data['type'] . $sentence
+                ),
+                fn ($mail) => $mail->line(
+                    trans('Your renewal request for subscription ') . $this->data['type'] . $sentence
+                ),
+            )
+            ->line(
+                __('It takes effect from ') . $starts_at . __(' to ') . formatedLocaleDate($this->data['ends_at']) . trans(' at ') . $this->data['ends_at']->format('H:i') . '.'
+            )
+            ->when(
+                $this->data['type_id'] === 1,
                 fn ($mail) => $mail->action(trans('Go to website'), url('/jobs')),
                 fn ($mail) => $mail->action(trans('Go to Dashboard'), route('front.subscriber.subscriptions'))
             );
