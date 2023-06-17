@@ -414,7 +414,7 @@
     "Validate the renewal": "Valider le renouvellement",
     "Dear subscriber, you have": "Cher abonné, il vous reste",
     "day": "jour",
-    "days": "jours",
+    "day(s)": "jour(s)",
     "hour": "heure",
     "hours": "heures",
     "left on your current subscription.": "pour votre abonnement actuel.",

@@ -48,9 +48,9 @@ class Subscription extends Model
      * @return float
      * 
      */
-    public function lastSubscriptionDaysLeft(): float
+    public function lastSubscriptionDaysLeft(): int
     {
-        return Carbon::parse($this->pivot->ends_at)->floatDiffInDays(now());
+        return now()->diff(Carbon::parse($this->pivot->ends_at), false)->format('%r%a');
     }
     
     /**

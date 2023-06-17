@@ -20,7 +20,7 @@
                 @if ($days_left < 7)
                     @lang('Click the button below to upgrade your subscription') <strong> @lang('Free') - <span class="text-secondary">{{ __($next_subscription['name']) }}</span></strong>
                     <br>
-                    (<small class="text-center fw-bold mt-2">@lang('You still have') <span class="text-secondary">{{ intval($days_left) }} @lang('days').</span></small>)
+                    (<small class="text-center fw-bold mt-2">@lang('You still have') <span class="text-secondary">{{ intval($days_left) }} @lang('day(s)').</span></small>)
                 @else
                     @lang('You can renew your subscription one week before the end of the current one.')
                 @endif
@@ -36,7 +36,7 @@
                         </form>
                     </div>
                 @else
-                    <p class="text-center fw-bold">@lang('You still have') <span class="text-secondary fs-5">{{ intval($days_left) }} @lang('days').</span></p>
+                    <p class="text-center fw-bold">@lang('You still have') <span class="text-secondary fs-5">{{ intval($days_left) }} @lang('day(s)').</span></p>
                 @endif
             </div>
         </div>

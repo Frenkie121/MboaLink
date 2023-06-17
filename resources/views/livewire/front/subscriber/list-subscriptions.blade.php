@@ -71,7 +71,7 @@
                     @if ($days_left < 0.1)
                         <p class="text-danger fw-bolder mb-1">@lang('Dear subscriber, your subscription period is over.')
                     @else
-                        <p class="mb-1">@lang('Dear subscriber, you have') <strong class="text-{{ $status }}">{{ intval($days_left) . ' ' . __(Str::plural('day', intval($days_left))) }}</strong> @lang('left on your current subscription.')</p>
+                        <p class="mb-1">@lang('Dear subscriber, you have') <strong class="text-{{ $status }}">{{ intval($days_left) }} @lang('day(s)')</strong> @lang('left on your current subscription.')</p>
                     @endif
                     <p class="mb-0">
                         @if ($can_renew)

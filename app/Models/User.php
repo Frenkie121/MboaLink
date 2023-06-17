@@ -116,7 +116,8 @@ class User extends Authenticatable
         return $this->subscriptions->filter(
                     fn ($item) => Carbon::parse($item->pivot->ends_at)->isFuture() 
                     && Carbon::parse($item->pivot->starts_at)->isPast()
-                )->first();
+                )->first()
+                ?? $this->subscriptions()->first();
     }
 
     public function getFreeSubscriptionType()
