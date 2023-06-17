@@ -24,14 +24,14 @@
     <div class="tab-content mb-4">
         <div class="tab-pane fade show p-0 @if ($currentStep === 1) active @endif">
             <form>
-                <div class="row g-3">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="@lang('Title')" wire:model.defer="title">
                             <label for="title">@lang('Title')<b class="text-danger">*</b></label>
                         </div>
                         @error('title')
-                            <span class="text-danger"><small>{{ $message }}</small></span>
+                            <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -39,7 +39,7 @@
                             <input type="date" class="form-control @error('dateline') is-invalid @enderror" id="dateline" wire:model.defer="dateline" placeholder="@lang('Deadline for applications')">
                             <label for="dateline">@lang('Deadline for applications')<b class="text-danger">*</b></label>
                             @error('dateline')
-                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <input type="number" class="form-control @error('min_salary') is-invalid @enderror" id="min_salary" placeholder="@lang('Min. salary')" wire:model.defer="min_salary">
                             <label for="minimal_salary">@lang('Min. salary')<b class="text-danger">*</b></label>
                             @error('min_salary')
-                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <input type="number" class="form-control @error('max_salary') is-invalid @enderror" id="max_salary" placeholder="@lang('Max. salary')" wire:model.defer="max_salary">
                             <label for="max_salary">@lang('Max. salary')</label>
                             @error('max_salary')
-                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                             @endforeach
                         </select>
                         @error('category')
-                            <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                            <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                         @enderror
                     </div>
                     <div class="col-md-6">
@@ -82,7 +82,7 @@
                             @endif
                         </select>
                         @error('sub_category')
-                            <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                            <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                         @enderror
                     </div>
                     <div class="col-md-12">
@@ -93,7 +93,7 @@
                             @endforeach
                         </select>
                         @error('type')
-                            <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                            <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                         @enderror
                     </div>
                     <div class="col-12">
@@ -101,7 +101,7 @@
                             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="@lang('Add a description')" id="description" style="height: 150px" wire:model.defer="description"></textarea>
                             <label for="description">@lang('Short Description')<b class="text-danger">*</b></label>
                             @error('description')
-                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" wire:model.defer="file" placeholder="@lang('Add job specifications file')" accept=".pdf,.doc,.docx,.ppt,.xlsx">
                             <label for="file">@lang('Add job specifications file')</label>
                             @error('file')
-                                <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             @endforeach
                         </select>
                         @error('tags')
-                            <span class="text-danger fw-light"><small>{{ $message }}</small></span>
+                            <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                         @enderror
                     </div> --}}
                 </div>
@@ -135,7 +135,7 @@
                             <input type="text" class="form-control @error('requirement.1') is-invalid @enderror" id="content" placeholder="@lang('Requirement') 1" wire:model.defer="requirements.1">
                             <label for="content">@lang('Requirement') 1<b class="text-danger">*</b></label>
                             @error('requirements.1')
-                                <span class="text-danger"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -148,7 +148,7 @@
                                 <input type="text" class="form-control @error('requirements.' . $loop->iteration + 1) is-invalid @enderror" id="content" placeholder="@lang('Requirement') {{ $loop->iteration + 1 }}" wire:model.defer="requirements.{{ $loop->iteration + 1 }}">
                                 <label for="content">@lang('Requirement') {{ $loop->iteration + 1 }}</label>
                                 @error('requirements.' . $loop->iteration + 1)
-                                    <span class="text-danger"><small>{{ $message }}</small></span>
+                                    <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                                 @enderror
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                             <input type="text" class="form-control @error('qualifications.1') is-invalid @enderror" id="content" placeholder="@lang('Qualification') 1" wire:model.defer="qualifications.1">
                             <label for="content">@lang('Qualification') 1<b class="text-danger">*</b></label>
                             @error('qualifications.1')
-                                <span class="text-danger"><small>{{ $message }}</small></span>
+                                <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                             @enderror
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                                 <input type="text" class="form-control @error('qualifications.' . $loop->iteration + 1) is-invalid @enderror" id="content" placeholder="@lang('Qualification') {{ $loop->iteration + 1 }}" wire:model.defer="qualifications.{{ $loop->iteration + 1 }}">
                                 <label for="content">@lang('Qualification') {{ $loop->iteration + 1 }}</label>
                                 @error('qualifications.' . $loop->iteration + 1)
-                                    <span class="text-danger"><small>{{ $message }}</small></span>
+                                    <span class="text-danger d-flex justify-content-start mb-3"><small>{{ $message }}</small></span>
                                 @enderror
                             </div>
                         </div>
