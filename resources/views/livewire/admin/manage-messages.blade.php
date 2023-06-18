@@ -68,9 +68,9 @@
                             <hr>
                             <div class="form-group">
                                 <label style="font-weight:bold;float:left;"
-                                    class="control-label">@lang('Message')</label>
+                                    class="control-label mr-2">@lang('Message')</label>
                               <div class="row"></div>
-                                <div style="text-align:justify;">{{ $displayContact->message }}</div>
+                                <div style="text-align:justify;"> {{ $displayContact->message }}</div>
                             </div>
                             @if (!$displayContact->response)
                                 <form wire:submit.prevent="replyMessage({{ $displayContact }})" id="InputRepyForm">
@@ -83,14 +83,14 @@
                                             <span class="text-danger ">{{ $message }} </span>
                                         @enderror
                                       <div class="row"></div>
-                                        <div>
+                                        <div class="mt-2">
                                             <button wire:loading.remove type="submit" style="float: right;"
-                                                class="btn btn-success">
+                                                class="btn btn-primary">
                                                 <i class="fa fa-paper-plane"></i>
                                                 @lang('Send')
                                             </button>
                                             <button wire:loading wire:target="replyMessage" style="float: right;"
-                                                class="btn btn-success" disabled>
+                                                class="btn btn-primary" disabled>
                                                 <span class="spinner-border spinner-border-sm" role="status"
                                                     aria-hidden="true"></span>
                                                 @lang('Loading...')

@@ -3,11 +3,10 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\Contact;
-use App\Notifications\admin\Contact\replyMessageNotification;
+use App\Notifications\Admin\Contact\ResponseNotification;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
-use Livewire\WithPagination;
+use Livewire\{Component, WithPagination};
 
 class ManageMessages extends Component
 {
@@ -42,7 +41,13 @@ class ManageMessages extends Component
         $contact->response = $response['reply'];
         $contact->save();
 
-        Notification::send($contact, new replyMessageNotification($response['reply'], $contact->subject));
+        $data = [
+            'subject' => $contact->subject,
+            'created_at' => $contact->created_at,
+            'response' => $contact->response,
+        ];
+
+        Notification::send($contact, new ResponseNotification($data));
 
         $this->closeModal();
 

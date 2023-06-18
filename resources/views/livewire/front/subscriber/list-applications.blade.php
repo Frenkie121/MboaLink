@@ -4,6 +4,10 @@
         @lang('The different applications for job') <span><a href="{{ route('front.jobs.show', $job) }}" class="text-secondary">{{ $job->title }}</a></span> @lang('are listed in the table below').
     </p>
 
+    <div class="d-flex justify-content-end mb-2">
+        <a href="{{ url()->previous() }}" class="btn btn-primary">@lang('Back to my jobs')</a>
+    </div>
+        
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>

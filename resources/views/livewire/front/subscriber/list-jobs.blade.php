@@ -3,7 +3,13 @@
 @endphp
 
 <div>
-    <h3 class="text-center fw-bolder">@lang('Jobs list')</h3>
+    <h3 class="text-center fw-bolder">
+        @if ($company)
+            @lang('Jobs list')
+        @else
+            @lang('My Applications')
+        @endif
+    </h3>
     <p class="mb-4 text-center fw-bold">
         @if ($company)
             @lang('Your created jobs are listed in the table below.')

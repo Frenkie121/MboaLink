@@ -196,6 +196,7 @@ return [
         'current_job' => 'job actuel',
         'offers_add.*' => 'nouvelle offre :position',
         'subs_name' => 'nom',
+        'subject' => 'sujet',
     ],
 
     'custom-values' => [

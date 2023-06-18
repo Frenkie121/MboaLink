@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Notifications\admin\Job;
+namespace App\Notifications\Admin\Job;
 
 use App\Models\Job;
 use Illuminate\Bus\Queueable;

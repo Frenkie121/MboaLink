@@ -451,7 +451,7 @@
     "active": "actif",
     "Inactive": "Inactif",
     "disabled": "désactivé",
-    "You can continue to browse the website and enjoy the privileges of your subscription.": "Vous pouvez continuer à naviguer sur le site et à profiter des privilèges de votre abonnement.",
+    "You can continue to browse the website and enjoy the privileges of your subscription.": "Vous pouvez continuer à naviguer sur le site et profiter des privilèges de votre abonnement.",
     "you": "vous",
     "administrator": "l'administrateur",
     "Your account has been disabled on": "Votre compte a été désactivé le",
@@ -464,6 +464,7 @@
     "activated": "activé",
     " your account.": " votre compte.",
     "You can contact the administrator to find out more:": "Vous pouvez contacter l'administrateur pour en savoir plus :",
+    "or": "ou",
     "The password reset link has expired, please request a new password reset.": "Le lien de réinitialisation a expiré, veuillez faire une nouvelle demande.",
     "You cannot enable this account because it was disabled by its owner.": "Vous ne pouvez pas activer ce compte car il a été désactivé par son propriétaire.",
     "This category has ": "Cette catégorie possède ",
@@ -532,5 +533,10 @@
     "Click on the link below to see details.": "Cliquer sur le lien ci-dessous pour voir les détails.",
     "New Job publication": "Nouvelle offre d'emploi publiée",
     "Your renewal request for subscription ": "Votre demande de renouvellement pour l'abonnement ",
+    "Back to my jobs": "Retourner à mes offres",
+    "New response notification": "Notification de nouvelle réponse",
+    "You have received a response for your message sent on ": "Vous avez reçu une réponse pour votre message  envoyé le ",
+    " with the subject: ": " dont le sujet était : ",
+    "The content of the response is: ": "Le contenu de la réponse est : ",
     "": ""
 }
