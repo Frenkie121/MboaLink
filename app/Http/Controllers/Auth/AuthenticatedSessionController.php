@@ -29,10 +29,14 @@ class AuthenticatedSessionController extends Controller
     {
         $message = '';
         $remember = (bool) $request->remember;
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_active' => true], $remember)) {
+        if (! Auth::attemptWhen([
+            'email' => $request->email,
+            'password' => $request->password,
+        ], fn (User $user) => $user->canLogin())
+        ) {
             $user = User::where('email', $request->email)->first();
             if ($user) {
-                if (Hash::check($request->password, $user->password)) {
+                if (Hash::check($request->password, $user->password) && (! $user->canLogin())) {
                     $message = 'auth.disabled';
                 } else {
                     $message = 'auth.failed';

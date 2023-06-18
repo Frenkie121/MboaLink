@@ -136,4 +136,15 @@ class User extends Authenticatable
         
         return Subscription::query()->find($type);
     }
+
+    /**
+     * Check if disabled account can login
+     *
+     * @return bool
+     * 
+     */
+    public function canLogin() : bool
+    {
+        return $this->is_active || (! $this->is_active && $this->disabled_by === $this->id);
+    }
 }

@@ -33,7 +33,7 @@
                     @if (auth()->check() && auth()->user()->userable_type === 'App\Models\Company')
                         <a href="{{ route('front.jobs.create') }}" class="dropdown-item
                             @if (Str::endsWith($currentRouteName, 'create')) active @endif"
-                        >@lang('Post A Job')</a>
+                        >@lang('Post a job')</a>
                     @endif
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     @elseif (in_array(auth()->user()->role_id, [2, 3, 4, 5]))
                         <li><a class="dropdown-item" href="{{ route('front.subscriber.profile') }}">@lang('My dashboard')</a></li>
                         @if (auth()->user()->role_id === 2)
-                            <li><a class="dropdown-item" href="{{ route('front.jobs.create') }}">@lang('Post A Job')</a></li>
+                            <li><a class="dropdown-item" href="{{ route('front.jobs.create') }}">@lang('Post a job')</a></li>
                         @endif
                     @elseif (auth()->user()->subscriptions->isNotEmpty() && auth()->user()->subscriptions->first()->pivot->starts_at)
                         <li><a class="dropdown-item" href="{{ route('front.subscriptions.renew') }}">@lang('Upgrade my subscription')</a></li>
@@ -71,6 +71,6 @@
             </div>
         @endauth
         
-        {{-- <a href="#" class="py-4 px-lg-3 d-none d-lg-block text-white">@lang('Post A Job')<i class="fa fa-arrow-right ms-3"></i></a> --}}
+        {{-- <a href="#" class="py-4 px-lg-3 d-none d-lg-block text-white">@lang('Post a job')<i class="fa fa-arrow-right ms-3"></i></a> --}}
     </div>
 </nav>

@@ -35,6 +35,7 @@ class DeleteModalPublish extends Component
                                 $query->whereNotNull('starts_at')
                                     ->whereNotNull('ends_at');
                             })
+                            ->where('is_active', true)
                             ->get()
                             ->whereIn('role_id', [3, 4, 5])
                             ->filter(fn ($item) => $item->userable->category->id === $job->subCategory->category->id);

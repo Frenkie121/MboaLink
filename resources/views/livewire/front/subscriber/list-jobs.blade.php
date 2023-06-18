@@ -27,6 +27,11 @@
             @endif
         </p>
     @else
+
+    <div class="d-flex justify-content-end mb-2">
+        <a href="{{ route('front.jobs.create') }}" class="btn btn-primary">@lang('Post a job')</a>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
             <thead>

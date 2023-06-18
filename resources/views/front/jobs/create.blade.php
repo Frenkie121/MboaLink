@@ -1,6 +1,6 @@
 @extends('layouts.front')
 
-@section('subtitle', __('Jobs') . ' | ' . __('Post A Job'))
+@section('subtitle', __('Jobs') . ' | ' . __('Post a job'))
 
 @push('css')
     @livewireStyles
@@ -31,7 +31,7 @@
 
     <!-- Header End -->
     <x-front.header
-        :title="__('Post A Job')"
+        :title="__('Post a job')"
         :middleLink="true"
         :middleTitle="__('Jobs')"
         :middleRouteName="route('front.jobs.index')"
@@ -40,7 +40,7 @@
 
     <div class="container-xxl py-5">
         <div class="container" id="tabs">
-            <h1 class="text-center mb-2 wow fadeInUp" data-wow-delay="0.1s">@lang('Post A Job')</h1>
+            <h1 class="text-center mb-2 wow fadeInUp" data-wow-delay="0.1s">@lang('Post a job')</h1>
         <h6 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('Follow the steps below to post a job') 
             @livewire('front.create-job')
         </div>
