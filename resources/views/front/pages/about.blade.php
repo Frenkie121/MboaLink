@@ -18,19 +18,19 @@
                             <img class="img-fluid w-100" src="{{ asset('assets/front/img/about-1.jpg') }}">
                         </div>
                         <div class="col-6 text-start">
-                            <img class="img-fluid" src="{{ asset('assets/front/img/about-2.jpg') }}" style="width: 85%; margin-top: 15%;">
+                            <img class="img-fluid" src="{{ asset('assets/front/img/about-3.jpg') }}" style="width: 85%; margin-top: 15%;">
                         </div>
                         <div class="col-6 text-end">
-                            <img class="img-fluid" src="{{ asset('assets/front/img/about-3.jpg') }}" style="width: 85%;">
+                            <img class="img-fluid" src="{{ asset('assets/front/img/about-4.jpg') }}" style="width: 85%;">
                         </div>
                         <div class="col-6 text-end">
-                            <img class="img-fluid w-100" src="{{ asset('assets/front/img/about-4.jpg') }}">
+                            <img class="img-fluid w-100" src="{{ asset('assets/front/img/about-2.jpg') }}">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="mb-4">@lang('We help you get the best job and find talent')</h1>
-                    <p class="mb-4" style="text-align: justify; line-height: 25pt"><strong>{{ config('app.name') }}</strong> @lang('is a start-up agency for employment born from a firm will to facilitate the professional insertion of any Cameroonian. It is in this optics that was set up this platform in order to bring closer to the companies, the job seekers and of professional training course, in this way they will be on the lookout for the least advertisement or request of those.')</p>
+                    <p class="mb-4 lh-lg" style="text-align: justify;"><strong>{{ config('app.name') }}</strong> @lang('is a start-up agency for employment born from a firm will to facilitate the professional insertion of any Cameroonian. It is in this optics that was set up this platform in order to bring closer to the companies, the job seekers and of professional training course, in this way they will be on the lookout for the least advertisement or request of those.')</p>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
     <!-- About End -->
 
     
-    <!-- Testimonial Start -->
+    <!-- Targets Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <h1 class="text-center mb-5">@lang('Our target audience')</h1>
@@ -90,6 +90,17 @@
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Targets End -->
 
 @endsection
+
+@push('css')
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5)), url({{ asset('assets/front/img/about-main.jpg') }}) center center no-repeat;
+            background-color: rgba(0, 0, 0, 0);
+            background-size: auto, auto;
+            background-size: cover;
+        }
+    </style>
+@endpush

@@ -25,3 +25,14 @@
     <!-- Category End -->
 
 @endsection
+
+@push('css')
+    <style>
+        .page-header {
+            background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5)), url({{ asset('assets/front/img/categories.jpg') }}) center center no-repeat;
+            background-color: rgba(0, 0, 0, 0);
+            background-size: auto, auto;
+            background-size: cover;
+        }
+    </style>
+@endpush
