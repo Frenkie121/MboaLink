@@ -3073,10 +3073,10 @@ fieldset:disabled .btn {
     background-color: #effdf5;
     border-color: #effdf5;
 }
-.btn-check:focus + .btn-outline-light,
+/* .btn-check:focus + .btn-outline-light,
 .btn-outline-light:focus {
     box-shadow: 0 0 0 0.25rem rgba(239, 253, 245, 0.5);
-}
+} */
 .btn-check:checked + .btn-outline-light,
 .btn-check:active + .btn-outline-light,
 .btn-outline-light:active,
@@ -3086,13 +3086,13 @@ fieldset:disabled .btn {
     background-color: #effdf5;
     border-color: #effdf5;
 }
-.btn-check:checked + .btn-outline-light:focus,
+/* .btn-check:checked + .btn-outline-light:focus,
 .btn-check:active + .btn-outline-light:focus,
 .btn-outline-light:active:focus,
 .btn-outline-light.active:focus,
 .btn-outline-light.dropdown-toggle.show:focus {
     box-shadow: 0 0 0 0.25rem rgba(239, 253, 245, 0.5);
-}
+} */
 .btn-outline-light:disabled,
 .btn-outline-light.disabled {
     color: #effdf5;

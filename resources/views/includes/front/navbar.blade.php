@@ -29,7 +29,7 @@
                     >@lang('Categories')</a>
                     <a href="{{ route('front.jobs.index') }}" class="dropdown-item
                         @if (Str::endsWith($currentRouteName, 'jobs.index')) active @endif"
-                    >@lang('Job List')</a>
+                    >@lang('Jobs')</a>
                     @if (auth()->check() && auth()->user()->userable_type === 'App\Models\Company')
                         <a href="{{ route('front.jobs.create') }}" class="dropdown-item
                             @if (Str::endsWith($currentRouteName, 'create')) active @endif"

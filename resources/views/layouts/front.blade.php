@@ -145,21 +145,16 @@
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">@lang('Contact')</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Douala, @lang('Cameroon')</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+237 699 999 999</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+237 697 421 377</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>mboalink@gmail.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Newsletter</h5>
-                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        <h5 class="text-white mb-4">@lang('Social Media')</h5>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href="https://twitter.com/MboaLink?t=IjCfaY_61fhxuWnG8xv0IA&s=35" target="__blank"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/profile.php?id=100082315072957&mibextid=ZbWKwL" target="__blank"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://instagram.com/mboalink?igshid=NGExMmI2YTkyZg==" target="__blank"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="#" title="@lang('Coming soon ...')"><i class="fab fa-linkedin-in" target="__blank"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -167,8 +162,8 @@
                         <div class="dropdown">
                             <button id="lang-dropdown" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">@if ($fr_locale) @lang('French') @else @lang('English') @endif</button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item {{ $fr_locale ? 'active' : '' }}" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
-                                    <li><a class="dropdown-item {{ $fr_locale ? '' : 'active' }}" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
+                                <li><a class="dropdown-item {{ $fr_locale ? 'active' : '' }}" href="{{ route('lang', 'fr') }}">@lang('French')</a></li>
+                                <li><a class="dropdown-item {{ $fr_locale ? '' : 'active' }}" href="{{ route('lang', 'en') }}">@lang('English')</a></li>
                             </ul>
                         </div>
                     </div>
@@ -178,11 +173,12 @@
                 <div class="copyright">
                     <div class="row">
                         <div id="copyright-text" class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Rights Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
-                            </br>Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                            &copy; <a class="border-bottom" href="#">{{ config('app.name') }}</a>, @lang('All Rights Reserved.')
+                            <br>
+                            @lang('Made By') <a href="https://bvision-lte.com" target="__blank">Better Vision</a>
+                            <br>
+                            @lang('Designed By') <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            @lang('Distributed By') <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
                         </div>
                         {{-- <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
