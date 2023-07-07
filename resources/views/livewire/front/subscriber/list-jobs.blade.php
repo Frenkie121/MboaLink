@@ -55,7 +55,7 @@
             <tbody>
                 @foreach ($jobs as $job)
                     @php
-                        $hasTalent = $job->talents->isNotEmpty();
+                        $hasTalent = $company ? $job->talents->isNotEmpty() : null;
                     @endphp
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
