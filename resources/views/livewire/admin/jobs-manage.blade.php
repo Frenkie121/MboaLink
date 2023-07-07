@@ -27,7 +27,7 @@
                                             <td>{{ $job->created_at }}</td>
                                             <td>
                                                 @if ($job->published_at)
-                                                    <span class="badge badge-pill badge-success">@lang('Published on ') <small>{{ $job->published_at }}</small></span>
+                                                    <span class="badge badge-pill badge-success"><small>@lang('Published on') {{ $job->published_at }}</small></span>
                                                 @else
                                                     <span class="badge badge-pill badge-dark">@lang('Pending')</span>
                                                 @endif
