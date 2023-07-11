@@ -114,7 +114,8 @@ class SubscribersController extends Controller
     }
     public function download(User $user)
     {
-        return Response::file(public_path("storage/cv/" . $user->userable->cv));
+        return response()->download(public_path("storage/cv/" . $user->userable->cv));
+        // return Response::file(public_path("storage/cv/" . $user->userable->cv));
         // return Response::download(public_path("storage/cv/" . $user->userable->cv),  $user->slug);
         // return Storage::download(public_path("storage/cv/" . $user->userable->cv) , 'CV_' . $user->name);
 

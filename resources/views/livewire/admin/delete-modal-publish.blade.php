@@ -11,7 +11,7 @@
         <div class="modal-dialog modal-dialog-top" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteJob">@lang('Delete job') <strong>{{ $title }}</strong></h5>
+                    <h5 class="modal-title" id="deleteJob">@lang('Actions for job') <strong>{{ $title }}</strong></h5>
                 </div>
                 <div class="modal-body">
                     <p class="text-primary font-weight-bold mb-0 h6">@lang('Do you confirm the publication of this job?')</p>

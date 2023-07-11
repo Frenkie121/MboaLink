@@ -46,9 +46,9 @@
                             <p>@lang('CV') : 
                                 <span class="fw-bold">
                                     @if($selectedTalent->cv)
-                                        <a href="#">@lang('Open')</a>
+                                        <a href="#" wire:click="downloadCV()">@lang('Download')</a>
                                     @else
-                                        /
+                                        @lang('No CV')
                                     @endif
                                 </span>
                             </p>

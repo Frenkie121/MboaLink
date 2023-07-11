@@ -296,7 +296,7 @@
 
         <div class="d-flex justify-content-end">
             @if ($currentStep === 4)
-                <a wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"><i class="fa fa-trash-alt"></i>  <span class="d-none d-md-inline d-sm-inline">@lang('Cancel')</span></a>
+                <a wire:target="confirm" wire:loading.class="isDisabled" class="btn btn-danger w-40 py-3" wire:click="cancel()"> <span class="d-none d-md-inline d-sm-inline">@lang('Cancel')</span></a>
             @endif
 
             <div class="mx-1">
@@ -310,7 +310,9 @@
                             @lang('Next')
                         @endif
                     </span>
-                    <i class="fa fa-caret-right"></i>
+                    @if ($currentStep !== 4)
+                        <i class="fa fa-caret-right"></i>
+                    @endif
                 </a>
             </div>
         </div>

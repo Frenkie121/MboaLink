@@ -6,7 +6,7 @@ use App\Models\Job;
 use Livewire\{Component, WithPagination};
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Notifications\admin\Job\PublishCompanyNotification;
+use App\Notifications\Admin\Job\PublishCompanyNotification;
 
 class JobsManage extends Component
 {

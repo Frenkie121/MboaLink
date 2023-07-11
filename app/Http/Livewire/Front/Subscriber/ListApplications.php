@@ -27,6 +27,11 @@ class ListApplications extends Component
         $this->emit('openModal');
     }
 
+    public function downloadCV()
+    {
+        return response()->download(public_path("storage/cv/" . $this->user->userable->cv));
+    }
+
     public function render()
     {
         return view('livewire.front.subscriber.list-applications', [

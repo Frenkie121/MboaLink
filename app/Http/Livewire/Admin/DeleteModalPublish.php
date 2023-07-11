@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\{Job, User};
-use App\Notifications\admin\Job\PublishCompanyNotification;
+use App\Notifications\Admin\Job\PublishCompanyNotification;
 use Illuminate\Support\Facades\Notification;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\{Component, WithPagination};
