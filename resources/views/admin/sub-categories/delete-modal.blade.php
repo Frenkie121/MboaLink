@@ -29,7 +29,7 @@
             <div class="modal-footer d-flex justify-content-between">
                 <button type="button" wire:click="closeModal()" class="btn btn-secondary">@lang('Cancel')</button>
                 <div class="">
-                    <button type="button" class="btn btn-{{ $selectedSubCategory->disabled_at ? 'success' : 'warning' }}" wire:click="updateStatus()">{{ $selectedSubCategory->disabled_at ? __('Enable') : __('Disable') }}</button>
+                    <button type="button" class="btn btn-{{ $selectedSubCategory->disabled_at ? 'primary' : 'warning' }}" wire:click="updateStatus()">{{ $selectedSubCategory->disabled_at ? __('Enable') : __('Disable') }}</button>
                     @if ($selectedSubCategory->jobs->count() === 0)
                         <button type="button" wire:click="confirmDelete()" class="btn btn-danger">@lang('Confirm')</button>
                     @endif

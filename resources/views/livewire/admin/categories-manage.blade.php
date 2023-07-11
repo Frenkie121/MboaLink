@@ -22,20 +22,28 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
+                                        @php
+                                            $disabled_at = $category->disabled_at;
+                                        @endphp
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->jobs_count }}</td>
                                             <td class="text-light">
-                                                @if ($category->disabled_at)
-                                                    <span class="badge bg-danger">@lang('Disabled at') {{ formatedLocaleDate($category->disabled_at) }}</span>
+                                                @if ($disabled_at)
+                                                    <span class="badge bg-danger">@lang('Disabled at') {{ formatedLocaleDate($disabled_at) }}</span>
                                                 @else
                                                     <span class="badge bg-primary">@lang('Active')</span>
                                                 @endif
                                             </td>
                                             <td>
                                                 <button wire:click="showEditForm({{ $category }})" class="btn btn-icon icon-left btn-primary"><i class="fas fa-pen"></i> </button>
-                                                <button class="btn btn-danger" wire:click="showDeleteForm({{ $category }})"> <i class="fa fa-trash"></i></button>
+                                                <button 
+                                                    class="btn btn-{{ $disabled_at ? 'secondary' : 'danger' }}"
+                                                    title="{{ ($disabled_at ? __('Enable') : __('Disable')) . __(' or delete ') . __('this category.') }}"
+                                                    wire:click="showDeleteForm({{ $category }})">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -152,7 +160,7 @@
                     <div class="modal-footer d-flex justify-content-between">
                         <button type="button" wire:click="closeModal()" class="btn btn-secondary">@lang('Cancel')</button>
                         <div class="">
-                            <button type="button" class="btn btn-{{ $selectedCategory->disabled_at ? 'success' : 'warning' }}" wire:click="updateStatus()">{{ $selectedCategory->disabled_at ? __('Enable') : __('Disable') }}</button>
+                            <button type="button" class="btn btn-{{ $selectedCategory->disabled_at ? 'primary' : 'warning' }}" wire:click="updateStatus()">{{ $selectedCategory->disabled_at ? __('Enable') : __('Disable') }}</button>
                             @if ($selectedCategory->jobs->count() === 0)
                                 <button type="button" wire:click="destroyCategory()" class="btn btn-danger">@lang('Confirm')</button>
                             @endif

@@ -13,23 +13,28 @@
                         <th>Action</th>
                     </tr>
                     @foreach ($subCategories as $subCategory)
+                        @php
+                            $disabled_at = $subCategory->disabled_at;
+                        @endphp
                         <tr wire:key="{{ $loop->index }}">
                             <td class="p-0 text-center">{{ $loop->iteration }}</td>
                             <td>{{ $subCategory->name }}</td>
                             <td title="{{ $subCategory->name }}">{{ $subCategory->category->short_name }}</td>
                             <td>{{ $subCategory->jobs_count }}</td>
                             <td class="text-light">
-                                @if ($subCategory->disabled_at)
-                                    <span class="badge bg-danger">@lang('Disabled at') <br>{{ formatedLocaleDate($subCategory->disabled_at) }}</span>
+                                @if ($disabled_at)
+                                    <span class="badge bg-danger">@lang('Disabled at') <br>{{ formatedLocaleDate($disabled_at) }}</span>
                                 @else
                                     <span class="badge bg-primary">@lang('Active')</span>
                                 @endif
                             </td>
                             <td>
-                                <button wire:click="showEditForm({{ $subCategory->id }})" class="btn btn-primary"><i
-                                        class="fas fa-pen"></i></button>
-                                <button wire:click="showDeleteModal({{ $subCategory->id }})" class="btn btn-danger"><i
-                                        class="fas fa-trash"></i></button>
+                                <button wire:click="showEditForm({{ $subCategory->id }})" class="btn btn-primary"><i class="fas fa-pen"></i></button>
+                                <button 
+                                    wire:click="showDeleteModal({{ $subCategory->id }})" class="btn btn-{{ $disabled_at ? 'secondary' : 'danger' }}"
+                                    title="{{ ($disabled_at ? __('Enable') : __('Disable')) . __(' or delete ') . __('this sub-category.') }}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
