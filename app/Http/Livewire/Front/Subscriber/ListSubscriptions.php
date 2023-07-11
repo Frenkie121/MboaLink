@@ -38,6 +38,8 @@ class ListSubscriptions extends Component
             'ends_at' => formatedLocaleDate($ends_at),
         ];
 
+        // dd($this->user->currentSubscription()->lastSubscriptionDaysLeft());
+
         return view('livewire.front.subscriber.list-subscriptions', [
             'subscriptions' => $this->user->subscriptions()->orderByPivot('ends_at', 'DESC')->orderByPivot('starts_at', 'DESC')->paginate(5),
             'current_subscription' => $this->user->currentSubscription(),

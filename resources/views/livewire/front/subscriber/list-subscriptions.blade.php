@@ -1,6 +1,6 @@
 @php
     $status = $days_left < 1 ? 'danger' : 'primary';
-    $can_renew = $current_subscription->isSameAs($last_subscription) && $days_left <= 7;
+    $can_renew = $last_subscription->pivot->starts_at && ($current_subscription->isSameAs($last_subscription) && $days_left <= 7);
 @endphp
 
 <div>
@@ -68,17 +68,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    @if ($days_left < 0.1)
-                        <p class="text-danger fw-bolder mb-1">@lang('Dear subscriber, your subscription period is over.')
-                    @else
-                        <p class="mb-1">@lang('Dear subscriber, you have') <strong class="text-{{ $status }}">{{ intval($days_left) }} @lang('day(s)')</strong> @lang('left on your current subscription.')</p>
+                    @if ($current_subscription->pivot->starts_at)
+                        @if ($days_left < 0.1)
+                            <p class="text-danger fw-bolder mb-1">@lang('Dear subscriber, your subscription period is over.')
+                        @else
+                            <p class="mb-1">@lang('Dear subscriber, you have') <strong class="text-{{ $status }}">{{ intval($days_left) }} @lang('day(s)')</strong> @lang('left on your current subscription.')</p>
+                        @endif
                     @endif
                     <p class="mb-0">
                         @if ($can_renew)
                             @lang('You can request a renewal by clicking on the button below.')
                             <p class="fw-bold fs-6 mb-0 mt-2">(@lang('It will cost you') {{ $next_subscription['amount'] }} XAF @lang('and go from') {{ $next_subscription['starts_at'] }} @lang('to ') {{ $next_subscription['ends_at'] }}.)</p>
-                        @elseif (! $current_subscription->isSameAs($last_subscription) && ! $last_subscription->starts_at)
-                            <span class="fw-bold">@lang('Your last subscription request is awaiting validation.')</span>
+                        @elseif (! $last_subscription->pivot->starts_at)
+                            @if (! $current_subscription->isSameAs($last_subscription) || $subscriptions->count() === 1)
+                                <span class="fw-bold">@lang('Your last subscription request is awaiting validation.')</span>
+                            @endif
                         @else
                             @lang('You can renew your subscription one week before the end of the current one.')
                         @endif

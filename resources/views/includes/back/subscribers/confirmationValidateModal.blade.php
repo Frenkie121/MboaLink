@@ -40,6 +40,7 @@
 
         var url = "{{ route('admin.subscribers.validate', ':id') }}";
         url = url.replace(':id', id);
+        this.disabled = true;
         location.href = url;
 
     }
