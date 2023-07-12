@@ -38,7 +38,7 @@ class JobsManage extends Component
     public function render()
     {
         return view('livewire.admin.jobs-manage', [
-            'jobs' => Job::query()->with('company', 'talents')->latest()->paginate(10)
+            'jobs' => Job::query()->with('company.user', 'talents')->latest()->paginate(10)
         ]);
     }
 }

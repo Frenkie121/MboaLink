@@ -2,24 +2,36 @@
 
 @section('subtitle', __('Subscriber profile'))
 
-@push('css')
-    <link rel="stylesheet" href="{{ asset('assets/back/modules/datatables/datatables.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('assets/back/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
-@endpush
-
 @section('content')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
-    <x-admin.section-header :title="__('Subscriber profile')" :previousTitle="__('Subscribers List')" :previousRouteName="url()->previous() === route('admin.subscribers.talent.index')
-        ? route('admin.subscribers.talent.index')
-        : route('admin.subscribers.company.index')" />
+    <x-admin.section-header :title="__('Subscriber profile')" :previousTitle="__('Subscribers List')" :previousRouteName="url()->previous()" />
 
     <div class="section-body">
-        <div class="row mt-sm-4">
+        <div class="row">
             <div class="col-12 col-md-12 col-lg-7">
 
                 <div class="card profile-widget">
+                    <div class="d-flex justify-content-end m-2">
+                        @if ($user->userable->jobs->isNotEmpty())
+                            <a href="{{ route('admin.subscribers.jobs', $user->slug) }}" class="btn btn-primary">
+                                @if ($user->role_id === 2)
+                                    @lang('See its job offers')
+                                @else
+                                    @lang('See its applications')
+                                @endif
+                                ({{ $user->userable->jobs->count() }})
+                            </a>
+                        @else
+                            <button class="btn btn-dark">
+                                @if ($user->role_id === 2)
+                                    @lang('No job yet')
+                                @else
+                                    @lang('No application yet')
+                                @endif   
+                            </button>
+                        @endif
+                    </div>
                     <div class="profile-widget-header">
                         <img alt="image"
                             src="{{ ($user->role_id === 2 && $user->userable->logo) ? asset("storage/companies/{$user->userable->logo}") : asset('assets/back/img/avatar/avatar-2.png') }}"
@@ -42,14 +54,17 @@
                                     @endif
                                 @endif
                                 <div class="slash"></div><b>{{ $user->name }}</b>
-                                <div class="badge badge-{{ $user->subscriptions->last()->id === 1 ? 'danger' : 'success' }}">
-                                    
-                                    @if ($user->subscriptions->last()->id === 1)
-                                        @lang('Free')
-                                    @else
-                                        @lang('Premuim')
-                                    @endif
-                                </div>
+                                {{-- This condition is there just because seeders --}}
+                                @if ($user->subscriptions->isNotEmpty())
+                                    <div class="badge badge-{{ $user->subscriptions->last()->id === 1 ? 'danger' : 'success' }}">
+                                        
+                                        @if ($user->subscriptions->last()->id === 1)
+                                            @lang('Free')
+                                        @else
+                                            @lang('Premuim')
+                                        @endif
+                                    </div>
+                                @endif
 
                             </div>
                         </div>

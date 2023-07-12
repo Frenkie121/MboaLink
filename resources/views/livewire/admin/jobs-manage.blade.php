@@ -26,7 +26,7 @@
                                         <tr wire:key="{{ $loop->index }}">
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $job->title }}</td>
-                                            <td>{{ $job->company->location }}</td>
+                                            <td>{{ $job->company->user->name }}</td>
                                             <td>{{ $job->created_at }}</td>
                                             <td>
                                                 @if ($job->published_at)

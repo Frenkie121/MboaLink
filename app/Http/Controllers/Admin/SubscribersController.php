@@ -112,6 +112,7 @@ class SubscribersController extends Controller
 
         return back();
     }
+
     public function download(User $user)
     {
         return response()->download(public_path("storage/cv/" . $user->userable->cv));
@@ -119,5 +120,17 @@ class SubscribersController extends Controller
         // return Response::download(public_path("storage/cv/" . $user->userable->cv),  $user->slug);
         // return Storage::download(public_path("storage/cv/" . $user->userable->cv) , 'CV_' . $user->name);
 
+    }
+
+    public function listJobs(User $user)
+    {
+        $jobs = $user->role_id === 2
+                ? $user->userable->jobs()->with('subCategory.category:name,id', 'talents')->latest()->paginate(5)
+                : $user->userable->jobs()->with('subCategory.category:name,id')->latest()->paginate(5);
+
+        return view('admin.subscribers.jobs', [
+            'user' => $user,
+            'jobs' => $jobs,
+        ]);  
     }
 }

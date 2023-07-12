@@ -84,8 +84,8 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::view('jobs', 'admin.jobs.index')->name('jobs.index');
     Route::controller(SingleJobController::class)->prefix('jobs')->name('job.')->group(function () {
         Route::get('{job:slug}', 'show')->name('show');
-        Route::get('download/{job:slug}', 'download')->name('download');
-        Route::get('applicants/{job:slug}', 'listApplicants')->name('applicants');
+        Route::get('{job:slug}/download', 'download')->name('download');
+        Route::get('{job:slug}/applicants', 'listApplicants')->name('applicants');
     });
     
     //CONTACTS
@@ -106,6 +106,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
         // Route::get('/{user}', 'show')->name('profile');
         Route::get('/validate/{id}', 'active')->name('validate');
         Route::get('/{user}/cv', 'download')->name('download');
+        Route::get('/{user}/jobs', 'listJobs')->name('jobs');
     });
 
     Route::get('subscribers/{user}', [SubscribersController::class, 'show'])->name('subscribers.profile');
