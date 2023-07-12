@@ -148,6 +148,9 @@
                                                     <p>@lang('Description') : <strong>{{ $job->company->description }}</strong></p>
                                                 </li>
                                             </ul>
+                                            <div class="d-flex justify-content-end mt-2">
+                                                <a href="{{ route('admin.subscribers.profile', $job->company->user->slug) }}" class="btn btn-primary">@lang('More details')</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

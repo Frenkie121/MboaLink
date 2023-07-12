@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'MboaLink') }} | @yield('subtitle')</title>
+    <title>@yield('subtitle') | {{ 'Admin' . ' ' . config('app.name', 'MboaLink') }}</title>
     
     <!-- Favicon -->
     <link href="{{ asset('assets/favicon.png') }}" rel="icon">

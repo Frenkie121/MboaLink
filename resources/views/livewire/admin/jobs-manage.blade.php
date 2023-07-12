@@ -15,11 +15,14 @@
                                         <th>@lang('Company')</th>
                                         <th>@lang('Submitted at')</th>
                                         <th>@lang('Status')</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($jobs as $job)
+                                        @php
+                                            $hasTalent = $job->talents->isNotEmpty();
+                                        @endphp
                                         <tr wire:key="{{ $loop->index }}">
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>{{ $job->title }}</td>
@@ -34,7 +37,13 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('admin.job.show', $job) }}"
-                                                    class="btn btn-icon icon-left btn-primary"><i class="fas fa-eye"></i> 
+                                                    class="btn btn-icon icon-left btn-primary" title="@lang('Details')"><i class="fas fa-eye"></i> 
+                                                </a>
+                                                <a
+                                                    href="{{ route('admin.job.applicants', $job) }}"
+                                                    class="btn btn-icon icon-left btn-{{ $hasTalent ? 'info' : 'secondary' }}"
+                                                    title="@if($hasTalent)@lang('Applicants list')@else @lang('No applicant yet')@endif">
+                                                    <i class="fas fa-users"></i>@if($hasTalent)<sup>{{ $job->talents->count() }}</sup> @endif
                                                 </a>
                                             </td>
                                         </tr>

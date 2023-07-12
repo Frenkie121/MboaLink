@@ -18,4 +18,12 @@ class SingleJobController extends Controller
     {
         return response()->download(public_path('storage/jobs/' . $job->file));
     }
+
+    public function listApplicants(Job $job)
+    {
+        return view('admin.jobs.applicants', [
+            'job' => $job,
+            'talents' => $job->load('talents.user')->talents,
+        ]);
+    }
 }

@@ -85,6 +85,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
     Route::controller(SingleJobController::class)->prefix('jobs')->name('job.')->group(function () {
         Route::get('{job:slug}', 'show')->name('show');
         Route::get('download/{job:slug}', 'download')->name('download');
+        Route::get('applicants/{job:slug}', 'listApplicants')->name('applicants');
     });
     
     //CONTACTS
