@@ -80,7 +80,7 @@
                             @if ($company)
                                 <a 
                                     href="@if($hasTalent){{ route('front.subscriber.job.applications', $job->slug) }} @else # @endif"
-                                    class="btn btn-{{ $hasTalent ? 'primary' : 'secondary' }}"
+                                    class="btn btn-{{ $hasTalent ? 'primary' : 'dark' }}"
                                     title="@if($hasTalent)@lang('Applicants list')@else @lang('No applicant yet')@endif">
                                     <i class="fas fa-users"></i>
                                 </a>
