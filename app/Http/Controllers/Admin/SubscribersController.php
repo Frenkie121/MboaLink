@@ -125,8 +125,8 @@ class SubscribersController extends Controller
     public function listJobs(User $user)
     {
         $jobs = $user->role_id === 2
-                ? $user->userable->jobs()->with('subCategory.category:name,id', 'talents')->latest()->paginate(5)
-                : $user->userable->jobs()->with('subCategory.category:name,id')->latest()->paginate(5);
+                ? $user->userable->jobs()->with('subCategory.category:name,id', 'talents')->latest()->get()
+                : $user->userable->jobs()->with('subCategory.category:name,id')->latest()->get();
 
         return view('admin.subscribers.jobs', [
             'user' => $user,
