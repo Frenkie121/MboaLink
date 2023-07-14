@@ -13,14 +13,7 @@ class Company extends Model
     protected $fillable = [
         'category_id', 'location', 'description', 'url', 'logo',
     ];
-
-    // ACCESSORS
-    public function getFrontLogoAttribute()
-    {
-        $logo = $this->attributes['logo'];
-        return $logo ? asset("storage/companies/{$logo}") : asset('assets/front/img/biz_bag.png');
-    }
-
+    
     // RELATIONSHIPS
     public function user(): MorphOne
     {

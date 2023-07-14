@@ -7,6 +7,7 @@ use App\Http\Controllers\Extra\LangController;
 use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
 use App\Http\Livewire\Admin\Subscription\EditComponent;
 use App\Http\Controllers\Admin\{StatisticsController, SubscribersController, SubscriptionBackController, UsersController};
+use App\Http\Controllers\Extra\ImageController;
 use App\Http\Livewire\Front\Subscriber\{AccountStatus, ListApplications, ListJobs, ListSubscriptions, UpdatePassword, UpdateProfile};
 
 /*
@@ -115,5 +116,6 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
 
 // GENERAL
 Route::get('lang/{locale}', LangController::class)->name('lang');
+Route::get('company-logo/{filename}', ImageController::class)->name('company-logo');
 
 require __DIR__ . '/auth.php';
