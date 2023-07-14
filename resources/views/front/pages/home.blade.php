@@ -8,7 +8,7 @@
     <div class="container-fluid p-0">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-4.jpg') }}" alt="">
+                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-0.jpg') }}" alt="{{ config('app.name') }}" id="home-bg">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -19,18 +19,18 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-2.png') }}" alt="">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="{{ asset('assets/front/img/carousel-home-1.jpg') }}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
                     <div class="container">
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
+                                <h1 class="display-3 text-white animated slideInDown mb-4">@lang('FIND THE BEST JOB THAT FIT YOU.')</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
     <!-- Carousel End -->
