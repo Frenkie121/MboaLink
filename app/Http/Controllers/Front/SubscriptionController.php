@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
         return view('front.subscriptions.index', [
             'subscriptions' => Subscription::query()
                                         ->with(['offers:id,content,subscription_id'])
-                                        ->get(['id', 'name', 'slug', 'amount']),
+                                        ->get(['id', 'name', 'slug', 'amount', 'duration']),
         ]);
     }
 

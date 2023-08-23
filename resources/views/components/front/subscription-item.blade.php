@@ -11,12 +11,16 @@
         </div>
         <div class="card-body">
             <div class="d-flex justify-content-center">
-                <small>XAF </small>
-                <h3 class="card-title pricing-card-title">{{ formatMoney($subscription->amount) }}<small class="text-muted fw-light">/mo</small></h3>
+                @if ($subscription->id === 1)
+                    <i><small class="fw-bold text-primary">@lang('Duration') : {{ $subscription->duration }} @lang('weeks')</small></i>
+                @else
+                    <small>XAF </small>
+                    <h3 class="card-title pricing-card-title">{{ formatMoney($subscription->amount) }}<small class="text-muted fw-light">/mo</small></h3>
+                @endif
             </div>
             <ul class="mt-3 mb-4">
                 @foreach ($subscription->offers as $offer)
-                    <li class="fs-6 mb-1" style="text-align: justify;"><small>{{ $offer->content }}</small></li>
+                <li class="fs-6 mb-1" style="text-align: justify;"><small>{{ __($offer->content) }}</small></li>
                 @endforeach
             </ul>
             @guest
