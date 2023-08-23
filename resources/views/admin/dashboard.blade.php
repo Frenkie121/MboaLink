@@ -12,9 +12,7 @@
 
     <div class="section-body">
         <div class="container">
-
-
-            <form class="form-inline">
+            {{-- <form class="form-inline">
                 <div class="form-group mr-2">
                     <label for="Name2">@lang('Start')</label>
                     <input type="date" name="startDate" id="oldest-date" class="form-control">
@@ -31,7 +29,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">@lang('Submit')</button>
 
-            </form>
+            </form> --}}
         </div>
         <hr>
         <div class="row">
@@ -85,7 +83,7 @@
                         <h4>@lang('Balance')</h4>
                     </div>
                     <div class="card-body">
-                        {{ $money }} Fcfa
+                        <h6>{{ formatMoney($money) }} XAF</h6>
                     </div>
                 </div>
             </div>

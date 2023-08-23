@@ -55,7 +55,7 @@ class StatisticsDataController extends Controller
         $chart3->loaderColor('#0133ff');
         $chart3->displaylegend(false);
 
-        $chart3->title(trans('Subscribers'), 30, "rgb(255, 99, 132)", true, 'Helvetica Neue');
+        $chart3->title(trans('Subscribers'), 30, "rgb(255, 99, 132)", true, 'Nunito');
         $nameRole = [];
         $pupil = Pupil::count();
         $student = Student::count();
@@ -89,13 +89,13 @@ class StatisticsDataController extends Controller
         $dataSetActivated = [];
         $dataSetInactivated = [];
         $activatedAccount->loaderColor('#0133ff');
-        $activatedAccount->title(trans('Subscriptions'), 30, "rgb(255, 99, 132)", true, 'Helvetica Neue');
+        $activatedAccount->title(trans('Subscriptions'), 30, "rgb(255, 99, 132)", true, 'Nunito');
         // $activatedAccount->displaylegend(false);
         $nameRole = [];
         foreach (Subscription::all() as $subscription) {
             array_push($nameRole, $subscription->name);
         }
-        $activatedAccount->title(trans('Subscriptions'), 30, "rgb(255, 99, 132)", true, 'Helvetica Neue');
+        $activatedAccount->title(trans('Subscriptions'), 30, "rgb(255, 99, 132)", true, 'Nunito');
         for ($cpt = 1; $cpt < 6; $cpt++) {
             $SubscriptionsByRole = DB::table('subscription_user')
                                         ->where('subscription_id', $cpt)
@@ -113,7 +113,7 @@ class StatisticsDataController extends Controller
 
         // job published and not
         $job = new PublicationJob();
-        $job->title(trans('Jobs'), 30, "rgb(255, 99, 132)", true, 'Helvetica Neue');
+        $job->title(trans('Jobs'), 30, "rgb(255, 99, 132)", true, 'Nunito');
         $allJob = Job::count();
         $activatedJob = Job::query()
                             ->whereNotNull('published_at')
@@ -123,7 +123,7 @@ class StatisticsDataController extends Controller
 
         // chartJob with pie type (activated and not)
         $jobPie = new ActivationChart();
-        $jobPie->title(trans('Subscription'), 30, "rgb(255, 99, 132)", true, 'Helvetica Neue');
+        $jobPie->title(trans('Subscriptions status'), 30, "rgb(255, 99, 132)", true, 'Nunito');
         $suscribers = DB::table('subscription_user')
                           ->count();
         $activatedSuscribers = DB::table('subscription_user')
