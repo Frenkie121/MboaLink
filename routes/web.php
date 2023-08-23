@@ -34,6 +34,7 @@ Route::name('front.')->group(function () {
         Route::get('/', 'home')->name('home');
         Route::view('about', 'front.pages.about')->name('about');
         Route::view('contact', 'front.pages.contact')->name('contact');
+        Route::view('faq', 'front.pages.faq')->name('faq');
         Route::get('categories', 'categories')->name('categories');
         Route::get('categories/{category:slug}/jobs', 'jobsByCategory')->name('category.jobs')->middleware('auth');
     });

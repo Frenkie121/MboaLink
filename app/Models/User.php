@@ -147,4 +147,9 @@ class User extends Authenticatable
     {
         return $this->is_active || (! $this->is_active && $this->disabled_by === $this->id);
     }
+
+    public function hasValidSubscription() : bool
+    {
+        return Carbon::parse($this->subscriptions->last()->pivot->ends_at)->isFuture();
+    }
 }

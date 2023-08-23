@@ -40,7 +40,7 @@
             color: #f9460c !important;
         }
         #copyright-text {
-            font-size: 25%;
+            font-size: 65%;
         }
 
         #lang-dropdown {
@@ -138,9 +138,10 @@
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">@lang('Quick Links')</h5>
                         <a class="btn btn-link text-white-50" href="{{ route('front.home') }}">@lang('Home')</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.jobs.index') }}">@lang('Jobs')</a>
                         <a class="btn btn-link text-white-50" href="{{ route('front.about') }}">@lang('About')</a>
                         <a class="btn btn-link text-white-50" href="{{ route('front.contact') }}">@lang('Contact')</a>
-                        <a class="btn btn-link text-white-50" href="{{ route('front.jobs.index') }}">@lang('Jobs')</a>
+                        <a class="btn btn-link text-white-50" href="{{ route('front.faq') }}">@lang('FAQ')</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">@lang('Contact')</h5>
@@ -175,10 +176,13 @@
                         <div id="copyright-text" class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">{{ config('app.name') }}</a>, @lang('All Rights Reserved.')
                             <br>
-                            @lang('Made By') <a href="https://bvision-lte.com" target="__blank">Better Vision</a>
                             <br>
-                            @lang('Designed By') <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            @lang('Made By') <a class="border-bottom" href="https://bvision-lte.com" target="__blank">Better Vision</a>
+                            <br>
+                            @lang('Template Designed By') <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                             @lang('Distributed By') <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                            <br>
+                            @lang('Some images are provided by') <a href="https://www.freepik.com/free-photo/composition-with-question-mark-urban-landscape_48050491.htm#query=faq&position=36&from_view=search&track=sph" target="_blank">Freepik</a>
                         </div>
                         {{-- <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
