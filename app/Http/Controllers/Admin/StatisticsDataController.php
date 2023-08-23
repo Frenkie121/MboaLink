@@ -3,24 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use DateTime;
-use App\Models\Job;
-use App\Models\User;
-use App\Models\Pupil;
-use App\Models\Company;
-use App\Models\Student;
-use Carbon\Traits\Date;
-use App\Charts\PublishJob;
-use App\Charts\Userglobal;
-use App\Models\Subscription;
+use App\Models\{Job, User, Company, Student, Unemployed, Pupil, Subscription};
+use App\Charts\{Userglobal, activatedAccount, PublicationJob, ActivationChart, SubscriptionsChart};
 use Illuminate\Http\Request;
-use App\Charts\PublicationJob;
-use App\Charts\activatedAccount;
-use App\Charts\ActivationChart;
-use App\Charts\SubscribersChart;
-use App\Charts\SubscriptionsChart;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Unemployed;
 
 class StatisticsDataController extends Controller
 {
