@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 use App\Http\Controllers\Extra\LangController;
-use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
-use App\Http\Livewire\Admin\Subscription\EditComponent;
-use App\Http\Controllers\Admin\{StatisticsController, SubscribersController, SubscriptionBackController, UsersController};
 use App\Http\Controllers\Extra\ImageController;
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Livewire\Admin\Subscription\EditComponent;
+use App\Http\Controllers\Admin\StatisticsDataController;
+use App\Http\Controllers\Admin\Job\{PublishJobController, SingleJobController};
+use App\Http\Controllers\Front\{JobController, PagesController, SubscriptionController};
 use App\Http\Livewire\Front\Subscriber\{AccountStatus, ListApplications, ListJobs, ListSubscriptions, UpdatePassword, UpdateProfile};
+use App\Http\Controllers\Admin\{ SubscribersController, SubscriptionBackController};
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +72,7 @@ Route::name('front.')->group(function () {
 
 // ADMIN
 Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('dashboard', StatisticsController::class)->name('dashboard');
+   Route::get('dashboard', [StatisticsDataController::class,'graph'] )->name('dashboard');
     // USERS
     Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {
         Route::get('', 'index')->name('index');
@@ -89,7 +91,7 @@ Route::middleware(['auth', 'role:1'])->prefix('admin')->name('admin.')->group(fu
         Route::get('{job:slug}/download', 'download')->name('download');
         Route::get('{job:slug}/applicants', 'listApplicants')->name('applicants');
     });
-    
+
     //CONTACTS
     Route::view('contacts', 'admin.contacts.index')->name('contacts.index');
     //SUBSCRIPTION
