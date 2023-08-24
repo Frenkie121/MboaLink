@@ -5,7 +5,7 @@
         <div class="col-sm-12 col-md-8 d-flex align-items-center">
             <img
                 class="flex-shrink-0 img-fluid"
-                src="{{ $job->company->logo ? route('company-logo', $job->company->logo) : asset('assets/front/img/job-default.png') }}"
+                src="{{ $job->company->logo }}"
                 alt="{{ config('app.name') }}" style="width: 80px; height: 80px;"
             >
             <div class="text-start ps-4">

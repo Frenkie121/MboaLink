@@ -55,7 +55,7 @@ class ValidateSubscriptionNotification extends Notification
                 ),
             )
             ->line(
-                __('It takes effect from ') . $starts_at . __(' to ') . formatedLocaleDate($this->data['ends_at']) . trans(' at ') . $this->data['ends_at']->format('H:i') . '.'
+                __('It takes effect from ') . formatedLocaleDate($starts_at) . __(' to ') . formatedLocaleDate($this->data['ends_at']) . trans(' at ') . $this->data['ends_at']->format('H:i') . '.'
             )
             ->when(
                 $this->data['type_id'] === 1,

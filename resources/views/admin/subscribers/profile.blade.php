@@ -34,7 +34,7 @@
                     </div>
                     <div class="profile-widget-header">
                         <img alt="image"
-                            src="{{ ($user->role_id === 2 && $user->userable->logo) ? route('company-logo', $user->userable->logo) : asset('assets/back/img/avatar/avatar-2.png') }}"
+                            src="{{ $user->role_id === 2 ? $user->userable->logo : asset('assets/back/img/avatar/avatar-2.png') }}"
                             class="rounded-circle profile-widget-picture" width="100px" height="100px"
                         >
                     </div>

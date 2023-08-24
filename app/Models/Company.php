@@ -14,6 +14,12 @@ class Company extends Model
         'category_id', 'location', 'description', 'url', 'logo',
     ];
     
+    // ACCESSORS
+    public function getLogoAttribute($logo) : string
+    {
+        return $logo ? route('company-logo', $logo) : asset('assets/front/img/job-default.png');
+    }
+
     // RELATIONSHIPS
     public function user(): MorphOne
     {

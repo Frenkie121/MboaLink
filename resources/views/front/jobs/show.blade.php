@@ -26,7 +26,7 @@
                 @endif
                 <div class="col-lg-8">
                     <div class="d-flex align-items-center mb-5">
-                        <img class="flex-shrink-0 img-fluid rounded" src="{{ $job->company->front_logo }}" alt="" style="width: 80px; height: 80px;">
+                        <img class="flex-shrink-0 img-fluid rounded" src="{{ $job->company->logo }}" alt="" style="width: 80px; height: 80px;">
                         <div class="text-start ps-4">
                             <h3 class="mb-3">{{ $job->title }}</h3>
                             <span class="text-truncate me-3"><i class="fa fa-calendar-alt text-primary me-2"></i>{{ $job->dateline }}</span>
