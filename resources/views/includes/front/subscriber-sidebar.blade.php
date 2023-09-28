@@ -70,8 +70,8 @@
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: auto;">
         <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <img alt="image" width="50" height="50" src="{{ 
-              ($auth->role_id === 2 && $auth->userable->logo)
-              ? asset('storage/companies/' . $auth->userable->logo)
+              $auth->role_id === 2
+              ? $auth->userable->logo
               : asset('assets/back/img/avatar/avatar-2.png') }}" class="rounded-circle profile-widget-picture mr-2">
             <span class="fs-4 fw-bolder" style="margin-left: 10px">{{ $auth->name }}</span>
           </a>

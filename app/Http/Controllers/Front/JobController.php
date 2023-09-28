@@ -56,7 +56,7 @@ class JobController extends Controller
         $sub_category = $request->sub_category;
         $type = $request->type;
 
-        if (! $request->search && ! $sub_category && ! $type) {
+        if (!$request->search && !$sub_category && !$type) {
             $jobs = $this->getDefault()['jobs']->get();
         } else {
             $jobs = Job::query()

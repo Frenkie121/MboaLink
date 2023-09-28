@@ -25,7 +25,7 @@
                 <h6 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">@lang('For category') 
                     <strong class="text-primary">{{ $category->name }} ({{ $category->jobs->count() }})</strong>
                 </h6>
-            @elseif (request()->isMethod('post'))
+            @elseif (request()->has('search'))
                 <h6 class="text-center wow fadeInUp" data-wow-delay="0.1s">@lang('Search results') : <strong class="text-primary">{{ $jobs->count() }}</strong> @lang('job(s) found')
                 </h6>
                 <p class="text-center mb-5 fst-italic">

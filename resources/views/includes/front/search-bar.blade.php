@@ -1,7 +1,7 @@
 <div class="container-fluid bg-secondary mb-3 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
     <div class="container">
-        <form action="{{ route('front.jobs.search') }}" method="post">
-            @csrf
+        <form action="{{ route('front.jobs.search') }}" method="get">
+            {{-- @csrf --}}
             <div class="row g-2">
                 <div class="col-md-9">
                     <div class="row g-2">

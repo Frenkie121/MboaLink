@@ -46,7 +46,7 @@ Route::name('front.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::get('/{job:slug}', 'show')->name('show');
-        Route::post('/search', 'search')->name('search');
+        Route::post('', 'search')->name('search');
     });
 
     // SUBSCRIPTIONS

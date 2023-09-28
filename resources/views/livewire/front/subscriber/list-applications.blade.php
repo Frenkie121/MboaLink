@@ -5,7 +5,7 @@
     </p>
 
     <div class="d-flex justify-content-end mb-2">
-        <a href="{{ url()->previous() }}" class="btn btn-primary">@lang('Back to my jobs')</a>
+        <a href="{{ route('front.subscriber.jobs') }}" class="btn btn-primary">@lang('Back to my jobs')</a>
     </div>
         
     <div class="table-responsive">
