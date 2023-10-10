@@ -70,52 +70,6 @@
                                         </tr>
                                         @include('includes.back.subscribers.confirmationValidateModal', ['subscriptions_count' => $subscriber->subscriptions->count()])
                                     @endforeach
-                                    {{-- @foreach ($subscribers as $subscriber)
-                                        @if ($subscriber->role_id === 2)
-                                            <tr>
-                                                <td class="text-center">{{ $loop->iteration }}</td>
-                                                <td>{{ $subscriber->name }}</td>
-                                                <td>
-                                                    <a href="mailto:{{ $subscriber->email }}">{{ $subscriber->email }}</a>
-                                                </td>
-                                                <td>
-                                                    @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
-                                                        @if ($user->id === $subscriber->id)
-                                                            @if (!$user->pivot->ends_at)
-                                                                <span class="text-info">----</span>
-                                                            @elseif ($user->pivot->ends_at >= now())
-                                                                <span class="text-success">
-                                                                    {{ formatedLocaleDate($user->pivot->ends_at) }}</span>
-                                                            @else
-                                                                <span class="text-danger">
-                                                                    {{ formatedLocaleDate($user->pivot->ends_at) }}</span>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-
-                                                <td> 
-                                                    <a href="https://wa.me/{{ $subscriber->phone_number }}" title="@lang('Chat on WhatsApp')" target="_blank">{{ $subscriber->phone_number }}</a>
-                                                </td>
-
-                                                <td>
-                                                    <a class="btn btn-primary"
-                                                        href="{{ route('admin.subscribers.profile', [$subscriber]) }}">
-                                                        <i class="fa fa-eye"></i></a>
-                                                    @foreach ($subscriber->subscriptions->last()->users()->with(['role', 'subscriptions'])->get() as $user)
-                                                        @if ($user->id === $subscriber->id)
-                                                            @if (!$user->pivot->starts_at)
-                                                            <a  class="btn btn-success" title="@lang('Validate subscription')"
-                                                            onclick="loadDeleteModal({{ $subscriber->id }}, `{{ $subscriber->name }}`)">
-                                                            <i style="color: white;" class="fas fa-check"></i></a>
-                                                            @endif
-                                                        @endif
-                                                    @endforeach
-                                                </td>
-                                            </tr>
-                                        @endif
-                                        @include('includes.back.subscribers.confirmationValidateModal')
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>

@@ -86,7 +86,6 @@
         </div>
     </div>
 
-
 @endsection
 
 @push('js')
